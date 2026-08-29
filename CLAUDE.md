@@ -30,8 +30,9 @@ aid is listed on awesome-light or GitHub as of 29 Aug 2026 (Reddit unchecked).
   DataStore, light-keyboard (JitPack). `minSdk 34`, JDK 17.
 - Hardware keys reach `LightKeyHandler.onKeyDown` on the current screen/VM; LP3 wheel =
   **317 up / 318 down / 319 press** (`LightDeviceKeys`); unconsumed keys go to LightOS,
-  which relaunches the tool (→ `onScreenShow` again). Wheel *turns* on retail LightOS:
-  **unverified until M0**.
+  which relaunches the tool (→ `onScreenShow` again). Wheel *turns* verified on retail
+  LightOS 572 (28 Aug 2026): 317 = toward the top of the phone, 318 = toward the bottom, 319 = press,
+  one DOWN/UP pair per detent; volume (24/25) and camera (80/27) also reach a consuming tool.
 - `LightTextInputEditor` (full-screen, `singleLine`, `initialCaps`) is the only text input;
   `LightTextField` is display-only; `LightLazyScrollView` needs uniform rows;
   `LightModalManager.show(modal, 2 s)` for transient results; no toggle/stepper/tabs/dialog.
@@ -74,7 +75,7 @@ Checkbox plan of record lives in `docs/ROADMAP.md` (M0 verify → M1 pure core �
 compendium → M3 sheet & trackers → M4 creation from paper → M5 dice & journal → M6 QA &
 submission). Tick boxes there; mirror the current milestone here:
 
-- [ ] **M0** — scaffold via `new-light-tool`, first PR green, `assembleDebug` with assets,
+- [x] **M0** — scaffold via `new-light-tool`, first PR green, `assembleDebug` with assets,
       wheel key codes recorded on hardware, first-launch import timed, pipeline reproducible.
 - [ ] **M1** — `rules/` replays every fixture; JVM gate green.
 
@@ -115,7 +116,7 @@ one-pager: `docs/VETTING-DEFENSE.md` (kept current; copied into `README.md`).
 ADR-0001 SRD 5.1 first · 0002 JSON→Room · 0003 counters · 0004 zero permissions · 0005 name
 "Grimoire" (confirmed 28 Aug 2026; `id` permanent) · 0006 mulberry32 dice ·
 0007 paper-first transcription · 0008 journal shape.
-Open: wheel turns on retail LightOS (M0); creatures in v1; journal v1 vs v1.1; roll history;
+Open: creatures in v1; journal v1 vs v1.1; roll history;
 `.db` assets ever allowed; Tool Library submission mechanics ("early Fall").
 
 ## Sharp edges
@@ -130,3 +131,5 @@ Open: wheel turns on retail LightOS (M0); creatures in v1; journal v1 vs v1.1; r
 - `versionName` is strict `x.y.z`; `versionCode` must increase per release; keep this
   file's toml block byte-identical to `tool/lighttool.toml`.
 - No GitHub Packages token is needed anymore (keyboard via JitPack) — ignore older docs.
+- First-launch compendium import measured 3.1–3.3 s on the LP3 (decode 2.4 s of it) — keep it behind
+  a spinner; typed `@Serializable` decoding is the lever if it ever needs to shrink.
