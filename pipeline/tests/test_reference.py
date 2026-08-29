@@ -209,6 +209,17 @@ def test_fixtures_are_regenerated():
 
     if not ASSETS.exists():
         pytest.skip("build assets first")
-    for name, gen in (("rng.json", fx.gen_rng), ("dice.json", fx.gen_dice), ("math.json", fx.gen_math), ("slots.json", fx.gen_slots)):
+    # derived.json and events.json need the compendium armor table, exactly as write_all() loads it;
+    # without them here, drift in derive()/run() would surface only in the Kotlin replay.
+    armor = fx._load_armor(ASSETS)
+    generators = (
+        ("rng.json", fx.gen_rng),
+        ("dice.json", fx.gen_dice),
+        ("math.json", fx.gen_math),
+        ("slots.json", fx.gen_slots),
+        ("derived.json", lambda: fx.gen_derived(armor)),
+        ("events.json", lambda: fx.gen_events(armor)),
+    )
+    for name, gen in generators:
         on_disk = json.loads((ROOT / "fixtures" / name).read_text(encoding="utf-8"))
         assert on_disk == json.loads(json.dumps(gen())), f"{name} is stale — run python3 -m pipeline fixtures"
