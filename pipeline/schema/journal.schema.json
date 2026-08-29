@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tyleryancey/light-grimoire/pipeline/schema/journal.schema.json",
+  "title": "Grimoire campaign journal (player-side)",
+  "description": "Six entities, one link primitive. Sessions are the spine; entries are timestamped one-liners with a kind sigil and links picked from rosters (never typed). Backlinks are derived, never stored. This is also the JSON export format; the Markdown export is generated from it.",
+  "type": "object",
+  "required": ["schemaVersion", "campaign", "sessions", "people", "places", "quests", "loot"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "campaign": {"type": "object", "required": ["id", "name"], "properties": {"id": {"type": "string"}, "name": {"type": "string", "maxLength": 40}, "partyGold": {"type": "integer"}, "characterId": {"type": ["string", "null"]}}},
+    "sessions": {
+      "type": "array",
+      "items": {"type": "object", "required": ["id", "number", "date", "entries"], "properties": {
+        "id": {"type": "string"}, "number": {"type": "integer", "minimum": 0}, "date": {"type": "string", "format": "date"},
+        "inWorldDate": {"type": ["string", "null"], "maxLength": 40}, "title": {"type": ["string", "null"], "maxLength": 40},
+        "entries": {"type": "array", "items": {"$ref": "#/$defs/entry"}}
+      }}
+    },
+    "people": {"type": "array", "items": {"$ref": "#/$defs/person"}},
+    "places": {"type": "array", "items": {"$ref": "#/$defs/place"}},
+    "quests": {"type": "array", "items": {"$ref": "#/$defs/quest"}},
+    "loot": {"type": "array", "items": {"$ref": "#/$defs/lootLine"}}
+  },
+  "$defs": {
+    "entry": {
+      "type": "object", "required": ["id", "at", "kind"],
+      "properties": {
+        "id": {"type": "string"},
+        "at": {"type": "string", "description": "ISO-8601 timestamp of capture"},
+        "kind": {"type": "string", "enum": ["met", "went", "quest", "got", "learned", "rumor", "note"]},
+        "personId": {"type": ["string", "null"]},
+        "placeId": {"type": ["string", "null"]},
+        "questId": {"type": ["string", "null"]},
+        "lootId": {"type": ["string", "null"]},
+        "text": {"type": "string", "maxLength": 120, "description": "one line; long prose belongs in the laptop recap after export"},
+        "voiceMemo": {"type": ["string", "null"], "description": "filename under filesDir/memos (v1.1)"}
+      }
+    },
+    "person": {"type": "object", "required": ["id", "name"], "properties": {"id": {"type": "string"}, "name": {"type": "string", "maxLength": 40}, "party": {"type": "boolean"}, "metAtPlaceId": {"type": ["string", "null"]}, "detail": {"type": "string", "maxLength": 80}, "disposition": {"type": "string", "enum": ["unknown", "friend", "neutral", "hostile"]}, "alive": {"type": "boolean"}, "firstSeenSession": {"type": ["integer", "null"]}}},
+    "place": {"type": "object", "required": ["id", "name"], "properties": {"id": {"type": "string"}, "name": {"type": "string", "maxLength": 40}, "parentId": {"type": ["string", "null"]}, "detail": {"type": "string", "maxLength": 80}, "firstSeenSession": {"type": ["integer", "null"]}}},
+    "quest": {"type": "object", "required": ["id", "title", "status"], "properties": {"id": {"type": "string"}, "title": {"type": "string", "maxLength": 60}, "status": {"type": "string", "enum": ["open", "done", "failed", "dropped"]}, "giverId": {"type": ["string", "null"]}, "placeId": {"type": ["string", "null"]}, "objectives": {"type": "array", "maxItems": 8, "items": {"type": "object", "properties": {"text": {"type": "string", "maxLength": 80}, "done": {"type": "boolean"}}}}, "firstSeenSession": {"type": ["integer", "null"]}}},
+    "lootLine": {"type": "object", "required": ["id", "name", "status"], "properties": {"id": {"type": "string"}, "name": {"type": "string", "maxLength": 40}, "holderId": {"type": ["string", "null"], "description": "person id, or null = party"}, "sessionId": {"type": ["string", "null"]}, "valueGp": {"type": ["integer", "null"]}, "status": {"type": "string", "enum": ["held", "sold", "used", "given"]}}}
+  }
+}

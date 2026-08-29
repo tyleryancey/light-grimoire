@@ -1,0 +1,1614 @@
+{
+ "$comment": "Replay events on the named fixtures/characters/*.json and compare the end state. 'errors' must raise (the UI should have disabled the control).",
+ "errors": [
+  {
+   "error": "no level-3 slots left",
+   "events": [
+    {
+     "level": 3,
+     "type": "spendSlot"
+    },
+    {
+     "level": 3,
+     "type": "spendSlot"
+    },
+    {
+     "level": 3,
+     "type": "spendSlot"
+    }
+   ],
+   "start": "cleric-5-life"
+  },
+  {
+   "error": "no pact magic",
+   "events": [
+    {
+     "type": "spendPactSlot"
+    }
+   ],
+   "start": "rogue-3-thief"
+  },
+  {
+   "error": "no d8 hit dice left",
+   "events": [
+    {
+     "die": 8,
+     "roll": 4,
+     "type": "spendHitDie"
+    }
+   ],
+   "start": "paladin-6-warlock-2"
+  }
+ ],
+ "scenarios": [
+  {
+   "end": {
+    "conditions": [],
+    "counters": [
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 25,
+     "down": false,
+     "max": 43,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 5,
+      "used": 1
+     }
+    ],
+    "hp": {
+     "damage": 18,
+     "max": 43,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": null,
+     "slotsUsed": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 10,
+     "type": "damage"
+    },
+    {
+     "amount": 4,
+     "type": "heal"
+    }
+   ],
+   "name": "damage then heal",
+   "start": "fixture-cleric-5-life"
+  },
+  {
+   "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 19,
+     "down": false,
+     "max": 24,
+     "temp": 0
+    },
+    "exhaustion": 1,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 5,
+     "max": 24,
+     "temp": 0
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "amount": 3,
+     "type": "damage"
+    },
+    {
+     "amount": 7,
+     "type": "damage"
+    }
+   ],
+   "name": "temp hp absorbs first",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 24,
+     "down": false,
+     "max": 24,
+     "temp": 8
+    },
+    "exhaustion": 1,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 24,
+     "temp": 8
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "amount": 3,
+     "type": "temp"
+    },
+    {
+     "amount": 8,
+     "type": "temp"
+    }
+   ],
+   "name": "temp hp does not stack (keep higher)",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [],
+    "counters": [
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 43,
+     "down": false,
+     "max": 43,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 5,
+      "used": 1
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 43,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": null,
+     "slotsUsed": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 999,
+     "type": "heal"
+    }
+   ],
+   "name": "overheal caps at max",
+   "start": "fixture-cleric-5-life"
+  },
+  {
+   "end": {
+    "conditions": [],
+    "counters": [
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 43,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 5,
+      "used": 1
+     }
+    ],
+    "hp": {
+     "damage": 43,
+     "max": 43,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": null,
+     "slotsUsed": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 31,
+     "type": "damage"
+    }
+   ],
+   "name": "drop to zero resets death saves",
+   "start": "fixture-cleric-5-life"
+  },
+  {
+   "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": true,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 24,
+     "temp": 0
+    },
+    "exhaustion": 1,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 24,
+     "max": 24,
+     "temp": 0
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "amount": 53,
+     "type": "damage"
+    }
+   ],
+   "name": "instant death from massive overflow",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": true,
+     "failures": 3,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 1,
+     "type": "damage"
+    },
+    {
+     "amount": 1,
+     "critical": true,
+     "type": "damage"
+    }
+   ],
+   "name": "damage at zero = failure; crit = two",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 2,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 6,
+     "type": "temp"
+    },
+    {
+     "amount": 5,
+     "type": "damage"
+    },
+    {
+     "amount": 3,
+     "type": "damage"
+    }
+   ],
+   "name": "temp hp absorbs damage while at zero (no failure)",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": true,
+     "current": 1,
+     "down": false,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 67,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "d20": 12,
+     "type": "deathSave"
+    },
+    {
+     "d20": 9,
+     "type": "deathSave"
+    },
+    {
+     "d20": 20,
+     "type": "deathSave"
+    }
+   ],
+   "name": "death save sequence: 12, 9, 20 → back to 1 hp",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": true,
+     "failures": 3,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "d20": 1,
+     "type": "deathSave"
+    }
+   ],
+   "name": "death save nat 1 counts two",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": true,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "d20": 15,
+     "type": "deathSave"
+    },
+    {
+     "d20": 15,
+     "type": "deathSave"
+    }
+   ],
+   "name": "three successes → stable",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": true,
+     "failures": 3,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "d20": 3,
+     "type": "deathSave"
+    },
+    {
+     "d20": 3,
+     "type": "deathSave"
+    }
+   ],
+   "name": "three failures → dead",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": true,
+     "current": 7,
+     "down": false,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 61,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 7,
+     "type": "heal"
+    }
+   ],
+   "name": "healing at zero revives and clears saves",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 1
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": true,
+     "current": 9,
+     "down": false,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 5
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 59,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 0,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 1,
+     "type": "heal"
+    },
+    {
+     "die": 10,
+     "roll": 6,
+     "type": "spendHitDie"
+    },
+    {
+     "type": "shortRest"
+    }
+   ],
+   "name": "short rest: hit die + con, counters reset, pact reset",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 21,
+     "down": false,
+     "max": 24,
+     "temp": 0
+    },
+    "exhaustion": 1,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 1
+     }
+    ],
+    "hp": {
+     "damage": 3,
+     "max": 24,
+     "temp": 0
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "amount": 10,
+     "type": "damage"
+    },
+    {
+     "die": 8,
+     "roll": 1,
+     "type": "spendHitDie"
+    }
+   ],
+   "name": "hit die never heals negative",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 30
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 1
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 68,
+     "down": false,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 0
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 0,
+     "slotsUsed": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "amount": 1,
+     "type": "heal"
+    },
+    {
+     "type": "longRest"
+    }
+   ],
+   "name": "long rest: full hp, half hit dice back (largest first), slots, exhaustion -1",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 24,
+     "down": false,
+     "max": 24,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 24,
+     "temp": 0
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "amount": 2,
+     "type": "damage"
+    },
+    {
+     "type": "longRest"
+    }
+   ],
+   "name": "long rest clears temp hp and reduces exhaustion",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [],
+    "counters": [
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 1
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 43,
+     "down": false,
+     "max": 43,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 5,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 43,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": null,
+     "slotsUsed": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "type": "longRest"
+    }
+   ],
+   "name": "long rest on cleric resets short+long counters and slots",
+   "start": "fixture-cleric-5-life"
+  },
+  {
+   "end": {
+    "conditions": [],
+    "counters": [
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 1
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 43,
+     "down": false,
+     "max": 43,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 5,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 43,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": null,
+     "slotsUsed": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "level": 3,
+     "type": "spendSlot"
+    },
+    {
+     "level": 3,
+     "type": "spendSlot"
+    },
+    {
+     "type": "longRest"
+    }
+   ],
+   "name": "spend slots then long rest",
+   "start": "fixture-cleric-5-life"
+  },
+  {
+   "end": {
+    "conditions": [],
+    "counters": [
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 1
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 31,
+     "down": false,
+     "max": 43,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 5,
+      "used": 1
+     }
+    ],
+    "hp": {
+     "damage": 12,
+     "max": 43,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": null,
+     "slotsUsed": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "delta": -1,
+     "id": "channel-divinity",
+     "type": "counter"
+    },
+    {
+     "delta": 5,
+     "id": "channel-divinity",
+     "type": "counter"
+    }
+   ],
+   "name": "counter clamps at 0 and max",
+   "start": "fixture-cleric-5-life"
+  },
+  {
+   "end": {
+    "conditions": [],
+    "counters": [
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 31,
+     "down": false,
+     "max": 43,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 5,
+      "used": 1
+     }
+    ],
+    "hp": {
+     "damage": 12,
+     "max": 43,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": null,
+     "slotsUsed": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "type": "dawn"
+    }
+   ],
+   "name": "dawn resets only dawn counters",
+   "start": "fixture-cleric-5-life"
+  }
+ ]
+}

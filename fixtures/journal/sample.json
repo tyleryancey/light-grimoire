@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "campaign": {"id": "camp-1", "name": "The Sunless Citadel", "partyGold": 412, "characterId": "fixture-cleric-5-life"},
+  "sessions": [
+    {"id": "s11", "number": 11, "date": "2026-08-21", "inWorldDate": null, "title": null, "entries": [
+      {"id": "e1", "at": "2026-08-21T19:04:00", "kind": "went", "placeId": "p1", "text": ""},
+      {"id": "e2", "at": "2026-08-21T19:20:00", "kind": "met", "personId": "n1", "placeId": "p2", "text": "honeycakes, knows the caravan road"},
+      {"id": "e3", "at": "2026-08-21T20:02:00", "kind": "quest", "questId": "q1", "text": "offered 50 gp each"},
+      {"id": "e4", "at": "2026-08-21T21:15:00", "kind": "got", "lootId": "l1", "text": ""},
+      {"id": "e5", "at": "2026-08-21T21:40:00", "kind": "learned", "text": "goblins camp north of the old bridge"}
+    ]},
+    {"id": "s12", "number": 12, "date": "2026-08-28", "inWorldDate": "3 Mirtul", "title": "Into the ravine", "entries": [
+      {"id": "e6", "at": "2026-08-28T19:10:00", "kind": "went", "placeId": "p3", "text": "rope down, 40 ft"},
+      {"id": "e7", "at": "2026-08-28T20:30:00", "kind": "rumor", "text": "a dragon under the citadel?"},
+      {"id": "e8", "at": "2026-08-28T21:05:00", "kind": "note", "text": "Vessa owes me 5 gp"}
+    ]}
+  ],
+  "people": [
+    {"id": "n1", "name": "Merrick", "party": false, "metAtPlaceId": "p2", "detail": "innkeeper, nervous", "disposition": "friend", "alive": true, "firstSeenSession": 11},
+    {"id": "n2", "name": "Vessa Quickfinger", "party": true, "metAtPlaceId": null, "detail": "our rogue", "disposition": "friend", "alive": true, "firstSeenSession": 1}
+  ],
+  "places": [
+    {"id": "p1", "name": "Oakhurst", "parentId": null, "detail": "village, apple market", "firstSeenSession": 11},
+    {"id": "p2", "name": "Salmon's Spyglass", "parentId": "p1", "detail": "inn", "firstSeenSession": 11},
+    {"id": "p3", "name": "The Ravine", "parentId": null, "detail": "citadel entrance", "firstSeenSession": 12}
+  ],
+  "quests": [
+    {"id": "q1", "title": "Find the missing caravan", "status": "open", "giverId": "n1", "placeId": "p1", "objectives": [{"text": "search the ravine", "done": true}, {"text": "return with news", "done": false}], "firstSeenSession": 11}
+  ],
+  "loot": [
+    {"id": "l1", "name": "Potion of healing (2)", "holderId": null, "sessionId": "s11", "valueGp": 100, "status": "held"}
+  ]
+}

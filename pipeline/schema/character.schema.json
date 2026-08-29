@@ -1,0 +1,711 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tyleryancey/light-grimoire/pipeline/schema/character.schema.json",
+  "title": "Grimoire character (normalized, edition-agnostic; 2014 rules implemented)",
+  "description": "The single stored representation of a player character. Everything the sheet shows that is NOT here is derived by the rules engine (see reference/rules.py `derive`). Invariants: current HP = max - damage (never stored); slot maxima come from classes (only `slotsUsed` is stored); counters are the one primitive for every limited-use resource.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "edition",
+    "classes",
+    "abilities",
+    "hp",
+    "hitDice"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "edition": {
+      "type": "string",
+      "enum": [
+        "2014"
+      ]
+    },
+    "classes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "classKey",
+          "level"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "classKey": {
+            "type": "string",
+            "description": "compendium class key, or a custom slug for a non-SRD class"
+          },
+          "subclassKey": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "compendium subclass key, or null; non-SRD subclasses live in `customSubclassName`"
+          },
+          "customSubclassName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "custom": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "only for non-SRD classes",
+            "properties": {
+              "hitDie": {
+                "type": "integer",
+                "enum": [
+                  6,
+                  8,
+                  10,
+                  12
+                ]
+              },
+              "casterType": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "full",
+                  "half",
+                  "third",
+                  "pact"
+                ]
+              },
+              "spellcastingAbility": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "race": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "subraceKey": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "background": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "abilities": {
+      "type": "object",
+      "required": [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+      ],
+      "additionalProperties": false,
+      "description": "FINAL scores including racial bonuses — paper players copy these straight from the sheet",
+      "properties": {
+        "str": {
+          "$ref": "#/$defs/score"
+        },
+        "dex": {
+          "$ref": "#/$defs/score"
+        },
+        "con": {
+          "$ref": "#/$defs/score"
+        },
+        "int": {
+          "$ref": "#/$defs/score"
+        },
+        "wis": {
+          "$ref": "#/$defs/score"
+        },
+        "cha": {
+          "$ref": "#/$defs/score"
+        }
+      }
+    },
+    "saveProficiencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ability"
+      },
+      "uniqueItems": true
+    },
+    "skills": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "none",
+          "half",
+          "proficient",
+          "expertise"
+        ]
+      },
+      "description": "only non-'none' entries need be present; keys are compendium skill keys"
+    },
+    "profBonusOverride": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ac": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "mode",
+            "value"
+          ],
+          "properties": {
+            "mode": {
+              "const": "manual"
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 40
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "mode",
+            "formula"
+          ],
+          "properties": {
+            "mode": {
+              "const": "computed"
+            },
+            "formula": {
+              "type": "string",
+              "enum": [
+                "unarmored",
+                "armor",
+                "unarmored-monk",
+                "unarmored-barbarian",
+                "mage-armor"
+              ]
+            },
+            "armorKey": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "shield": {
+              "type": "boolean"
+            },
+            "bonus": {
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    },
+    "speed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "initiativeBonus": {
+      "type": "integer"
+    },
+    "hp": {
+      "type": "object",
+      "required": [
+        "max",
+        "damage",
+        "temp"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "damage": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "temp": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "hitDice": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "die",
+          "total",
+          "used"
+        ],
+        "properties": {
+          "die": {
+            "type": "integer",
+            "enum": [
+              6,
+              8,
+              10,
+              12
+            ]
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "used": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "deathSaves": {
+      "type": "object",
+      "properties": {
+        "successes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "failures": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "stable": {
+          "type": "boolean"
+        },
+        "dead": {
+          "type": "boolean"
+        }
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "compendium condition keys; exhaustion is separate"
+    },
+    "exhaustion": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "concentration": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "spellKey": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "inspiration": {
+      "type": "boolean"
+    },
+    "counters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "value",
+          "max",
+          "reset"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "value": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "max": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reset": {
+            "type": "string",
+            "enum": [
+              "short",
+              "long",
+              "dawn",
+              "none"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "featureKey": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "showOnTurn": {
+            "type": "boolean",
+            "description": "list this counter on the Turn screen"
+          }
+        }
+      }
+    },
+    "spellcasting": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "ability": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ability"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "prepared",
+            "known",
+            "pact",
+            "none"
+          ]
+        },
+        "slotsUsed": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
+          }
+        },
+        "pactUsed": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 4
+        },
+        "spells": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "prepared"
+            ],
+            "properties": {
+              "key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "prepared": {
+                "type": "boolean"
+              },
+              "alwaysPrepared": {
+                "type": "boolean"
+              },
+              "custom": {
+                "type": "boolean"
+              },
+              "level": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "required when custom (no compendium record)"
+              }
+            }
+          }
+        },
+        "dcOverride": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "attacks": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "group",
+          "ability",
+          "damage"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "group": {
+            "type": "string",
+            "enum": [
+              "action",
+              "bonus",
+              "reaction",
+              "other"
+            ]
+          },
+          "ability": {
+            "$ref": "#/$defs/ability"
+          },
+          "proficient": {
+            "type": "boolean"
+          },
+          "bonusOverride": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "bonus": {
+            "type": "integer"
+          },
+          "damage": {
+            "type": "string",
+            "description": "dice notation without the ability bonus, e.g. 1d8"
+          },
+          "damageType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "damageBonusMode": {
+            "type": "string",
+            "enum": [
+              "ability",
+              "none"
+            ]
+          },
+          "damageBonus": {
+            "type": "integer"
+          },
+          "counterId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "counter spent when used (e.g. superiority dice)"
+          }
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 60,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "qty"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "key": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "kind": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "equipment",
+              "magic_item",
+              null
+            ]
+          },
+          "qty": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "equipped": {
+            "type": "boolean"
+          },
+          "attuned": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "cp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ep": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pp": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "quickbuild",
+            "import"
+          ]
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "score": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "ability": {
+      "type": "string",
+      "enum": [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+      ]
+    }
+  }
+}

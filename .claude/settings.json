@@ -1,0 +1,120 @@
+{
+  "$comment": "Project settings for light-grimoire. Hooks mirror the Light SDK plugin scan and the house rules so violations surface at edit time, not at build time. Permissions are deliberately narrow: build/test/git-read are free, destructive git and the forbidden content sources are denied.",
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew *)",
+      "Bash(python3 -m pipeline *)",
+      "Bash(python3 -m pytest *)",
+      "Bash(python3 pipeline/*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git show*)",
+      "Bash(git branch*)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git switch *)",
+      "Bash(git checkout -b *)",
+      "Bash(git tag *)",
+      "Bash(adb *)",
+      "Bash(gh pr *)",
+      "Bash(gh run *)",
+      "Bash(gh issue *)",
+      "Read(**)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:developers.thelightphone.com)",
+      "WebFetch(domain:support.thelightphone.com)",
+      "WebFetch(domain:dnd.wizards.com)",
+      "WebFetch(domain:www.dndbeyond.com)",
+      "WebFetch(domain:open5e.com)",
+      "WebFetch(domain:api.open5e.com)",
+      "WebFetch(domain:www.dnd5eapi.co)",
+      "WebFetch(domain:code.claude.com)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git merge --squash*)",
+      "Bash(git rebase*)",
+      "Bash(./gradlew clean assemble*)",
+      "Edit(sdk/**)",
+      "Edit(plugin/**)",
+      "Edit(builder/**)",
+      "Edit(lint-rules/**)",
+      "Edit(tool/src/main/AndroidManifest.xml)",
+      "Write(tool/src/main/AndroidManifest.xml)",
+      "Write(tool/src/main/assets/compendium/**)",
+      "Edit(tool/src/main/assets/compendium/**)",
+      "Write(tool/src/main/assets/legal/**)",
+      "Edit(tool/src/main/assets/legal/**)",
+      "WebFetch(domain:5e.tools)",
+      "WebFetch(domain:5etools-mirror-3.github.io)",
+      "WebFetch(domain:5etools-mirror-2.github.io)",
+      "WebFetch(domain:character-service.dndbeyond.com)",
+      "Bash(./gradlew :tool:clean :tool:assemble*)",
+      "Bash(./gradlew :tool:clean assemble*)",
+      "Bash(./gradlew clean :tool:assemble*)"
+    ],
+    "additionalDirectories": [
+      "../light-sdk",
+      "../light-workspace"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-start.sh",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-paths.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/scan-kotlin.sh",
+            "timeout": 20
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-lighttool.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/prompt-reminders.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

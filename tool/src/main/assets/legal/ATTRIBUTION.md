@@ -1,0 +1,20 @@
+# Attribution
+
+Grimoire is 5E compatible. It bundles rules text from the System Reference Document 5.1
+published by Wizards of the Coast under the Creative Commons Attribution 4.0 International
+License (CC-BY-4.0). The text has been reorganized into a searchable database for display
+on a small screen: entries were split into fields and paragraphs, and cross-references were
+converted to keys. No rules wording was changed.
+
+This work includes material taken from the System Reference Document 5.1 ("SRD 5.1") by Wizards of the Coast LLC and available at https://dnd.wizards.com/resources/systems-reference-document. The SRD 5.1 is licensed under the Creative Commons Attribution 4.0 International License available at https://creativecommons.org/licenses/by/4.0/legalcode.
+
+The structured JSON this tool was built from comes from the open-source project
+5e-bits/5e-database (MIT-licensed code; the rules text it carries is the SRD 5.1 under
+CC-BY-4.0). Its record structure was used; its text is the SRD's.
+
+The full text of CC-BY-4.0 is included as LICENSE-CC-BY-4.0.txt. The bundled data is
+provided "as is"; see Section 5 of CC-BY-4.0 for the disclaimer of warranties and
+limitation of liability.
+
+Application source code is licensed under the MIT License (see LICENSE in the repository).
+This tool is a derivative of lightphone/light-sdk, also MIT-licensed.
