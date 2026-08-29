@@ -25,3 +25,9 @@ then builds an FTS4 search table. The hash is recorded in DataStore.
 ## Consequences
 The importer is a one-time cost behind a spinner; compendium tables are immutable; the
 build stays reproducible (`git diff --exit-code` on assets).
+
+Measured on the LP3 (TLP301, LightOS 572-release-lp3, 28 Aug 2026; branch `spike/import-timing`):
+first launch 3 254 / 3 183 / 3 125 ms for 1 992 rows plus an FTS4 table — decode ≈ 2.45 s,
+insert + FTS ≈ 0.7 s. Under the 4 s bar: the JSON→Room decision stands; the prebuilt-SQLite
+fallback stays unscheduled. Decode dominates, so typed `@Serializable` models (not `JsonElement`)
+are the first lever if the spinner ever feels long.

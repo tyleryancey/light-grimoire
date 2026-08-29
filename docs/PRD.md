@@ -22,7 +22,7 @@ nothing is infinite. Nearest banned categories: none. Full one-pager: `docs/VETT
    tracked as *named counters* and *named attacks*; their rules text lives on paper. The tool
    ships only SRD 5.1 text and never asks the player to type rules in.
 3. **The wheel has a job on every screen.** Scroll lists, nudge numbers, step exhaustion.
-   (Hardware wheel events reach tools as key codes 317/318/319 — verify on device in M0.)
+   (Verified on device 28 Aug 2026: wheel turns reach tools — 317 toward the top of the phone, 318 toward the bottom, 319 press.)
 4. **Weight and glyph, never hue.** Three theme tokens; bloodied is heavier type, a spent pip
    is hollow, an expired concentration is struck through.
 5. **Finite and calm.** No streaks, no stats, no "roll history" beyond the last ten rolls, no

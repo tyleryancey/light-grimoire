@@ -26,8 +26,8 @@ When you confirm or refute something on hardware, add a dated line here **and** 
   itself then relaunches the tool (so an unconsumed wheel event costs an `onAppPause` →
   `onScreenShow` round trip — the Weather VM's `skipRefreshOnNextScreenShow` guard). Wheel
   key codes: **317 up, 318 down, 319 press** (`LightDeviceKeys`). LightOS v572 "fixes all
-  hardware button events for external tools". **Unverified:** whether retail LightOS lets
-  wheel *turns* reach a tool. → M0 hardware test.
+  hardware button events for external tools". **Verified 2026-08-28 on LightOS 572-release-lp3:** wheel
+  turns reach a consuming tool — see §Hardware results below.
 - **Builder** (`builder/`): extracts only `tool/build.gradle.kts`, `tool/lighttool.toml`,
   `tool/src/main/{kotlin,java,res,assets}`; asset extensions allow-list
   `.png .jpg .jpeg .webp .gif .svg .json .txt .md .ttf .otf .bin .dat .csv .html .css`;
@@ -64,8 +64,22 @@ validated declared + resolved; `ALLOWED_PERMISSIONS` (11) unchanged; KSP only
 
 | Control | Key code observed | Reaches tool? | Date / LightOS |
 |---|---|---|---|
-| Wheel up | | | |
-| Wheel down | | | |
-| Wheel press | | | |
-| Volume up / down | | | |
-| Camera half / full | | | |
+| Wheel toward the top of the phone | `KEYCODE_WHEEL_CCW` (317), one DOWN/UP pair per detent | yes | 2026-08-28 / 572-release-lp3 |
+| Wheel toward the bottom of the phone | `KEYCODE_WHEEL_CW` (318), one DOWN/UP pair per detent | yes | 2026-08-28 / 572-release-lp3 |
+| Wheel press | `KEYCODE_WHEEL_CLICK` (319) DOWN/UP | yes | 2026-08-28 / 572-release-lp3 |
+| Volume up / down | `KEYCODE_VOLUME_UP` (24) / `KEYCODE_VOLUME_DOWN` (25) DOWN/UP | yes (tool stays foreground when it consumes them) | 2026-08-28 / 572-release-lp3 |
+| Camera half / full | half: `KEYCODE_FOCUS` (80) DOWN/UP; full: FOCUS DOWN, `KEYCODE_CAMERA` (27) DOWN auto-repeating (`repeat=0…5` while held), CAMERA UP, FOCUS UP | yes | 2026-08-28 / 572-release-lp3 |
+
+Method: `examples/ui-demo` (commits `serverPackage = "com.lightos"`) installed with
+`./gradlew :examples:ui-demo:installDebug`, its **Key Events** screen consumes every key and lists
+`KeyEvent.keyCodeToString`; screenshots over adb are the record. The power (screen on/off) button
+hands the screen to LightOS — that is not a key event and is expected. Unconsumed keys were not
+tested (the SDK forwards them to LightOS, which relaunches the tool).
+
+## Measured on hardware (28 Aug 2026, TLP301, LightOS 572-release-lp3)
+
+- First-launch compendium import (`spike/import-timing`, commit b811c63): 22 JSON chunks →
+  `JsonElement` decode → one Room `insertAll` of 1 992 `(kind, key, name, json)` rows with an FTS4
+  content table. Three true-first-launch runs (`pm clear` between): **3 254 / 3 183 / 3 125 ms**
+  total — decode 2 508 / 2 486 / 2 429 ms, insert+FTS 741 / 691 / 691 ms, `MATCH 'fire*'` 4 ms
+  (169 hits). Under the 4 s bar in ADR-0002; the `.bin` prebuilt-SQLite fallback is not scheduled.

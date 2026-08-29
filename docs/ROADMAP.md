@@ -5,11 +5,11 @@ before any UI; commit per task; `CLAUDE.md` mirrors this list and is the handoff
 
 ## M0 — Verify, don't trust (½ day)
 
-- [ ] Scaffold the repo with `new-light-tool` (`light-grimoire`, id `dev.tyler.grimoire`), apply this overlay, first PR green (`check`, `submission-check`).
-- [ ] `./gradlew :tool:assembleDebug` on the pristine scaffold with the compendium assets in place (proves the builder-style asset set builds and the plugin scan passes).
-- [ ] Install `ui-demo` on the physical LP3 (LightOS ≥ v572) and record which key codes arrive on the **Key Events** screen for wheel up / wheel down / wheel press / volume / camera. Write the result into `docs/sdk-facts-delta.md` §Hardware. **This decides the wheel design.**
-- [ ] Measure first-launch import time for 2.6 MB of JSON into Room on the LP3 (a throwaway spike screen). If > 4 s, plan the `.bin` prebuilt-SQLite fallback (ADR-0002).
-- [ ] `python3 -m pipeline all && git diff --exit-code tool/src/main/assets fixtures` is empty on a clean clone.
+- [x] Scaffold the repo with `new-light-tool` (`light-grimoire`, id `dev.tyler.grimoire`), apply this overlay, first PR green (`check`, `submission-check`).
+- [x] `./gradlew :tool:assembleDebug` on the pristine scaffold with the compendium assets in place (proves the builder-style asset set builds and the plugin scan passes).
+- [x] Install `ui-demo` on the physical LP3 (LightOS ≥ v572) and record which key codes arrive on the **Key Events** screen for wheel up / wheel down / wheel press / volume / camera. Write the result into `docs/sdk-facts-delta.md` §Hardware. **This decides the wheel design.** → Done 28 Aug 2026 on LightOS 572-release-lp3: wheel turns reach the tool (317 toward the top of the phone / 318 toward the bottom / 319 press); volume (24/25) and camera (80 focus / 27 shutter) too. Wheel design stands.
+- [x] Measure first-launch import time for 2.6 MB of JSON into Room on the LP3 (a throwaway spike screen). If > 4 s, plan the `.bin` prebuilt-SQLite fallback (ADR-0002). → Measured 28 Aug 2026 (`spike/import-timing`): 3.13–3.25 s for 1 992 rows + FTS4 (decode 2.4–2.5 s, insert 0.7 s). Under the bar; JSON→Room stands.
+- [x] `python3 -m pipeline all && git diff --exit-code tool/src/main/assets fixtures` is empty on a clean clone.
 
 ## M1 — Pure core (the oracle in Kotlin) (2–3 days)
 

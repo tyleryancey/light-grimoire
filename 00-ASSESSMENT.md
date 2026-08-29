@@ -61,7 +61,8 @@ tools (Dictionary, three Bibles, Recall) and finite games (Chess, Sudoku) alread
 
 ## Verdict
 
-**Go.** No blocker. Two items gate design, not feasibility: (1) whether wheel *turns* reach
-a tool on retail LightOS (M0 test with `ui-demo` Key Events — if not, every wheel job falls
-back to tap targets already in the spec); (2) first-launch import time for 2.6 MB into Room
-(M0 measurement — fallback is a prebuilt SQLite shipped as `.bin`, ADR-0002).
+**Go.** No blocker. Two items gated design, not feasibility, and both were settled in M0 (28 Aug 2026,
+TLP301, LightOS 572-release-lp3): (1) wheel *turns* reach a tool on retail LightOS (317/318/319 —
+`docs/sdk-facts-delta.md` §Hardware results), so the wheel design stands; (2) first-launch import of
+2.6 MB into Room measured 3.1–3.3 s — under the 4 s bar, so the `.bin` prebuilt-SQLite fallback
+(ADR-0002) is not scheduled.
