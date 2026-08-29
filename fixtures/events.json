@@ -38,6 +38,16 @@
     }
    ],
    "start": "paladin-6-warlock-2"
+  },
+  {
+   "error": "spell level must be 1..9",
+   "events": [
+    {
+     "level": 0,
+     "type": "spendSlot"
+    }
+   ],
+   "start": "cleric-5-life"
   }
  ],
  "scenarios": [

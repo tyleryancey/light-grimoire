@@ -38,7 +38,8 @@ def gen_rng() -> dict:
 
 
 def gen_dice() -> dict:
-    exprs = ["1d20", "d20+5", "2d20kh1+5", "2d20kl1+3", "1d8+3", "8d6", "2d6+1d4+2", "1d4-1", "-1d4+10", "4d6kh3", "1d100", "3d12+7", "1d20+0"]
+    # "2d20" (no keep) pins natural = null: a natural is only the single kept d20 of a check.
+    exprs = ["1d20", "d20+5", "2d20kh1+5", "2d20kl1+3", "1d8+3", "8d6", "2d6+1d4+2", "1d4-1", "-1d4+10", "4d6kh3", "1d100", "3d12+7", "1d20+0", "2d20"]
     cases = []
     for e in exprs:
         for seed in (1, 7, 12345):
@@ -48,8 +49,10 @@ def gen_dice() -> dict:
                 "total": r.total, "natural": r.natural, "min": dice.bounds(e)[0], "max": dice.bounds(e)[1],
                 "average": dice.average(e),
             })
-    invalid = ["", "++1", "1d7", "2d20kh3", "1d20+", "abc", "101d6", "0d6", "1d20kh0", "1 d 20 x"]
-    adv = [{"expr": "1d20+5", "mode": "adv", "result": "2d20kh1+5"}, {"expr": "d20+2", "mode": "dis", "result": "2d20kl1+2"}, {"expr": "1d20-1", "mode": "none", "result": "1d20-1"}]
+    # The last string is a constant beyond MAX_CONSTANT (the Kotlin Int range) — rejected, never truncated.
+    invalid = ["", "++1", "1d7", "2d20kh3", "1d20+", "abc", "101d6", "0d6", "1d20kh0", "1 d 20 x", "1d20+99999999999"]
+    # mode "none" returns the expression untouched — un-normalised "d20+2" stays "d20+2".
+    adv = [{"expr": "1d20+5", "mode": "adv", "result": "2d20kh1+5"}, {"expr": "d20+2", "mode": "dis", "result": "2d20kl1+2"}, {"expr": "1d20-1", "mode": "none", "result": "1d20-1"}, {"expr": "d20+2", "mode": "none", "result": "d20+2"}]
     crit = [{"expr": e, "result": dice.with_critical(e)} for e in ("1d8+3", "2d6+1d4+2", "1d6", "2d20kh1+5", "3d12-1")]
     pairs = []
     for seed in (1, 42, 999):
@@ -145,6 +148,7 @@ def gen_events(armor: dict[str, dict]) -> dict:
         {"start": "cleric-5-life", "events": [{"type": "spendSlot", "level": 3}, {"type": "spendSlot", "level": 3}, {"type": "spendSlot", "level": 3}], "error": "no level-3 slots left"},
         {"start": "rogue-3-thief", "events": [{"type": "spendPactSlot"}], "error": "no pact magic"},
         {"start": "paladin-6-warlock-2", "events": [{"type": "spendHitDie", "die": 8, "roll": 4}], "error": "no d8 hit dice left"},
+        {"start": "cleric-5-life", "events": [{"type": "spendSlot", "level": 0}], "error": "spell level must be 1..9"},
     ]
     return {"$comment": "Replay events on the named fixtures/characters/*.json and compare the end state. 'errors' must raise (the UI should have disabled the control).", "scenarios": scenarios, "errors": errors}
 

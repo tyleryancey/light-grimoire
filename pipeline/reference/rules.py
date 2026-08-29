@@ -423,6 +423,8 @@ def spend_slot(ch: dict, level: int) -> dict:
     """Spend one spell slot of `level` (1..9); prefers Pact slot if it matches exactly and
     regular slots are exhausted — the tool asks the player which to use, so this helper
     only handles regular slots and raises when none remain."""
+    if not 1 <= level <= 9:
+        raise ValueError("spell level must be 1..9")
     ch = deepcopy(ch)
     sc = ch.setdefault("spellcasting", {})
     used = sc.setdefault("slotsUsed", [0] * 9)

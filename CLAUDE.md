@@ -77,7 +77,9 @@ submission). Tick boxes there; mirror the current milestone here:
 
 - [x] **M0** — scaffold via `new-light-tool`, first PR green, `assembleDebug` with assets,
       wheel key codes recorded on hardware, first-launch import timed, pipeline reproducible.
-- [ ] **M1** — `rules/` replays every fixture; JVM gate green.
+- [x] **M1** — `rules/` replays every fixture; JVM gate green (29 Aug 2026: 58 JVM tests in
+      11 classes, property tests mutation-checked, `assembleDebug` clean).
+- [ ] **M2** — compendium on device: Room entities + `AssetImporter`, kind/list/reader/search screens.
 
 ## Commands
 
