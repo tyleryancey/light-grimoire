@@ -79,7 +79,7 @@ submission). Tick boxes there; mirror the current milestone here:
       wheel key codes recorded on hardware, first-launch import timed, pipeline reproducible.
 - [x] **M1** — `rules/` replays every fixture; JVM gate green (29 Aug 2026: 58 JVM tests in
       11 classes, property tests mutation-checked, `assembleDebug` clean).
-- [ ] **M2** — compendium on device: Room entities + `AssetImporter`, kind/list/reader/search screens.
+- [ ] **M2** — compendium on device: Room entities + `AssetImporter`, kind/list/reader/search screens. (task 1 — data layer — done 29 Aug 2026)
 
 ## Commands
 
@@ -117,7 +117,8 @@ one-pager: `docs/VETTING-DEFENSE.md` (kept current; copied into `README.md`).
 
 ADR-0001 SRD 5.1 first · 0002 JSON→Room · 0003 counters · 0004 zero permissions · 0005 name
 "Grimoire" (confirmed 28 Aug 2026; `id` permanent) · 0006 mulberry32 dice ·
-0007 paper-first transcription · 0008 journal shape.
+0007 paper-first transcription · 0008 journal shape · 0009 one `records` table + FTS4,
+file-name versioning instead of migrations.
 Open: creatures in v1; journal v1 vs v1.1; roll history;
 `.db` assets ever allowed; Tool Library submission mechanics ("early Fall").
 
@@ -133,5 +134,16 @@ Open: creatures in v1; journal v1 vs v1.1; roll history;
 - `versionName` is strict `x.y.z`; `versionCode` must increase per release; keep this
   file's toml block byte-identical to `tool/lighttool.toml`.
 - No GitHub Packages token is needed anymore (keyboard via JitPack) — ignore older docs.
-- First-launch compendium import measured 3.1–3.3 s on the LP3 (decode 2.4 s of it) — keep it behind
-  a spinner; typed `@Serializable` decoding is the lever if it ever needs to shrink.
+- First-launch compendium import measured 2.3–2.5 s on the LP3 (29 Aug 2026: 2 543 / 2 281 /
+  2 268 ms; decode ≈ 1.47 s, insert ≈ 0.56 s — the store's `compendium import …` logcat line,
+  method in `docs/sdk-facts-delta.md`) for 1 992 rows + FTS4; a relaunch skips the import via
+  the stamp-and-count path; `compendium-v1.db` is 6.3 MB on device (+ a WAL of the same size
+  until checkpoint).
+- `sdk:ui` has no spinner — the wait is `Preparing the rules…` over a determinate `LightProgressBar`.
+- Any `RecordRow`/`SearchRow` change needs a `CompendiumDb.SCHEMA_VERSION` bump (a new
+  `compendium-v<N>.db` file; stale files deleted) — never a Room migration: `buildDatabase` has none,
+  and a forgotten bump throws "Room cannot verify the data integrity… forgot to update the version
+  number" at open on every installed phone; `StaleDbFilesTest` pins the column set beside the version.
+- `CompendiumStore.reader()` throws unless the state is Ready — navigate off Home only after Ready.
+- A first launch while the phone is dozing (screen off) is slow (11.5 s measured, throttled CPU)
+  but still completes — do not add a timeout.

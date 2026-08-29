@@ -64,11 +64,37 @@ fighter `action_surges` (short), `indomitable_uses` (long), `extra_attacks`; mon
 the SRD feature is limited-use; store `featureKey` so the row can open its text.
 Unknown/custom classes seed nothing.
 
-## On-device import contract
+## On-device import contract (as built — `compendium/AssetImporter.kt`, ADR-0009)
 
-1. Read `index.json` via `lightContext.readAsset`; compare `bundleSha256` with DataStore.
-2. If different: for each file in `index.files`, `readAsset` → `Json.decodeFromString` →
-   Room `insertAll` in one transaction per kind; build `search_index(kind, key, name, body)`
-   (`@Fts4`); store the hash. Show a spinner; total should be a few seconds.
-3. Readers query Room, never the assets, after import. Compendium tables are read-only.
-4. Search: name-prefix matches first, then FTS `MATCH`, limit 50, grouped by kind.
+1. Read `compendium/index.json` via `readAsset` and decode it strictly (`CompendiumJson`:
+   `ignoreUnknownKeys = false`, `explicitNulls = false`); refuse a `schemaVersion` ≠ 1 or a
+   file set ≠ the 22 `Kind`s with an `IllegalStateException` naming the offender.
+2. Ready gate: DataStore `compendium.stamp` == `"$SCHEMA_VERSION.$FORMAT:$bundleSha256"`
+   (`"1.1:fce4d793…"` today) **and** `COUNT(records)` **and** `COUNT(search_index)` both ==
+   Σ `files[*].count` (1 992). The stamp alone lies after a lost file, a count alone after an
+   equal-count bundle or a short FTS table. No on-device hashing.
+3. Otherwise **one transaction** (`db.withTransaction`): clear both tables; per `Kind` in S13
+   order (`rules` before `rule_sections`, whose chapter comes from `rules.json`): `readAsset` →
+   size == `files[kind].bytes` → `JsonArraySplit.elements` (raw slices) → strict decode → both
+   counts == `files[kind].count` → `Rows.of` → insert `records` + `search_index` → progress
+   tick (22 in all). Write the stamp only after the commit. Any exception rolls back, leaves the
+   stamp untouched, surfaces as `Failed(reason)` on Home, and the next `onScreenShow` retries.
+4. Shape: one generic `records` table (PK `(kind, key)`, index `(kind, sortName)`, hot columns,
+   the raw-slice `json` column last — never re-encoded, never selected by list queries) plus a
+   standalone `search_index(kind, key, name, body)` `@Fts4` (`unicode61`; `kind`/`key`
+   `notIndexed`). Body per kind = `Body.of`: spells `text + higherLevel`; magic items
+   `headline + text`; backgrounds `feature.text + text`; creatures `text` + every
+   trait/action/reaction/legendary line; classes the spellcasting `info` entries;
+   proficiencies `""`; everything else `text`. File `compendium-v<SCHEMA_VERSION>.db`; any
+   `RecordRow`/`SearchRow` change bumps `SCHEMA_VERSION` (new file, stale files deleted) —
+   never a Room migration (`buildDatabase` has none). Compendium tables are read-only.
+5. Readers go through `CompendiumStore.reader()` (throws unless the state is Ready) →
+   `CompendiumReader` over the one DAO; `json` decodes back with the same strict models. List
+   queries are kind-scoped and bounded. Home shows `Preparing the rules…` over a determinate
+   `LightProgressBar` until Ready — `sdk:ui` has no spinner.
+6. Search (`CompendiumReader.search(input, kinds)`): `Search.likePrefix` (trim, lowercase,
+   `%`/`_` stripped, null under two chars) → DAO `nameMatches` (`LIKE` prefix, ≤ 50) ranked by
+   `Search.rankNames` (string-prefix before word-prefix, shortest name first, then sortName);
+   then `Search.ftsQuery` (≤ 4 tokens, lowercased, `*`-suffixed, space-joined = AND) → FTS
+   `MATCH` joined to `records` (≤ 50); `Search.merge` = name hits first, dedupe on
+   `(kind, key)`, cut at 50, grouped in S13 kind order. "fire → Fireball first" is a JVM test.

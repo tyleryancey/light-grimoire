@@ -52,6 +52,48 @@ validated declared + resolved; `ALLOWED_PERMISSIONS` (11) unchanged; KSP only
 `LightTextField` read-only; `LightFullscreenModal(message, onClose)` only; `LightWork`
 15-minute floor; `clean` must be a separate Gradle invocation.
 
+## Verified 29 Aug 2026 — compendium data layer (M2 task 1, `feat/m2-compendium-db`)
+
+- **No spinner in `sdk:ui`.** `LightProgressBar(colors: LightColors, progress: Float)`
+  (`sdk/ui/src/main/kotlin/com/thelightphone/sdk/ui/LightProgressBar.kt:27`) is the only progress
+  component; `LightTouchableProgressBar` (`:45`) is its draggable variant. The one indeterminate
+  indicator in the module is Material3's `CircularProgressIndicator` inside
+  `LightQrCodeScanner.kt:140` — internal to that scanner, not an exported component, and Material
+  widgets are off-limits here anyway. → Home shows `Preparing the rules…` + a determinate bar.
+- **`buildDatabase` is a bare build.** `fun <T : RoomDatabase> SealedLightContext.buildDatabase(
+  dbClass: Class<T>, dbName: String?): T = Room.databaseBuilder(androidContext.applicationContext,
+  dbClass, dbName).build()` (`sdk/client/src/main/kotlin/com/thelightphone/sdk/LightDb.kt:6-8`) —
+  no `addMigrations`, no `fallbackToDestructiveMigration`, no `createFromAsset`, no callbacks or
+  options. A Room `version` bump throws at open with nothing to catch it; the compendium versions
+  its *file name* instead (`compendium-v<SCHEMA_VERSION>.db`, ADR-0009).
+- **`withTransaction` lives in `room-runtime-android` 2.7.0.** `androidx/room/RoomDatabaseKt.class`
+  in `room-runtime-release.aar`'s `classes.jar` exports `withTransaction` and
+  `withTransactionContext` (javap). `room-ktx-2.7.0.aar`'s `classes.jar` holds only
+  `META-INF/androidx.room_room-ktx.version` — an empty shim kept for the coordinate. `@Fts4` /
+  `FtsOptions` are in `room-common-jvm-2.7.0.jar`.
+- **Room, FTS and DataStore cannot run in JVM unit tests.** `ALLOWED_DEPENDENCIES`
+  (`plugin/src/main/kotlin/com/thelightphone/plugin/LightSdkPlugin.kt:17-45`) has no Robolectric,
+  sqlite-jdbc or `room-testing`, and `validateDeclaredDependencies` (`:422`) walks every
+  declarable configuration (`isCanBeDeclared`, `:426`) — `testImplementation` included — so nothing
+  can be slipped in for tests. → the pure layer is tested through seams and DAO fakes; the DAO's
+  SQL, FTS `MATCH`, `withTransaction` and DataStore are device-only checks (`adb logcat -s Grimoire`).
+- **Plugin-scan traps for Room code.** `validateSourceFiles` (`:366-383`) walks all of `tool/src`
+  incl. `src/test`, per line; `findSourceLineViolations` (`:184`) exempts only statements starting
+  `//`, `*` or `/*` (`:197`). `\b\.java\s*\.\s*\w` (`:119`), `\b\.javaClass\b` (`:118`) and
+  `Class.forName(` (`:120`) are banned in any statement — strings and trailing comments included —
+  and `import kotlin.reflect.` is a blocked import (`:93`). `CompendiumDb::class.java` passes only
+  as a plain argument never followed by a dot (`buildDatabase(CompendiumDb::class.java, …)`,
+  `viewModelClass = HomeViewModel::class.java`); generic readers take a `KSerializer<T>`, not a
+  `KClass`.
+- **What a forgotten `SCHEMA_VERSION` bump throws.** With Room's `version` still 1 and a changed
+  `RecordRow`/`SearchRow`, the open fails on the identity-hash check: "Room cannot verify the data
+  integrity. Looks like you've changed schema but forgot to update the version number…"
+  (`androidx/room/RoomOpenHelper.class` and `BaseRoomConnectionManager.class` in
+  `room-runtime-release.aar` 2.7.0, checked against `room_master_table WHERE id = 42`).
+  "A migration from X to Y was required but not found" is the other branch — a `version` bump
+  without a `Migration` — which this design never takes. The JVM gate pins the column set beside
+  the version (`StaleDbFilesTest.aColumnChangeInEitherRowRequiresASchemaVersionBump`).
+
 ## Still unknown (ask Light or test)
 
 1. Wheel turn events on retail LightOS (M0).
@@ -76,10 +118,25 @@ Method: `examples/ui-demo` (commits `serverPackage = "com.lightos"`) installed w
 hands the screen to LightOS — that is not a key event and is expected. Unconsumed keys were not
 tested (the SDK forwards them to LightOS, which relaunches the tool).
 
-## Measured on hardware (28 Aug 2026, TLP301, LightOS 572-release-lp3)
+## Measured on hardware (TLP301, LightOS 572-release-lp3)
 
-- First-launch compendium import (`spike/import-timing`, commit b811c63): 22 JSON chunks →
-  `JsonElement` decode → one Room `insertAll` of 1 992 `(kind, key, name, json)` rows with an FTS4
-  content table. Three true-first-launch runs (`pm clear` between): **3 254 / 3 183 / 3 125 ms**
-  total — decode 2 508 / 2 486 / 2 429 ms, insert+FTS 741 / 691 / 691 ms, `MATCH 'fire*'` 4 ms
-  (169 hits). Under the 4 s bar in ADR-0002; the `.bin` prebuilt-SQLite fallback is not scheduled.
+- **First-launch compendium import, 29 Aug 2026** (`feat/m2-compendium-db`, the shipped importer):
+  22 JSON chunks → strict typed decode of raw slices → one `withTransaction` writing 1 992
+  `records` rows and the standalone `search_index` FTS4 table. Three true first-launch runs
+  (phone awake, `pm clear` between): **2 543 / 2 281 / 2 268 ms** total — decode 1 482 / 1 471 /
+  1 468 ms, insert 571 / 562 / 558 ms. A relaunch takes the stamp-and-count path
+  (`compendium ready rows=1992`, no import line; not timed). On device `compendium-v1.db` is
+  6 279 168 bytes plus a WAL of the same size until checkpoint (the plan estimated ≈ 4 MB). The
+  first run of the session, while the phone was dozing (screen off), logged **11 460 ms** on a
+  throttled CPU and still ended Ready — slow, not broken; no timeout; excluded from the three.
+  Supersedes the 28 Aug `spike/import-timing` figures (`JsonElement` decode: 3 254 / 3 183 /
+  3 125 ms). Under the 4 s bar in ADR-0002; the `.bin` prebuilt-SQLite fallback stays unscheduled.
+
+Method: the debug APK of the step-5 tree (commit `71617b3`, whose message records the rounded
+figures) installed over adb; `adb shell pm clear dev.tyler.grimoire`, launch, wait for Home. The
+numbers are `CompendiumStore`'s one `Log.i("Grimoire", …)` line — `compendium import rows=1992
+decode=<ms>ms insert=<ms>ms total=<ms>ms` from `ImportResult.Imported` (`System.nanoTime` buckets
+around decode and insert inside `AssetImporter.ensure()`), `compendium ready rows=1992` from
+`Skipped` — read with `adb logcat -s Grimoire`; the file size from
+`adb shell run-as dev.tyler.grimoire ls -l databases/`. Reproduce with `run-light-tool`; the phone
+must be awake with the tool in the foreground, or the dozing figure is what you get.

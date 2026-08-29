@@ -51,6 +51,12 @@ DICE                      ▸
 Characters first (≤ 6), then the three utilities. Tap a character → S1. `NEW` → S12.
 If exactly one character exists the tool still opens here (predictable, one extra tap).
 
+First launch (and after a bundle or schema change): until the compendium is imported the list
+is replaced by one line, `Preparing the rules…`, over a determinate `LightProgressBar` that
+advances per kind (22 steps, ≈ 2.5 s on the LP3 — `sdk:ui` has no spinner); a failed import
+shows its reason in that line and the next show retries. The list above appears only once the
+store is Ready.
+
 ## S1 Sheet hub
 
 ```
@@ -320,7 +326,7 @@ CREATURES (334)           ▸
 ```
 `FIND` opens the editor (single line) and returns to a bounded result list (≤ 50) across
 kinds, name matches first (Room FTS4). Spells list filters by level with the wheel; rules
-are the SRD's six chapters with their sections.
+are the SRD's nine chapters with their sections.
 
 ## S14 Journal
 

@@ -31,6 +31,38 @@ class StaleDbFilesTest {
         assertEquals("compendium-v1.db", CompendiumDb.FILE_NAME, "FILE_NAME carries the schema version")
     }
 
+    /**
+     * The tripwire behind ADR-0009's rule "any `RecordRow`/`SearchRow` change needs a `SCHEMA_VERSION` bump":
+     * Room's `version` stays 1, so a changed column set with the same file name throws "Room cannot verify the
+     * data integrity" at open on every installed phone. Both rows are built positionally and their data-class
+     * `toString()` (property names in declaration order) is pinned beside the version, so adding, removing,
+     * renaming or reordering a column fails here — at compile time or at this message — until the version moves
+     * and the fingerprint is updated together. Annotation-only changes (index, primary key, FTS options) are not
+     * caught; they still need the bump.
+     */
+    @Test
+    fun aColumnChangeInEitherRowRequiresASchemaVersionBump() {
+        val record = RecordRow(
+            "spells", "fireball", "Fireball", "fireball", 0, 3, "evocation", "1 action", false, false,
+            " sorcerer wizard ", null, null, null, null, null, null, null, "{}",
+        )
+        val search = SearchRow("spells", "fireball", "Fireball", "A bright streak")
+        val message = "columns changed — bump CompendiumDb.SCHEMA_VERSION (a new compendium-v<N>.db, never a migration) and this fingerprint"
+        assertEquals(
+            "RecordRow(kind=spells, key=fireball, name=Fireball, sortName=fireball, position=0, level=3, " +
+                "school=evocation, castingTime=1 action, concentration=false, ritual=false, " +
+                "classList= sorcerer wizard , classKey=null, subclassKey=null, parentKey=null, category=null, " +
+                "subcategory=null, rarity=null, cr=null, json={}) @ v1",
+            "$record @ v${CompendiumDb.SCHEMA_VERSION}",
+            "RecordRow $message",
+        )
+        assertEquals(
+            "SearchRow(kind=spells, key=fireball, name=Fireball, body=A bright streak) @ v1",
+            "$search @ v${CompendiumDb.SCHEMA_VERSION}",
+            "SearchRow $message",
+        )
+    }
+
     @Test
     fun deletesExactlyTheOtherVersionsTrioAndKeepsTheCurrentFileAndUserData() {
         val filesDir = sandbox(
