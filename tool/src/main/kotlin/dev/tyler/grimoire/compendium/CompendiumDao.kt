@@ -5,7 +5,8 @@ import androidx.room.Insert
 import androidx.room.Query
 
 /**
- * The one DAO of the compendium (plan §DAO). Every query is kind-scoped and bounded, and only the three
+ * The one DAO of the compendium (plan §DAO). Every query is kind-scoped and finite by the bundle — the
+ * compendium is a fixed 1 992 rows, the large kinds take an explicit `limit` — and only the three
  * reader queries ([get], [getAll], [refs]'s siblings) ever select `json` — list queries return the
  * [CompendiumRef] projection so a 27 KB rule section never meets the cursor window. The column list of
  * that projection is spelled out in every query on purpose: Room verifies each string at compile time,

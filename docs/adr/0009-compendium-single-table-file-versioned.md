@@ -28,8 +28,9 @@ lists need") and assumed a spinner. Facts that decided the shape:
    `ritual`, `classList`, `classKey`, `subclassKey`, `parentKey`) **and one standalone
    `search_index` FTS4 table** (`SearchRow(kind, key, name, body)`, tokenizer `unicode61`,
    `kind`/`key` `notIndexed` so a `MATCH` can be kind-scoped). Two entities, one DAO
-   (`CompendiumDao`), one `@Database` (`CompendiumDb`). Every list query is kind-scoped, bounded
-   and returns the `CompendiumRef` projection; only `get`/`getAll` select `json`.
+   (`CompendiumDao`), one `@Database` (`CompendiumDb`). Every list query is kind-scoped and finite
+   by the bundle (a fixed 1 992 rows; the large kinds take an explicit `limit`) and returns the
+   `CompendiumRef` projection; only `get`/`getAll` select `json`.
 2. **Raw-slice `json` column.** A pure JSON-array splitter (`JsonArraySplit`) cuts each asset
    file into its element slices; the slice is stored byte-identical to the bundle, never
    re-encoded. The same strict models decode it at read time.

@@ -93,7 +93,7 @@ class CompendiumReader(private val dao: CompendiumDao) {
         return Search.merge(nameHits, textHits)
     }
 
-    // ---- lists (pass-throughs; every one kind-scoped and bounded by the DAO) ---------------------------------
+    // ---- lists (pass-throughs; every one kind-scoped, finite by the bundle; large kinds take a limit) ------
 
     suspend fun countsByKind(): List<KindCount> = dao.countsByKind()
     suspend fun listByName(kind: Kind, limit: Int): List<CompendiumRef> = dao.listByName(kind.id, limit)
