@@ -306,7 +306,12 @@ val RulesJson: Json = Json {
     ignoreUnknownKeys = false
 }
 
-/** Codec for [Character] plus the schema-version gate. */
+/**
+ * Codec for [Character] plus the schema-version gate. Decoding checks shape (every key known, every
+ * type right), not cardinality: the schema's item caps (`classes` ≤ 3, `attacks` ≤ 12, `items` ≤ 60,
+ * `notes` ≤ 20, nine `slotsUsed`) are enforced where characters are written — the wizard and the
+ * repository — not here.
+ */
 object Model {
     const val SCHEMA_VERSION = 1
 

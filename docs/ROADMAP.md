@@ -13,12 +13,12 @@ before any UI; commit per task; `CLAUDE.md` mirrors this list and is the handoff
 
 ## M1 — Pure core (the oracle in Kotlin) (2–3 days)
 
-- [ ] `rules/Model.kt` — `Character` + nested types with kotlinx-serialization; round-trips `fixtures/characters/*.json` byte-for-byte after normalisation.
-- [ ] `rules/Dice.kt` — Mulberry32 (bit-exact: `fixtures/rng.json`), parser, `roll`, `withAdvantage`, `bounds`, `average` (`fixtures/dice.json`, invalid list rejected).
-- [ ] `rules/Tables.kt` + `rules/Derive.kt` — `fixtures/math.json`, `slots.json`, `derived.json` green.
-- [ ] `rules/Ledger.kt` — every scenario in `fixtures/events.json` green, error cases throw.
-- [ ] Property tests: HP never negative, temp never stacks, long rest never exceeds max, counters clamp.
-- [ ] `./gradlew :tool:testDebugUnitTest` green; no `android`/`androidx` import under `rules/` (hook enforces).
+- [x] `rules/Model.kt` — `Character` + nested types with kotlinx-serialization; round-trips `fixtures/characters/*.json` byte-for-byte after normalisation (normalisation = drop null-valued keys and compare as JSON trees; the hand-written samples omit some optional keys and spell others as `null` — see `ModelRoundTripTest`).
+- [x] `rules/Dice.kt` — Mulberry32 (bit-exact: `fixtures/rng.json`), parser, `roll`, `withAdvantage`, `bounds`, `average` (`fixtures/dice.json`, invalid list rejected).
+- [x] `rules/Tables.kt` + `rules/Derive.kt` — `fixtures/math.json`, `slots.json`, `derived.json` green.
+- [x] `rules/Ledger.kt` — every scenario in `fixtures/events.json` green, error cases throw.
+- [x] Property tests: HP never negative, temp never stacks, long rest never exceeds max, counters clamp.
+- [x] `./gradlew :tool:testDebugUnitTest` green; no `android`/`androidx` import under `rules/` (hook enforces). → Done 29 Aug 2026 (`feat/m1-rules-core`): 58 JVM tests in 11 classes replay all six fixtures plus the compendium cross-check; property tests were mutation-checked; two oracle gaps found in review were fixed fixture-first (dice constant cap, `spend_slot` level bounds) and the Python staleness guard now covers `derived.json`/`events.json`.
 
 ## M2 — Compendium on device (2 days)
 
