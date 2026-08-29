@@ -1,0 +1,119 @@
+[
+ {
+  "edition": "2014",
+  "key": "acid",
+  "license": "CC-BY-4.0",
+  "name": "Acid",
+  "source": "srd-5.1",
+  "text": "The corrosive spray of a black dragon's breath and the dissolving enzymes secreted by a black pudding deal acid damage.",
+  "xref": "/api/2014/damage-types/acid"
+ },
+ {
+  "edition": "2014",
+  "key": "bludgeoning",
+  "license": "CC-BY-4.0",
+  "name": "Bludgeoning",
+  "source": "srd-5.1",
+  "text": "Blunt force attacks, falling, constriction, and the like deal bludgeoning damage.",
+  "xref": "/api/2014/damage-types/bludgeoning"
+ },
+ {
+  "edition": "2014",
+  "key": "cold",
+  "license": "CC-BY-4.0",
+  "name": "Cold",
+  "source": "srd-5.1",
+  "text": "The infernal chill radiating from an ice devil's spear and the frigid blast of a white dragon's breath deal cold damage.",
+  "xref": "/api/2014/damage-types/cold"
+ },
+ {
+  "edition": "2014",
+  "key": "fire",
+  "license": "CC-BY-4.0",
+  "name": "Fire",
+  "source": "srd-5.1",
+  "text": "Red dragons breathe fire, and many spells conjure flames to deal fire damage.",
+  "xref": "/api/2014/damage-types/fire"
+ },
+ {
+  "edition": "2014",
+  "key": "force",
+  "license": "CC-BY-4.0",
+  "name": "Force",
+  "source": "srd-5.1",
+  "text": "Force is pure magical energy focused into a damaging form. Most effects that deal force damage are spells, including magic missile and spiritual weapon.",
+  "xref": "/api/2014/damage-types/force"
+ },
+ {
+  "edition": "2014",
+  "key": "lightning",
+  "license": "CC-BY-4.0",
+  "name": "Lightning",
+  "source": "srd-5.1",
+  "text": "A lightning bolt spell and a blue dragon's breath deal lightning damage.",
+  "xref": "/api/2014/damage-types/lightning"
+ },
+ {
+  "edition": "2014",
+  "key": "necrotic",
+  "license": "CC-BY-4.0",
+  "name": "Necrotic",
+  "source": "srd-5.1",
+  "text": "Necrotic damage, dealt by certain undead and a spell such as chill touch, withers matter and even the soul.",
+  "xref": "/api/2014/damage-types/necrotic"
+ },
+ {
+  "edition": "2014",
+  "key": "piercing",
+  "license": "CC-BY-4.0",
+  "name": "Piercing",
+  "source": "srd-5.1",
+  "text": "Puncturing and impaling attacks, including spears and monsters' bites, deal piercing damage.",
+  "xref": "/api/2014/damage-types/piercing"
+ },
+ {
+  "edition": "2014",
+  "key": "poison",
+  "license": "CC-BY-4.0",
+  "name": "Poison",
+  "source": "srd-5.1",
+  "text": "Venomous stings and the toxic gas of a green dragon's breath deal poison damage.",
+  "xref": "/api/2014/damage-types/poison"
+ },
+ {
+  "edition": "2014",
+  "key": "psychic",
+  "license": "CC-BY-4.0",
+  "name": "Psychic",
+  "source": "srd-5.1",
+  "text": "Mental abilities such as a psionic blast deal psychic damage.",
+  "xref": "/api/2014/damage-types/psychic"
+ },
+ {
+  "edition": "2014",
+  "key": "radiant",
+  "license": "CC-BY-4.0",
+  "name": "Radiant",
+  "source": "srd-5.1",
+  "text": "Radiant damage, dealt by a cleric's flame strike spell or an angel's smiting weapon, sears the flesh like fire and overloads the spirit with power.",
+  "xref": "/api/2014/damage-types/radiant"
+ },
+ {
+  "edition": "2014",
+  "key": "slashing",
+  "license": "CC-BY-4.0",
+  "name": "Slashing",
+  "source": "srd-5.1",
+  "text": "Swords, axes, and monsters' claws deal slashing damage.",
+  "xref": "/api/2014/damage-types/slashing"
+ },
+ {
+  "edition": "2014",
+  "key": "thunder",
+  "license": "CC-BY-4.0",
+  "name": "Thunder",
+  "source": "srd-5.1",
+  "text": "A concussive burst of sound, such as the effect of the thunderwave spell, deals thunder damage.",
+  "xref": "/api/2014/damage-types/thunder"
+ }
+]

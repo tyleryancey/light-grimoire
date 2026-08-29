@@ -1,0 +1,4801 @@
+[
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "abacus",
+  "license": "CC-BY-4.0",
+  "name": "Abacus",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 2,
+  "xref": "/api/2014/equipment/abacus"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "acid-vial",
+  "license": "CC-BY-4.0",
+  "name": "Acid (vial)",
+  "source": "srd-5.1",
+  "text": "As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon.\n\nOn a hit, the target takes 2d6 acid damage.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/acid-vial"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "alchemists-fire-flask",
+  "license": "CC-BY-4.0",
+  "name": "Alchemist's fire (flask)",
+  "source": "srd-5.1",
+  "text": "This sticky, adhesive fluid ignites when exposed to air.\n\nAs an action, you can throw this flask up to 20 feet, shattering it on impact. Make a ranged attack against a creature or object, treating the alchemist's fire as an improvised weapon.\n\nOn a hit, the target takes 1d4 fire damage at the start of each of its turns. A creature can end this damage by using its action to make a DC 10 Dexterity check to extinguish the flames.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/alchemists-fire-flask"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "alchemists-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Alchemist's Supplies",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 8,
+  "xref": "/api/2014/equipment/alchemists-supplies"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 0,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "alms-box",
+  "license": "CC-BY-4.0",
+  "name": "Alms box",
+  "source": "srd-5.1",
+  "text": "A small box for alms, typically found in a priest's pack.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/alms-box"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "holy-symbols",
+  "key": "amulet",
+  "license": "CC-BY-4.0",
+  "name": "Amulet",
+  "source": "srd-5.1",
+  "text": "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic.\n\nAppendix B lists the symbols commonly associated with many gods in the multiverse. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/amulet"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 5,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "key": "animal-feed-1-day",
+  "license": "CC-BY-4.0",
+  "name": "Animal Feed (1 day)",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 10,
+  "xref": "/api/2014/equipment/animal-feed-1-day"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "antitoxin-vial",
+  "license": "CC-BY-4.0",
+  "name": "Antitoxin (vial)",
+  "source": "srd-5.1",
+  "text": "A creature that drinks this vial of liquid gains advantage on saving throws against poison for 1 hour. It confers no benefit to undead or constructs.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/antitoxin-vial"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "ammunition",
+  "key": "arrow",
+  "license": "CC-BY-4.0",
+  "name": "Arrow",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 1,
+  "xref": "/api/2014/equipment/arrow"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "backpack",
+  "license": "CC-BY-4.0",
+  "name": "Backpack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 5,
+  "xref": "/api/2014/equipment/backpack"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 30,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "bagpipes",
+  "license": "CC-BY-4.0",
+  "name": "Bagpipes",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 6,
+  "xref": "/api/2014/equipment/bagpipes"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "ball-bearings-bag-of-1000",
+  "license": "CC-BY-4.0",
+  "name": "Ball bearings (bag of 1,000)",
+  "source": "srd-5.1",
+  "text": "As an action, you can spill these tiny metal balls from their pouch to cover a level, square area that is 10 feet on a side.\n\nA creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone.\n\nA creature moving through the area at half speed doesn't need to make the save.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/ball-bearings-bag-of-1000"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 1600,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-breastplate",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Breastplate",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 40,
+  "xref": "/api/2014/equipment/barding-breastplate"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 300,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-chain-mail",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Chain mail",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 110,
+  "xref": "/api/2014/equipment/barding-chain-mail"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 200,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-chain-shirt",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Chain shirt",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 40,
+  "xref": "/api/2014/equipment/barding-chain-shirt"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 3000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-half-plate",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Half plate",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 80,
+  "xref": "/api/2014/equipment/barding-half-plate"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 40,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-hide",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Hide",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 24,
+  "xref": "/api/2014/equipment/barding-hide"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 40,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-leather",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Leather",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 20,
+  "xref": "/api/2014/equipment/barding-leather"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-padded",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Padded",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 16,
+  "xref": "/api/2014/equipment/barding-padded"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 6000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-plate",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Plate",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 130,
+  "xref": "/api/2014/equipment/barding-plate"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 12,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-ring-mail",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Ring mail",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 80,
+  "xref": "/api/2014/equipment/barding-ring-mail"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 200,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-scale-mail",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Scale mail",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 90,
+  "xref": "/api/2014/equipment/barding-scale-mail"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 800,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-splint",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Splint",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 120,
+  "xref": "/api/2014/equipment/barding-splint"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 180,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "barding-studded-leather",
+  "license": "CC-BY-4.0",
+  "name": "Barding: Studded Leather",
+  "source": "srd-5.1",
+  "text": "Barding is armor designed to protect an animal's head, neck, chest, and body. Any type of armor shown on the Armor table can be purchased as barding. The cost is four times the equivalent armor made for humanoids, and it weighs twice as much.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 26,
+  "xref": "/api/2014/equipment/barding-studded-leather"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "barrel",
+  "license": "CC-BY-4.0",
+  "name": "Barrel",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 70,
+  "xref": "/api/2014/equipment/barrel"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 4,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "basket",
+  "license": "CC-BY-4.0",
+  "name": "Basket",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 2,
+  "xref": "/api/2014/equipment/basket"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "battleaxe",
+  "license": "CC-BY-4.0",
+  "name": "Battleaxe",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "slashing"
+   },
+   "properties": [
+    "versatile"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": {
+    "dice": "1d10",
+    "type": "slashing"
+   }
+  },
+  "weight": 4,
+  "xref": "/api/2014/equipment/battleaxe"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "bedroll",
+  "license": "CC-BY-4.0",
+  "name": "Bedroll",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 7,
+  "xref": "/api/2014/equipment/bedroll"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "bell",
+  "license": "CC-BY-4.0",
+  "name": "Bell",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/bell"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "bit-and-bridle",
+  "license": "CC-BY-4.0",
+  "name": "Bit and bridle",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 1,
+  "xref": "/api/2014/equipment/bit-and-bridle"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "blanket",
+  "license": "CC-BY-4.0",
+  "name": "Blanket",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 3,
+  "xref": "/api/2014/equipment/blanket"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "block-and-tackle",
+  "license": "CC-BY-4.0",
+  "name": "Block and tackle",
+  "source": "srd-5.1",
+  "text": "A set of pulleys with a cable threaded through them and a hook to attach to objects, a block and tackle allows you to hoist up to four times the weight you can normally lift.",
+  "weight": 5,
+  "xref": "/api/2014/equipment/block-and-tackle"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 0,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "block-of-incense",
+  "license": "CC-BY-4.0",
+  "name": "Block of incense",
+  "source": "srd-5.1",
+  "text": "A block of incense, typically found in a priest's pack.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/block-of-incense"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "blowgun",
+  "license": "CC-BY-4.0",
+  "name": "Blowgun",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1",
+    "type": "piercing"
+   },
+   "properties": [
+    "ammunition",
+    "loading"
+   ],
+   "range": {
+    "long": 100,
+    "normal": 25
+   },
+   "rangeType": "Ranged",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 1,
+  "xref": "/api/2014/equipment/blowgun"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "ammunition",
+  "key": "blowgun-needle",
+  "license": "CC-BY-4.0",
+  "name": "Blowgun needle",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 1,
+  "xref": "/api/2014/equipment/blowgun-needle"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "book",
+  "license": "CC-BY-4.0",
+  "name": "Book",
+  "source": "srd-5.1",
+  "text": "A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented using text or pictures. A book of spells is a spellbook (described later in this section).",
+  "weight": 5,
+  "xref": "/api/2014/equipment/book"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "bottle-glass",
+  "license": "CC-BY-4.0",
+  "name": "Bottle, glass",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 2,
+  "xref": "/api/2014/equipment/bottle-glass"
+ },
+ {
+  "armor": {
+   "base": 14,
+   "category": "Medium",
+   "dexBonus": true,
+   "maxBonus": 2,
+   "stealthDisadvantage": false,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 400,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "breastplate",
+  "license": "CC-BY-4.0",
+  "name": "Breastplate",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 20,
+  "xref": "/api/2014/equipment/breastplate"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "brewers-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Brewer's Supplies",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 9,
+  "xref": "/api/2014/equipment/brewers-supplies"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "bucket",
+  "license": "CC-BY-4.0",
+  "name": "Bucket",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 2,
+  "xref": "/api/2014/equipment/bucket"
+ },
+ {
+  "category": "adventuring-gear",
+  "contents": [
+   {
+    "key": "backpack",
+    "qty": 1
+   },
+   {
+    "key": "ball-bearings-bag-of-1000",
+    "qty": 1
+   },
+   {
+    "key": "string-10-feet",
+    "qty": 1
+   },
+   {
+    "key": "bell",
+    "qty": 1
+   },
+   {
+    "key": "candle",
+    "qty": 5
+   },
+   {
+    "key": "crowbar",
+    "qty": 1
+   },
+   {
+    "key": "hammer",
+    "qty": 1
+   },
+   {
+    "key": "piton",
+    "qty": 10
+   },
+   {
+    "key": "lantern-hooded",
+    "qty": 1
+   },
+   {
+    "key": "oil-flask",
+    "qty": 2
+   },
+   {
+    "key": "rations-1-day",
+    "qty": 5
+   },
+   {
+    "key": "tinderbox",
+    "qty": 1
+   },
+   {
+    "key": "waterskin",
+    "qty": 1
+   },
+   {
+    "key": "rope-hempen-50-feet",
+    "qty": 1
+   }
+  ],
+  "cost": {
+   "qty": 16,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "equipment-packs",
+  "key": "burglars-pack",
+  "license": "CC-BY-4.0",
+  "name": "Burglar's Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": null,
+  "xref": "/api/2014/equipment/burglars-pack"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "calligraphers-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Calligrapher's Supplies",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 5,
+  "xref": "/api/2014/equipment/calligraphers-supplies"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "caltrops",
+  "license": "CC-BY-4.0",
+  "name": "Caltrops",
+  "source": "srd-5.1",
+  "text": "As an action, you can spread a bag of caltrops to cover a square area that is 5 feet on a side.\n\nAny creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving this turn and take 1 piercing damage.\n\nTaking this damage reduces the creature's walking speed by 10 feet until the creature regains at least 1 hit point.\n\nA creature moving through the area at half speed doesn't need to make the save.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/caltrops"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "camel",
+  "license": "CC-BY-4.0",
+  "name": "Camel",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/camel"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "candle",
+  "license": "CC-BY-4.0",
+  "name": "Candle",
+  "source": "srd-5.1",
+  "text": "For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 feet.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/candle"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 8,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "carpenters-tools",
+  "license": "CC-BY-4.0",
+  "name": "Carpenter's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 6,
+  "xref": "/api/2014/equipment/carpenters-tools"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 100,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "carriage",
+  "license": "CC-BY-4.0",
+  "name": "Carriage",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 600,
+  "xref": "/api/2014/equipment/carriage"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 15,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "cart",
+  "license": "CC-BY-4.0",
+  "name": "Cart",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 200,
+  "xref": "/api/2014/equipment/cart"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 15,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "cartographers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Cartographer's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 6,
+  "xref": "/api/2014/equipment/cartographers-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "case-crossbow-bolt",
+  "license": "CC-BY-4.0",
+  "name": "Case, crossbow bolt",
+  "source": "srd-5.1",
+  "text": "This wooden case can hold up to twenty crossbow bolts.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/case-crossbow-bolt"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "case-map-or-scroll",
+  "license": "CC-BY-4.0",
+  "name": "Case, map or scroll",
+  "source": "srd-5.1",
+  "text": "This cylindrical leather case can hold up to ten rolled-up sheets of paper or five rolled-up sheets of parchment.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/case-map-or-scroll"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 0,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "censer",
+  "license": "CC-BY-4.0",
+  "name": "Censer",
+  "source": "srd-5.1",
+  "text": "A censer, typically found in a priest's pack.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/censer"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "chain-10-feet",
+  "license": "CC-BY-4.0",
+  "name": "Chain (10 feet)",
+  "source": "srd-5.1",
+  "text": "A chain has 10 hit points. It can be burst with a successful DC 20 Strength check.",
+  "weight": 10,
+  "xref": "/api/2014/equipment/chain-10-feet"
+ },
+ {
+  "armor": {
+   "base": 16,
+   "category": "Heavy",
+   "dexBonus": false,
+   "maxBonus": null,
+   "stealthDisadvantage": true,
+   "strMinimum": 13
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 75,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "chain-mail",
+  "license": "CC-BY-4.0",
+  "name": "Chain Mail",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 55,
+  "xref": "/api/2014/equipment/chain-mail"
+ },
+ {
+  "armor": {
+   "base": 13,
+   "category": "Medium",
+   "dexBonus": true,
+   "maxBonus": 2,
+   "stealthDisadvantage": false,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "chain-shirt",
+  "license": "CC-BY-4.0",
+  "name": "Chain Shirt",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 20,
+  "xref": "/api/2014/equipment/chain-shirt"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "chalk-1-piece",
+  "license": "CC-BY-4.0",
+  "name": "Chalk (1 piece)",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/chalk-1-piece"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 250,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "chariot",
+  "license": "CC-BY-4.0",
+  "name": "Chariot",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 100,
+  "xref": "/api/2014/equipment/chariot"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "chest",
+  "license": "CC-BY-4.0",
+  "name": "Chest",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 25,
+  "xref": "/api/2014/equipment/chest"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "kits",
+  "key": "climbers-kit",
+  "license": "CC-BY-4.0",
+  "name": "Climber's Kit",
+  "source": "srd-5.1",
+  "text": "A climber's kit includes special pitons, boot tips, gloves, and a harness. You can use the climber's kit as an action to anchor yourself; when you do, you can't fall more than 25 feet from the point where you anchored yourself, and you can't climb more than 25 feet away from that point without undoing the anchor.",
+  "weight": 12,
+  "xref": "/api/2014/equipment/climbers-kit"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "clothes-common",
+  "license": "CC-BY-4.0",
+  "name": "Clothes, common",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 3,
+  "xref": "/api/2014/equipment/clothes-common"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "clothes-costume",
+  "license": "CC-BY-4.0",
+  "name": "Clothes, costume",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 4,
+  "xref": "/api/2014/equipment/clothes-costume"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 15,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "clothes-fine",
+  "license": "CC-BY-4.0",
+  "name": "Clothes, fine",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 6,
+  "xref": "/api/2014/equipment/clothes-fine"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "clothes-travelers",
+  "license": "CC-BY-4.0",
+  "name": "Clothes, traveler's",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 4,
+  "xref": "/api/2014/equipment/clothes-travelers"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 1,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "club",
+  "license": "CC-BY-4.0",
+  "name": "Club",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d4",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "light",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/club"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "cobblers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Cobbler's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 5,
+  "xref": "/api/2014/equipment/cobblers-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "component-pouch",
+  "license": "CC-BY-4.0",
+  "name": "Component pouch",
+  "source": "srd-5.1",
+  "text": "A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).",
+  "weight": 2,
+  "xref": "/api/2014/equipment/component-pouch"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "cooks-utensils",
+  "license": "CC-BY-4.0",
+  "name": "Cook's utensils",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 8,
+  "xref": "/api/2014/equipment/cooks-utensils"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "ammunition",
+  "key": "crossbow-bolt",
+  "license": "CC-BY-4.0",
+  "name": "Crossbow bolt",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 1.5,
+  "xref": "/api/2014/equipment/crossbow-bolt"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 75,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "crossbow-hand",
+  "license": "CC-BY-4.0",
+  "name": "Crossbow, hand",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+   },
+   "properties": [
+    "ammunition",
+    "light",
+    "loading"
+   ],
+   "range": {
+    "long": 120,
+    "normal": 30
+   },
+   "rangeType": "Ranged",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 3,
+  "xref": "/api/2014/equipment/crossbow-hand"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "crossbow-heavy",
+  "license": "CC-BY-4.0",
+  "name": "Crossbow, heavy",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d10",
+    "type": "piercing"
+   },
+   "properties": [
+    "ammunition",
+    "heavy",
+    "loading",
+    "two-handed"
+   ],
+   "range": {
+    "long": 400,
+    "normal": 100
+   },
+   "rangeType": "Ranged",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 18,
+  "xref": "/api/2014/equipment/crossbow-heavy"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "crossbow-light",
+  "license": "CC-BY-4.0",
+  "name": "Crossbow, light",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d8",
+    "type": "piercing"
+   },
+   "properties": [
+    "ammunition",
+    "loading",
+    "two-handed"
+   ],
+   "range": {
+    "long": 320,
+    "normal": 80
+   },
+   "rangeType": "Ranged",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 5,
+  "xref": "/api/2014/equipment/crossbow-light"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "crowbar",
+  "license": "CC-BY-4.0",
+  "name": "Crowbar",
+  "source": "srd-5.1",
+  "text": "Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.",
+  "weight": 5,
+  "xref": "/api/2014/equipment/crowbar"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "arcane-foci",
+  "key": "crystal",
+  "license": "CC-BY-4.0",
+  "name": "Crystal",
+  "source": "srd-5.1",
+  "text": "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/crystal"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "dagger",
+  "license": "CC-BY-4.0",
+  "name": "Dagger",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d4",
+    "type": "piercing"
+   },
+   "properties": [
+    "finesse",
+    "light",
+    "thrown",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": {
+    "long": 60,
+    "normal": 20
+   },
+   "twoHandedDamage": null
+  },
+  "weight": 1,
+  "xref": "/api/2014/equipment/dagger"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 5,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "key": "dart",
+  "license": "CC-BY-4.0",
+  "name": "Dart",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d4",
+    "type": "piercing"
+   },
+   "properties": [
+    "finesse",
+    "thrown"
+   ],
+   "range": {
+    "long": 60,
+    "normal": 20
+   },
+   "rangeType": "Ranged",
+   "throwRange": {
+    "long": 60,
+    "normal": 20
+   },
+   "twoHandedDamage": null
+  },
+  "weight": 0.25,
+  "xref": "/api/2014/equipment/dart"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 1,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "dice-set",
+  "license": "CC-BY-4.0",
+  "name": "Dice Set",
+  "source": "srd-5.1",
+  "text": "This item encompasses a wide range of game pieces, including dice and decks of cards (for games such as Three-Dragon Ante). A few common examples appear on the Tools table, but other kinds of gaming sets exist. If you are proficient with a gaming set, you can add your proficiency bonus to ability checks you make to play a game with that set. Each type of gaming set requires a separate proficiency.",
+  "toolCategory": "Gaming Sets",
+  "weight": 0,
+  "xref": "/api/2014/equipment/dice-set"
+ },
+ {
+  "category": "adventuring-gear",
+  "contents": [
+   {
+    "key": "chest",
+    "qty": 1
+   },
+   {
+    "key": "case-map-or-scroll",
+    "qty": 2
+   },
+   {
+    "key": "clothes-fine",
+    "qty": 1
+   },
+   {
+    "key": "ink-1-ounce-bottle",
+    "qty": 1
+   },
+   {
+    "key": "ink-pen",
+    "qty": 1
+   },
+   {
+    "key": "lamp",
+    "qty": 1
+   },
+   {
+    "key": "oil-flask",
+    "qty": 2
+   },
+   {
+    "key": "paper-one-sheet",
+    "qty": 5
+   },
+   {
+    "key": "perfume-vial",
+    "qty": 1
+   },
+   {
+    "key": "sealing-wax",
+    "qty": 1
+   },
+   {
+    "key": "soap",
+    "qty": 1
+   }
+  ],
+  "cost": {
+   "qty": 39,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "equipment-packs",
+  "key": "diplomats-pack",
+  "license": "CC-BY-4.0",
+  "name": "Diplomat's Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": null,
+  "xref": "/api/2014/equipment/diplomats-pack"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "kits",
+  "key": "disguise-kit",
+  "license": "CC-BY-4.0",
+  "name": "Disguise Kit",
+  "source": "srd-5.1",
+  "text": "This pouch of cosmetics, hair dye, and small props lets you create disguises that change your physical appearance. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to create a visual disguise.",
+  "weight": 3,
+  "xref": "/api/2014/equipment/disguise-kit"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 8,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "donkey",
+  "license": "CC-BY-4.0",
+  "name": "Donkey",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/donkey"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 6,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "drum",
+  "license": "CC-BY-4.0",
+  "name": "Drum",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 3,
+  "xref": "/api/2014/equipment/drum"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "dulcimer",
+  "license": "CC-BY-4.0",
+  "name": "Dulcimer",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 10,
+  "xref": "/api/2014/equipment/dulcimer"
+ },
+ {
+  "category": "adventuring-gear",
+  "contents": [
+   {
+    "key": "backpack",
+    "qty": 1
+   },
+   {
+    "key": "crowbar",
+    "qty": 1
+   },
+   {
+    "key": "hammer",
+    "qty": 1
+   },
+   {
+    "key": "piton",
+    "qty": 10
+   },
+   {
+    "key": "torch",
+    "qty": 10
+   },
+   {
+    "key": "tinderbox",
+    "qty": 1
+   },
+   {
+    "key": "rations-1-day",
+    "qty": 10
+   },
+   {
+    "key": "waterskin",
+    "qty": 1
+   },
+   {
+    "key": "rope-hempen-50-feet",
+    "qty": 1
+   }
+  ],
+  "cost": {
+   "qty": 12,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "equipment-packs",
+  "key": "dungeoneers-pack",
+  "license": "CC-BY-4.0",
+  "name": "Dungeoneer's Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": null,
+  "xref": "/api/2014/equipment/dungeoneers-pack"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 200,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "elephant",
+  "license": "CC-BY-4.0",
+  "name": "Elephant",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/elephant"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "holy-symbols",
+  "key": "emblem",
+  "license": "CC-BY-4.0",
+  "name": "Emblem",
+  "source": "srd-5.1",
+  "text": "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic.\n\nAppendix B lists the symbols commonly associated with many gods in the multiverse. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/emblem"
+ },
+ {
+  "category": "adventuring-gear",
+  "contents": [
+   {
+    "key": "backpack",
+    "qty": 1
+   },
+   {
+    "key": "bedroll",
+    "qty": 1
+   },
+   {
+    "key": "clothes-costume",
+    "qty": 2
+   },
+   {
+    "key": "candle",
+    "qty": 5
+   },
+   {
+    "key": "rations-1-day",
+    "qty": 5
+   },
+   {
+    "key": "waterskin",
+    "qty": 1
+   },
+   {
+    "key": "disguise-kit",
+    "qty": 1
+   }
+  ],
+  "cost": {
+   "qty": 40,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "equipment-packs",
+  "key": "entertainers-pack",
+  "license": "CC-BY-4.0",
+  "name": "Entertainer's Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": null,
+  "xref": "/api/2014/equipment/entertainers-pack"
+ },
+ {
+  "category": "adventuring-gear",
+  "contents": [
+   {
+    "key": "backpack",
+    "qty": 1
+   },
+   {
+    "key": "bedroll",
+    "qty": 1
+   },
+   {
+    "key": "mess-kit",
+    "qty": 1
+   },
+   {
+    "key": "tinderbox",
+    "qty": 1
+   },
+   {
+    "key": "torch",
+    "qty": 10
+   },
+   {
+    "key": "rations-1-day",
+    "qty": 10
+   },
+   {
+    "key": "waterskin",
+    "qty": 1
+   },
+   {
+    "key": "rope-hempen-50-feet",
+    "qty": 1
+   }
+  ],
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "equipment-packs",
+  "key": "explorers-pack",
+  "license": "CC-BY-4.0",
+  "name": "Explorer's Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": null,
+  "xref": "/api/2014/equipment/explorers-pack"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "fishing-tackle",
+  "license": "CC-BY-4.0",
+  "name": "Fishing tackle",
+  "source": "srd-5.1",
+  "text": "This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting.",
+  "weight": 4,
+  "xref": "/api/2014/equipment/fishing-tackle"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "flail",
+  "license": "CC-BY-4.0",
+  "name": "Flail",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "bludgeoning"
+   },
+   "properties": [],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/flail"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "flask-or-tankard",
+  "license": "CC-BY-4.0",
+  "name": "Flask or tankard",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 1,
+  "xref": "/api/2014/equipment/flask-or-tankard"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "flute",
+  "license": "CC-BY-4.0",
+  "name": "Flute",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 1,
+  "xref": "/api/2014/equipment/flute"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 15,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "kits",
+  "key": "forgery-kit",
+  "license": "CC-BY-4.0",
+  "name": "Forgery Kit",
+  "source": "srd-5.1",
+  "text": "This small box contains a variety of papers and parchments, pens and inks, seals and sealing wax, gold and silver leaf, and other supplies necessary to create convincing forgeries of physical documents. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to create a physical forgery of a document.",
+  "weight": 5,
+  "xref": "/api/2014/equipment/forgery-kit"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 30000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "galley",
+  "license": "CC-BY-4.0",
+  "name": "Galley",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Waterborne Vehicles",
+  "weight": null,
+  "xref": "/api/2014/equipment/galley"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "glaive",
+  "license": "CC-BY-4.0",
+  "name": "Glaive",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d10",
+    "type": "slashing"
+   },
+   "properties": [
+    "heavy",
+    "reach",
+    "two-handed"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 6,
+  "xref": "/api/2014/equipment/glaive"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 30,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "glassblowers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Glassblower's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 5,
+  "xref": "/api/2014/equipment/glassblowers-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "grappling-hook",
+  "license": "CC-BY-4.0",
+  "name": "Grappling hook",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 4,
+  "xref": "/api/2014/equipment/grappling-hook"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 30,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "greataxe",
+  "license": "CC-BY-4.0",
+  "name": "Greataxe",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d12",
+    "type": "slashing"
+   },
+   "properties": [
+    "heavy",
+    "two-handed"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 7,
+  "xref": "/api/2014/equipment/greataxe"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 2,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "greatclub",
+  "license": "CC-BY-4.0",
+  "name": "Greatclub",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d8",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "two-handed"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 10,
+  "xref": "/api/2014/equipment/greatclub"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "greatsword",
+  "license": "CC-BY-4.0",
+  "name": "Greatsword",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "2d6",
+    "type": "slashing"
+   },
+   "properties": [
+    "heavy",
+    "two-handed"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 6,
+  "xref": "/api/2014/equipment/greatsword"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "halberd",
+  "license": "CC-BY-4.0",
+  "name": "Halberd",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d10",
+    "type": "slashing"
+   },
+   "properties": [
+    "heavy",
+    "reach",
+    "two-handed"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 6,
+  "xref": "/api/2014/equipment/halberd"
+ },
+ {
+  "armor": {
+   "base": 15,
+   "category": "Medium",
+   "dexBonus": true,
+   "maxBonus": 2,
+   "stealthDisadvantage": true,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 750,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "half-plate-armor",
+  "license": "CC-BY-4.0",
+  "name": "Half Plate Armor",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 40,
+  "xref": "/api/2014/equipment/half-plate-armor"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "hammer",
+  "license": "CC-BY-4.0",
+  "name": "Hammer",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 3,
+  "xref": "/api/2014/equipment/hammer"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "hammer-sledge",
+  "license": "CC-BY-4.0",
+  "name": "Hammer, sledge",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 10,
+  "xref": "/api/2014/equipment/hammer-sledge"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "handaxe",
+  "license": "CC-BY-4.0",
+  "name": "Handaxe",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d6",
+    "type": "slashing"
+   },
+   "properties": [
+    "light",
+    "thrown",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": {
+    "long": 60,
+    "normal": 20
+   },
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/handaxe"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "kits",
+  "key": "healers-kit",
+  "license": "CC-BY-4.0",
+  "name": "Healer's Kit",
+  "source": "srd-5.1",
+  "text": "This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses. As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check.",
+  "weight": 3,
+  "xref": "/api/2014/equipment/healers-kit"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "kits",
+  "key": "herbalism-kit",
+  "license": "CC-BY-4.0",
+  "name": "Herbalism Kit",
+  "source": "srd-5.1",
+  "text": "This kit contains a variety of instruments such as clippers, mortar and pestle, and pouches and vials used by herbalists to create remedies and potions. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to identify or apply herbs. Also, proficiency with this kit is required to create antitoxin and potions of healing.",
+  "weight": 3,
+  "xref": "/api/2014/equipment/herbalism-kit"
+ },
+ {
+  "armor": {
+   "base": 12,
+   "category": "Medium",
+   "dexBonus": true,
+   "maxBonus": 2,
+   "stealthDisadvantage": false,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "hide-armor",
+  "license": "CC-BY-4.0",
+  "name": "Hide Armor",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 12,
+  "xref": "/api/2014/equipment/hide-armor"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "holy-water-flask",
+  "license": "CC-BY-4.0",
+  "name": "Holy water (flask)",
+  "source": "srd-5.1",
+  "text": "As an action, you can splash the contents of this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. In either case, make a ranged attack against a target creature, treating the holy water as an improvised weapon.\n\nIf the target is a fiend or undead, it takes 2d6 radiant damage.\n\nA cleric or paladin may create holy water by performing a special ritual.\n\nThe ritual takes 1 hour to perform, uses 25 gp worth of powdered silver, and requires the caster to expend a 1st-level spell slot.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/holy-water-flask"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 3,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "horn",
+  "license": "CC-BY-4.0",
+  "name": "Horn",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 2,
+  "xref": "/api/2014/equipment/horn"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "horse-draft",
+  "license": "CC-BY-4.0",
+  "name": "Horse, draft",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/horse-draft"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 75,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "horse-riding",
+  "license": "CC-BY-4.0",
+  "name": "Horse, riding",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/horse-riding"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "hourglass",
+  "license": "CC-BY-4.0",
+  "name": "Hourglass",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 1,
+  "xref": "/api/2014/equipment/hourglass"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "hunting-trap",
+  "license": "CC-BY-4.0",
+  "name": "Hunting trap",
+  "source": "srd-5.1",
+  "text": "When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground.\n\nA creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of the chain (typically 3 feet long).\n\nA creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature.",
+  "weight": 25,
+  "xref": "/api/2014/equipment/hunting-trap"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "ink-1-ounce-bottle",
+  "license": "CC-BY-4.0",
+  "name": "Ink (1 ounce bottle)",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/ink-1-ounce-bottle"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "ink-pen",
+  "license": "CC-BY-4.0",
+  "name": "Ink pen",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/ink-pen"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "javelin",
+  "license": "CC-BY-4.0",
+  "name": "Javelin",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+   },
+   "properties": [
+    "thrown",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": {
+    "long": 120,
+    "normal": 30
+   },
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/javelin"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "jewelers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Jeweler's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 2,
+  "xref": "/api/2014/equipment/jewelers-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "jug-or-pitcher",
+  "license": "CC-BY-4.0",
+  "name": "Jug or pitcher",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 4,
+  "xref": "/api/2014/equipment/jug-or-pitcher"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 3000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "keelboat",
+  "license": "CC-BY-4.0",
+  "name": "Keelboat",
+  "source": "srd-5.1",
+  "text": "Keelboats and rowboats are used on lakes and rivers. If going downstream, add the speed of the current (typically 3 miles per hour) to the speed of the vehicle. These vehicles can't be rowed against any significant current, but they can be pulled upstream by draft animals on the shores. A rowboat weighs 100 pounds, in case adventurers carry it over land.",
+  "vehicleCategory": "Waterborne Vehicles",
+  "weight": null,
+  "xref": "/api/2014/equipment/keelboat"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "ladder-10-foot",
+  "license": "CC-BY-4.0",
+  "name": "Ladder (10-foot)",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 25,
+  "xref": "/api/2014/equipment/ladder-10-foot"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "lamp",
+  "license": "CC-BY-4.0",
+  "name": "Lamp",
+  "source": "srd-5.1",
+  "text": "A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/lamp"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "lance",
+  "license": "CC-BY-4.0",
+  "name": "Lance",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d12",
+    "type": "piercing"
+   },
+   "properties": [
+    "reach",
+    "special"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 6,
+  "xref": "/api/2014/equipment/lance"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "lantern-bullseye",
+  "license": "CC-BY-4.0",
+  "name": "Lantern, bullseye",
+  "source": "srd-5.1",
+  "text": "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/lantern-bullseye"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "lantern-hooded",
+  "license": "CC-BY-4.0",
+  "name": "Lantern, hooded",
+  "source": "srd-5.1",
+  "text": "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/lantern-hooded"
+ },
+ {
+  "armor": {
+   "base": 11,
+   "category": "Light",
+   "dexBonus": true,
+   "maxBonus": null,
+   "stealthDisadvantage": false,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "leather-armor",
+  "license": "CC-BY-4.0",
+  "name": "Leather Armor",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 10,
+  "xref": "/api/2014/equipment/leather-armor"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "leatherworkers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Leatherworker's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 5,
+  "xref": "/api/2014/equipment/leatherworkers-tools"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "light-hammer",
+  "license": "CC-BY-4.0",
+  "name": "Light hammer",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d4",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "light",
+    "thrown",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": {
+    "long": 60,
+    "normal": 20
+   },
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/light-hammer"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 0,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "little-bag-of-sand",
+  "license": "CC-BY-4.0",
+  "name": "Little bag of sand",
+  "source": "srd-5.1",
+  "text": "A small bag of sand, typically found in a scholar's pack.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/little-bag-of-sand"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "lock",
+  "license": "CC-BY-4.0",
+  "name": "Lock",
+  "source": "srd-5.1",
+  "text": "A key is provided with the lock. Without the key, a creature proficient with thieves' tools can pick this lock with a successful DC 15 Dexterity check. Your GM may decide that better locks are available for higher prices.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/lock"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "longbow",
+  "license": "CC-BY-4.0",
+  "name": "Longbow",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "piercing"
+   },
+   "properties": [
+    "ammunition",
+    "heavy",
+    "two-handed"
+   ],
+   "range": {
+    "long": 600,
+    "normal": 150
+   },
+   "rangeType": "Ranged",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/longbow"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 10000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "longship",
+  "license": "CC-BY-4.0",
+  "name": "Longship",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Waterborne Vehicles",
+  "weight": null,
+  "xref": "/api/2014/equipment/longship"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 15,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "longsword",
+  "license": "CC-BY-4.0",
+  "name": "Longsword",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "slashing"
+   },
+   "properties": [
+    "versatile"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": {
+    "dice": "1d10",
+    "type": "slashing"
+   }
+  },
+  "weight": 3,
+  "xref": "/api/2014/equipment/longsword"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 35,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "lute",
+  "license": "CC-BY-4.0",
+  "name": "Lute",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 2,
+  "xref": "/api/2014/equipment/lute"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 30,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "lyre",
+  "license": "CC-BY-4.0",
+  "name": "Lyre",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 2,
+  "xref": "/api/2014/equipment/lyre"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "mace",
+  "license": "CC-BY-4.0",
+  "name": "Mace",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d6",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 4,
+  "xref": "/api/2014/equipment/mace"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 100,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "magnifying-glass",
+  "license": "CC-BY-4.0",
+  "name": "Magnifying glass",
+  "source": "srd-5.1",
+  "text": "This lens allows a closer look at small objects. It is also useful as a substitute for flint and steel when starting fires. Lighting a fire with a magnifying glass requires light as bright as sunlight to focus, tinder to ignite, and about 5 minutes for the fire to ignite.\n\nA magnifying glass grants advantage on any ability check made to appraise or inspect an item that is small or highly detailed.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/magnifying-glass"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "manacles",
+  "license": "CC-BY-4.0",
+  "name": "Manacles",
+  "source": "srd-5.1",
+  "text": "These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check.\n\nEach set of manacles comes with one key. Without the key, a creature proficient with thieves' tools can pick the manacles' lock with a successful DC 15 Dexterity check. Manacles have 15 hit points.",
+  "weight": 6,
+  "xref": "/api/2014/equipment/manacles"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "masons-tools",
+  "license": "CC-BY-4.0",
+  "name": "Mason's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 8,
+  "xref": "/api/2014/equipment/masons-tools"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "mastiff",
+  "license": "CC-BY-4.0",
+  "name": "Mastiff",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/mastiff"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "maul",
+  "license": "CC-BY-4.0",
+  "name": "Maul",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "2d6",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "heavy",
+    "two-handed"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 10,
+  "xref": "/api/2014/equipment/maul"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "kits",
+  "key": "mess-kit",
+  "license": "CC-BY-4.0",
+  "name": "Mess Kit",
+  "source": "srd-5.1",
+  "text": "This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/mess-kit"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "mirror-steel",
+  "license": "CC-BY-4.0",
+  "name": "Mirror, steel",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0.5,
+  "xref": "/api/2014/equipment/mirror-steel"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 15,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "morningstar",
+  "license": "CC-BY-4.0",
+  "name": "Morningstar",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "piercing"
+   },
+   "properties": [],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 4,
+  "xref": "/api/2014/equipment/morningstar"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 8,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "mule",
+  "license": "CC-BY-4.0",
+  "name": "Mule",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/mule"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "navigators-tools",
+  "license": "CC-BY-4.0",
+  "name": "Navigator's Tools",
+  "source": "srd-5.1",
+  "text": "This set of instruments is used for navigation at sea. Proficiency with navigator's tools lets you chart a ship's course and follow navigation charts. In addition, these tools allow you to add your proficiency bonus to any ability check you make to avoid getting lost at sea.",
+  "toolCategory": "Other Tools",
+  "weight": 2,
+  "xref": "/api/2014/equipment/navigators-tools"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "net",
+  "license": "CC-BY-4.0",
+  "name": "Net",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": null,
+   "properties": [
+    "thrown",
+    "special"
+   ],
+   "range": {
+    "long": 15,
+    "normal": 5
+   },
+   "rangeType": "Ranged",
+   "throwRange": {
+    "long": 15,
+    "normal": 5
+   },
+   "twoHandedDamage": null
+  },
+  "weight": 3,
+  "xref": "/api/2014/equipment/net"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "oil-flask",
+  "license": "CC-BY-4.0",
+  "name": "Oil (flask)",
+  "source": "srd-5.1",
+  "text": "Oil usually comes in a clay flask that holds 1 pint.\n\nAs an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon.\n\nOn a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil.\n\nYou can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level.\n\nIf lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/oil-flask"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "arcane-foci",
+  "key": "orb",
+  "license": "CC-BY-4.0",
+  "name": "Orb",
+  "source": "srd-5.1",
+  "text": "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.",
+  "weight": 3,
+  "xref": "/api/2014/equipment/orb"
+ },
+ {
+  "armor": {
+   "base": 11,
+   "category": "Light",
+   "dexBonus": true,
+   "maxBonus": null,
+   "stealthDisadvantage": true,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "padded-armor",
+  "license": "CC-BY-4.0",
+  "name": "Padded Armor",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 8,
+  "xref": "/api/2014/equipment/padded-armor"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "painters-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Painter's Supplies",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 5,
+  "xref": "/api/2014/equipment/painters-supplies"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 12,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "pan-flute",
+  "license": "CC-BY-4.0",
+  "name": "Pan flute",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 2,
+  "xref": "/api/2014/equipment/pan-flute"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "paper-one-sheet",
+  "license": "CC-BY-4.0",
+  "name": "Paper (one sheet)",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/paper-one-sheet"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "parchment-one-sheet",
+  "license": "CC-BY-4.0",
+  "name": "Parchment (one sheet)",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/parchment-one-sheet"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "perfume-vial",
+  "license": "CC-BY-4.0",
+  "name": "Perfume (vial)",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/perfume-vial"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "pick-miners",
+  "license": "CC-BY-4.0",
+  "name": "Pick, miner's",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 10,
+  "xref": "/api/2014/equipment/pick-miners"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "pike",
+  "license": "CC-BY-4.0",
+  "name": "Pike",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d10",
+    "type": "piercing"
+   },
+   "properties": [
+    "heavy",
+    "reach",
+    "two-handed"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 18,
+  "xref": "/api/2014/equipment/pike"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "piton",
+  "license": "CC-BY-4.0",
+  "name": "Piton",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0.25,
+  "xref": "/api/2014/equipment/piton"
+ },
+ {
+  "armor": {
+   "base": 18,
+   "category": "Heavy",
+   "dexBonus": false,
+   "maxBonus": null,
+   "stealthDisadvantage": true,
+   "strMinimum": 15
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 1500,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "plate-armor",
+  "license": "CC-BY-4.0",
+  "name": "Plate Armor",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 65,
+  "xref": "/api/2014/equipment/plate-armor"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "playing-card-set",
+  "license": "CC-BY-4.0",
+  "name": "Playing Card Set",
+  "source": "srd-5.1",
+  "text": "This item encompasses a wide range of game pieces, including dice and decks of cards (for games such as Three-Dragon Ante). A few common examples appear on the Tools table, but other kinds of gaming sets exist. If you are proficient with a gaming set, you can add your proficiency bonus to ability checks you make to play a game with that set. Each type of gaming set requires a separate proficiency.",
+  "toolCategory": "Gaming Sets",
+  "weight": 0,
+  "xref": "/api/2014/equipment/playing-card-set"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 100,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "poison-basic-vial",
+  "license": "CC-BY-4.0",
+  "name": "Poison, basic (vial)",
+  "source": "srd-5.1",
+  "text": "You can use the poison in this vial to coat one slashing or piercing weapon or up to three pieces of ammunition. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must make a DC 10 Constitution saving throw or take 1d4 poison damage. Once applied, the poison retains potency for 1 minute before drying.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/poison-basic-vial"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "kits",
+  "key": "poisoners-kit",
+  "license": "CC-BY-4.0",
+  "name": "Poisoner's Kit",
+  "source": "srd-5.1",
+  "text": "A poisoner's kit includes the vials, chemicals, and other equipment necessary for the creation of poisons. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to craft or use poisons.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/poisoners-kit"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "pole-10-foot",
+  "license": "CC-BY-4.0",
+  "name": "Pole (10-foot)",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 7,
+  "xref": "/api/2014/equipment/pole-10-foot"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 30,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "pony",
+  "license": "CC-BY-4.0",
+  "name": "Pony",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/pony"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "pot-iron",
+  "license": "CC-BY-4.0",
+  "name": "Pot, iron",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 10,
+  "xref": "/api/2014/equipment/pot-iron"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "potters-tools",
+  "license": "CC-BY-4.0",
+  "name": "Potter's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 3,
+  "xref": "/api/2014/equipment/potters-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "pouch",
+  "license": "CC-BY-4.0",
+  "name": "Pouch",
+  "source": "srd-5.1",
+  "text": "A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch (described earlier in this section).",
+  "weight": 1,
+  "xref": "/api/2014/equipment/pouch"
+ },
+ {
+  "category": "adventuring-gear",
+  "contents": [
+   {
+    "key": "backpack",
+    "qty": 1
+   },
+   {
+    "key": "blanket",
+    "qty": 1
+   },
+   {
+    "key": "candle",
+    "qty": 10
+   },
+   {
+    "key": "tinderbox",
+    "qty": 1
+   },
+   {
+    "key": "rations-1-day",
+    "qty": 2
+   },
+   {
+    "key": "waterskin",
+    "qty": 1
+   },
+   {
+    "key": "alms-box",
+    "qty": 1
+   },
+   {
+    "key": "block-of-incense",
+    "qty": 2
+   },
+   {
+    "key": "censer",
+    "qty": 1
+   },
+   {
+    "key": "vestments",
+    "qty": 1
+   }
+  ],
+  "cost": {
+   "qty": 19,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "equipment-packs",
+  "key": "priests-pack",
+  "license": "CC-BY-4.0",
+  "name": "Priest's Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": null,
+  "xref": "/api/2014/equipment/priests-pack"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 2,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "quarterstaff",
+  "license": "CC-BY-4.0",
+  "name": "Quarterstaff",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d6",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "versatile",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": {
+    "dice": "1d8",
+    "type": "bludgeoning"
+   }
+  },
+  "weight": 4,
+  "xref": "/api/2014/equipment/quarterstaff"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "quiver",
+  "license": "CC-BY-4.0",
+  "name": "Quiver",
+  "source": "srd-5.1",
+  "text": "A quiver can hold up to 20 arrows.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/quiver"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 4,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "ram-portable",
+  "license": "CC-BY-4.0",
+  "name": "Ram, portable",
+  "source": "srd-5.1",
+  "text": "You can use a portable ram to break down doors. When doing so, you gain a +4 bonus on the Strength check. One other character can help you use the ram, giving you advantage on this check.",
+  "weight": 35,
+  "xref": "/api/2014/equipment/ram-portable"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "rapier",
+  "license": "CC-BY-4.0",
+  "name": "Rapier",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "piercing"
+   },
+   "properties": [
+    "finesse"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/rapier"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "rations-1-day",
+  "license": "CC-BY-4.0",
+  "name": "Rations (1 day)",
+  "source": "srd-5.1",
+  "text": "Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/rations-1-day"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "holy-symbols",
+  "key": "reliquary",
+  "license": "CC-BY-4.0",
+  "name": "Reliquary",
+  "source": "srd-5.1",
+  "text": "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic.\n\nAppendix B lists the symbols commonly associated with many gods in the multiverse. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/reliquary"
+ },
+ {
+  "armor": {
+   "base": 14,
+   "category": "Heavy",
+   "dexBonus": false,
+   "maxBonus": null,
+   "stealthDisadvantage": true,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 30,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "ring-mail",
+  "license": "CC-BY-4.0",
+  "name": "Ring Mail",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 40,
+  "xref": "/api/2014/equipment/ring-mail"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "robes",
+  "license": "CC-BY-4.0",
+  "name": "Robes",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 4,
+  "xref": "/api/2014/equipment/robes"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "arcane-foci",
+  "key": "rod",
+  "license": "CC-BY-4.0",
+  "name": "Rod",
+  "source": "srd-5.1",
+  "text": "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.",
+  "weight": 2,
+  "xref": "/api/2014/equipment/rod"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "rope-hempen-50-feet",
+  "license": "CC-BY-4.0",
+  "name": "Rope, hempen (50 feet)",
+  "source": "srd-5.1",
+  "text": "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.",
+  "weight": 10,
+  "xref": "/api/2014/equipment/rope-hempen-50-feet"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "rope-silk-50-feet",
+  "license": "CC-BY-4.0",
+  "name": "Rope, silk (50 feet)",
+  "source": "srd-5.1",
+  "text": "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.",
+  "weight": 5,
+  "xref": "/api/2014/equipment/rope-silk-50-feet"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "rowboat",
+  "license": "CC-BY-4.0",
+  "name": "Rowboat",
+  "source": "srd-5.1",
+  "text": "Keelboats and rowboats are used on lakes and rivers. If going downstream, add the speed of the current (typically 3 miles per hour) to the speed of the vehicle. These vehicles can't be rowed against any significant current, but they can be pulled upstream by draft animals on the shores. A rowboat weighs 100 pounds, in case adventurers carry it over land.",
+  "vehicleCategory": "Waterborne Vehicles",
+  "weight": null,
+  "xref": "/api/2014/equipment/rowboat"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "sack",
+  "license": "CC-BY-4.0",
+  "name": "Sack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0.5,
+  "xref": "/api/2014/equipment/sack"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 60,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "saddle-exotic",
+  "license": "CC-BY-4.0",
+  "name": "Saddle, Exotic",
+  "source": "srd-5.1",
+  "text": "An exotic saddle is required for riding any aquatic or flying mount.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 50,
+  "xref": "/api/2014/equipment/saddle-exotic"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "saddle-military",
+  "license": "CC-BY-4.0",
+  "name": "Saddle, Military",
+  "source": "srd-5.1",
+  "text": "A military saddle braces the rider, helping you keep your seat on an active mount in battle. It gives you advantage on any check you make to remain mounted.",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 30,
+  "xref": "/api/2014/equipment/saddle-military"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "saddle-pack",
+  "license": "CC-BY-4.0",
+  "name": "Saddle, Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 15,
+  "xref": "/api/2014/equipment/saddle-pack"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "saddle-riding",
+  "license": "CC-BY-4.0",
+  "name": "Saddle, Riding",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 25,
+  "xref": "/api/2014/equipment/saddle-riding"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 4,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "saddlebags",
+  "license": "CC-BY-4.0",
+  "name": "Saddlebags",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 8,
+  "xref": "/api/2014/equipment/saddlebags"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 10000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "sailing-ship",
+  "license": "CC-BY-4.0",
+  "name": "Sailing ship",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Waterborne Vehicles",
+  "weight": null,
+  "xref": "/api/2014/equipment/sailing-ship"
+ },
+ {
+  "armor": {
+   "base": 14,
+   "category": "Medium",
+   "dexBonus": true,
+   "maxBonus": 2,
+   "stealthDisadvantage": true,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "scale-mail",
+  "license": "CC-BY-4.0",
+  "name": "Scale Mail",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 45,
+  "xref": "/api/2014/equipment/scale-mail"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "scale-merchants",
+  "license": "CC-BY-4.0",
+  "name": "Scale, merchant's",
+  "source": "srd-5.1",
+  "text": "A scale includes a small balance, pans, and a suitable assortment of weights up to 2 pounds. With it, you can measure the exact weight of small objects, such as raw precious metals or trade goods, to help determine their worth.",
+  "weight": 3,
+  "xref": "/api/2014/equipment/scale-merchants"
+ },
+ {
+  "category": "adventuring-gear",
+  "contents": [
+   {
+    "key": "backpack",
+    "qty": 1
+   },
+   {
+    "key": "book",
+    "qty": 1
+   },
+   {
+    "key": "ink-1-ounce-bottle",
+    "qty": 1
+   },
+   {
+    "key": "ink-pen",
+    "qty": 1
+   },
+   {
+    "key": "parchment-one-sheet",
+    "qty": 10
+   },
+   {
+    "key": "little-bag-of-sand",
+    "qty": 1
+   },
+   {
+    "key": "small-knife",
+    "qty": 1
+   }
+  ],
+  "cost": {
+   "qty": 40,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "equipment-packs",
+  "key": "scholars-pack",
+  "license": "CC-BY-4.0",
+  "name": "Scholar's Pack",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": null,
+  "xref": "/api/2014/equipment/scholars-pack"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "scimitar",
+  "license": "CC-BY-4.0",
+  "name": "Scimitar",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d6",
+    "type": "slashing"
+   },
+   "properties": [
+    "finesse",
+    "light"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 3,
+  "xref": "/api/2014/equipment/scimitar"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "sealing-wax",
+  "license": "CC-BY-4.0",
+  "name": "Sealing wax",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/sealing-wax"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "shawm",
+  "license": "CC-BY-4.0",
+  "name": "Shawm",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 1,
+  "xref": "/api/2014/equipment/shawm"
+ },
+ {
+  "armor": {
+   "base": 2,
+   "category": "Shield",
+   "dexBonus": false,
+   "maxBonus": null,
+   "stealthDisadvantage": false,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "shield",
+  "license": "CC-BY-4.0",
+  "name": "Shield",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 6,
+  "xref": "/api/2014/equipment/shield"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "shortbow",
+  "license": "CC-BY-4.0",
+  "name": "Shortbow",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+   },
+   "properties": [
+    "ammunition",
+    "two-handed"
+   ],
+   "range": {
+    "long": 320,
+    "normal": 80
+   },
+   "rangeType": "Ranged",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/shortbow"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "shortsword",
+  "license": "CC-BY-4.0",
+  "name": "Shortsword",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+   },
+   "properties": [
+    "finesse",
+    "light",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/shortsword"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "shovel",
+  "license": "CC-BY-4.0",
+  "name": "Shovel",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 5,
+  "xref": "/api/2014/equipment/shovel"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "sickle",
+  "license": "CC-BY-4.0",
+  "name": "Sickle",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d4",
+    "type": "slashing"
+   },
+   "properties": [
+    "light",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/sickle"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "signal-whistle",
+  "license": "CC-BY-4.0",
+  "name": "Signal whistle",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/signal-whistle"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "signet-ring",
+  "license": "CC-BY-4.0",
+  "name": "Signet ring",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/signet-ring"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "sled",
+  "license": "CC-BY-4.0",
+  "name": "Sled",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 300,
+  "xref": "/api/2014/equipment/sled"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 1,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "sling",
+  "license": "CC-BY-4.0",
+  "name": "Sling",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d4",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "ammunition"
+   ],
+   "range": {
+    "long": 120,
+    "normal": 30
+   },
+   "rangeType": "Ranged",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 0,
+  "xref": "/api/2014/equipment/sling"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 4,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "ammunition",
+  "key": "sling-bullet",
+  "license": "CC-BY-4.0",
+  "name": "Sling bullet",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 1.5,
+  "xref": "/api/2014/equipment/sling-bullet"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 0,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "small-knife",
+  "license": "CC-BY-4.0",
+  "name": "Small knife",
+  "source": "srd-5.1",
+  "text": "A small knife, typically found in a scholar's pack.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/small-knife"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 20,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "smiths-tools",
+  "license": "CC-BY-4.0",
+  "name": "Smith's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 8,
+  "xref": "/api/2014/equipment/smiths-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "soap",
+  "license": "CC-BY-4.0",
+  "name": "Soap",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/soap"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "spear",
+  "license": "CC-BY-4.0",
+  "name": "Spear",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Simple",
+   "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+   },
+   "properties": [
+    "thrown",
+    "versatile",
+    "monk"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": {
+    "long": 60,
+    "normal": 20
+   },
+   "twoHandedDamage": {
+    "dice": "1d8",
+    "type": "piercing"
+   }
+  },
+  "weight": 3,
+  "xref": "/api/2014/equipment/spear"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "spellbook",
+  "license": "CC-BY-4.0",
+  "name": "Spellbook",
+  "source": "srd-5.1",
+  "text": "Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.",
+  "weight": 3,
+  "xref": "/api/2014/equipment/spellbook"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "spike-iron",
+  "license": "CC-BY-4.0",
+  "name": "Spike, iron",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 5,
+  "xref": "/api/2014/equipment/spike-iron"
+ },
+ {
+  "armor": {
+   "base": 17,
+   "category": "Heavy",
+   "dexBonus": false,
+   "maxBonus": null,
+   "stealthDisadvantage": true,
+   "strMinimum": 15
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 200,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "splint-armor",
+  "license": "CC-BY-4.0",
+  "name": "Splint Armor",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 60,
+  "xref": "/api/2014/equipment/splint-armor"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "druidic-foci",
+  "key": "sprig-of-mistletoe",
+  "license": "CC-BY-4.0",
+  "name": "Sprig of mistletoe",
+  "source": "srd-5.1",
+  "text": "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/sprig-of-mistletoe"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "spyglass",
+  "license": "CC-BY-4.0",
+  "name": "Spyglass",
+  "source": "srd-5.1",
+  "text": "Objects viewed through a spyglass are magnified to twice their size.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/spyglass"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "key": "stabling-1-day",
+  "license": "CC-BY-4.0",
+  "name": "Stabling (1 day)",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 0,
+  "xref": "/api/2014/equipment/stabling-1-day"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "arcane-foci",
+  "key": "staff",
+  "license": "CC-BY-4.0",
+  "name": "Staff",
+  "source": "srd-5.1",
+  "text": "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.",
+  "weight": 4,
+  "xref": "/api/2014/equipment/staff"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 0,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "string-10-feet",
+  "license": "CC-BY-4.0",
+  "name": "String (10 feet)",
+  "source": "srd-5.1",
+  "text": "A 10-foot length of string, typically found in a burglar's pack.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/string-10-feet"
+ },
+ {
+  "armor": {
+   "base": 12,
+   "category": "Light",
+   "dexBonus": true,
+   "maxBonus": null,
+   "stealthDisadvantage": false,
+   "strMinimum": 0
+  },
+  "category": "armor",
+  "cost": {
+   "qty": 45,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "studded-leather-armor",
+  "license": "CC-BY-4.0",
+  "name": "Studded Leather Armor",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 13,
+  "xref": "/api/2014/equipment/studded-leather-armor"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "tent-two-person",
+  "license": "CC-BY-4.0",
+  "name": "Tent, two-person",
+  "source": "srd-5.1",
+  "text": "A simple and portable canvas shelter, a tent sleeps two.",
+  "weight": 20,
+  "xref": "/api/2014/equipment/tent-two-person"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 25,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "thieves-tools",
+  "license": "CC-BY-4.0",
+  "name": "Thieves' Tools",
+  "source": "srd-5.1",
+  "text": "This set of tools includes a small file, a set of lock picks, a small mirror mounted on a metal handle, a set of narrow-bladed scissors, and a pair of pliers. Proficiency with these tools lets you add your proficiency bonus to any ability checks you make to disarm traps or open locks.",
+  "toolCategory": "Other Tools",
+  "weight": 1,
+  "xref": "/api/2014/equipment/thieves-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "tinderbox",
+  "license": "CC-BY-4.0",
+  "name": "Tinderbox",
+  "source": "srd-5.1",
+  "text": "This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch--or anything else with abundant, exposed fuel--takes an action.\n\nLighting any other fire takes 1 minute.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/tinderbox"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 50,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "tinkers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Tinker's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 10,
+  "xref": "/api/2014/equipment/tinkers-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "torch",
+  "license": "CC-BY-4.0",
+  "name": "Torch",
+  "source": "srd-5.1",
+  "text": "A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/torch"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "druidic-foci",
+  "key": "totem",
+  "license": "CC-BY-4.0",
+  "name": "Totem",
+  "source": "srd-5.1",
+  "text": "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/totem"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "trident",
+  "license": "CC-BY-4.0",
+  "name": "Trident",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d6",
+    "type": "piercing"
+   },
+   "properties": [
+    "thrown",
+    "versatile"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": {
+    "long": 60,
+    "normal": 20
+   },
+   "twoHandedDamage": {
+    "dice": "1d8",
+    "type": "piercing"
+   }
+  },
+  "weight": 4,
+  "xref": "/api/2014/equipment/trident"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 0,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "vestments",
+  "license": "CC-BY-4.0",
+  "name": "Vestments",
+  "source": "srd-5.1",
+  "text": "Religious clothing, typically found in a priest's pack.",
+  "weight": 0,
+  "xref": "/api/2014/equipment/vestments"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "vial",
+  "license": "CC-BY-4.0",
+  "name": "Vial",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 0,
+  "xref": "/api/2014/equipment/vial"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 30,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "viol",
+  "license": "CC-BY-4.0",
+  "name": "Viol",
+  "source": "srd-5.1",
+  "text": "Several of the most common types of musical instruments are shown on the table as examples. If you have proficiency with a given musical instrument, you can add your proficiency bonus to any ability checks you make to play music with the instrument. A bard can use a musical instrument as a spellcasting focus. Each type of musical instrument requires a separate proficiency.",
+  "toolCategory": "Musical Instrument",
+  "weight": 1,
+  "xref": "/api/2014/equipment/viol"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 35,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "wagon",
+  "license": "CC-BY-4.0",
+  "name": "Wagon",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Tack, Harness, and Drawn Vehicles",
+  "weight": 400,
+  "xref": "/api/2014/equipment/wagon"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "arcane-foci",
+  "key": "wand",
+  "license": "CC-BY-4.0",
+  "name": "Wand",
+  "source": "srd-5.1",
+  "text": "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/wand"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "war-pick",
+  "license": "CC-BY-4.0",
+  "name": "War pick",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "piercing"
+   },
+   "properties": [],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/war-pick"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 15,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "warhammer",
+  "license": "CC-BY-4.0",
+  "name": "Warhammer",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d8",
+    "type": "bludgeoning"
+   },
+   "properties": [
+    "versatile"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": {
+    "dice": "1d10",
+    "type": "bludgeoning"
+   }
+  },
+  "weight": 2,
+  "xref": "/api/2014/equipment/warhammer"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 400,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "warhorse",
+  "license": "CC-BY-4.0",
+  "name": "Warhorse",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Mounts and Other Animals",
+  "weight": null,
+  "xref": "/api/2014/equipment/warhorse"
+ },
+ {
+  "category": "mounts-and-vehicles",
+  "cost": {
+   "qty": 25000,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "warship",
+  "license": "CC-BY-4.0",
+  "name": "Warship",
+  "source": "srd-5.1",
+  "text": "",
+  "vehicleCategory": "Waterborne Vehicles",
+  "weight": null,
+  "xref": "/api/2014/equipment/warship"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 2,
+   "unit": "sp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "waterskin",
+  "license": "CC-BY-4.0",
+  "name": "Waterskin",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 5,
+  "xref": "/api/2014/equipment/waterskin"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "weavers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Weaver's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 5,
+  "xref": "/api/2014/equipment/weavers-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 1,
+   "unit": "cp"
+  },
+  "edition": "2014",
+  "gearCategory": "standard-gear",
+  "key": "whetstone",
+  "license": "CC-BY-4.0",
+  "name": "Whetstone",
+  "source": "srd-5.1",
+  "text": "",
+  "weight": 1,
+  "xref": "/api/2014/equipment/whetstone"
+ },
+ {
+  "category": "weapon",
+  "cost": {
+   "qty": 2,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "whip",
+  "license": "CC-BY-4.0",
+  "name": "Whip",
+  "source": "srd-5.1",
+  "text": "",
+  "weapon": {
+   "category": "Martial",
+   "damage": {
+    "dice": "1d4",
+    "type": "slashing"
+   },
+   "properties": [
+    "finesse",
+    "reach"
+   ],
+   "range": {
+    "normal": 5
+   },
+   "rangeType": "Melee",
+   "throwRange": null,
+   "twoHandedDamage": null
+  },
+  "weight": 3,
+  "xref": "/api/2014/equipment/whip"
+ },
+ {
+  "category": "tools",
+  "cost": {
+   "qty": 1,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "key": "woodcarvers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Woodcarver's Tools",
+  "source": "srd-5.1",
+  "text": "These special tools include the items needed to pursue a craft or trade. The table shows examples of the most common types of tools, each providing items related to a single craft. Proficiency with a set of artisan's tools lets you add your proficiency bonus to any ability checks you make using the tools in your craft. Each type of artisan's tools requires a separate proficiency.",
+  "toolCategory": "Artisan's Tools",
+  "weight": 5,
+  "xref": "/api/2014/equipment/woodcarvers-tools"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 5,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "druidic-foci",
+  "key": "wooden-staff",
+  "license": "CC-BY-4.0",
+  "name": "Wooden staff",
+  "source": "srd-5.1",
+  "text": "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus.",
+  "weight": 4,
+  "xref": "/api/2014/equipment/wooden-staff"
+ },
+ {
+  "category": "adventuring-gear",
+  "cost": {
+   "qty": 10,
+   "unit": "gp"
+  },
+  "edition": "2014",
+  "gearCategory": "druidic-foci",
+  "key": "yew-wand",
+  "license": "CC-BY-4.0",
+  "name": "Yew wand",
+  "source": "srd-5.1",
+  "text": "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus.",
+  "weight": 1,
+  "xref": "/api/2014/equipment/yew-wand"
+ }
+]

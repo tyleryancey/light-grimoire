@@ -1,0 +1,142 @@
+{
+ "attribution": "assets/legal/ATTRIBUTION.md",
+ "bundleSha256": "fce4d793fec7d0c5292f37794c5d7709a59947fed149607c0abe8b8dc1dd23b9",
+ "edition": "2014",
+ "files": {
+  "alignments.json": {
+   "bytes": 3358,
+   "count": 9,
+   "sha256": "17f04b8e178f6df731d2674318a9b2907673307bd0bc6d4d84ccefcd45b191eb"
+  },
+  "backgrounds.json": {
+   "bytes": 3726,
+   "count": 1,
+   "sha256": "df47d5a4256a75289277abdab38a798c014b2b184e0b3d3a2817cceb84340113"
+  },
+  "classes.json": {
+   "bytes": 137025,
+   "count": 12,
+   "sha256": "fbc70c5e7de0e279490d1ee1bf048834dbefc97a8c21404d13a3fd4ca8548551"
+  },
+  "conditions.json": {
+   "bytes": 7562,
+   "count": 15,
+   "sha256": "1548a0175f95365ba3d573505ede371bd0d982f6855c65dec9f7bd46d71fe81f"
+  },
+  "creatures.json": {
+   "bytes": 769122,
+   "count": 334,
+   "sha256": "6a5a99a7dc8632e7d7ebd7bda94b851e676227038c559785ce2c590498842d88"
+  },
+  "damage_types.json": {
+   "bytes": 3527,
+   "count": 13,
+   "sha256": "158666c10dcdf607b674829a5a1ce4aa32985092a714c094d69ac0923eceb93b"
+  },
+  "equipment.json": {
+   "bytes": 119156,
+   "count": 237,
+   "sha256": "d4f6937e51e3077f163a37b3e31f44117a543bfea071205ac9f60d246ca62ad5"
+  },
+  "feats.json": {
+   "bytes": 635,
+   "count": 1,
+   "sha256": "8a9b1c8a7d42b77448d179f4f643f8c07c5fa8760fe169b6d16f55849212b471"
+  },
+  "features.json": {
+   "bytes": 307005,
+   "count": 407,
+   "sha256": "988fadaf5e8351d8437d31a84bb15c98f58e5702f3fa62fc5a3ceb67ab162e1d"
+  },
+  "languages.json": {
+   "bytes": 5163,
+   "count": 16,
+   "sha256": "6cc14d5253af03b8b6c7b3840f1e390fba4d1644a938173f578a896e6d644f41"
+  },
+  "magic_items.json": {
+   "bytes": 389386,
+   "count": 362,
+   "sha256": "bfc32dbe8bd317f1affd6e984318a824f39913f2bbfb4e223afc3b888327e6f5"
+  },
+  "magic_schools.json": {
+   "bytes": 3447,
+   "count": 8,
+   "sha256": "50fab974184d790fa7460a581b9b87472cc142c9bf63b0fb23fe9db1b051d355"
+  },
+  "proficiencies.json": {
+   "bytes": 32151,
+   "count": 117,
+   "sha256": "190df0a58945f67f9cd8463b5c7a482806da2fb0dc12cf884c7cf27a6d14029c"
+  },
+  "races.json": {
+   "bytes": 11576,
+   "count": 9,
+   "sha256": "b690423f606d3b041f55a80bb46709cbe9105d7b5807e559028a9d1e2aa55990"
+  },
+  "rule_sections.json": {
+   "bytes": 249803,
+   "count": 40,
+   "sha256": "2f82af5950de950faa22ebf25764c765cbc31b0e0b329bf4e3111ce8b93525d5"
+  },
+  "rules.json": {
+   "bytes": 6458,
+   "count": 9,
+   "sha256": "9748bd7ec3a1af78ab9f951f86657c119ec1b1f00cdf6673885c8f54aa5f1779"
+  },
+  "skills.json": {
+   "bytes": 8630,
+   "count": 18,
+   "sha256": "00d9592d4f3865b3d69235c4bc61cd2272652856b49e76d6468e53dc721b8cee"
+  },
+  "spells.json": {
+   "bytes": 514708,
+   "count": 319,
+   "sha256": "f8b8eeb78d5112b692b58d86da7e21901d33df7dfb8f7a0c3a65021126e03436"
+  },
+  "subclasses.json": {
+   "bytes": 33149,
+   "count": 12,
+   "sha256": "569b8be6f2784b83bdce57d9f0203c6c98a1710e96739e505dcc94e0b80be4d6"
+  },
+  "subraces.json": {
+   "bytes": 2460,
+   "count": 4,
+   "sha256": "46d1b64d4564979330bf9f0c955bef36b9f88abec082d1ada18cea69a74bef57"
+  },
+  "traits.json": {
+   "bytes": 18638,
+   "count": 38,
+   "sha256": "f395e366cd4204e12c577fc091ba627283d6159c559a7a289b32b259ef444862"
+  },
+  "weapon_properties.json": {
+   "bytes": 4413,
+   "count": 11,
+   "sha256": "5d37d7915f311aaf0f34fd63d25401e5d49ea25b1d1cf5b429fbfbd0bcf4bb7d"
+  }
+ },
+ "license": "CC-BY-4.0",
+ "schemaVersion": 1,
+ "sources": {
+  "cc-by-4.0-legalcode": {
+   "commit": "a3cbf2e897d54bccec0c35469c691521d089ef53",
+   "path": "text",
+   "repo": "https://github.com/spdx/license-list-data",
+   "role": "license-text"
+  },
+  "fivebits-2014": {
+   "commit": "ce47a18dfeb3e41a1b2a2dfe00a25761c3c3a4f1",
+   "contentLicense": "CC-BY-4.0 (System Reference Document 5.1, Wizards of the Coast LLC)",
+   "path": "src/2014/en",
+   "repo": "https://github.com/5e-bits/5e-database",
+   "role": "primary"
+  },
+  "open5e-v1-wotc-srd": {
+   "commit": "0e594c370b4daa9c8d8690979a58eab615afd6d5",
+   "contentLicense": "CC-BY-4.0 (System Reference Document 5.1)",
+   "path": "data/v1/wotc-srd",
+   "repo": "https://github.com/open5e/open5e-api",
+   "role": "supplement + cross-check"
+  }
+ },
+ "srdVersion": "5.1"
+}

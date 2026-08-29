@@ -1,0 +1,93 @@
+[
+ {
+  "abilityBonuses": [
+   {
+    "ability": "int",
+    "bonus": 1
+   }
+  ],
+  "edition": "2014",
+  "key": "high-elf",
+  "languageOptions": "",
+  "languages": [],
+  "license": "CC-BY-4.0",
+  "name": "High Elf",
+  "raceKey": "elf",
+  "source": "srd-5.1",
+  "startingProficiencies": [],
+  "text": "As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many fantasy gaming worlds, there are two kinds of high elves. One type is haughty and reclusive, believing themselves to be superior to non-elves and even other elves. The other type is more common and more friendly, and often encountered among humans and other races.",
+  "traits": [
+   "elf-weapon-training",
+   "high-elf-cantrip",
+   "extra-language"
+  ],
+  "xref": "/api/2014/subraces/high-elf"
+ },
+ {
+  "abilityBonuses": [
+   {
+    "ability": "wis",
+    "bonus": 1
+   }
+  ],
+  "edition": "2014",
+  "key": "hill-dwarf",
+  "languageOptions": "",
+  "languages": [],
+  "license": "CC-BY-4.0",
+  "name": "Hill Dwarf",
+  "raceKey": "dwarf",
+  "source": "srd-5.1",
+  "startingProficiencies": [],
+  "text": "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience.",
+  "traits": [
+   "dwarven-toughness"
+  ],
+  "xref": "/api/2014/subraces/hill-dwarf"
+ },
+ {
+  "abilityBonuses": [
+   {
+    "ability": "cha",
+    "bonus": 1
+   }
+  ],
+  "edition": "2014",
+  "key": "lightfoot-halfling",
+  "languageOptions": "",
+  "languages": [],
+  "license": "CC-BY-4.0",
+  "name": "Lightfoot Halfling",
+  "raceKey": "halfling",
+  "source": "srd-5.1",
+  "startingProficiencies": [],
+  "text": "As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You're inclined to be affable and get along well with others. Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life.",
+  "traits": [
+   "naturally-stealthy"
+  ],
+  "xref": "/api/2014/subraces/lightfoot-halfling"
+ },
+ {
+  "abilityBonuses": [
+   {
+    "ability": "con",
+    "bonus": 1
+   }
+  ],
+  "edition": "2014",
+  "key": "rock-gnome",
+  "languageOptions": "",
+  "languages": [],
+  "license": "CC-BY-4.0",
+  "name": "Rock Gnome",
+  "raceKey": "gnome",
+  "source": "srd-5.1",
+  "startingProficiencies": [],
+  "text": "As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.",
+  "traits": [
+   "artificers-lore",
+   "tinker"
+  ],
+  "xref": "/api/2014/subraces/rock-gnome"
+ }
+]

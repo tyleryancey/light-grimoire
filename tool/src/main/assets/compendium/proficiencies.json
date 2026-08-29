@@ -1,0 +1,1540 @@
+[
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "alchemists-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Alchemist's Supplies",
+  "races": [],
+  "referenceKey": "alchemists-supplies",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/alchemists-supplies"
+ },
+ {
+  "classes": [
+   "fighter",
+   "paladin"
+  ],
+  "edition": "2014",
+  "key": "all-armor",
+  "license": "CC-BY-4.0",
+  "name": "All armor",
+  "races": [],
+  "referenceKey": "armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/all-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "bagpipes",
+  "license": "CC-BY-4.0",
+  "name": "Bagpipes",
+  "races": [],
+  "referenceKey": "bagpipes",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/bagpipes"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "battleaxes",
+  "license": "CC-BY-4.0",
+  "name": "Battleaxes",
+  "races": [
+   "dwarf"
+  ],
+  "referenceKey": "battleaxe",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/battleaxes"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "blowguns",
+  "license": "CC-BY-4.0",
+  "name": "Blowguns",
+  "races": [],
+  "referenceKey": "blowgun",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/blowguns"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "breastplate",
+  "license": "CC-BY-4.0",
+  "name": "Breastplate",
+  "races": [],
+  "referenceKey": "breastplate",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/breastplate"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "brewers-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Brewer's Supplies",
+  "races": [],
+  "referenceKey": "brewers-supplies",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/brewers-supplies"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "calligraphers-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Calligrapher's Supplies",
+  "races": [],
+  "referenceKey": "calligraphers-supplies",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/calligraphers-supplies"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "carpenters-tools",
+  "license": "CC-BY-4.0",
+  "name": "Carpenter's Tools",
+  "races": [],
+  "referenceKey": "carpenters-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/carpenters-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "cartographers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Cartographer's Tools",
+  "races": [],
+  "referenceKey": "cartographers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/cartographers-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "chain-mail",
+  "license": "CC-BY-4.0",
+  "name": "Chain Mail",
+  "races": [],
+  "referenceKey": "chain-mail",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/chain-mail"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "chain-shirt",
+  "license": "CC-BY-4.0",
+  "name": "Chain Shirt",
+  "races": [],
+  "referenceKey": "chain-shirt",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/chain-shirt"
+ },
+ {
+  "classes": [
+   "druid"
+  ],
+  "edition": "2014",
+  "key": "clubs",
+  "license": "CC-BY-4.0",
+  "name": "Clubs",
+  "races": [],
+  "referenceKey": "club",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/clubs"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "cobblers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Cobbler's Tools",
+  "races": [],
+  "referenceKey": "cobblers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/cobblers-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "cooks-utensils",
+  "license": "CC-BY-4.0",
+  "name": "Cook's utensils",
+  "races": [],
+  "referenceKey": "cooks-utensils",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/cooks-utensils"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "crossbows-heavy",
+  "license": "CC-BY-4.0",
+  "name": "Crossbows, heavy",
+  "races": [],
+  "referenceKey": "crossbow-heavy",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/crossbows-heavy"
+ },
+ {
+  "classes": [
+   "sorcerer",
+   "wizard"
+  ],
+  "edition": "2014",
+  "key": "crossbows-light",
+  "license": "CC-BY-4.0",
+  "name": "Crossbows, light",
+  "races": [],
+  "referenceKey": "crossbow-light",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/crossbows-light"
+ },
+ {
+  "classes": [
+   "druid",
+   "sorcerer",
+   "wizard"
+  ],
+  "edition": "2014",
+  "key": "daggers",
+  "license": "CC-BY-4.0",
+  "name": "Daggers",
+  "races": [],
+  "referenceKey": "dagger",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/daggers"
+ },
+ {
+  "classes": [
+   "druid",
+   "sorcerer",
+   "wizard"
+  ],
+  "edition": "2014",
+  "key": "darts",
+  "license": "CC-BY-4.0",
+  "name": "Darts",
+  "races": [],
+  "referenceKey": "dart",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/darts"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "dice-set",
+  "license": "CC-BY-4.0",
+  "name": "Dice Set",
+  "races": [],
+  "referenceKey": "dice-set",
+  "source": "srd-5.1",
+  "type": "Gaming Sets",
+  "xref": "/api/2014/proficiencies/dice-set"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "disguise-kit",
+  "license": "CC-BY-4.0",
+  "name": "Disguise Kit",
+  "races": [],
+  "referenceKey": "disguise-kit",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/disguise-kit"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "drum",
+  "license": "CC-BY-4.0",
+  "name": "Drum",
+  "races": [],
+  "referenceKey": "drum",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/drum"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "dulcimer",
+  "license": "CC-BY-4.0",
+  "name": "Dulcimer",
+  "races": [],
+  "referenceKey": "dulcimer",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/dulcimer"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "flails",
+  "license": "CC-BY-4.0",
+  "name": "Flails",
+  "races": [],
+  "referenceKey": "flail",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/flails"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "flute",
+  "license": "CC-BY-4.0",
+  "name": "Flute",
+  "races": [],
+  "referenceKey": "flute",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/flute"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "forgery-kit",
+  "license": "CC-BY-4.0",
+  "name": "Forgery Kit",
+  "races": [],
+  "referenceKey": "forgery-kit",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/forgery-kit"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "glaives",
+  "license": "CC-BY-4.0",
+  "name": "Glaives",
+  "races": [],
+  "referenceKey": "glaive",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/glaives"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "glassblowers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Glassblower's Tools",
+  "races": [],
+  "referenceKey": "glassblowers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/glassblowers-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "greataxes",
+  "license": "CC-BY-4.0",
+  "name": "Greataxes",
+  "races": [],
+  "referenceKey": "greataxe",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/greataxes"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "greatclubs",
+  "license": "CC-BY-4.0",
+  "name": "Greatclubs",
+  "races": [],
+  "referenceKey": "greatclub",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/greatclubs"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "greatswords",
+  "license": "CC-BY-4.0",
+  "name": "Greatswords",
+  "races": [],
+  "referenceKey": "greatsword",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/greatswords"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "halberds",
+  "license": "CC-BY-4.0",
+  "name": "Halberds",
+  "races": [],
+  "referenceKey": "halberd",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/halberds"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "half-plate-armor",
+  "license": "CC-BY-4.0",
+  "name": "Half Plate Armor",
+  "races": [],
+  "referenceKey": "half-plate-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/half-plate-armor"
+ },
+ {
+  "classes": [
+   "bard",
+   "rogue"
+  ],
+  "edition": "2014",
+  "key": "hand-crossbows",
+  "license": "CC-BY-4.0",
+  "name": "Hand crossbows",
+  "races": [],
+  "referenceKey": "crossbow-hand",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/hand-crossbows"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "handaxes",
+  "license": "CC-BY-4.0",
+  "name": "Handaxes",
+  "races": [
+   "dwarf"
+  ],
+  "referenceKey": "handaxe",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/handaxes"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "heavy-armor",
+  "license": "CC-BY-4.0",
+  "name": "Heavy Armor",
+  "races": [],
+  "referenceKey": "heavy-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/heavy-armor"
+ },
+ {
+  "classes": [
+   "druid"
+  ],
+  "edition": "2014",
+  "key": "herbalism-kit",
+  "license": "CC-BY-4.0",
+  "name": "Herbalism Kit",
+  "races": [],
+  "referenceKey": "herbalism-kit",
+  "source": "srd-5.1",
+  "type": "Other",
+  "xref": "/api/2014/proficiencies/herbalism-kit"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "hide-armor",
+  "license": "CC-BY-4.0",
+  "name": "Hide Armor",
+  "races": [],
+  "referenceKey": "hide-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/hide-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "horn",
+  "license": "CC-BY-4.0",
+  "name": "Horn",
+  "races": [],
+  "referenceKey": "horn",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/horn"
+ },
+ {
+  "classes": [
+   "druid"
+  ],
+  "edition": "2014",
+  "key": "javelins",
+  "license": "CC-BY-4.0",
+  "name": "Javelins",
+  "races": [],
+  "referenceKey": "javelin",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/javelins"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "jewelers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Jeweler's Tools",
+  "races": [],
+  "referenceKey": "jewelers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/jewelers-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "lances",
+  "license": "CC-BY-4.0",
+  "name": "Lances",
+  "races": [],
+  "referenceKey": "lance",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/lances"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "land-vehicles",
+  "license": "CC-BY-4.0",
+  "name": "Land Vehicles",
+  "races": [],
+  "referenceKey": "land-vehicles",
+  "source": "srd-5.1",
+  "type": "Vehicles",
+  "xref": "/api/2014/proficiencies/land-vehicles"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "leather-armor",
+  "license": "CC-BY-4.0",
+  "name": "Leather Armor",
+  "races": [],
+  "referenceKey": "leather-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/leather-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "leatherworkers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Leatherworker's Tools",
+  "races": [],
+  "referenceKey": "leatherworkers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/leatherworkers-tools"
+ },
+ {
+  "classes": [
+   "barbarian",
+   "bard",
+   "cleric",
+   "druid",
+   "ranger",
+   "rogue",
+   "warlock"
+  ],
+  "edition": "2014",
+  "key": "light-armor",
+  "license": "CC-BY-4.0",
+  "name": "Light Armor",
+  "races": [],
+  "referenceKey": "light-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/light-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "light-hammers",
+  "license": "CC-BY-4.0",
+  "name": "Light hammers",
+  "races": [
+   "dwarf"
+  ],
+  "referenceKey": "light-hammer",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/light-hammers"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "longbows",
+  "license": "CC-BY-4.0",
+  "name": "Longbows",
+  "races": [
+   "high-elf"
+  ],
+  "referenceKey": "longbow",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/longbows"
+ },
+ {
+  "classes": [
+   "bard",
+   "rogue"
+  ],
+  "edition": "2014",
+  "key": "longswords",
+  "license": "CC-BY-4.0",
+  "name": "Longswords",
+  "races": [
+   "high-elf"
+  ],
+  "referenceKey": "longsword",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/longswords"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "lute",
+  "license": "CC-BY-4.0",
+  "name": "Lute",
+  "races": [],
+  "referenceKey": "lute",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/lute"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "lyre",
+  "license": "CC-BY-4.0",
+  "name": "Lyre",
+  "races": [],
+  "referenceKey": "lyre",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/lyre"
+ },
+ {
+  "classes": [
+   "druid"
+  ],
+  "edition": "2014",
+  "key": "maces",
+  "license": "CC-BY-4.0",
+  "name": "Maces",
+  "races": [],
+  "referenceKey": "mace",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/maces"
+ },
+ {
+  "classes": [
+   "barbarian",
+   "fighter",
+   "paladin",
+   "ranger"
+  ],
+  "edition": "2014",
+  "key": "martial-weapons",
+  "license": "CC-BY-4.0",
+  "name": "Martial Weapons",
+  "races": [],
+  "referenceKey": "martial-weapons",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/martial-weapons"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "masons-tools",
+  "license": "CC-BY-4.0",
+  "name": "Mason's Tools",
+  "races": [],
+  "referenceKey": "masons-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/masons-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "mauls",
+  "license": "CC-BY-4.0",
+  "name": "Mauls",
+  "races": [],
+  "referenceKey": "maul",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/mauls"
+ },
+ {
+  "classes": [
+   "barbarian",
+   "cleric",
+   "druid",
+   "ranger"
+  ],
+  "edition": "2014",
+  "key": "medium-armor",
+  "license": "CC-BY-4.0",
+  "name": "Medium Armor",
+  "races": [],
+  "referenceKey": "medium-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/medium-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "morningstars",
+  "license": "CC-BY-4.0",
+  "name": "Morningstars",
+  "races": [],
+  "referenceKey": "morningstar",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/morningstars"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "navigators-tools",
+  "license": "CC-BY-4.0",
+  "name": "Navigator's Tools",
+  "races": [],
+  "referenceKey": "navigators-tools",
+  "source": "srd-5.1",
+  "type": "Other",
+  "xref": "/api/2014/proficiencies/navigators-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "nets",
+  "license": "CC-BY-4.0",
+  "name": "Nets",
+  "races": [],
+  "referenceKey": "net",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/nets"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "padded-armor",
+  "license": "CC-BY-4.0",
+  "name": "Padded Armor",
+  "races": [],
+  "referenceKey": "padded-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/padded-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "painters-supplies",
+  "license": "CC-BY-4.0",
+  "name": "Painter's Supplies",
+  "races": [],
+  "referenceKey": "painters-supplies",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/painters-supplies"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "pan-flute",
+  "license": "CC-BY-4.0",
+  "name": "Pan flute",
+  "races": [],
+  "referenceKey": "pan-flute",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/pan-flute"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "pikes",
+  "license": "CC-BY-4.0",
+  "name": "Pikes",
+  "races": [],
+  "referenceKey": "pike",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/pikes"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "plate-armor",
+  "license": "CC-BY-4.0",
+  "name": "Plate Armor",
+  "races": [],
+  "referenceKey": "plate-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/plate-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "playing-card-set",
+  "license": "CC-BY-4.0",
+  "name": "Playing Card Set",
+  "races": [],
+  "referenceKey": "playing-card-set",
+  "source": "srd-5.1",
+  "type": "Gaming Sets",
+  "xref": "/api/2014/proficiencies/playing-card-set"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "poisoners-kit",
+  "license": "CC-BY-4.0",
+  "name": "Poisoner's Kit",
+  "races": [],
+  "referenceKey": "poisoners-kit",
+  "source": "srd-5.1",
+  "type": "Other",
+  "xref": "/api/2014/proficiencies/poisoners-kit"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "potters-tools",
+  "license": "CC-BY-4.0",
+  "name": "Potter's Tools",
+  "races": [],
+  "referenceKey": "potters-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/potters-tools"
+ },
+ {
+  "classes": [
+   "druid",
+   "sorcerer",
+   "wizard"
+  ],
+  "edition": "2014",
+  "key": "quarterstaffs",
+  "license": "CC-BY-4.0",
+  "name": "Quarterstaffs",
+  "races": [],
+  "referenceKey": "quarterstaff",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/quarterstaffs"
+ },
+ {
+  "classes": [
+   "bard",
+   "rogue"
+  ],
+  "edition": "2014",
+  "key": "rapiers",
+  "license": "CC-BY-4.0",
+  "name": "Rapiers",
+  "races": [],
+  "referenceKey": "rapier",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/rapiers"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "ring-mail",
+  "license": "CC-BY-4.0",
+  "name": "Ring Mail",
+  "races": [],
+  "referenceKey": "ring-mail",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/ring-mail"
+ },
+ {
+  "classes": [
+   "bard",
+   "cleric",
+   "paladin",
+   "sorcerer",
+   "warlock"
+  ],
+  "edition": "2014",
+  "key": "saving-throw-cha",
+  "license": "CC-BY-4.0",
+  "name": "Saving Throw: CHA",
+  "races": [],
+  "referenceKey": "cha",
+  "source": "srd-5.1",
+  "type": "Saving Throws",
+  "xref": "/api/2014/proficiencies/saving-throw-cha"
+ },
+ {
+  "classes": [
+   "barbarian",
+   "fighter",
+   "sorcerer"
+  ],
+  "edition": "2014",
+  "key": "saving-throw-con",
+  "license": "CC-BY-4.0",
+  "name": "Saving Throw: CON",
+  "races": [],
+  "referenceKey": "con",
+  "source": "srd-5.1",
+  "type": "Saving Throws",
+  "xref": "/api/2014/proficiencies/saving-throw-con"
+ },
+ {
+  "classes": [
+   "bard",
+   "monk",
+   "ranger",
+   "rogue"
+  ],
+  "edition": "2014",
+  "key": "saving-throw-dex",
+  "license": "CC-BY-4.0",
+  "name": "Saving Throw: DEX",
+  "races": [],
+  "referenceKey": "dex",
+  "source": "srd-5.1",
+  "type": "Saving Throws",
+  "xref": "/api/2014/proficiencies/saving-throw-dex"
+ },
+ {
+  "classes": [
+   "druid",
+   "rogue",
+   "wizard"
+  ],
+  "edition": "2014",
+  "key": "saving-throw-int",
+  "license": "CC-BY-4.0",
+  "name": "Saving Throw: INT",
+  "races": [],
+  "referenceKey": "int",
+  "source": "srd-5.1",
+  "type": "Saving Throws",
+  "xref": "/api/2014/proficiencies/saving-throw-int"
+ },
+ {
+  "classes": [
+   "barbarian",
+   "fighter",
+   "monk",
+   "ranger"
+  ],
+  "edition": "2014",
+  "key": "saving-throw-str",
+  "license": "CC-BY-4.0",
+  "name": "Saving Throw: STR",
+  "races": [],
+  "referenceKey": "str",
+  "source": "srd-5.1",
+  "type": "Saving Throws",
+  "xref": "/api/2014/proficiencies/saving-throw-str"
+ },
+ {
+  "classes": [
+   "cleric",
+   "druid",
+   "paladin",
+   "warlock",
+   "wizard"
+  ],
+  "edition": "2014",
+  "key": "saving-throw-wis",
+  "license": "CC-BY-4.0",
+  "name": "Saving Throw: WIS",
+  "races": [],
+  "referenceKey": "wis",
+  "source": "srd-5.1",
+  "type": "Saving Throws",
+  "xref": "/api/2014/proficiencies/saving-throw-wis"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "scale-mail",
+  "license": "CC-BY-4.0",
+  "name": "Scale Mail",
+  "races": [],
+  "referenceKey": "scale-mail",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/scale-mail"
+ },
+ {
+  "classes": [
+   "druid"
+  ],
+  "edition": "2014",
+  "key": "scimitars",
+  "license": "CC-BY-4.0",
+  "name": "Scimitars",
+  "races": [],
+  "referenceKey": "scimitar",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/scimitars"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "shawm",
+  "license": "CC-BY-4.0",
+  "name": "Shawm",
+  "races": [],
+  "referenceKey": "shawm",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/shawm"
+ },
+ {
+  "classes": [
+   "barbarian",
+   "cleric",
+   "druid",
+   "fighter",
+   "paladin",
+   "ranger"
+  ],
+  "edition": "2014",
+  "key": "shields",
+  "license": "CC-BY-4.0",
+  "name": "Shields",
+  "races": [],
+  "referenceKey": "shield",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/shields"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "shortbows",
+  "license": "CC-BY-4.0",
+  "name": "Shortbows",
+  "races": [
+   "high-elf"
+  ],
+  "referenceKey": "shortbow",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/shortbows"
+ },
+ {
+  "classes": [
+   "bard",
+   "monk",
+   "rogue"
+  ],
+  "edition": "2014",
+  "key": "shortswords",
+  "license": "CC-BY-4.0",
+  "name": "Shortswords",
+  "races": [
+   "high-elf"
+  ],
+  "referenceKey": "shortsword",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/shortswords"
+ },
+ {
+  "classes": [
+   "druid"
+  ],
+  "edition": "2014",
+  "key": "sickles",
+  "license": "CC-BY-4.0",
+  "name": "Sickles",
+  "races": [],
+  "referenceKey": "sickle",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/sickles"
+ },
+ {
+  "classes": [
+   "barbarian",
+   "bard",
+   "cleric",
+   "fighter",
+   "monk",
+   "paladin",
+   "ranger",
+   "rogue",
+   "warlock"
+  ],
+  "edition": "2014",
+  "key": "simple-weapons",
+  "license": "CC-BY-4.0",
+  "name": "Simple Weapons",
+  "races": [],
+  "referenceKey": "simple-weapons",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/simple-weapons"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-acrobatics",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Acrobatics",
+  "races": [],
+  "referenceKey": "acrobatics",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-acrobatics"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-animal-handling",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Animal Handling",
+  "races": [],
+  "referenceKey": "animal-handling",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-animal-handling"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-arcana",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Arcana",
+  "races": [],
+  "referenceKey": "arcana",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-arcana"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-athletics",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Athletics",
+  "races": [],
+  "referenceKey": "athletics",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-athletics"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-deception",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Deception",
+  "races": [],
+  "referenceKey": "deception",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-deception"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-history",
+  "license": "CC-BY-4.0",
+  "name": "Skill: History",
+  "races": [],
+  "referenceKey": "history",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-history"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-insight",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Insight",
+  "races": [],
+  "referenceKey": "insight",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-insight"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-intimidation",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Intimidation",
+  "races": [],
+  "referenceKey": "intimidation",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-intimidation"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-investigation",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Investigation",
+  "races": [],
+  "referenceKey": "investigation",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-investigation"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-medicine",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Medicine",
+  "races": [],
+  "referenceKey": "medicine",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-medicine"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-nature",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Nature",
+  "races": [],
+  "referenceKey": "nature",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-nature"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-perception",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Perception",
+  "races": [
+   "elf"
+  ],
+  "referenceKey": "perception",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-perception"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-performance",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Performance",
+  "races": [],
+  "referenceKey": "performance",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-performance"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-persuasion",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Persuasion",
+  "races": [],
+  "referenceKey": "persuasion",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-persuasion"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-religion",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Religion",
+  "races": [],
+  "referenceKey": "religion",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-religion"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-sleight-of-hand",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Sleight of Hand",
+  "races": [],
+  "referenceKey": "sleight-of-hand",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-sleight-of-hand"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-stealth",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Stealth",
+  "races": [],
+  "referenceKey": "stealth",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-stealth"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "skill-survival",
+  "license": "CC-BY-4.0",
+  "name": "Skill: Survival",
+  "races": [],
+  "referenceKey": "survival",
+  "source": "srd-5.1",
+  "type": "Skills",
+  "xref": "/api/2014/proficiencies/skill-survival"
+ },
+ {
+  "classes": [
+   "druid",
+   "sorcerer",
+   "wizard"
+  ],
+  "edition": "2014",
+  "key": "slings",
+  "license": "CC-BY-4.0",
+  "name": "Slings",
+  "races": [],
+  "referenceKey": "sling",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/slings"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "smiths-tools",
+  "license": "CC-BY-4.0",
+  "name": "Smith's Tools",
+  "races": [],
+  "referenceKey": "smiths-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/smiths-tools"
+ },
+ {
+  "classes": [
+   "druid"
+  ],
+  "edition": "2014",
+  "key": "spears",
+  "license": "CC-BY-4.0",
+  "name": "Spears",
+  "races": [],
+  "referenceKey": "spear",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/spears"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "splint-armor",
+  "license": "CC-BY-4.0",
+  "name": "Splint Armor",
+  "races": [],
+  "referenceKey": "splint-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/splint-armor"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "studded-leather-armor",
+  "license": "CC-BY-4.0",
+  "name": "Studded Leather Armor",
+  "races": [],
+  "referenceKey": "studded-leather-armor",
+  "source": "srd-5.1",
+  "type": "Armor",
+  "xref": "/api/2014/proficiencies/studded-leather-armor"
+ },
+ {
+  "classes": [
+   "rogue"
+  ],
+  "edition": "2014",
+  "key": "thieves-tools",
+  "license": "CC-BY-4.0",
+  "name": "Thieves' Tools",
+  "races": [],
+  "referenceKey": "thieves-tools",
+  "source": "srd-5.1",
+  "type": "Other",
+  "xref": "/api/2014/proficiencies/thieves-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "tinkers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Tinker's Tools",
+  "races": [],
+  "referenceKey": "tinkers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/tinkers-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "tridents",
+  "license": "CC-BY-4.0",
+  "name": "Tridents",
+  "races": [],
+  "referenceKey": "trident",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/tridents"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "viol",
+  "license": "CC-BY-4.0",
+  "name": "Viol",
+  "races": [],
+  "referenceKey": "viol",
+  "source": "srd-5.1",
+  "type": "Musical Instruments",
+  "xref": "/api/2014/proficiencies/viol"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "war-picks",
+  "license": "CC-BY-4.0",
+  "name": "War picks",
+  "races": [],
+  "referenceKey": "war-pick",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/war-picks"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "warhammers",
+  "license": "CC-BY-4.0",
+  "name": "Warhammers",
+  "races": [
+   "dwarf"
+  ],
+  "referenceKey": "warhammer",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/warhammers"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "water-vehicles",
+  "license": "CC-BY-4.0",
+  "name": "Water Vehicles",
+  "races": [],
+  "referenceKey": "waterborne-vehicles",
+  "source": "srd-5.1",
+  "type": "Vehicles",
+  "xref": "/api/2014/proficiencies/water-vehicles"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "weavers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Weaver's Tools",
+  "races": [],
+  "referenceKey": "weavers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/weavers-tools"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "whips",
+  "license": "CC-BY-4.0",
+  "name": "Whips",
+  "races": [],
+  "referenceKey": "whip",
+  "source": "srd-5.1",
+  "type": "Weapons",
+  "xref": "/api/2014/proficiencies/whips"
+ },
+ {
+  "classes": [],
+  "edition": "2014",
+  "key": "woodcarvers-tools",
+  "license": "CC-BY-4.0",
+  "name": "Woodcarver's Tools",
+  "races": [],
+  "referenceKey": "woodcarvers-tools",
+  "source": "srd-5.1",
+  "type": "Artisan's Tools",
+  "xref": "/api/2014/proficiencies/woodcarvers-tools"
+ }
+]
