@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/tyleryancey/light-grimoire/pipeline/schema/compendium.schema.json",
+  "title": "Grimoire compendium bundle (one file per kind under tool/src/main/assets/compendium/)",
+  "description": "Every record carries the envelope (key, name, edition, source, license). Kind-specific fields are documented per definition. Prose fields are Markdown-lite: paragraphs separated by blank lines, '- ' bullets, **bold**/*italic* only. Cross-references are bare keys into sibling files.",
+  "$defs": {
+    "key": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "ability": {"type": "string", "enum": ["str", "dex", "con", "int", "wis", "cha"]},
+    "envelope": {
+      "type": "object",
+      "required": ["key", "name", "edition", "source", "license"],
+      "properties": {
+        "key": {"$ref": "#/$defs/key"},
+        "name": {"type": "string", "minLength": 1},
+        "edition": {"type": "string", "enum": ["2014", "2024"]},
+        "source": {"type": "string", "enum": ["srd-5.1", "srd-5.2.1"]},
+        "license": {"type": "string", "const": "CC-BY-4.0"},
+        "xref": {"type": "string"}
+      }
+    },
+    "damage": {
+      "type": "object",
+      "properties": {"dice": {"type": ["string", "null"]}, "type": {"type": ["string", "null"]}}
+    },
+    "creatureAction": {
+      "type": "object",
+      "required": ["name", "text"],
+      "properties": {
+        "name": {"type": "string"},
+        "text": {"type": "string"},
+        "attackBonus": {"type": "integer"},
+        "damage": {"type": "array", "items": {"$ref": "#/$defs/damage"}},
+        "save": {"type": "object", "properties": {"ability": {"type": ["string", "null"]}, "dc": {"type": ["integer", "null"]}, "success": {"type": ["string", "null"]}}},
+        "usage": {"type": "object"}
+      }
+    },
+    "spell": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["level", "school", "castingTime", "range", "components", "ritual", "concentration", "duration", "classes", "text"],
+      "properties": {
+        "level": {"type": "integer", "minimum": 0, "maximum": 9},
+        "school": {"type": "string", "enum": ["abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"]},
+        "castingTime": {"type": "string"},
+        "range": {"type": "string"},
+        "components": {"type": "array", "items": {"type": "string", "enum": ["V", "S", "M"]}},
+        "material": {"type": ["string", "null"]},
+        "ritual": {"type": "boolean"},
+        "concentration": {"type": "boolean"},
+        "duration": {"type": "string"},
+        "classes": {"type": "array", "items": {"$ref": "#/$defs/key"}},
+        "subclasses": {"type": "array", "items": {"$ref": "#/$defs/key"}},
+        "attackType": {"type": ["string", "null"]},
+        "saveAbility": {"anyOf": [{"$ref": "#/$defs/ability"}, {"type": "null"}]},
+        "saveSuccess": {"type": ["string", "null"]},
+        "damageType": {"type": ["string", "null"]},
+        "damageAtSlotLevel": {"type": ["object", "null"]},
+        "damageAtCharacterLevel": {"type": ["object", "null"]},
+        "healAtSlotLevel": {"type": ["object", "null"]},
+        "areaOfEffect": {"type": ["object", "null"]},
+        "text": {"type": "string", "minLength": 1},
+        "higherLevel": {"type": "string"}
+      }
+    },
+    "creature": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["size", "type", "ac", "hp", "hitDice", "abilities", "cr", "actions"],
+      "properties": {
+        "size": {"type": "string"},
+        "type": {"type": "string"},
+        "subtype": {"type": ["string", "null"]},
+        "alignment": {"type": ["string", "null"]},
+        "ac": {"type": "array", "items": {"type": "object", "properties": {"value": {"type": "integer"}, "type": {"type": "string"}}}},
+        "hp": {"type": "integer"},
+        "hitDice": {"type": "string"},
+        "hpRoll": {"type": ["string", "null"]},
+        "speed": {"type": "object"},
+        "abilities": {"type": "object", "required": ["str", "dex", "con", "int", "wis", "cha"]},
+        "saves": {"type": "object"},
+        "skills": {"type": "object"},
+        "vulnerabilities": {"type": "array"},
+        "resistances": {"type": "array"},
+        "immunities": {"type": "array"},
+        "conditionImmunities": {"type": "array", "items": {"$ref": "#/$defs/key"}},
+        "senses": {"type": "object"},
+        "languages": {"type": "string"},
+        "cr": {"type": "number"},
+        "profBonus": {"type": ["integer", "null"]},
+        "xp": {"type": ["integer", "null"]},
+        "traits": {"type": "array", "items": {"$ref": "#/$defs/creatureAction"}},
+        "actions": {"type": "array", "items": {"$ref": "#/$defs/creatureAction"}},
+        "reactions": {"type": "array", "items": {"$ref": "#/$defs/creatureAction"}},
+        "legendaryActions": {"type": "array", "items": {"$ref": "#/$defs/creatureAction"}},
+        "text": {"type": "string"}
+      }
+    },
+    "classLevel": {
+      "type": "object",
+      "required": ["level", "profBonus", "features", "slots"],
+      "properties": {
+        "level": {"type": "integer", "minimum": 1, "maximum": 20},
+        "profBonus": {"type": "integer", "minimum": 2, "maximum": 6},
+        "abilityScoreBonuses": {"type": "integer"},
+        "features": {"type": "array", "items": {"$ref": "#/$defs/key"}},
+        "slots": {"type": "array", "minItems": 9, "maxItems": 9, "items": {"type": "integer", "minimum": 0, "maximum": 4}},
+        "cantripsKnown": {"type": ["integer", "null"]},
+        "spellsKnown": {"type": ["integer", "null"]},
+        "classSpecific": {"type": "object"}
+      }
+    },
+    "class": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["hitDie", "savingThrows", "proficiencies", "subclasses", "levels"],
+      "properties": {
+        "hitDie": {"type": "integer", "enum": [6, 8, 10, 12]},
+        "savingThrows": {"type": "array", "items": {"$ref": "#/$defs/ability"}, "minItems": 2, "maxItems": 2},
+        "proficiencies": {"type": "array", "items": {"$ref": "#/$defs/key"}},
+        "proficiencyChoices": {"type": "array"},
+        "startingEquipment": {"type": "array"},
+        "startingEquipmentOptions": {"type": "array", "items": {"type": "string"}},
+        "multiclassing": {"type": "object"},
+        "spellcasting": {"type": ["object", "null"]},
+        "subclasses": {"type": "array", "items": {"$ref": "#/$defs/key"}},
+        "levels": {"type": "array", "minItems": 20, "maxItems": 20, "items": {"$ref": "#/$defs/classLevel"}}
+      }
+    },
+    "subclass": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["classKey", "levels", "text"],
+      "properties": {"classKey": {"$ref": "#/$defs/key"}, "flavor": {"type": ["string", "null"]}, "levels": {"type": "array"}, "spells": {"type": "array"}, "text": {"type": "string"}}
+    },
+    "feature": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["classKey", "level", "text"],
+      "properties": {"classKey": {"$ref": "#/$defs/key"}, "subclassKey": {"anyOf": [{"$ref": "#/$defs/key"}, {"type": "null"}]}, "level": {"type": "integer"}, "parentKey": {"type": ["string", "null"]}, "text": {"type": "string"}}
+    },
+    "race": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["speed", "size", "abilityBonuses", "traits", "subraces"],
+      "properties": {"speed": {"type": "integer"}, "size": {"type": "string"}, "abilityBonuses": {"type": "array"}, "traits": {"type": "array"}, "subraces": {"type": "array"}, "text": {"type": "string"}}
+    },
+    "subrace": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["raceKey", "abilityBonuses", "traits"]},
+    "trait": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["text"]},
+    "background": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["skillProficiencies", "feature"]},
+    "feat": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["text"]},
+    "condition": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["text"], "properties": {"text": {"type": "string", "minLength": 1}}},
+    "equipment": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["category"],
+      "properties": {
+        "category": {"$ref": "#/$defs/key"},
+        "cost": {"type": ["object", "null"]},
+        "weight": {"type": ["number", "null"]},
+        "weapon": {"type": "object", "required": ["category", "rangeType", "damage", "properties"]},
+        "armor": {"type": "object", "required": ["category", "base", "dexBonus"], "properties": {"base": {"type": "integer"}, "dexBonus": {"type": "boolean"}, "maxBonus": {"type": ["integer", "null"]}}},
+        "text": {"type": "string"}
+      }
+    },
+    "magicItem": {
+      "allOf": [{"$ref": "#/$defs/envelope"}],
+      "required": ["category", "rarity", "attunement", "isVariant", "headline", "text"],
+      "properties": {"rarity": {"type": ["string", "null"]}, "attunement": {"type": "boolean"}, "attunementBy": {"type": ["string", "null"]}, "isVariant": {"type": "boolean"}, "variants": {"type": "array"}, "headline": {"type": "string"}, "text": {"type": "string"}}
+    },
+    "skill": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["ability", "text"], "properties": {"ability": {"$ref": "#/$defs/ability"}}},
+    "simple": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["text"]},
+    "rule": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["sections", "text"]},
+    "ruleSection": {"allOf": [{"$ref": "#/$defs/envelope"}], "required": ["text"], "properties": {"text": {"type": "string", "minLength": 1}}}
+  },
+  "type": "object",
+  "required": ["spells", "creatures", "classes", "subclasses", "features", "races", "subraces", "traits", "backgrounds", "feats", "conditions", "equipment", "magic_items", "weapon_properties", "skills", "languages", "damage_types", "magic_schools", "alignments", "proficiencies", "rules", "rule_sections"],
+  "properties": {
+    "spells": {"type": "array", "items": {"$ref": "#/$defs/spell"}},
+    "creatures": {"type": "array", "items": {"$ref": "#/$defs/creature"}},
+    "classes": {"type": "array", "items": {"$ref": "#/$defs/class"}},
+    "subclasses": {"type": "array", "items": {"$ref": "#/$defs/subclass"}},
+    "features": {"type": "array", "items": {"$ref": "#/$defs/feature"}},
+    "races": {"type": "array", "items": {"$ref": "#/$defs/race"}},
+    "subraces": {"type": "array", "items": {"$ref": "#/$defs/subrace"}},
+    "traits": {"type": "array", "items": {"$ref": "#/$defs/trait"}},
+    "backgrounds": {"type": "array", "items": {"$ref": "#/$defs/background"}},
+    "feats": {"type": "array", "items": {"$ref": "#/$defs/feat"}},
+    "conditions": {"type": "array", "items": {"$ref": "#/$defs/condition"}},
+    "equipment": {"type": "array", "items": {"$ref": "#/$defs/equipment"}},
+    "magic_items": {"type": "array", "items": {"$ref": "#/$defs/magicItem"}},
+    "weapon_properties": {"type": "array", "items": {"$ref": "#/$defs/simple"}},
+    "skills": {"type": "array", "items": {"$ref": "#/$defs/skill"}},
+    "languages": {"type": "array", "items": {"$ref": "#/$defs/envelope"}},
+    "damage_types": {"type": "array", "items": {"$ref": "#/$defs/simple"}},
+    "magic_schools": {"type": "array", "items": {"$ref": "#/$defs/simple"}},
+    "alignments": {"type": "array", "items": {"$ref": "#/$defs/simple"}},
+    "proficiencies": {"type": "array", "items": {"$ref": "#/$defs/envelope"}},
+    "rules": {"type": "array", "items": {"$ref": "#/$defs/rule"}},
+    "rule_sections": {"type": "array", "items": {"$ref": "#/$defs/ruleSection"}}
+  }
+}

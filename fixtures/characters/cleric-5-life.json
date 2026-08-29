@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "id": "fixture-cleric-5-life",
+  "name": "Brother Aldric",
+  "edition": "2014",
+  "classes": [
+    {
+      "classKey": "cleric",
+      "subclassKey": "life",
+      "level": 5
+    }
+  ],
+  "race": {
+    "key": "dwarf",
+    "subraceKey": "hill-dwarf",
+    "name": "Hill Dwarf"
+  },
+  "background": {
+    "key": "acolyte",
+    "name": "Acolyte"
+  },
+  "abilities": {
+    "str": 14,
+    "dex": 10,
+    "con": 16,
+    "int": 8,
+    "wis": 18,
+    "cha": 12
+  },
+  "saveProficiencies": [
+    "wis",
+    "cha"
+  ],
+  "skills": {
+    "insight": "proficient",
+    "religion": "proficient",
+    "medicine": "proficient",
+    "perception": "half"
+  },
+  "profBonusOverride": null,
+  "ac": {
+    "mode": "computed",
+    "formula": "armor",
+    "armorKey": "chain-mail",
+    "shield": true,
+    "bonus": 0
+  },
+  "speed": 25,
+  "initiativeBonus": 0,
+  "hp": {
+    "max": 43,
+    "damage": 12,
+    "temp": 0
+  },
+  "hitDice": [
+    {
+      "die": 8,
+      "total": 5,
+      "used": 1
+    }
+  ],
+  "deathSaves": {
+    "successes": 0,
+    "failures": 0,
+    "stable": false,
+    "dead": false
+  },
+  "conditions": [],
+  "exhaustion": 0,
+  "concentration": {
+    "spellKey": "bless",
+    "name": "Bless"
+  },
+  "inspiration": false,
+  "counters": [
+    {
+      "id": "channel-divinity",
+      "name": "Channel Divinity",
+      "value": 0,
+      "max": 1,
+      "reset": "short",
+      "source": "class",
+      "featureKey": "channel-divinity-1-rest",
+      "showOnTurn": true
+    }
+  ],
+  "spellcasting": {
+    "ability": "wis",
+    "mode": "prepared",
+    "slotsUsed": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pactUsed": null,
+    "spells": [
+      {
+        "key": "sacred-flame",
+        "name": "Sacred Flame",
+        "prepared": true,
+        "alwaysPrepared": false,
+        "custom": false
+      },
+      {
+        "key": "bless",
+        "name": "Bless",
+        "prepared": true,
+        "alwaysPrepared": true,
+        "custom": false
+      },
+      {
+        "key": "cure-wounds",
+        "name": "Cure Wounds",
+        "prepared": true,
+        "alwaysPrepared": true,
+        "custom": false
+      },
+      {
+        "key": "spiritual-weapon",
+        "name": "Spiritual Weapon",
+        "prepared": true,
+        "alwaysPrepared": false,
+        "custom": false
+      },
+      {
+        "key": "spirit-guardians",
+        "name": "Spirit Guardians",
+        "prepared": true,
+        "alwaysPrepared": false,
+        "custom": false
+      }
+    ]
+  },
+  "attacks": [
+    {
+      "id": "mace",
+      "name": "Mace",
+      "group": "action",
+      "ability": "str",
+      "proficient": true,
+      "bonusOverride": null,
+      "bonus": 0,
+      "damage": "1d6",
+      "damageType": "bludgeoning",
+      "damageBonusMode": "ability",
+      "damageBonus": 0
+    }
+  ],
+  "items": [
+    {
+      "id": "i1",
+      "name": "Chain Mail",
+      "key": "chain-mail",
+      "qty": 1,
+      "equipped": true,
+      "attuned": false,
+      "custom": false
+    },
+    {
+      "id": "i2",
+      "name": "Shield",
+      "key": "shield",
+      "qty": 1,
+      "equipped": true,
+      "attuned": false,
+      "custom": false
+    },
+    {
+      "id": "i3",
+      "name": "Mace",
+      "key": "mace",
+      "qty": 1,
+      "equipped": true,
+      "attuned": false,
+      "custom": false
+    },
+    {
+      "id": "i4",
+      "name": "Holy Symbol",
+      "key": null,
+      "qty": 1,
+      "equipped": false,
+      "attuned": false,
+      "custom": true
+    }
+  ],
+  "currency": {
+    "cp": 0,
+    "sp": 12,
+    "ep": 0,
+    "gp": 47,
+    "pp": 0
+  },
+  "notes": [],
+  "meta": {
+    "source": "manual"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "tyler-light-tools",
+  "owner": {"name": "Tyler Yancey"},
+  "plugins": [
+    {
+      "name": "fifth-edition",
+      "source": "./fifth-edition",
+      "description": "5E (SRD 5.1) rules, dice, and licensing knowledge + rules-lawyer agent"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "id": "fixture-paladin-6-warlock-2",
+  "name": "Ser Maelis of the Pact",
+  "edition": "2014",
+  "classes": [
+    {
+      "classKey": "paladin",
+      "subclassKey": "devotion",
+      "level": 6
+    },
+    {
+      "classKey": "warlock",
+      "subclassKey": "fiend",
+      "level": 2
+    }
+  ],
+  "race": {
+    "key": "half-elf",
+    "subraceKey": null,
+    "name": "Half-Elf"
+  },
+  "background": {
+    "key": null,
+    "name": "Noble"
+  },
+  "abilities": {
+    "str": 16,
+    "dex": 10,
+    "con": 14,
+    "int": 10,
+    "wis": 12,
+    "cha": 18
+  },
+  "saveProficiencies": [
+    "wis",
+    "cha"
+  ],
+  "skills": {
+    "athletics": "proficient",
+    "persuasion": "proficient",
+    "intimidation": "proficient"
+  },
+  "profBonusOverride": null,
+  "ac": {
+    "mode": "manual",
+    "value": 19
+  },
+  "speed": 30,
+  "initiativeBonus": 0,
+  "hp": {
+    "max": 68,
+    "damage": 68,
+    "temp": 0
+  },
+  "hitDice": [
+    {
+      "die": 10,
+      "total": 6,
+      "used": 4
+    },
+    {
+      "die": 8,
+      "total": 2,
+      "used": 2
+    }
+  ],
+  "deathSaves": {
+    "successes": 1,
+    "failures": 1,
+    "stable": false,
+    "dead": false
+  },
+  "conditions": [
+    "prone"
+  ],
+  "exhaustion": 0,
+  "concentration": null,
+  "inspiration": false,
+  "counters": [
+    {
+      "id": "lay-on-hands",
+      "name": "Lay on Hands",
+      "value": 5,
+      "max": 30,
+      "reset": "long",
+      "source": "class",
+      "featureKey": "lay-on-hands",
+      "showOnTurn": true
+    },
+    {
+      "id": "channel-divinity",
+      "name": "Channel Divinity",
+      "value": 0,
+      "max": 1,
+      "reset": "short",
+      "source": "class",
+      "featureKey": "channel-divinity-1-rest",
+      "showOnTurn": true
+    },
+    {
+      "id": "dark-ones-blessing",
+      "name": "Dark One's Blessing",
+      "value": 0,
+      "max": 1,
+      "reset": "none",
+      "source": "subclass",
+      "featureKey": "dark-ones-blessing",
+      "showOnTurn": false
+    }
+  ],
+  "spellcasting": {
+    "ability": "cha",
+    "mode": "prepared",
+    "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pactUsed": 2,
+    "spells": []
+  },
+  "attacks": [
+    {
+      "id": "longsword",
+      "name": "Longsword",
+      "group": "action",
+      "ability": "str",
+      "proficient": true,
+      "bonusOverride": null,
+      "bonus": 1,
+      "damage": "1d8",
+      "damageType": "slashing",
+      "damageBonusMode": "ability",
+      "damageBonus": 1
+    }
+  ],
+  "items": [],
+  "currency": {
+    "cp": 0,
+    "sp": 0,
+    "ep": 0,
+    "gp": 210,
+    "pp": 3
+  },
+  "notes": [],
+  "meta": {
+    "source": "manual"
+  }
+}

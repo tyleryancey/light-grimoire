@@ -1,0 +1,5144 @@
+{
+ "$comment": "slots = [L1..L9] max slots; pact = Pact Magic {count, level} or null. Spellcasting from exactly one class (even when multiclassed with non-casters or a warlock) uses that class's table; Spellcasting from two or more classes uses the SRD Multiclass Spellcaster rule.",
+ "multiclass": [
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 6
+    },
+    {
+     "classKey": "warlock",
+     "level": 2
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 1
+   },
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 3
+    },
+    {
+     "classKey": "fighter",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 3
+    },
+    {
+     "classKey": "wizard",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 1
+    },
+    {
+     "classKey": "warlock",
+     "level": 3
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 2
+   },
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 5
+    },
+    {
+     "classKey": "cleric",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 5
+    },
+    {
+     "classKey": "rogue",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 17
+    },
+    {
+     "classKey": "warlock",
+     "level": 3
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 2
+   },
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 4
+    },
+    {
+     "classKey": "rogue",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 1
+    },
+    {
+     "classKey": "paladin",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "custom-ek",
+     "custom": {
+      "casterType": "third",
+      "hitDie": 10
+     },
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "custom-ek",
+     "custom": {
+      "casterType": "third",
+      "hitDie": 10
+     },
+     "level": 6
+    },
+    {
+     "classKey": "wizard",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "single": [
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "barbarian",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "bard",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "cleric",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "druid",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "fighter",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "monk",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "paladin",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "ranger",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "rogue",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "sorcerer",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 1
+    }
+   ],
+   "pact": {
+    "count": 1,
+    "level": 1
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 2
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 1
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 3
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 2
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 4
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 2
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 5
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 3
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 6
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 3
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 7
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 4
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 8
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 4
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 9
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 10
+    }
+   ],
+   "pact": {
+    "count": 2,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 11
+    }
+   ],
+   "pact": {
+    "count": 3,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 12
+    }
+   ],
+   "pact": {
+    "count": 3,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 13
+    }
+   ],
+   "pact": {
+    "count": 3,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 14
+    }
+   ],
+   "pact": {
+    "count": 3,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 15
+    }
+   ],
+   "pact": {
+    "count": 3,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 16
+    }
+   ],
+   "pact": {
+    "count": 3,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 17
+    }
+   ],
+   "pact": {
+    "count": 4,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 18
+    }
+   ],
+   "pact": {
+    "count": 4,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 19
+    }
+   ],
+   "pact": {
+    "count": 4,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "warlock",
+     "level": 20
+    }
+   ],
+   "pact": {
+    "count": 4,
+    "level": 5
+   },
+   "slots": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 1
+    }
+   ],
+   "pact": null,
+   "slots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 2
+    }
+   ],
+   "pact": null,
+   "slots": [
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 3
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 4
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 5
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 6
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 7
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 8
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 9
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    1,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 10
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 11
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 12
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 13
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 14
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 15
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 16
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 17
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 18
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 19
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    1,
+    1,
+    1
+   ]
+  },
+  {
+   "classes": [
+    {
+     "classKey": "wizard",
+     "level": 20
+    }
+   ],
+   "pact": null,
+   "slots": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    1,
+    1
+   ]
+  }
+ ]
+}

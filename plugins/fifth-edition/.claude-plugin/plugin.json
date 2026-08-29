@@ -1,0 +1,8 @@
+{
+  "name": "fifth-edition",
+  "description": "Portable 5E (2014 rules / SRD 5.1) knowledge for Claude Code: rules math and procedures, dice notation contract, content-licensing guardrails, and a read-only rules-lawyer agent. Reusable across Light Phone tools or any other project that needs open-licensed 5E rules handling.",
+  "version": "0.1.0",
+  "author": {"name": "Tyler Yancey"},
+  "license": "MIT",
+  "keywords": ["5e", "srd", "tabletop", "dice", "cc-by", "light-phone"]
+}
