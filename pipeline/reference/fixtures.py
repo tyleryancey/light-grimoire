@@ -148,6 +148,7 @@ def gen_events(armor: dict[str, dict]) -> dict:
         {"start": "cleric-5-life", "events": [{"type": "spendSlot", "level": 3}, {"type": "spendSlot", "level": 3}, {"type": "spendSlot", "level": 3}], "error": "no level-3 slots left"},
         {"start": "rogue-3-thief", "events": [{"type": "spendPactSlot"}], "error": "no pact magic"},
         {"start": "paladin-6-warlock-2", "events": [{"type": "spendHitDie", "die": 8, "roll": 4}], "error": "no d8 hit dice left"},
+        {"start": "cleric-5-life", "events": [{"type": "spendSlot", "level": 0}], "error": "spell level must be 1..9"},
     ]
     return {"$comment": "Replay events on the named fixtures/characters/*.json and compare the end state. 'errors' must raise (the UI should have disabled the control).", "scenarios": scenarios, "errors": errors}
 
