@@ -15,4 +15,14 @@ object Fixtures {
     }
 
     fun text(relative: String): String = dir.resolve(relative).readText()
+
+    /**
+     * The JSON of a sample character under fixtures/characters/, by any of the three names the generated
+     * fixtures use for it: the file name (`cleric-5-life.json`, derived.json), the stem (`cleric-5-life`,
+     * events.json errors) or the character's id (`fixture-cleric-5-life`, events.json scenarios).
+     */
+    fun character(ref: String): String {
+        val stem = ref.removeSuffix(".json").removePrefix("fixture-")
+        return text("characters/$stem.json")
+    }
 }
