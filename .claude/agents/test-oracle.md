@@ -20,9 +20,9 @@ Fixture-first loop for any rules change:
 
 Kotlin test conventions (`kotlin.test`): one test class per fixture file
 (`RngFixtureTest`, `DiceFixtureTest`, `MathFixtureTest`, `SlotsFixtureTest`,
-`DerivedFixtureTest`, `EventsFixtureTest`); load the JSON from `src/test/resources`
-(copied from `fixtures/` by a Gradle `Copy` task or checked-in symlink-free copy — keep the
-copy step in `tool/build.gradle.kts` so the two never drift); iterate every case and assert
+`DerivedFixtureTest`, `EventsFixtureTest`); load the JSON with `Fixtures.text("<name>.json")`
+(`tool/src/test/kotlin/dev/tyler/grimoire/Fixtures.kt` reads `<repo>/fixtures` in place via the
+`grimoire.fixtures` system property set in `tool/build.gradle.kts`; never import `android`, `androidx`, `kotlinx.coroutines`, `java.io` or `java.nio` in a `rules/` test — the house hook bans them there); iterate every case and assert
 with the case name in the message; **message is the LAST argument**:
 `assertEquals(expected, actual, "dice case ${case.expr}@${case.seed}")`.
 
