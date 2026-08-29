@@ -74,8 +74,14 @@ dependencies {
 // -Dgrimoire.fixtures; declaring the directory as a task input re-runs the replays when the pipeline
 // regenerates a file. No copy (nothing to drift) and no custom source-directory registration (the Light SDK plugin scan bans it).
 // Light's builder never runs unit tests, so the directory's absence there is irrelevant.
+// The compendium's armor table (assets/compendium/equipment.json) is an input of derived.json and
+// events.json, so the bundled compendium is handed to the tests the same way (it ships in the module,
+// hence never optional).
 val fixturesDir = rootProject.layout.projectDirectory.dir("fixtures")
+val compendiumDir = layout.projectDirectory.dir("src/main/assets/compendium")
 tasks.withType<Test>().configureEach {
     inputs.dir(fixturesDir).optional(true)   // absent on Light's builder, which never runs tests
+    inputs.dir(compendiumDir)
     systemProperty("grimoire.fixtures", fixturesDir.asFile.absolutePath)
+    systemProperty("grimoire.compendium", compendiumDir.asFile.absolutePath)
 }
