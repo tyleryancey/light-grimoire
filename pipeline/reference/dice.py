@@ -32,6 +32,7 @@ from dataclasses import dataclass, field
 MASK32 = 0xFFFFFFFF
 VALID_SIDES = (2, 3, 4, 6, 8, 10, 12, 20, 100)
 MAX_DICE = 100
+MAX_CONSTANT = 2**31 - 1  # a constant must fit the signed 32-bit Int the Kotlin engine stores it in
 
 
 class Mulberry32:
@@ -118,7 +119,10 @@ def parse(expression: str) -> list:
         if not m:
             raise DiceError(f"bad term {chunk!r} in {expression!r}")
         if m.group(5) is not None:
-            terms.append(ConstTerm(int(m.group(5)), sgn))
+            value = int(m.group(5))
+            if value > MAX_CONSTANT:
+                raise DiceError(f"constant {value} too large")
+            terms.append(ConstTerm(value, sgn))
             continue
         count = int(m.group(1)) if m.group(1) else 1
         sides = int(m.group(2))

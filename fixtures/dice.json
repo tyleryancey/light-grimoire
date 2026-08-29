@@ -15,6 +15,11 @@
    "expr": "1d20-1",
    "mode": "none",
    "result": "1d20-1"
+  },
+  {
+   "expr": "d20+2",
+   "mode": "none",
+   "result": "d20+2"
   }
  ],
  "cases": [
@@ -896,6 +901,72 @@
    ],
    "seed": 12345,
    "total": 20
+  },
+  {
+   "average": 21.0,
+   "expr": "2d20",
+   "kept": [
+    [
+     13,
+     1
+    ]
+   ],
+   "max": 40,
+   "min": 2,
+   "natural": null,
+   "normalized": "2d20",
+   "rolls": [
+    [
+     13,
+     1
+    ]
+   ],
+   "seed": 1,
+   "total": 14
+  },
+  {
+   "average": 21.0,
+   "expr": "2d20",
+   "kept": [
+    [
+     1,
+     2
+    ]
+   ],
+   "max": 40,
+   "min": 2,
+   "natural": null,
+   "normalized": "2d20",
+   "rolls": [
+    [
+     1,
+     2
+    ]
+   ],
+   "seed": 7,
+   "total": 3
+  },
+  {
+   "average": 21.0,
+   "expr": "2d20",
+   "kept": [
+    [
+     20,
+     7
+    ]
+   ],
+   "max": 40,
+   "min": 2,
+   "natural": null,
+   "normalized": "2d20",
+   "rolls": [
+    [
+     20,
+     7
+    ]
+   ],
+   "seed": 12345,
+   "total": 27
   }
  ],
  "critical": [
@@ -930,7 +1001,8 @@
   "101d6",
   "0d6",
   "1d20kh0",
-  "1 d 20 x"
+  "1 d 20 x",
+  "1d20+99999999999"
  ],
  "pairs": [
   {
