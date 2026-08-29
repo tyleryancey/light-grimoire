@@ -50,3 +50,10 @@ bin/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+### Grimoire ###
+# The Claude Code workspace (agents, skills, hooks, rules) is part of this repo — unlike the sibling tools.
+!.claude/
+.claude/settings.local.json
+CLAUDE.local.md
+pipeline/cache/
+.remember/

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "compendium": {
+      "type": "stdio",
+      "command": "python3",
+      "args": ["pipeline/mcp/compendium_server.py"],
+      "env": {}
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/"
+    }
+  }
+}
