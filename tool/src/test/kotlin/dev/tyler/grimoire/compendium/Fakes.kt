@@ -1,5 +1,7 @@
 package dev.tyler.grimoire.compendium
 
+import dev.tyler.grimoire.Fixtures
+
 /**
  * Test doubles for the seams the compendium layer is built behind (plan D10). Room itself cannot run on the
  * JVM (no Robolectric on the allow-list), so [FakeCompendiumDao] answers the DAO's queries from the rows
@@ -201,5 +203,109 @@ class FakeCompendiumDao(built: List<Rows.Built> = emptyList()) : CompendiumDao {
     override suspend fun textMatchesIn(kinds: List<String>, match: String, limit: Int): List<CompendiumRef> {
         note("textMatchesIn")
         return ftsMatch(search.filter { it.kind in kinds }, match, limit)
+    }
+}
+
+// ---- the importer's seams (plan §AssetImporter) ------------------------------------------------------------
+//
+// The three fakes below share one `events` list so a test can pin the order of things that happen in
+// different objects — "the stamp is written after the transaction commits" is a statement about the marker
+// and the writer together. Event names: `read:<path>`, `marker.read`, `marker.write:<stamp>`, `count`,
+// `searchCount`, `begin`, `clear`, `insert:<kind>:<records>:<search>`, `commit`, `rollback`.
+
+/**
+ * `ctx::readAsset` over the bundled files on disk: every read is recorded, and [overrides] hands back other
+ * bytes for a path so a test can stage a short file or a rewritten index.json.
+ */
+class FakeAssetSource(
+    private val overrides: Map<String, ByteArray> = emptyMap(),
+    private val events: MutableList<String> = ArrayList(),
+) : AssetSource {
+    val reads: MutableList<String> = ArrayList()
+
+    override fun read(path: String): ByteArray {
+        reads += path
+        events += "read:$path"
+        overrides[path]?.let { return it }
+        require(path.startsWith("compendium/")) { "unexpected asset path: $path" }
+        return Fixtures.compendiumBytes(path.removePrefix("compendium/"))
+    }
+}
+
+/** The DataStore stamp as one field; [readThrows] stages a store that cannot be read. */
+class FakeMarker(
+    var stamp: String? = null,
+    var readThrows: Boolean = false,
+    private val events: MutableList<String> = ArrayList(),
+) : ImportMarker {
+    val writes: MutableList<String> = ArrayList()
+
+    override suspend fun read(): String? {
+        events += "marker.read"
+        if (readThrows) throw IllegalStateException("preferences unreadable")
+        return stamp
+    }
+
+    override suspend fun write(stamp: String) {
+        events += "marker.write:$stamp"
+        this.stamp = stamp
+        writes += stamp
+    }
+}
+
+/**
+ * `db.withTransaction` over a [FakeCompendiumDao]: the sink's writes land in the DAO; a throw inside
+ * [replaceAll] restores the rows from before it (rollback) and rethrows. [failOnInsert] makes the n-th
+ * insert of the next transaction throw, once.
+ */
+class FakeWriter(
+    val dao: FakeCompendiumDao = FakeCompendiumDao(),
+    var failOnInsert: Int? = null,
+    private val events: MutableList<String> = ArrayList(),
+) : CompendiumWriter {
+    override suspend fun count(): Int {
+        events += "count"
+        return dao.count()
+    }
+
+    override suspend fun searchCount(): Int {
+        events += "searchCount"
+        return dao.searchCount()
+    }
+
+    override suspend fun replaceAll(block: suspend (ImportSink) -> Unit) {
+        val recordsBefore = dao.records.toList()
+        val searchBefore = dao.search.toList()
+        var inserts = 0
+        val sink = object : ImportSink {
+            override suspend fun clear() {
+                events += "clear"
+                dao.clearRecords()
+                dao.clearSearch()
+            }
+
+            override suspend fun insert(records: List<RecordRow>, search: List<SearchRow>) {
+                inserts++
+                if (failOnInsert == inserts) {
+                    failOnInsert = null
+                    throw IllegalStateException("insert $inserts failed")
+                }
+                events += "insert:${records.firstOrNull()?.kind ?: "-"}:${records.size}:${search.size}"
+                dao.insertRecords(records)
+                dao.insertSearch(search)
+            }
+        }
+        events += "begin"
+        try {
+            block(sink)
+        } catch (e: Throwable) {
+            dao.records.clear()
+            dao.records += recordsBefore
+            dao.search.clear()
+            dao.search += searchBefore
+            events += "rollback"
+            throw e
+        }
+        events += "commit"
     }
 }
