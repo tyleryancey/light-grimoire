@@ -305,13 +305,14 @@ table becomes a bold title line plus `Header: cell` lines. Nothing scrolls horiz
 | classes | "Hit die d12"; "Saves Str, Con"; lighten humanized proficiencies; casters add "Spellcasting: Int (from level 1)". Body = spellcasting sections (a class with none, e.g. Barbarian, is a legal header-only page). The 20-level class table is deferred to M4. |
 | subclasses | lighten flavor line ("Primal Path"); body = text |
 | features | "Barbarian 1" / "Berserker 3" (+ a prerequisites line) |
-| traits, subraces | a parent-context line |
+| traits | none — the parent trait (when there is one) is a PART OF footer link |
+| subraces | "+1 Cha" ability-bonus line; the race is a RACE footer link |
 | races | "Medium · Speed 30 ft."; "+2 Con"; lighten languages |
 | backgrounds | lighten skills line; body = feature text + suggested-characteristics tables |
 | feats | "Prerequisite: Str 13" |
-| equipment | lighten "75 gp · 55 lb."; armor adds its real line, each field as applicable — chain mail "Heavy armor · AC 16 · Str 13 · Stealth disadvantage", scale mail "Medium armor · AC 14 (+ Dex, max 2) · Stealth disadvantage"; weapons add "Martial melee weapon" / "1d8 slashing" / range, versatile, thrown as applicable. Footer (weapons only): PROPERTIES links. |
+| equipment | lighten "75 gp · 55 lb."; armor adds its real line, each field as applicable — chain mail "Heavy armor · AC 16 · Str 13 · Stealth disadvantage", scale mail "Medium armor · AC 14 + Dex (max 2) · Stealth disadvantage"; weapons add "Martial melee weapon" / "1d8 slashing" / range, versatile, thrown as applicable. Footer (weapons only): PROPERTIES links. |
 | magic items | the headline verbatim, lighten ("Armor (medium or heavy, but not hide), uncommon"); a base item's footer lists its VARIANTS |
-| creatures | classic SRD stat-block order: "Small humanoid (goblinoid), neutral evil"; "AC 15 (armor)"; "HP 7 (2d6)"; "Speed 30 ft."; an ability grid as a monospace table (STR..CHA header, one row "8 (−1)"); lighten saves/skills/vulnerabilities/resistances/immunities/senses/languages lines; "CR 1/4 · 50 XP · Prof +2". Body = text + trait/action/reaction/legendary-action run-ins under headings. |
+| creatures | classic SRD stat-block order: "Small humanoid (goblinoid), neutral evil"; "AC 15 (armor)"; "HP 7 (2d6)"; "Speed 30 ft."; an ability grid as a monospace table (STR..CHA header, one row "8 (-1)" — ASCII hyphen); lighten saves/skills/vulnerabilities/resistances/immunities/senses/languages lines; "CR 1/4 · 50 XP · Prof +2". Body = text + trait/action/reaction/legendary-action run-ins under headings. |
 | skills | "Ability: Dexterity" |
 | languages | "Exotic · Script: Infernal" + speakers |
 | alignments | lighten "CE" |
@@ -334,9 +335,12 @@ then "See: <Condition>" rows:
 | rule section | its CHAPTER |
 
 Condition links come from a whole-word case-insensitive scan of the rendered prose for the
-15 condition names (a creature also unions its `conditionImmunities`), first-occurrence
-order, deduped, self-excluded, capped at 12. Spell names in prose are not links in M2. Every
-link row pushes a new S10 reader.
+15 condition names, on exactly these kinds: spells (text + higher-level), conditions
+(self-excluded), rule sections, subclasses, features, traits, feats, equipment, magic items,
+and creatures (which also union their `conditionImmunities`). The other kinds are not
+scanned — the bundle's only condition-word hit among them is lightfoot-halfling's idiomatic
+"prone to wanderlust", which must not become a link. First-occurrence order, deduped, capped
+at 12. Spell names in prose are not links in M2. Every link row pushes a new S10 reader.
 
 Reader-to-reader cross-links are the one static-depth exception (D5): each link push adds one
 screen and BACK pops one, so the chain is bounded by how many links the user actually taps,
