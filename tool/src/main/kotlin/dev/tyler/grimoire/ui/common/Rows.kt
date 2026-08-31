@@ -1,0 +1,83 @@
+package dev.tyler.grimoire.ui.common
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
+import com.thelightphone.sdk.ui.LightIcon
+import com.thelightphone.sdk.ui.LightIcons
+import com.thelightphone.sdk.ui.LightText
+import com.thelightphone.sdk.ui.LightTextVariant
+import com.thelightphone.sdk.ui.gridUnitsAsDp
+import com.thelightphone.sdk.ui.lightClickable
+
+/** UI-SPEC list-row height: 2.5 grid units, shared by every row so `LightLazyScrollView`'s uniform-row contract holds. */
+const val ROW_HEIGHT_GRID_UNITS = 2.5f
+
+/**
+ * The UI-SPEC `▸` navigating row (kind list, record list, search results): name in `Copy`
+ * weighted to fill, an optional right-aligned lightened `Detail` (e.g. a count or a spell's
+ * level), and the trailing `ARROW_RIGHT` nav glyph. Fixed [ROW_HEIGHT_GRID_UNITS] tall.
+ */
+@Composable
+fun NavRow(
+    name: String,
+    detail: String? = null,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(ROW_HEIGHT_GRID_UNITS.gridUnitsAsDp())
+            .lightClickable { onClick() }
+            .padding(horizontal = 1f.gridUnitsAsDp()),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        LightText(
+            text = name,
+            variant = LightTextVariant.Copy,
+            modifier = Modifier.weight(1f),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+        if (detail != null) {
+            LightText(
+                text = detail,
+                variant = LightTextVariant.Detail,
+                lighten = true,
+                maxLines = 1,
+            )
+        }
+        LightIcon(LightIcons.ARROW_RIGHT)
+    }
+}
+
+/**
+ * The UI-SPEC section header (e.g. the spells list's level bands): a lightened `Detail`
+ * label — uppercased here, so every call site gets the spec's header treatment —
+ * bottom-aligned in a non-clickable row of the same fixed [ROW_HEIGHT_GRID_UNITS] height,
+ * keeping header rows inside the uniform-row contract of `LightLazyScrollView`. No
+ * dividers, per the section-header recipe.
+ */
+@Composable
+fun SectionHeaderRow(label: String, modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(ROW_HEIGHT_GRID_UNITS.gridUnitsAsDp())
+            .padding(horizontal = 1f.gridUnitsAsDp()),
+        verticalAlignment = Alignment.Bottom,
+    ) {
+        LightText(
+            text = label.uppercase(),
+            variant = LightTextVariant.Detail,
+            lighten = true,
+            maxLines = 1,
+        )
+    }
+}
