@@ -94,6 +94,12 @@ class FakeCompendiumDao(built: List<Rows.Built> = emptyList()) : CompendiumDao {
         return kind("subclasses").filter { it.classKey == classKey }.sortedBy { it.sortName }.map(::ref)
     }
 
+    override suspend fun chapterOfSection(sectionKey: String): CompendiumRef? {
+        note("chapterOfSection")
+        val owner = kind("rule_sections").firstOrNull { it.key == sectionKey }?.parentKey ?: return null
+        return kind("rules").firstOrNull { it.key == owner }?.let(::ref)
+    }
+
     override suspend fun spellsByLevel(level: Int): List<CompendiumRef> {
         note("spellsByLevel")
         return kind("spells").filter { it.level == level }.sortedBy { it.sortName }.map(::ref)

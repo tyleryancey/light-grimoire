@@ -327,6 +327,24 @@ class ReaderContentTest {
     }
 
     @Test
+    fun everyRuleSectionDropsTheLeadingHeadingThatRepeatsItsName() {
+        // 33 of the 40 sections open "## <Name>" (none open "#"), so the drop must not be level-1-only:
+        // otherwise every one of those pages draws its own title again under a top bar that says it.
+        // A regenerated bundle that changes this is SUPPOSED to fail here — re-measure, never loosen.
+        var withLeadingHeading = 0
+        for (record in Kind.RULE_SECTIONS.decodeAll(Fixtures.compendium(Kind.RULE_SECTIONS.file))) {
+            val source = Markdown.parse((record as TextRecord).text).firstOrNull()
+            if (source is Block.Heading && plain(source.spans) == record.name) withLeadingHeading++
+            val head = ReaderContent.of(Kind.RULE_SECTIONS, record).blocks.firstOrNull()
+            assertTrue(
+                head !is Block.Heading || plain(head.spans) != record.name,
+                "${record.key} must not open with a heading repeating its own name",
+            )
+        }
+        assertEquals(33, withLeadingHeading, "sections whose text opens with a heading equal to their name")
+    }
+
+    @Test
     fun multiclassingKeepsItsMidTextH1s() {
         val doc = doc(Kind.RULE_SECTIONS, "multiclassing")
         assertEquals(listOf("Proficiency Bonus", "Proficiencies"), headings(doc, 1), "mid-text h1s survive")

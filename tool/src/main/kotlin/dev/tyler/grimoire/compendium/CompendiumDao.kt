@@ -70,6 +70,18 @@ interface CompendiumDao {
     )
     suspend fun subclassesOf(classKey: String): List<CompendiumRef>
 
+    /**
+     * The rules chapter that owns a rule section — the S10 reader's CHAPTER link. The owner is the derived
+     * `parentKey` column [Rows.of] fills from rules.json, which no other query exposes, so the subquery reads
+     * it back. Null when the section is unknown or its `parentKey` is null: `key = (NULL)` matches no row.
+     */
+    @Query(
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
+            "WHERE kind = 'rules' AND `key` = (SELECT parentKey FROM records " +
+            "WHERE kind = 'rule_sections' AND `key` = :sectionKey)",
+    )
+    suspend fun chapterOfSection(sectionKey: String): CompendiumRef?
+
     /** The S13 spell wheel: one level at a time. */
     @Query(
         "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +

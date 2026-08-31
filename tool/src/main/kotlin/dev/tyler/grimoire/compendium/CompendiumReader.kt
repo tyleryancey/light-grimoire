@@ -100,6 +100,9 @@ class CompendiumReader(private val dao: CompendiumDao) {
     suspend fun listInOrder(kind: Kind, limit: Int): List<CompendiumRef> = dao.listInOrder(kind.id, limit)
     suspend fun children(kind: Kind, parentKey: String): List<CompendiumRef> = dao.children(kind.id, parentKey)
     suspend fun subclassesOf(classKey: String): List<CompendiumRef> = dao.subclassesOf(classKey)
+
+    /** The rules chapter owning a rule section (the S10 CHAPTER link); null when the section has no owner. */
+    suspend fun chapterOfSection(sectionKey: String): CompendiumRef? = dao.chapterOfSection(sectionKey)
     suspend fun spellsByLevel(level: Int): List<CompendiumRef> = dao.spellsByLevel(level)
     suspend fun spellsForClass(classKey: String, maxLevel: Int): List<CompendiumRef> = dao.spellsForClass(classKey, maxLevel)
     suspend fun classFeatures(classKey: String, maxLevel: Int): List<CompendiumRef> = dao.classFeatures(classKey, maxLevel)

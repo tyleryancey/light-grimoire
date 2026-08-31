@@ -1,9 +1,10 @@
 # Grimoire — UI specification (screen by screen)
 
 Canvas: LP3 3.92" 1080×1240, `LightGrid` 27 × 31 units (1 unit ≈ 40 px ≈ 15.2 dp). Top bar
-3 units, bottom bar 4 units → 24 content units ≈ 9–10 rows of `Copy` text or ~16 rows of
-`Detail`. Type scale is multiplied by `screenHeightDp/600` (≈ 0.79 on the LP3), so `Copy`
-renders ≈ 24 sp, `Paragraph` ≈ 19 sp, `Detail` ≈ 16 sp, `Subtitle` ≈ 41 sp, `Title` ≈ 90 sp.
+3 units, bottom bar 4 units plus its own 1-unit top margin (`LightBottomBar.kt:18-20`) →
+23 content units ≈ 9 rows of `Copy` text or ~15 rows of `Detail`. Type scale is multiplied by
+`screenHeightDp/600` (≈ 0.79 on the LP3), so `Copy` renders ≈ 24 sp, `Paragraph` ≈ 19 sp,
+`Detail` ≈ 16 sp, `Subtitle` ≈ 41 sp, `Title` ≈ 90 sp.
 
 Wireframes below are 27 characters wide = one grid unit per character. `▔` top bar, `▁`
 bottom bar, `●`/`○` filled/hollow pip, `▸` row that navigates, `◂` its mirror (S13.2's level
@@ -287,9 +288,10 @@ from a character's spell list. The header lines and the link footer are specifie
 per-kind header table and the cross-link footer, D10).
 
 **Body render — Markdown-lite → `sdk:ui` (D7/D8).** `h1`/`h2` → `Heading`, `h3` →
-`Subheading`, `h4`/`h5` → bold `Paragraph`; a leading `h1` equal to the record's own name is
-dropped (the nine rules chapters open this way). `- `/`* ` bullets become hanging rows; `N.  `
-numbered items keep their number. Inline `**bold**` → weight, `*italic*` → slant. Pipe tables
+`Subheading`, `h4`/`h5` → bold `Paragraph`; a leading heading at any level whose text equals
+the record's own name is dropped — the top bar already says it (the nine rules chapters open
+`# <Name>`, 33 of the 40 rule sections open `## <Name>`). `- `/`* ` bullets become hanging
+rows; `N.  ` numbered items keep their number. Inline `**bold**` → weight, `*italic*` → slant. Pipe tables
 — both bundle dialects, rows contiguous or blank-line-separated — render as monospace
 column-aligned rows: `Detail` when the packed width fits ≈ 38 chars, `Superfine` up to ≈ 48;
 wider tables stack instead — a 2-column table becomes a bold run-in paragraph, a 3+-column
@@ -316,10 +318,11 @@ table becomes a bold title line plus `Header: cell` lines. Nothing scrolls horiz
 | skills | "Ability: Dexterity" |
 | languages | "Exotic · Script: Infernal" + speakers |
 | alignments | lighten "CE" |
-| proficiencies | a type line; header-only |
+| proficiencies | a type line, plus lighten classes/races lines when the record names any; no body |
 
-**Cross-link footer (D10).** Underlined `LightText` rows at the end, structural links first,
-then "See: <Condition>" rows:
+**Cross-link footer (D10).** Underlined `LightText` rows at the end, grouped under a
+`SectionHeaderRow` label each — the structural sections first, then a `SEE` section whose rows
+are the condition names:
 
 | Source kind | Footer links |
 |---|---|

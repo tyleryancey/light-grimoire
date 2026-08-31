@@ -292,12 +292,19 @@ object ReaderContent {
 
     // ---- body pipeline ---------------------------------------------------------------------------------------
 
-    /** Parse [text], drop a leading level-1 heading equal to [name], lower every table. */
+    /**
+     * Parse [text], drop a leading heading that just repeats [name], lower every table.
+     *
+     * Any level, not only `#`: the nine rules chapters open `# <Name>` but 33 of the 40 rule sections open
+     * `## <Name>`, and the top bar already carries the name either way. Every leading heading in those two
+     * files matches its record's name exactly, so this drops the duplicates and nothing else; mid-text
+     * headings (multiclassing's "Proficiency Bonus", reading-a-stat-block's) are untouched.
+     */
     private fun body(name: String, text: String): List<Block> {
         if (text.isBlank()) return emptyList()
         val parsed = Markdown.parse(text)
         val first = parsed.firstOrNull()
-        val trimmed = if (first is Block.Heading && first.level == 1 && plain(first.spans) == name) parsed.drop(1) else parsed
+        val trimmed = if (first is Block.Heading && plain(first.spans) == name) parsed.drop(1) else parsed
         return lowerTables(trimmed)
     }
 
