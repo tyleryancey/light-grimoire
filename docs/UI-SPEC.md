@@ -505,9 +505,9 @@ Rage           Barbarian 1▸
 S13 order (SPELLS, CONDITIONS, RULES, CLASSES & FEATURES, RACES, BACKGROUNDS & FEATS,
 EQUIPMENT, MAGIC ITEMS, CREATURES); a LOOKUP kind sorts after those nine, in `Kind` declaration
 order (it has no hub row of its own). A row may carry a right-aligned lighten Detail
-disambiguator (D6) — a feature row reads "Barbarian 1" (its class and level; `classKey` joins
-the `CompendiumRef` projection in the next implementation step — this adds no `RecordRow`
-column, so it needs no `SCHEMA_VERSION` bump). Empty result is one lighten `Copy` line, "No
+disambiguator (D6) — a feature row reads "Barbarian 1" (its class and level; `classKey` is on
+the `CompendiumRef` projection — a projection column, not a `RecordRow` column, so it needs
+no `SCHEMA_VERSION` bump). Empty result is one lighten `Copy` line, "No
 matches." `FIND` re-opens the editor seeded with the current query; the editor pops back to
 this same screen instance, which re-queries in place — it never pushes a second results
 screen. From the hub the sequence is editor-pops-then-results-pushes (S0 → S13 → S13.3 pops to

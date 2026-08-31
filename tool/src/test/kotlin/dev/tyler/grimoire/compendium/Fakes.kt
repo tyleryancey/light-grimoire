@@ -27,6 +27,7 @@ class FakeCompendiumDao(built: List<Rows.Built> = emptyList()) : CompendiumDao {
         subcategory = r.subcategory,
         rarity = r.rarity,
         cr = r.cr,
+        classKey = r.classKey,
     )
 
     private fun note(name: String) {

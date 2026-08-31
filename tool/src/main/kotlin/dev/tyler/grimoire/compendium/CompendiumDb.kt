@@ -61,7 +61,11 @@ data class RecordRow(
 @Entity(tableName = "search_index")
 data class SearchRow(val kind: String, val key: String, val name: String, val body: String)
 
-/** The list projection every kind-scoped query returns — never `json` (27 KB rule sections would hit the cursor window). */
+/**
+ * The list projection every kind-scoped query returns — never `json` (27 KB rule sections would hit the
+ * cursor window). A projection, not an entity: adding a column here (and to the spelled-out SELECT lists
+ * in [CompendiumDao]) needs no `SCHEMA_VERSION` bump — the bump rule above is for [RecordRow]/[SearchRow].
+ */
 data class CompendiumRef(
     val kind: String,
     val key: String,
@@ -72,6 +76,7 @@ data class CompendiumRef(
     val subcategory: String?,
     val rarity: String?,
     val cr: Double?,
+    val classKey: String?,
 )
 
 data class KindCount(val kind: String, val n: Int)

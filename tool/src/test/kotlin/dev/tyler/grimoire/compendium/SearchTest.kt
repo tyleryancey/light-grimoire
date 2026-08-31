@@ -22,14 +22,14 @@ class SearchTest {
         val bundle: List<CompendiumRef> by lazy {
             Kind.entries.flatMap { kind ->
                 kind.decodeAll(Fixtures.compendium(kind.file)).map { record ->
-                    CompendiumRef(kind = kind.id, key = record.key, name = record.name, level = null, school = null, category = null, subcategory = null, rarity = null, cr = null)
+                    CompendiumRef(kind = kind.id, key = record.key, name = record.name, level = null, school = null, category = null, subcategory = null, rarity = null, cr = null, classKey = null)
                 }
             }
         }
     }
 
     private fun ref(kind: Kind, key: String, name: String, level: Int? = null): CompendiumRef =
-        CompendiumRef(kind = kind.id, key = key, name = name, level = level, school = null, category = null, subcategory = null, rarity = null, cr = null)
+        CompendiumRef(kind = kind.id, key = key, name = name, level = level, school = null, category = null, subcategory = null, rarity = null, cr = null, classKey = null)
 
     /**
      * The DAO's `nameMatches` (plan §DAO) modelled on the JVM over the real bundle: `name LIKE :p || '%' OR
@@ -144,7 +144,7 @@ class SearchTest {
     @Test
     fun mergeKeepsUnknownKindsLastWithoutDropping() {
         val known = ref(Kind.SPELLS, "fireball", "Fireball", 3)
-        val unknown = CompendiumRef(kind = "monsters", key = "x", name = "X", level = null, school = null, category = null, subcategory = null, rarity = null, cr = null)
+        val unknown = CompendiumRef(kind = "monsters", key = "x", name = "X", level = null, school = null, category = null, subcategory = null, rarity = null, cr = null, classKey = null)
         assertEquals(listOf(known, unknown), Search.merge(listOf(unknown, known), emptyList()), "unknown kind sorts last")
     }
 

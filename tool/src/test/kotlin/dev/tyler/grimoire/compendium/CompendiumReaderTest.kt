@@ -185,4 +185,14 @@ class CompendiumReaderTest {
         assertTrue(reader.children(Kind.SUBRACES, "elf").any { it.key == "high-elf" }, "high elf is a child of elf")
         assertEquals(listOf("listInOrder", "countsByKind", "bySubcategory", "bySubcategory", "bySubcategory", "spellsByLevel", "subclassesOf", "children"), dao.calls, "each pass-through is one DAO call")
     }
+
+    @Test
+    fun refsCarryClassKeyForFeatureDisambiguation() = runBlocking {
+        val reader = CompendiumReader(dao())
+        val rage = reader.classFeatures("barbarian", 1).single { it.key == "rage" }
+        assertEquals("barbarian", rage.classKey, "a feature ref carries its class for the list subtitle")
+        assertEquals(1, rage.level, "rage level")
+        val fireball = reader.spellsByLevel(3).single { it.key == "fireball" }
+        assertNull(fireball.classKey, "a spell ref has no classKey")
+    }
 }
