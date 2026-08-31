@@ -1,5 +1,7 @@
 package dev.tyler.grimoire
 
+import dev.tyler.grimoire.compendium.CompendiumIndex
+import dev.tyler.grimoire.compendium.CompendiumJson
 import dev.tyler.grimoire.rules.ArmorStats
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNull
@@ -30,6 +32,13 @@ object Fixtures {
 
     /** A bundled compendium file (tool/src/main/assets/compendium) as text. */
     fun compendium(name: String): String = compendiumDir.resolve(name).readText()
+
+    /** The same file as the exact bytes Light's builder bundles — what `readAsset` hands the importer. */
+    fun compendiumBytes(name: String): ByteArray = compendiumDir.resolve(name).readBytes()
+
+    /** index.json decoded strictly, the way AssetImporter reads it on device. */
+    fun compendiumIndex(): CompendiumIndex =
+        CompendiumJson.decodeFromString(CompendiumIndex.serializer(), compendium("index.json"))
 
     /**
      * The armor rows of equipment.json as the engine's [ArmorStats], keyed by equipment key — what the

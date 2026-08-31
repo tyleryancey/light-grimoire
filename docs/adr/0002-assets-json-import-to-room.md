@@ -31,3 +31,17 @@ first launch 3 254 / 3 183 / 3 125 ms for 1 992 rows plus an FTS4 table — deco
 insert + FTS ≈ 0.7 s. Under the 4 s bar: the JSON→Room decision stands; the prebuilt-SQLite
 fallback stays unscheduled. Decode dominates, so typed `@Serializable` models (not `JsonElement`)
 are the first lever if the spinner ever feels long.
+
+**Addendum, 29 Aug 2026 (`feat/m2-compendium-db`; schema and versioning in ADR-0009).** The
+importer as built uses one generic `records` table plus a standalone `search_index` FTS4 table
+(not one table per kind), strict typed models decoding the raw JSON slices, a DataStore stamp
+(`compendium.stamp` = `"$SCHEMA_VERSION.$FORMAT:$bundleSha256"`) **and** row counts in both
+tables as the Ready gate, and a determinate `LightProgressBar` — `sdk:ui` has no spinner.
+Measured on the LP3 (TLP301, LightOS 572-release-lp3, phone awake, `pm clear` between runs):
+three true first-launch imports **2 543 / 2 281 / 2 268 ms** total — decode 1 482 / 1 471 /
+1 468 ms, insert 571 / 562 / 558 ms — for 1 992 records plus the FTS4 table (the store's own
+logcat line; method and provenance in `docs/sdk-facts-delta.md`); a relaunch takes the
+stamp-and-count path (`compendium ready rows=1992`, no import line). On device
+`compendium-v1.db` is 6 279 168 bytes plus a WAL of the same size until checkpoint. A first
+launch while the phone was dozing (screen off) logged 11 460 ms on a throttled CPU and still
+ended Ready. The `.bin` fallback stays unscheduled.

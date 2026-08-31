@@ -10,7 +10,8 @@ tool/src/main/kotlin/dev/tyler/grimoire/
 │   ├── Derive.kt       derive(character, armorTable) → Derived
 │   ├── Ledger.kt       damage/heal/temp/deathSave/spendHitDie/shortRest/longRest/dawn/slots/counter
 │   └── Model.kt        Character + nested data classes (kotlinx-serialization), schemaVersion, migrate()
-├── compendium/     Room entities + DAOs for the bundled data; AssetImporter; Search (FTS4)
+├── compendium/     one `records` table + `search_index` FTS4 (CompendiumDb, one DAO); strict record models;
+│                   AssetImporter behind seams; CompendiumStore (singleton, state); CompendiumReader; Search
 ├── data/           CharacterRepository, JournalRepository, Prefs (DataStore), Codecs, Ids
 ├── journal/        Journal model + export renderers (Markdown/JSON text pages)
 ├── ui/
@@ -81,18 +82,24 @@ python3 -m pipeline validate && python3 -m pytest pipeline/tests -q   # data + o
 |---|---|
 | `rules/` | replay `fixtures/rng.json`, `dice.json`, `math.json`, `slots.json`, `derived.json`, `events.json` (one test class per file; message-last `kotlin.test` asserts) + property tests for the ledger (HP never negative, temp never stacks) |
 | codecs | round-trip every `fixtures/characters/*.json`; migration chain from v1 |
-| compendium import | decode every asset; counts equal `index.json`; FTS returns `fireball` for "fire" |
+| compendium | JVM, through the seams (`AssetSource` / `ImportMarker` / `CompendiumWriter`+`ImportSink`, `CompendiumDao` fakes): every asset decodes strictly; per-file bytes, sha256 and counts equal `index.json`; raw slices round-trip; `AssetImporter` runs the whole bundle (stamp + counts gate, rollback, retry); `Search.rankNames`/`merge` put Fireball first for "fire"; `RulesBridge.armorTable == Fixtures.armorTable()`. Room SQL, FTS `MATCH`, `withTransaction` and DataStore run only on the device (the allow-list has no Robolectric) — checked with `adb logcat -s Grimoire` |
 | view models | state transitions with a fake repository and a virtual clock (`now: () -> Long`) |
 | UI | driven on the emulator with `run-light-tool`; checklist in `docs/ROADMAP.md`; wheel on hardware only |
 | release | `:tool:assembleRelease` locally before every tag (R8 + scan) |
 
 ## Threading & lifecycle
 
-`Dispatchers.Default` for rules and codecs, `Dispatchers.IO` for Room; the compendium
-importer runs once behind a spinner in `HomeViewModel.onScreenShow`. Long rests, deletes and
-imports are confirm-screens. There is no background work (`@LightJob`) in v1.
+`Dispatchers.Default` for rules and codecs, `Dispatchers.IO` for Room. The compendium
+importer runs on `CompendiumStore`'s own scope (a process singleton over
+`SupervisorJob() + Dispatchers.IO`) under `withContext(NonCancellable)`, never on a
+`viewModelScope`; `HomeViewModel.onScreenShow` calls `CompendiumStore.ensureImported(ctx)` on
+every show, and the store's state (`Idle → Checking → Importing(done, total) → Ready`, or
+`Failed(reason)` until the next show) is the guard, so screen pops and `onResume` re-entry cost
+nothing once Ready. Home renders `Preparing the rules…` + `LightProgressBar` until then. Long
+rests, deletes and imports are confirm-screens. There is no background work (`@LightJob`) in v1.
 
 ## Decision records
 
 `docs/adr/` — 0001 edition, 0002 assets→Room, 0003 counters, 0004 zero permissions,
-0005 name, 0006 deterministic dice, 0007 paper-first transcription, 0008 journal shape.
+0005 name, 0006 deterministic dice, 0007 paper-first transcription, 0008 journal shape,
+0009 one `records` table + FTS4, file-name versioning instead of migrations.

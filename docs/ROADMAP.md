@@ -22,7 +22,7 @@ before any UI; commit per task; `CLAUDE.md` mirrors this list and is the handoff
 
 ## M2 — Compendium on device (2 days)
 
-- [ ] Room entities/DAOs per kind + `search_index` FTS4; `AssetImporter` keyed by `index.json` bundle hash.
+- [x] Room entities/DAOs ~~per kind~~ + `search_index` FTS4; `AssetImporter` keyed by `index.json` bundle hash. → Done 29 Aug 2026 (`feat/m2-compendium-db`): one `records` table + FTS4 (ADR-0009), 2.3–2.5 s first launch on the LP3, 169 JVM tests
 - [ ] Compendium screens: kind list → filtered lists (spells by level via wheel) → reader (S10) with cross-links; search via editor screen (S13).
 - [ ] About screen renders `assets/legal/ATTRIBUTION.md`.
 - [ ] Emulator QA: every kind opens; "fire" finds Fireball; a 1,500-word rule section scrolls with the wheel (or touch if wheel is unavailable).
