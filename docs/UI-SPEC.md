@@ -17,7 +17,7 @@ Component mapping (all `sdk:ui`, verified 29 Aug 2026 — see `.claude/skills/lp
 | Row list | `LightScrollView` (mixed heights) or `LightLazyScrollView` (uniform rows) + `LightText` + `lightClickable` |
 | Toggle / pip | `LightIcon(TOGGLE_STATE_ON/OFF)` or `CIRCLE`/`STAR_OUTLINE` glyph in a clickable row; never a Material switch |
 | Number pad | `LightText(Subtitle)` value + two glyph buttons (`UP`/`DOWN` or `ADD`/`DOWN`) + wheel via `LightKeyHandler` |
-| Text entry | `LightTextField` (display) → `navigateTo(EditorScreen)` → `LightTextInputEditor(singleLine=true, initialCaps=true)` |
+| Text entry | `LightTextField` (display) → `navigateTo(EditorScreen)` → `LightTextInputEditor(singleLine=true, initialCaps=true)` — `initialCaps=false` for a search query, which is not a name |
 | Confirm | a `SimpleLightScreen<Boolean>` with CONFIRM/CANCEL in the bottom bar |
 | Transient result | `LightModalManager.show(RollModal, 2 s)` for dice results; the originating row keeps the last result inline |
 | Long text | `LightText(Paragraph)` inside `LightScrollView`; wheel scrolls |
@@ -488,14 +488,21 @@ count on the S13 hub. Static depth S0 → S13 → S13.2 → S10 = 4.
 
 ```
 ┌─────────────────────────┐
-│                         │
-│  Search…                │
-│                         │
+│  FIND                   │
+│  ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁  │
+│  [ keyboard ]           │
 └─────────────────────────┘
 ```
-The SDK's own full-screen `LightTextInputEditor(singleLine = true)` — the box stands in for
-the SDK's own chrome; the tool draws no top or bottom bar here. Return submits the query;
-BACK (or hardware back) cancels with no result.
+The SDK's own full-screen `LightTextInputEditor(singleLine = true, initialCaps = false)` — the
+box stands in for the SDK's own chrome; the tool draws no top or bottom bar here. `FIND` is the
+editor's `title`, the only string it takes: there is no placeholder or hint parameter
+(`LightTextInputEditor.kt:47-61`), so the empty line carries no prompt text. Return submits the
+query (that is what `singleLine` buys — otherwise Return inserts a newline); BACK, hardware back
+and an empty submit all cancel with no result delivered, so a caller treats "the result callback
+never fired" as cancel. A query under two characters is refused at the caller, because the name
+query has a two-character floor while the FTS query has none — one letter would return fifty rows
+of whatever sorts first. The editor consumes the wheel like every other compendium screen; it is
+the one screen with no view model, so the overrides sit on the screen itself.
 Reached from the hub's `FIND` or from S13.4's `FIND` (re-seeded with the current query).
 
 ## S13.4 Search results

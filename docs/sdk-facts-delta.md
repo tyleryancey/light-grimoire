@@ -94,6 +94,37 @@ validated declared + resolved; `ALLOWED_PERMISSIONS` (11) unchanged; KSP only
   without a `Migration` — which this design never takes. The JVM gate pins the column set beside
   the version (`StaleDbFilesTest.aColumnChangeInEitherRowRequiresASchemaVersionBump`).
 
+## Verified 31 Aug 2026 — compendium screens (M2 step 6, `feat/m2-compendium-screens`)
+
+Read out of `light-sdk` @ `3df3c24`; all three are load-bearing for the S13 hub → FIND editor →
+S13.4 results round trip, and none is inferable from the July snapshot.
+
+- **A cancel delivers no result at all — the `navigateTo` callback simply never fires.**
+  `BackStackEntry.deliverResult` opens `val result = screen.result ?: return`
+  (`sdk/client/.../LightActivity.kt:52-55`), and the Activity's back dispatcher calls
+  `goBack()` directly (`:139-146`) rather than the screen's own `goBack(result)`, so `result` is
+  still null. The hardware back button, a drawn BACK button and an explicit `goBack(null)` are
+  therefore indistinguishable to the caller: **"the callback never ran" is the only cancel signal**,
+  and a screen that must express cancel needs a nullable result type (`SimpleLightScreen<String?>`)
+  so the null branch is expressible at both ends.
+- **`goBack()` shows the previous screen *before* it delivers the popped screen's result.**
+  The order inside `LightActivity.goBack` is `previous.screen.notifyWillShow()` (`:85`, →
+  `onScreenShow`), then `currentScreen.value = previous` (`:86`), then `current.deliverResult()`
+  (`:87`). So a screen that pushes an editor and re-queries itself from the result always gets a
+  second `onScreenShow` *first*: its load must be guarded (`loaded`), or the re-show would re-run
+  the query the result is about to replace. S13.4 depends on this
+  (`SearchResultsViewModel.load()`; pinned by `theReShowThatPrecedesAReFindCannotUndoIt`).
+- **A `SimpleLightScreen` gets no key handling for free, and silently forwards the wheel.**
+  `SimpleLightScreen` *implements* `LightKeyHandler` (`LightScreen.kt:11-12`) whose three methods
+  default to `false` (`sdk/ui/.../LightKeyHandler.kt:6-14`); only `LightScreen` overrides them, to
+  delegate to its view model (`LightScreen.kt:95-103`). A screen with no view model that overrides
+  nothing therefore returns false for every key, and `LightActivity` hands anything in
+  `LightDeviceKeys.mapping` to `forwardKeyEventToServer(…, componentToRelaunch = …)`
+  (`:157-166`, `:176-183`, `:189-197`, `:199-216`) — LightOS foregrounds itself and relaunches the
+  tool. Any full-screen editor must consume 317/318/319 itself (`TextEditorScreen`). Consuming at
+  this level cannot starve the composed keyboard: `LightActivity` overrides `onKeyDown`, not
+  `dispatchKeyEvent`, so the view hierarchy has already had first refusal.
+
 ## Still unknown (ask Light or test)
 
 1. Wheel turn events on retail LightOS (M0).

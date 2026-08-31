@@ -39,7 +39,8 @@ class CompendiumListViewModel(
         require(group != KindGroup.SPELLS) { SPELLS_ELSEWHERE }
     }
 
-    private val _state = MutableStateFlow(CompendiumListUiState(title = titleOf(group)))
+    // "The top bar centre is that row's own label" (S13.1) — the same string the hub row was tapped on.
+    private val _state = MutableStateFlow(CompendiumListUiState(title = GroupLabel.of(group)))
     val state: StateFlow<CompendiumListUiState> = _state.asStateFlow()
 
     private val _ticks = MutableSharedFlow<Int>(extraBufferCapacity = 16)
@@ -182,19 +183,5 @@ class CompendiumListViewModel(
 
         /** The largest lookup kind is proficiencies, 117 rows. */
         const val LOOKUP_LIMIT = 120
-
-        /** The hub row's own label, already in the top bar's upper case (S13). */
-        fun titleOf(group: KindGroup): String = when (group) {
-            KindGroup.SPELLS -> "SPELLS"
-            KindGroup.CONDITIONS -> "CONDITIONS"
-            KindGroup.RULES -> "RULES"
-            KindGroup.CLASSES_AND_FEATURES -> "CLASSES & FEATURES"
-            KindGroup.RACES -> "RACES"
-            KindGroup.BACKGROUNDS_AND_FEATS -> "BACKGROUNDS & FEATS"
-            KindGroup.EQUIPMENT -> "EQUIPMENT"
-            KindGroup.MAGIC_ITEMS -> "MAGIC ITEMS"
-            KindGroup.CREATURES -> "CREATURES"
-            KindGroup.LOOKUP -> "LOOKUP"
-        }
     }
 }
