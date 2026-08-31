@@ -42,8 +42,9 @@ import dev.tyler.grimoire.ui.common.WheelScrollEffect
 private const val FIND = "FIND"
 
 /**
- * S13.4: one query's results across every kind (docs/UI-SPEC.md S13.4). Bounded at `Search.LIMIT`, grouped
- * under the same non-tappable headers S13.1 uses, and re-queried in place from `FIND`.
+ * S13.4: one query's results across every kind (docs/UI-SPEC.md S13.4) — the name matches under the same
+ * non-tappable kind headers S13.1 uses, then the body matches under one `ALSO MENTIONED`. Bounded at
+ * `Search.LIMIT` hits (the headers are extra rows), and re-queried in place from `FIND`.
  *
  * Every row — a section header included — is exactly [ROW_HEIGHT_GRID_UNITS] tall, because
  * `LightLazyScrollView` computes its scrollbar and its drag position from that one number and nothing enforces

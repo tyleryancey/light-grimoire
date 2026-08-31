@@ -73,24 +73,27 @@ class CompendiumReader(private val dao: CompendiumDao) {
 
     /**
      * The S13 search (plan D9): a name-prefix query (skipped under two characters) and an FTS query
-     * (skipped when no token survives), ranked and merged by [Search]; [kinds] empty means every kind.
-     * Never more than [Search.LIMIT] results.
+     * (skipped when no token survives), ranked and split into [Search.Results]' two tiers by [Search];
+     * [kinds] empty means every kind. Never more than [Search.LIMIT] hits across both tiers.
      */
-    suspend fun search(input: String, kinds: List<Kind> = emptyList()): List<CompendiumRef> {
+    suspend fun search(input: String, kinds: List<Kind> = emptyList()): Search.Results {
         val prefix = Search.likePrefix(input)
         val match = Search.ftsQuery(input)
         val kindIds = kinds.map { it.id }
+        // Both queries fetch Search.FETCH candidates, not Search.LIMIT: their SQL order is not a ranking
+        // (alphabetical for names, import order for the FTS hits), so cutting at the display bound would
+        // decide the results before anything ranked them. Search.split applies the real bound.
         val nameHits = when {
             prefix == null -> emptyList()
-            kindIds.isEmpty() -> Search.rankNames(prefix, dao.nameMatches(prefix, Search.LIMIT))
-            else -> Search.rankNames(prefix, dao.nameMatchesIn(kindIds, prefix, Search.LIMIT))
+            kindIds.isEmpty() -> Search.rankNames(prefix, dao.nameMatches(prefix, Search.FETCH))
+            else -> Search.rankNames(prefix, dao.nameMatchesIn(kindIds, prefix, Search.FETCH))
         }
         val textHits = when {
             match == null -> emptyList()
-            kindIds.isEmpty() -> dao.textMatches(match, Search.LIMIT)
-            else -> dao.textMatchesIn(kindIds, match, Search.LIMIT)
+            kindIds.isEmpty() -> dao.textMatches(match, Search.FETCH)
+            else -> dao.textMatchesIn(kindIds, match, Search.FETCH)
         }
-        return Search.merge(nameHits, textHits)
+        return Search.split(nameHits, textHits)
     }
 
     // ---- lists (pass-throughs; every one kind-scoped, finite by the bundle; large kinds take a limit) ------

@@ -2,8 +2,9 @@ package dev.tyler.grimoire.ui.compendium
 
 /**
  * Everything S13.4 draws (docs/UI-SPEC.md S13.4): the [query] that produced it — kept because `FIND` re-opens
- * the editor seeded with it — the flattened [rows] (kind-group headers over their hits, the same [ListRow]
- * shape S13.1 uses), [loading] while a query runs and [empty] for the one "No matches." line.
+ * the editor seeded with it — the flattened [rows] (kind-group headers over the name matches, then one "Also
+ * mentioned" header over the body matches, the same [ListRow] shape S13.1 uses), [loading] while a query runs
+ * and [empty] for the one "No matches." line.
  *
  * [empty] is not `rows.isEmpty()`: the rows are also empty while the first query is still running, and the two
  * states draw different things.

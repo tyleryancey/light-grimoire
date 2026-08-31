@@ -508,25 +508,77 @@ Reached from the hub's `FIND` or from S13.4's `FIND` (re-seeded with the current
 ## S13.4 Search results
 
 ```
-▔ BACK ▔ RESULTS (4) ▔ FIND
+▔ BACK ▔ RESULTS (6) ▔ FIND
 SPELLS                     
 Fireball                  ▸
 Fire Bolt                 ▸
-CONDITIONS                 
-Frightened                ▸
 CLASSES & FEATURES         
 Rage           Barbarian 1▸
+CREATURES                  
+Fire Giant                ▸
+ALSO MENTIONED             
+Burning Hands        Spell▸
+Traps         Rule section▸
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 ```
-`search(query)` (`CompendiumReader`) — name matches first, then FTS4 body matches, ≤ 50 rows
-(`Search.LIMIT`). Non-tappable kind header rows (the same shape as S13.1) group the hits in
-S13 order (SPELLS, CONDITIONS, RULES, CLASSES & FEATURES, RACES, BACKGROUNDS & FEATS,
+`search(query)` (`CompendiumReader`) returns **two tiers** (`Search.Results`), drawn one after
+the other: the records whose *name* matched, then the records only a body mentions. Blending
+them into one kind-grouped list buried the name matches — a name hit sat behind every body
+mention of an earlier kind, which put the equipment **Shield** at row 23 of the "shield"
+results and the creature **Fire Giant** at row 53 of the "fire" results. Two tiers put every
+name match above every mention, whatever kind it belongs to; a record whose name matched is
+never repeated as a mention.
+
+**Named tier.** Non-tappable kind header rows (the same shape as S13.1) group the name matches
+in S13 order (SPELLS, CONDITIONS, RULES, CLASSES & FEATURES, RACES, BACKGROUNDS & FEATS,
 EQUIPMENT, MAGIC ITEMS, CREATURES); a LOOKUP kind sorts after those nine, in `Kind` declaration
 order (it has no hub row of its own). A row may carry a right-aligned lighten Detail
 disambiguator (D6) — a feature row reads "Barbarian 1" (its class and level; `classKey` is on
 the `CompendiumRef` projection — a projection column, not a `RecordRow` column, so it needs
-no `SCHEMA_VERSION` bump). Empty result is one lighten `Copy` line, "No
-matches." `FIND` re-opens the editor seeded with the current query; the editor pops back to
+no `SCHEMA_VERSION` bump); every other named row's own name is its answer, and repeating a kind
+the header above already names would be noise.
+
+**Mention tier.** One header, `ALSO MENTIONED`, and under it a flat list — no per-kind headers,
+because two levels of header over a tail of loose body matches read badly on 27 units. Each
+mention row instead carries its kind as the right detail ("Spell", "Rule section", "Creature"),
+so a spell is still told from a rule with no header to say so — except a feature, which keeps
+the class-and-level disambiguator a named feature row gets ("Barbarian 6"). Features are the
+one kind whose names collide (31 colliding names in the bundle, "Ability Score Improvement" 63
+times): the mentions of "rage" hold three different features all named "Path feature", and
+"Class feature" on each of the three is one unopenable choice where "Barbarian 6 / 10 / 14" is
+three. The mentions are ordered by the same S13 kind order; the header is drawn only when there
+is at least one mention.
+
+**No kind takes more than five mentions** (`Search.MENTIONS_PER_KIND`). The FTS query has no
+`ORDER BY`, so its hits arrive in import order — spells first — and one loud kind used to take
+every slot: "hit points" drew fifty spell rows and the rule section that answers it was never
+even fetched. The tier is allowed to come back short of the cap rather than top itself up with
+more of the same kind; five rows a kind is what "where else does this appear" is worth.
+
+**The cap is on hits, not rows**: at most 50 hits across the two tiers (`Search.LIMIT`), name
+matches taken first so they always survive the cut, and the headers standing over them are
+extra rows on top — "fire" draws 50 hits under 7 headers, 57 rows. The top bar counts hits, not
+rows: `RESULTS (n)` once the query is in, bare `RESULTS` while it runs. Both queries fetch
+`Search.FETCH` (250) candidates rather than 50, because neither one's SQL order is a ranking:
+the name query sorts by `sortName`, so cutting at 50 cut "giant" alphabetically and lost **Stone
+Giant** and **Storm Giant** from the screen entirely. The bound belongs to the ranking, not to
+the SQL.
+
+Two transient lines, each the same lightened `Copy` line the empty state uses (`sdk:ui` has no
+spinner): the hub draws `Opening…` while its counts load, and this screen draws `Searching…`
+while a query runs. Empty result — neither tier found anything — is one lighten `Copy` line,
+"No matches."
+
+**Known limits, left for a later milestone** (both predate the two-tier split; measured over
+this bundle): a multi-word query never reaches the name tier, because `Search.likePrefix` hands
+the whole typed string to a `LIKE` substring test while the FTS side AND-joins its tokens — so
+"long rest" and "opportunity attack" are all mentions, and the rule section that answers them is
+found only by the FTS query. And inside the named tier kind grouping outranks match quality, so
+an exact name match in a LOOKUP kind sorts below every hub kind: the damage type **Fire**, the
+one record whose name *is* the query, is the last named row of "fire". Neither is worth new
+query shapes in M2; both want a name index that tokenises, which is an M6-or-later change.
+
+`FIND` re-opens the editor seeded with the current query; the editor pops back to
 this same screen instance, which re-queries in place — it never pushes a second results
 screen. From the hub the sequence is editor-pops-then-results-pushes (S0 → S13 → S13.3 pops to
 S0 → S13, which then pushes S0 → S13 → S13.4); from this screen the sequence briefly reaches
