@@ -37,4 +37,15 @@ object WheelHandler {
         319 -> WheelEvent.PRESS // LightDeviceKeys.RotaryButtonPress
         else -> null // volume 24/25, camera 80/27 and everything else stay unconsumed
     }
+
+    /**
+     * Whether a screen that acts on this key must also swallow its other halves. Acting on a wheel
+     * event in `onKeyDown` alone is not enough: `LightKeyHandler` defaults `onKeyUp` and
+     * `onKeyMultiple` to false, and `LightActivity` forwards every unconsumed key it recognises to
+     * LightOS with `componentToRelaunch` set — so the release of each detent would foreground
+     * LightOS and relaunch the tool even though the turn itself was handled. Every wheel-consuming
+     * view model therefore forwards `onKeyUp`/`onKeyMultiple` here, which consumes without acting
+     * (routing the release through `handleKey` would double every detent).
+     */
+    fun consumes(keyCode: Int): Boolean = of(keyCode) != null
 }

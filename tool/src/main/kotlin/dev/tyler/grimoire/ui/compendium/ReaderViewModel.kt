@@ -116,7 +116,14 @@ class ReaderViewModel(
         null -> false
     }
 
+    /** Every key this screen swallows whatever the action — see [WheelHandler.consumes] for why the halves matter. */
+    fun consumesKey(keyCode: Int): Boolean = WheelHandler.consumes(keyCode)
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean = handleKey(keyCode)
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean = consumesKey(keyCode)
+
+    override fun onKeyMultiple(keyCode: Int, repeatCount: Int, event: KeyEvent): Boolean = consumesKey(keyCode)
 
     private companion object {
         /** Class features are listed to the top of the SRD's progression. */

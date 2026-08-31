@@ -427,8 +427,10 @@ Circle of the Land        ▸
 ```
 One screen definition, reused for every S13 row but SPELLS; the top bar centre is that row's
 own label. `LightLazyScrollView`, every row — a section header included — exactly 2.5 grid
-units tall (D1); a header row is `LightText(Detail)`, lighten, letter-spaced upper-case, and
-is not `lightClickable` (the same shape as S5's level groups). The wheel scrolls; a press is
+units tall (D1); a header row is `LightText(Detail)`, lighten, upper-cased by the row itself, and
+is not `lightClickable` (the same shape as S5's level groups). Not letter-spaced: `LightText`
+takes no `letterSpacing` and only the `fine`/`button` styles define one (`LightTheme.kt:124-136`),
+both larger than `Detail` — upper case and `lighten` carry the header on their own. The wheel scrolls; a press is
 consumed as a no-op (no primary action here — see the wheel-contract amendment above). No
 `FIND` on this screen — search stays on the hub and on S13.4. Tap a row → S10. Static depth
 S0 → S13 → S13.1 → S10 = 4 (deeper only via a reader cross-link, D5).
@@ -442,7 +444,7 @@ Per-group content — the load-bearing shape of this screen:
 | CLASSES & FEATURES | section CLASSES, `listInOrder(CLASSES, 12)` — bounded at 12 — then section SUBCLASSES, `listByName(SUBCLASSES, 12)` — bounded at 12; features have no list row here — reached from a class or subclass reader's footer and from FIND (63 duplicate "Ability Score Improvement" rows would be noise) | none |
 | RACES | section RACES, `listInOrder(RACES, 9)` — bounded at 9 — then section SUBRACES, `listByName(SUBRACES, 4)` — bounded at 4; traits via race reader footers + FIND | none |
 | BACKGROUNDS & FEATS | two one-row sections, `listInOrder(BACKGROUNDS, 1)` + `listInOrder(FEATS, 1)`; SRD 5.1 ships exactly one of each | none |
-| EQUIPMENT | one section per `categoriesOf(EQUIPMENT)` category (humanized label), rows from `byCategory` — finite by the bundle — then a WEAPON PROPERTIES section, `listByName(WEAPON_PROPERTIES, 12)` — bounded at 12 (the bundle ships 11); ≈ 250 rows total (the hub's 237 counts equipment records only — the category headers and the 11 weapon-property rows are the difference, not a discrepancy) | none |
+| EQUIPMENT | one section per `categoriesOf(EQUIPMENT)` category (humanized label), rows from `byCategory` — finite by the bundle — then a WEAPON PROPERTIES section, `listByName(WEAPON_PROPERTIES, 12)` — bounded at 12 (the bundle ships 11); ≈ 250 rows total (the hub's 237 counts equipment records only — the category headers and the 11 weapon-property rows are the difference, not a discrepancy). Sections run **weapon, armor, adventuring gear, tools, mounts and vehicles**, not `categoriesOf`'s alphabetical order: alphabetical opens the screen on 116 rows of adventuring gear and puts weapons at row 204, and weapons and armor are what get looked up mid-turn. A category the bundle grows later keeps its alphabetical place after these five. | none |
 | MAGIC ITEMS | flat, `bySubcategory(MAGIC_ITEMS, "base")` — finite by the bundle, 239 rows; the 123 variants are reached from each base item's reader footer and FIND — 239 + 123 = 362, the hub's count (which counts items, not rows opened by this list, D13) | rarity |
 | CREATURES | flat, `listByName(CREATURES, 334)` — bounded at 334, the whole bundle | CR as a fraction ("1/8", "1/2", "5") |
 
@@ -467,7 +469,9 @@ second line, both lines `Detail` weight (the SDK's own rendering, not the usual 
 verified in `LightTopBar.kt`). The first content row is a tappable stepper, `◂ LEVEL n · count ▸` — the
 emulator emits no wheel codes, so the arrows are the tap fallback for the wheel job below.
 Rows under it are `spellsByLevel(level)` (finite by the bundle; the largest level, 2nd, is 54
-rows), right detail = school; tap one → S10, with no `CAST` action (opened outside a
+rows), right detail = the school abbreviated to at most four characters as the wireframe draws
+it — `Abj` `Conj` `Div` `Ench` `Evo` `Illu` `Nec` `Tran` (the full names ellipsize 37 of the 319
+spell names, the abbreviations 6); tap one → S10, with no `CAST` action (opened outside a
 character's spell list — S10's existing rule). Touch drag scrolls the row list itself, since
 the wheel's turns are claimed by the level stepper on this screen.
 

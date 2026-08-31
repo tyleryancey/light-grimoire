@@ -49,6 +49,8 @@ fun NavRow(
             LightText(
                 text = detail,
                 variant = LightTextVariant.Detail,
+                // A gap, so an ellipsized name never butts straight against the detail column.
+                modifier = Modifier.padding(start = 0.5f.gridUnitsAsDp()),
                 lighten = true,
                 maxLines = 1,
             )
