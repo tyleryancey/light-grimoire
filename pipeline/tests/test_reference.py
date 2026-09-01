@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -145,6 +146,20 @@ def test_temp_hp_absorbs_first():
     assert ch["hp"] == {"max": 20, "damage": 5, "temp": 0}
 
 
+def test_adjust_temp_hp_is_a_signed_correction_not_a_grant():
+    ch = rules.adjust_temp_hp(_pc(temp=5), -2)
+    assert ch["hp"]["temp"] == 3                       # lowers, unlike apply_temp_hp
+    ch = rules.adjust_temp_hp(_pc(temp=5), -20)
+    assert ch["hp"]["temp"] == 0                        # clamps at 0, never negative
+    ch = rules.adjust_temp_hp(rules.adjust_temp_hp(_pc(temp=5), 3), 3)
+    assert ch["hp"]["temp"] == 11                        # stacks (a correction, not a grant)
+    ch = rules.apply_damage(_pc(), 20)                   # down, 0 hp
+    ch = rules.adjust_temp_hp(ch, 6)
+    assert ch["deathSaves"]["failures"] == 0 and ch["hp"]["temp"] == 6  # untouched HP/saves
+    ch = rules.apply_damage(ch, 5)                       # fully absorbed at 0 hp
+    assert ch["deathSaves"]["failures"] == 0 and ch["hp"]["temp"] == 1
+
+
 def test_temp_hp_absorbs_at_zero_hp():
     ch = rules.apply_damage(_pc(), 20)                # down
     ch = rules.apply_temp_hp(ch, 6)
@@ -177,6 +192,34 @@ def test_death_saves():
     assert ch["hp"]["damage"] == 19 and ch["deathSaves"]["successes"] == 0
     ch2 = rules.death_save(rules.apply_damage(_pc(), 20), 1)
     assert ch2["deathSaves"]["failures"] == 2
+
+
+def test_adjust_temp_hp_is_the_deliberate_exception_to_the_dead_guards():
+    """heal/spend_hit_die/long_rest all no-op once dead; a correction is bookkeeping, so it does not.
+    If someone 'fixes' that asymmetry, this and the events.json scenario of the same name go red."""
+    ch = rules.apply_damage(_pc(), 20)                  # down, 0 hp
+    for _ in range(3):
+        ch = rules.death_save(ch, 3)                    # three failures -> dead
+    assert ch["deathSaves"]["dead"] is True
+    corrected = rules.adjust_temp_hp(ch, 6)
+    assert corrected["hp"]["temp"] == 6                 # applied, unlike every neighbouring function
+    assert corrected["deathSaves"] == ch["deathSaves"]  # and it still revives nobody
+    assert corrected["hp"]["damage"] == ch["hp"]["damage"]
+
+
+def test_spend_hit_die_does_not_revive_the_dead():
+    ch = rules.apply_damage(_pc(), 20)                  # down, 0 hp
+    ch = rules.death_save(ch, 3)
+    ch = rules.death_save(ch, 3)
+    ch = rules.death_save(ch, 3)                        # three failures -> dead
+    assert ch["deathSaves"]["dead"] is True
+    before = deepcopy(ch)
+    ch = rules.spend_hit_die(ch, 10, 6)                 # would heal 6 + con mod if alive
+    assert ch == before                                 # unchanged: matches heal()/long_rest()
+    ch["hitDice"] = [{"die": 8, "total": 1, "used": 1}]  # pool already exhausted
+    before = deepcopy(ch)
+    ch = rules.spend_hit_die(ch, 8, 4)                  # dead is checked BEFORE "no dice left"
+    assert ch == before                                 # unchanged, not a raise
 
 
 def test_long_rest_hit_dice_half_minimum_one():

@@ -60,7 +60,7 @@ class EventsFixtureTest {
 
     @Test
     fun everyScenarioEndsInTheOracleState() {
-        assertEquals(21, fixture.scenarios.size, "scenario count")
+        assertEquals(28, fixture.scenarios.size, "scenario count")
         for (scenario in fixture.scenarios) {
             val end = Ledger.run(start(scenario.start), scenario.events)
             assertEquals(scenario.end, endState(end), "scenario ${scenario.name}")
@@ -135,5 +135,12 @@ class EventsFixtureTest {
         assertEquals(dead, Ledger.heal(dead, 20), "healing the dead")
         assertEquals(dead, Ledger.longRest(dead), "resting the dead")
         assertEquals(dead, Ledger.deathSave(dead, 20), "death save when dead")
+        // The d10 pool has two dice left: without the guard this would heal and clear the death saves.
+        assertEquals(dead, Ledger.spendHitDie(dead, 10, 6), "hit die when dead")
+        // The d8 pool is spent, so this pins that the dead check runs before the "no dice left" error.
+        assertEquals(dead, Ledger.spendHitDie(dead, 8, 4), "exhausted hit die when dead")
+        // tempDelta is the deliberate exception: a correction is bookkeeping, so it applies while dead and
+        // still revives nobody. Guarding it for symmetry with the four above fails this and its fixture.
+        assertEquals(dead.copy(hp = dead.hp.copy(temp = 6)), Ledger.tempDelta(dead, 6), "temp correction when dead")
     }
 }

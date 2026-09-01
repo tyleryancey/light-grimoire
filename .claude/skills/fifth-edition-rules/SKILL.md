@@ -39,7 +39,13 @@ Paper players default to `mode: manual`.
   a critical hit); if damage drops you to 0 **and** the overflow ≥ max HP → instant death;
   if damage taken at 0 HP ≥ max HP → instant death.
 - **Healing** cannot exceed max; regaining ≥ 1 HP clears death saves; does nothing if dead.
-- **Temp HP** do not stack: keep the higher value. Cleared by a long rest.
+- **Temp HP** do not stack: keep the higher value. Cleared by a long rest. That is the *grant*
+  (`temp`); a *correction* to the number on the sheet (`tempDelta`) is signed, clamped at 0,
+  does stack, and is the only way temp HP comes down. Neither touches HP or the death saves, so
+  `tempDelta` alone among the HP-adjacent functions keeps working while dead — on purpose.
+- **A dead character benefits from nothing**: `heal`, `spendHitDie`, `longRest` and `deathSave`
+  all return the character unchanged once `deathSaves.dead`. `spendHitDie` checks `dead` *before*
+  the pool, so a dead character spending a die they lack is a no-op, not the "no dice left" error.
 - **Death saves**: d20 ≥ 10 success, < 10 failure, natural 1 = two failures, natural 20 =
   regain 1 HP; three successes → stable (counters reset, still at 0 HP); three failures →
   dead. Damage while stable resumes saves and counts a failure.

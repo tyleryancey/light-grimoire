@@ -8,7 +8,7 @@ tool/src/main/kotlin/dev/tyler/grimoire/
 │   ├── Dice.kt         grammar, Mulberry32, Roll, advantage rewrite, bounds/average
 │   ├── Tables.kt       FULL_CASTER_SLOTS, PACT_SLOTS, CASTER_TYPE, HIT_DIE, SKILLS, AVERAGE_HIT_DIE
 │   ├── Derive.kt       derive(character, armorTable) → Derived
-│   ├── Ledger.kt       damage/heal/temp/deathSave/spendHitDie/shortRest/longRest/dawn/slots/counter
+│   ├── Ledger.kt       damage/heal/temp/tempDelta/deathSave/spendHitDie/shortRest/longRest/dawn/slots/counter
 │   └── Model.kt        Character + nested data classes (kotlinx-serialization), schemaVersion, migrate()
 ├── compendium/     one `records` table + `search_index` FTS4 (CompendiumDb, one DAO); strict record models;
 │                   AssetImporter behind seams; CompendiumStore (singleton, state); CompendiumReader; Search

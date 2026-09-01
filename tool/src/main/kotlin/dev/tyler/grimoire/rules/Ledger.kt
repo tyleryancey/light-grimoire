@@ -11,6 +11,11 @@ import kotlin.math.min
  * The in-play mutation vocabulary — everything with rules semantics goes through [Ledger] and has a
  * scenario in fixtures/events.json. Trivial setters (toggling a condition, inspiration, currency, what is
  * equipped) are applied by the view model directly and are not events (docs/DATA-MODEL.md).
+ *
+ * Temporary hit points arrive two ways and the pair must stay distinct. [Temp] is a **grant** — a spell or
+ * feature conferring temp HP, which keeps the higher of the old and new numbers and never stacks (SRD 5.1).
+ * [TempDelta] is a **correction** — S3's HP pad raising or lowering the number the player entered, signed and
+ * clamped at 0. A grant can only ever raise the number; only a correction can take a mis-tap back down.
  */
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
@@ -24,9 +29,15 @@ sealed class Event {
     @SerialName("heal")
     data class Heal(val amount: Int) : Event()
 
+    /** A grant of temporary hit points from a spell or feature — the higher number wins, they never stack. */
     @Serializable
     @SerialName("temp")
     data class Temp(val amount: Int) : Event()
+
+    /** A correction to the temp HP already on the sheet — signed, clamped at 0, and it does stack. */
+    @Serializable
+    @SerialName("tempDelta")
+    data class TempDelta(val delta: Int) : Event()
 
     /** A death saving throw with the natural d20 the player rolled. */
     @Serializable
@@ -112,6 +123,19 @@ object Ledger {
     fun temp(c: Character, amount: Int): Character = c.copy(hp = c.hp.copy(temp = max(c.hp.temp, amount)))
 
     /**
+     * Correct the temporary hit points directly: a signed delta clamped at 0, touching neither HP nor death
+     * saves. This is the HP pad editing a number the player entered, not a spell or feature granting temp HP
+     * — that is [temp] and its don't-stack rule. No upper clamp: the SRD puts no cap on temporary hit points.
+     *
+     * Deliberately the one HP-adjacent function with **no dead guard**, where [heal], [spendHitDie] and
+     * [longRest] all return early: a correction is bookkeeping about what the sheet says, not a rules effect
+     * on the character, and it can revive nobody because it never touches HP or the death saves. Adding a
+     * guard here for symmetry with its neighbours fails the events.json scenario "temp hp correction applies
+     * even to the dead" — in both languages, which is the point.
+     */
+    fun tempDelta(c: Character, delta: Int): Character = c.copy(hp = c.hp.copy(temp = max(0, c.hp.temp + delta)))
+
+    /**
      * 10 or more is a success, less a failure; a natural 1 is two failures, a natural 20 regains 1 HP.
      * Three successes: stable (still at 0 HP, counters reset). Three failures: dead.
      */
@@ -136,8 +160,14 @@ object Ledger {
         return out.copy(deathSaves = next)
     }
 
-    /** Short rest: one hit die at a time — regain the roll plus the CON modifier, never less than 0. */
+    /**
+     * Short rest: one hit die at a time — regain the roll plus the CON modifier, never less than 0. A dead
+     * character cannot benefit from a short rest, so the state stands and the die goes unspent, matching
+     * [heal] and [longRest] rather than raising. The guard comes before the pool is looked up: spending a die
+     * the dead character does not have is a no-op too, not the "no dice left" error a living one would get.
+     */
     fun spendHitDie(c: Character, die: Int, roll: Int): Character {
+        if (c.deathSaves.dead) return c
         val index = c.hitDice.indexOfFirst { it.die == die }
         val pool = c.hitDice.getOrNull(index)
         if (pool == null || pool.used >= pool.total) throw RulesException("no d$die hit dice left")
@@ -216,6 +246,7 @@ object Ledger {
         is Event.Damage -> damage(c, event.amount, event.critical)
         is Event.Heal -> heal(c, event.amount)
         is Event.Temp -> temp(c, event.amount)
+        is Event.TempDelta -> tempDelta(c, event.delta)
         is Event.DeathSave -> deathSave(c, event.d20)
         is Event.SpendHitDie -> spendHitDie(c, event.die, event.roll)
         is Event.ShortRest -> shortRest(c)

@@ -216,6 +216,335 @@
   },
   {
    "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 24,
+     "down": false,
+     "max": 24,
+     "temp": 3
+    },
+    "exhaustion": 1,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 24,
+     "temp": 3
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "delta": -2,
+     "type": "tempDelta"
+    }
+   ],
+   "name": "temp hp correction can lower the number",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 24,
+     "down": false,
+     "max": 24,
+     "temp": 0
+    },
+    "exhaustion": 1,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 24,
+     "temp": 0
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "delta": -20,
+     "type": "tempDelta"
+    }
+   ],
+   "name": "temp hp correction clamps at zero",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [
+     "poisoned"
+    ],
+    "counters": [],
+    "deathSaves": {
+     "dead": false,
+     "failures": 0,
+     "stable": false,
+     "successes": 0
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 24,
+     "down": false,
+     "max": 24,
+     "temp": 11
+    },
+    "exhaustion": 1,
+    "hitDice": [
+     {
+      "die": 8,
+      "total": 3,
+      "used": 0
+     }
+    ],
+    "hp": {
+     "damage": 0,
+     "max": 24,
+     "temp": 11
+    },
+    "spellcasting": null
+   },
+   "events": [
+    {
+     "delta": 3,
+     "type": "tempDelta"
+    },
+    {
+     "delta": 3,
+     "type": "tempDelta"
+    }
+   ],
+   "name": "temp hp correction stacks (unlike temp)",
+   "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": false,
+     "failures": 1,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 1
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 1
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "delta": 6,
+     "type": "tempDelta"
+    },
+    {
+     "amount": 5,
+     "type": "damage"
+    }
+   ],
+   "name": "temp hp correction at zero hp still absorbs damage",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": true,
+     "failures": 3,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 6
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 6
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "d20": 3,
+     "type": "deathSave"
+    },
+    {
+     "d20": 3,
+     "type": "deathSave"
+    },
+    {
+     "delta": 6,
+     "type": "tempDelta"
+    }
+   ],
+   "name": "temp hp correction applies even to the dead",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
     "conditions": [],
     "counters": [
      {
@@ -1207,6 +1536,208 @@
    ],
    "name": "hit die never heals negative",
    "start": "fixture-rogue-3-thief"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": true,
+     "failures": 3,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "d20": 3,
+     "type": "deathSave"
+    },
+    {
+     "d20": 3,
+     "type": "deathSave"
+    },
+    {
+     "die": 10,
+     "roll": 6,
+     "type": "spendHitDie"
+    }
+   ],
+   "name": "spend hit die does not revive the dead",
+   "start": "fixture-paladin-6-warlock-2"
+  },
+  {
+   "end": {
+    "conditions": [
+     "prone"
+    ],
+    "counters": [
+     {
+      "featureKey": "lay-on-hands",
+      "id": "lay-on-hands",
+      "max": 30,
+      "name": "Lay on Hands",
+      "reset": "long",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 5
+     },
+     {
+      "featureKey": "channel-divinity-1-rest",
+      "id": "channel-divinity",
+      "max": 1,
+      "name": "Channel Divinity",
+      "reset": "short",
+      "showOnTurn": true,
+      "source": "class",
+      "value": 0
+     },
+     {
+      "featureKey": "dark-ones-blessing",
+      "id": "dark-ones-blessing",
+      "max": 1,
+      "name": "Dark One's Blessing",
+      "reset": "none",
+      "showOnTurn": false,
+      "source": "subclass",
+      "value": 0
+     }
+    ],
+    "deathSaves": {
+     "dead": true,
+     "failures": 3,
+     "stable": false,
+     "successes": 1
+    },
+    "derivedHp": {
+     "bloodied": false,
+     "current": 0,
+     "down": true,
+     "max": 68,
+     "temp": 0
+    },
+    "exhaustion": 0,
+    "hitDice": [
+     {
+      "die": 10,
+      "total": 6,
+      "used": 4
+     },
+     {
+      "die": 8,
+      "total": 2,
+      "used": 2
+     }
+    ],
+    "hp": {
+     "damage": 68,
+     "max": 68,
+     "temp": 0
+    },
+    "spellcasting": {
+     "pactUsed": 2,
+     "slotsUsed": [
+      4,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   },
+   "events": [
+    {
+     "d20": 3,
+     "type": "deathSave"
+    },
+    {
+     "d20": 3,
+     "type": "deathSave"
+    },
+    {
+     "die": 8,
+     "roll": 4,
+     "type": "spendHitDie"
+    }
+   ],
+   "name": "spend hit die on a dead character does not even raise when none are left",
+   "start": "fixture-paladin-6-warlock-2"
   },
   {
    "end": {

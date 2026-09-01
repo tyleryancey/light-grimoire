@@ -294,14 +294,14 @@ that swapped the pad out would take that control away at exactly the moment it m
 ```
 Two ways to record a save, both reaching `Ledger.deathSave`: `[ ROLL DEATH SAVE ]` rolls the
 app's own d20 and handles natural 1 and natural 20 automatically — a 1 is two failures; a 20
-regains 1 HP and clears the saves outright (`Ledger.kt:123-126` sets `hp.damage = max − 1` and
+regains 1 HP and clears the saves outright (`Ledger.kt:147-150` sets `hp.damage = max − 1` and
 `NO_SAVES`), which returns the character to **UP** at 1 HP, not to STABLE. Or tap a hollow
 success or failure pip directly — the manual path for a player who already rolled a physical
 d20 and just wants to log the outcome.
 
 A pip tap dispatches `Event.DeathSave` with a plain, non-critical value: **success = 10,
 failure = 9**. Those two are the whole decision, and they need no engine work — `Ledger.deathSave`
-already branches `d20 >= 10` → success, `else` → failure (`Ledger.kt:128-129`), and 10 and 9 are
+already branches `d20 >= 10` → success, `else` → failure (`Ledger.kt:152-153`), and 10 and 9 are
 the two values nearest the threshold that are neither a natural 1 nor a natural 20. Natural 1
 and natural 20 therefore stay reachable only through `ROLL`, never through a pip tap, by
 construction. Wheel press triggers `ROLL DEATH SAVE` — the Dice screen's "wheel press rolls"
@@ -322,7 +322,7 @@ convention, reused here.
 ```
 `Ledger.deathSave` zeroes both counts on stabilizing, so both rows draw hollow — there is
 nothing left to show filled. No `[ ROLL ]` button: `Ledger.deathSave` returns the character
-unchanged once `stable` (`Ledger.kt:120`), so a live-looking roll button here would be a dead
+unchanged once `stable` (`Ledger.kt:144`), so a live-looking roll button here would be a dead
 control. **The pips are display-only in this state**, for exactly the same reason — they are
 tappable in DYING, but here the same early return would swallow the tap, and six hollow
 tappable-looking pips are the dead control the missing roll button was removed to avoid. Wheel
@@ -341,29 +341,37 @@ press: no primary action, consumed as a no-op.
                             
 ▁▁▁▁▁▁▁▁▁▁ REST ▁▁▁▁▁▁▁▁▁▁▁
 ```
-No pad, no verb chips, no `±n` buttons: `Ledger.heal` (`Ledger.kt:105`), `Ledger.longRest`
-(`:164`) and `Ledger.deathSave` (`:120`) all return the character unchanged once `dead`, so
-drawing controls that do nothing would be the same dead-button problem `STABLE` avoids by
-dropping its roll button. `DEAD` draws in `Heading` weight — 38 sp and a 2.65-unit line box,
-genuinely larger than `Copy`/`Subheading`'s shared 30 sp, so unlike S1's bloodied case this one
-already reads as heavier without help.
+No pad, no verb chips, no `±n` buttons: `Ledger.heal` (`Ledger.kt:116`), `Ledger.longRest`
+(`:194`), `Ledger.deathSave` (`:144`) and `Ledger.spendHitDie` (`:170`) all return the character
+unchanged once `dead`, so drawing controls that do nothing would be the same dead-button problem
+`STABLE` avoids by dropping its roll button. `DEAD` draws in `Heading` weight — 38 sp and a
+2.65-unit line box, genuinely larger than `Copy`/`Subheading`'s shared 30 sp, so unlike S1's
+bloodied case this one already reads as heavier without help.
 
-**One control still reaches a dead character, and it is not on this screen.** The bottom bar
-keeps `REST`, and `Ledger.spendHitDie` has no dead guard: `Ledger.kt:148` returns
-`out.copy(deathSaves = NO_SAVES)` whenever the die brings HP above 0, which clears `dead` along
-with everything else. S8 → `[ROLL]`/`[AVG]` would therefore resurrect a dead character with
-none of the deliberation `[ REVIVE ]` is justified by. Two things close it: **S8's hit-dice
-controls are disabled whenever `deathSaves.dead`** (stated again in S8), and `spendHitDie` is
-**owed a dead guard** pipeline-first (`pipeline/reference/`, a fixture, then `rules/Ledger.kt`)
-in the same step as TEMP `−n` below. Until that guard lands the disable is the only thing
-holding the door, which is why it is written into both screens rather than one. `REST` stays in
-this frame's bottom bar so all four states keep the same bars — the state that changes is the
-middle of the screen, never the chrome.
+**The one control that used to reach a dead character is now closed in the engine.** The bottom
+bar keeps `REST`, and `Ledger.spendHitDie` had no dead guard: it returned
+`out.copy(deathSaves = NO_SAVES)` whenever the die brought HP above 0, which cleared `dead` along
+with everything else, so S8 → `[ROLL]`/`[AVG]` resurrected a dead character with none of the
+deliberation `[ REVIVE ]` is justified by. **That guard has landed** — pipeline-first as the
+working rules require (`rules.py::spend_hit_die`, two `events.json` scenarios, then
+`Ledger.kt:170`) — and it sits *before* the hit-dice pool is looked up, so a dead character
+spending a die they do not have is a no-op too, not the `no dN hit dice left` error a living one
+would get. **S8's hit-dice controls stay disabled whenever `deathSaves.dead`** (stated again
+in S8): the guard is what makes the engine safe, the disable is what keeps the UI from drawing a
+live-looking button that does nothing — the same dead-button rule `STABLE` follows, not a
+stand-in for the guard any more. `REST` stays in this frame's bottom bar so all four states keep
+the same bars — the state that changes is the middle of the screen, never the chrome.
 
-The other two unguarded functions are harmless here and are named so nobody has to re-derive
-it: damage dealt to a dead character always takes the at-0-HP branch (`Ledger.kt:87-92`), which
-carries `dead` forward rather than clearing it, and `Ledger.temp` only ever raises temporary
-HP, which cannot revive anyone. `spendHitDie` is the whole hole.
+The functions that are still unguarded are harmless here and are named so nobody has to
+re-derive it: damage dealt to a dead character always takes the at-0-HP branch
+(`Ledger.kt:98-103`), which carries `dead` forward rather than clearing it; `Ledger.temp`
+(`:123`) only ever raises temporary HP; `Ledger.tempDelta` (`:136`) is left unguarded **on
+purpose** — a correction is bookkeeping about what the sheet says, not a rules effect on the
+character, and it touches neither HP nor the death saves, so it revives nobody. That exception is
+pinned by its own scenario (`events.json`, "temp hp correction applies even to the dead") in both
+languages, so adding a guard there for symmetry with its four neighbours fails the suite by
+design. `shortRest`, `dawn`, `spendSlot`, `spendPactSlot` and `counter` touch neither HP nor the
+saves either. With `spendHitDie` guarded there is no hole left.
 
 `[ REVIVE ]` clears `deathSaves` back to its default and leaves HP at 0, so the character
 returns to `DYING`, ready for saves again — resurrection is the DM's call at the table, and the
@@ -371,15 +379,16 @@ tool only records it. It is **not** a view-model `copy()`: every `deathSaves` mu
 engine goes through `Ledger` (damage, heal, deathSave, spendHitDie, longRest), and
 `Ledger.kt:12-13`'s view-model carve-out names four rules-free fields — toggling a condition,
 inspiration, currency, what is equipped — and no death-save field. `REVIVE` is owed to
-`pipeline/reference/` as `Ledger.revive` (`Event.Revive`), a fixture, then Kotlin, the same debt
-as TEMP `−n` and the `spendHitDie` guard.
+`pipeline/reference/` as `Ledger.revive` (`Event.Revive`), a fixture, then Kotlin — the same debt
+TEMP `−n` and the `spendHitDie` guard were, both of which have since been paid. `REVIVE` is the
+last of the three still outstanding.
 
 **M3 gap, stated rather than hidden:** until `Ledger.revive` lands, DEAD has no working control.
 The only in-app recovery from a mis-tapped third failure is `UNDO`, and `UNDO` survives only the
 current visit to S3 (an in-memory snapshot — see the end of this section). Off that path, a
 character wrongly marked dead is recovered by editing HP through M4's `EDIT`, which does not
-exist yet. That is the strongest argument for landing `Ledger.revive` in the same step as the
-other two engine debts, not after the screens.
+exist yet. That is the strongest argument for landing `Ledger.revive` the way the other two
+engine debts were landed — pipeline-first, before the screen is built — not after the screens.
 
 Wheel: no verb to nudge in this state and nothing to scroll, so **both** halves are consumed as
 no-ops — turn and press alike. `REVIVE` is deliberately tap-only.
@@ -391,12 +400,19 @@ same three buttons cover both directions of a correction:
 |---|---|---|
 | DAMAGE | give it back (`Event.Heal(n)`) | take `n` (`Event.Damage(n)`) |
 | HEAL | heal (`Event.Heal(n)`) | damage (`Event.Damage(n)`) |
-| TEMP | grant `n` temp HP, the 2014 "does not stack" rule (`Event.Temp(n)`, keeps the higher value) | lower temp by `n`, floored at 0 |
+| TEMP | grant `n` temp HP, the 2014 "does not stack" rule (`Event.Temp(n)`, keeps the higher value) | lower temp by `n`, floored at 0 (`Event.TempDelta(-n)`) |
 
-TEMP `−n` has **no engine support yet**: `Ledger.temp` only ever raises (`max(current,
-amount)`); a lowering path needs a pipeline-first change (`pipeline/reference/`, a fixture, then
-`rules/Ledger.kt`) before this direction of the chip ships. This section is written as the
-target state.
+TEMP's two signs reach the **two different temp-HP functions**, and keeping that pair distinct is
+the point. `Ledger.temp` (`Ledger.kt:123`) is a *grant* — a spell or feature conferring temp HP,
+keeping the higher of the old and new numbers, so it can only ever raise. `Ledger.tempDelta`
+(`:136`) is a *correction* — the signed, clamped-at-0 edit of a number the player already typed,
+and the only way temp HP comes back down. The correction **has landed** (pipeline-first:
+`rules.py::adjust_temp_hp`, five `events.json` scenarios, then Kotlin), so this row ships in both
+directions. Unlike a grant, corrections stack: `+3` then `+3` onto a temp of 5 leaves 11, where
+two grants of 3 would have left it at 5.
+
+`tempDelta` is also the one HP-adjacent function that deliberately keeps working while
+`deathSaves.dead` — see the DEAD state above for why, and for the fixture that pins it.
 
 DAMAGE `+n` and HEAL `−n` are not exact inverses of their own verb, because each reaches the
 real `rules/Ledger.kt` function its sign maps to, not a UI-layer approximation: DAMAGE `+n`
@@ -600,15 +616,19 @@ shape the preamble's depth rule describes — so the chain stays S0 → S1 → S
 never a confirm screen left sitting under it. The tool never clears conditions on a rest (the
 GM decides) and warns if HP is 0 ("must have at least 1 HP to benefit").
 
-**`[ROLL]` and `[AVG]` are disabled whenever `deathSaves.dead`.** `Ledger.spendHitDie` is the
-one HP-affecting function with no dead guard — `Ledger.kt:148` returns
-`out.copy(deathSaves = NO_SAVES)` whenever the die brings HP above 0, clearing `dead` with it —
-so a hit die spent here would silently resurrect a dead character, which is S3's `[ REVIVE ]`
-without any of its deliberation. The disable is the UI half; the guard itself is owed to
-`pipeline/reference/` and a fixture (see S3 DEAD). `LONG REST` needs no such disable —
-`Ledger.longRest` already returns the character unchanged once `dead` (`Ledger.kt:164`) — but
-it is drawn inert in that state for the same dead-control reason S3 STABLE drops its roll
-button.
+**`[ROLL]` and `[AVG]` are disabled whenever `deathSaves.dead`.** `Ledger.spendHitDie` used to be
+the one HP-affecting function with no dead guard — it returned `out.copy(deathSaves = NO_SAVES)`
+whenever the die brought HP above 0, clearing `dead` with it — so a hit die spent here silently
+resurrected a dead character, which is S3's `[ REVIVE ]` without any of its deliberation. **The
+guard has since landed** (`Ledger.kt:170`, pipeline-first through `rules.py` and two
+`events.json` scenarios; see S3 DEAD), and it runs before the pool lookup, so a dead character
+spending a die they do not have is a no-op rather than the `no dN hit dice left` error. The
+disable stays all the same, as the UI half of the same rule: a control that would do nothing is
+not drawn live. (One function is still unguarded on purpose — `Ledger.tempDelta`, which touches
+neither HP nor the death saves and so needs no disable anywhere; see S3 DEAD.) `LONG REST` needs
+no such disable either — `Ledger.longRest` returns the character unchanged once `dead`
+(`Ledger.kt:194`) — but it too is drawn inert in that state, for the same dead-control reason S3
+STABLE drops its roll button.
 
 Wheel scrolls (hit-dice pools are bounded per die size — see `docs/DATA-MODEL.md`'s open bound
 question); wheel press: no primary action, consumed as a no-op — spending a die is `[ROLL]` or

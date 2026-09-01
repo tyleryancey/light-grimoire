@@ -33,13 +33,21 @@ slot maxima, attack to-hit and damage formulas. Kotlin: `Derive.derive(character
 
 ## Events (the only mutation vocabulary in play)
 
-`damage{amount,critical}`, `heal{amount}`, `temp{amount}`, `deathSave{d20}`,
-`spendHitDie{die,roll}`, `shortRest`, `longRest`, `dawn`, `spendSlot{level}`,
-`spendPactSlot`, `counter{id,delta}` — plus `restoreSlot{level}`, `toggleCondition{key}`,
-`setExhaustion{level}`, `setConcentration{spellKey|null}`, `toggleInspiration`,
-`setCurrency{…}`, `toggleEquipped{id}`, `toggleAttuned{id}` which are trivial setters (no
-fixture needed) and are applied by the view model directly. Everything with rules
-semantics goes through `Ledger` and has a fixture in `events.json`.
+`damage{amount,critical}`, `heal{amount}`, `temp{amount}`, `tempDelta{delta}`,
+`deathSave{d20}`, `spendHitDie{die,roll}`, `shortRest`, `longRest`, `dawn`,
+`spendSlot{level}`, `spendPactSlot`, `counter{id,delta}` — plus `restoreSlot{level}`,
+`toggleCondition{key}`, `setExhaustion{level}`, `setConcentration{spellKey|null}`,
+`toggleInspiration`, `setCurrency{…}`, `toggleEquipped{id}`, `toggleAttuned{id}` which are
+trivial setters (no fixture needed) and are applied by the view model directly. Everything
+with rules semantics goes through `Ledger` and has a fixture in `events.json`.
+
+`temp` and `tempDelta` are distinct and must stay so: `temp` is a **grant** (spell/feature —
+keeps the higher number, never stacks, can only raise); `tempDelta` is a **correction** to the
+number already on the sheet (signed, clamped at 0, does stack, and it is the only way temp HP
+comes down). `tempDelta` is also the one HP-adjacent function deliberately left **unguarded**
+when `deathSaves.dead`, where `heal`, `spendHitDie` and `longRest` all return early — a
+correction is bookkeeping, touches neither HP nor the saves, and so revives nobody. Adding a
+guard there for symmetry breaks the fixture "temp hp correction applies even to the dead".
 
 ## Representing non-SRD content (paper tables)
 
