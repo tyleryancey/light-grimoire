@@ -32,6 +32,7 @@ import dev.tyler.grimoire.compendium.CompendiumStore
 import dev.tyler.grimoire.compendium.Kind
 import dev.tyler.grimoire.compendium.KindGroup
 import dev.tyler.grimoire.ui.common.NavRow
+import dev.tyler.grimoire.ui.common.QuietLine
 import dev.tyler.grimoire.ui.common.ROW_HEIGHT_GRID_UNITS
 import dev.tyler.grimoire.ui.common.SectionHeaderRow
 import dev.tyler.grimoire.ui.common.WheelScrollEffect
@@ -85,12 +86,7 @@ class CompendiumListScreen(
                     if (state.loading) {
                         // The same quiet line the reader shows while it composes a record — the queries behind a
                         // group are indexed and quick, but the screen is pushed before any of them has run.
-                        LightText(
-                            text = "Opening…",
-                            variant = LightTextVariant.Copy,
-                            lighten = true,
-                            modifier = Modifier.padding(1f.gridUnitsAsDp()),
-                        )
+                        QuietLine("Opening…")
                     } else {
                         LightLazyScrollView(
                             listState = listState,

@@ -33,6 +33,7 @@ import dev.tyler.grimoire.compendium.CompendiumStore
 import dev.tyler.grimoire.compendium.Kind
 import dev.tyler.grimoire.compendium.Search
 import dev.tyler.grimoire.ui.common.NavRow
+import dev.tyler.grimoire.ui.common.QuietLine
 import dev.tyler.grimoire.ui.common.ROW_HEIGHT_GRID_UNITS
 import dev.tyler.grimoire.ui.common.SectionHeaderRow
 import dev.tyler.grimoire.ui.common.TextEditorScreen
@@ -96,8 +97,8 @@ class SearchResultsScreen(
                         .fillMaxWidth(),
                 ) {
                     when {
-                        state.loading -> Quiet("Searching…")
-                        state.empty -> Quiet("No matches.")
+                        state.loading -> QuietLine("Searching…")
+                        state.empty -> QuietLine("No matches.")
                         else -> LightLazyScrollView(
                             listState = listState,
                             uniformItemHeightGridUnits = ROW_HEIGHT_GRID_UNITS,
@@ -122,16 +123,6 @@ class SearchResultsScreen(
         }
     }
 
-    /** The one-line states: the wait, and S13.4's "No matches." — both a lightened `Copy` line, as specified. */
-    @Composable
-    private fun Quiet(text: String) {
-        LightText(
-            text = text,
-            variant = LightTextVariant.Copy,
-            lighten = true,
-            modifier = Modifier.padding(1f.gridUnitsAsDp()),
-        )
-    }
 
     /**
      * Push the reader for a tapped row. [CompendiumRef.kind] is the `records.kind` string; `Kind.byId` throws

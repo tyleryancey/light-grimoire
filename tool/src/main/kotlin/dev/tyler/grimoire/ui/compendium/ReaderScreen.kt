@@ -30,6 +30,7 @@ import com.thelightphone.sdk.ui.verticalGridUnitsAsDp
 import dev.tyler.grimoire.compendium.CompendiumRef
 import dev.tyler.grimoire.compendium.CompendiumStore
 import dev.tyler.grimoire.compendium.Kind
+import dev.tyler.grimoire.ui.common.QuietLine
 import dev.tyler.grimoire.ui.common.WheelScrollEffect
 
 /** One wheel detent scrolls this many vertical grid units — about a sixth of the 31-unit screen. */
@@ -86,8 +87,8 @@ class ReaderScreen(
                         .fillMaxWidth(),
                 ) {
                     when {
-                        state.loading -> Quiet("Opening…")
-                        state.missing -> Quiet("Not in the compendium.")
+                        state.loading -> QuietLine("Opening…")
+                        state.missing -> QuietLine("Not in the compendium.")
                         else -> ReaderBody(
                             blocks = state.blocks,
                             links = state.links,
@@ -116,13 +117,4 @@ class ReaderScreen(
         navigateTo({ ReaderScreen(it, target, ref.key, ref.name) })
     }
 
-    @Composable
-    private fun Quiet(text: String) {
-        LightText(
-            text = text,
-            variant = LightTextVariant.Copy,
-            lighten = true,
-            modifier = Modifier.padding(1f.gridUnitsAsDp()),
-        )
-    }
 }

@@ -151,5 +151,11 @@ Open: creatures in v1; journal v1 vs v1.1; roll history;
 - `ui/common/MarkdownBlocks` draws S10's compendium prose **and** S16's CC-BY attribution: never give a
   prose branch a `maxLines` — the licence sentence would be clipped on device with the JVM gate green.
   The whole truncation policy is `maxLinesOf` (only `Block.Mono` clips); `AboutViewModelTest` pins it.
+- Regenerating the bundle (`python3 -m pipeline all`) is *supposed* to fail a spread of pinned counts —
+  re-measure them together, never loosen one: `MarkdownSweepTest` and `TableLayoutTest` (block/table
+  census), `CrossRefsTest` (condition unions), `ReaderContentTest` (per-kind header strings),
+  `CompendiumReaderTest` and `SearchResultsViewModelTest` ("fire"/"shield"/"giant"/"hit points" tiers
+  and row positions), `RefDetailTest` and `SpellLevelViewModelTest` (per-level spell counts),
+  `CompendiumHubViewModelTest` (hub counts). Each file says so in its own KDoc; this is the index.
 - A first launch while the phone is dozing (screen off) is slow (11.5 s measured, throttled CPU)
   but still completes — do not add a timeout.

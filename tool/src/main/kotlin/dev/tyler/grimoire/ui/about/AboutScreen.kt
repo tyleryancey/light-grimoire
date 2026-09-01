@@ -33,6 +33,7 @@ import com.thelightphone.sdk.ui.verticalGridUnitsAsDp
 import dev.tyler.grimoire.BuildConfig
 import dev.tyler.grimoire.ui.common.MARKDOWN_SIDE_MARGIN_UNITS
 import dev.tyler.grimoire.ui.common.MarkdownBlocks
+import dev.tyler.grimoire.ui.common.QuietLine
 import dev.tyler.grimoire.ui.common.WheelScrollEffect
 
 /** One wheel detent scrolls this many vertical grid units — the reader's step, so both long texts feel alike. */
@@ -96,7 +97,7 @@ class AboutScreen(sealedActivity: SealedLightActivity) : LightScreen<Unit, About
                         MarkdownBlocks(state.blocks)
                         val notice = state.notice
                         if (notice != null) {
-                            Quiet(notice)
+                            QuietLine(notice)
                         }
                         Spacer(Modifier.height(SECTION_GAP_UNITS.gridUnitsAsDp()))
                         for (line in state.lines) {
@@ -116,17 +117,4 @@ class AboutScreen(sealedActivity: SealedLightActivity) : LightScreen<Unit, About
         }
     }
 
-    @Composable
-    private fun Quiet(text: String) {
-        LightText(
-            text = text,
-            variant = LightTextVariant.Copy,
-            lighten = true,
-            modifier = Modifier.padding(
-                top = SECTION_GAP_UNITS.gridUnitsAsDp(),
-                start = MARKDOWN_SIDE_MARGIN_UNITS.gridUnitsAsDp(),
-                end = MARKDOWN_SIDE_MARGIN_UNITS.gridUnitsAsDp(),
-            ),
-        )
-    }
 }

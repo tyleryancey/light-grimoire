@@ -31,6 +31,7 @@ import dev.tyler.grimoire.compendium.CompendiumStore
 import dev.tyler.grimoire.compendium.KindGroup
 import dev.tyler.grimoire.compendium.Search
 import dev.tyler.grimoire.ui.common.NavRow
+import dev.tyler.grimoire.ui.common.QuietLine
 import dev.tyler.grimoire.ui.common.ROW_HEIGHT_GRID_UNITS
 import dev.tyler.grimoire.ui.common.TextEditorScreen
 import dev.tyler.grimoire.ui.common.WheelScrollEffect
@@ -85,12 +86,7 @@ class CompendiumHubScreen(
                         // The rows themselves are fixed, but their counts are not; drawing the nine names first
                         // and letting five of them grow a number a frame later would reflow the list under the
                         // finger, so the one quiet line covers the single COUNT query instead.
-                        LightText(
-                            text = "Opening…",
-                            variant = LightTextVariant.Copy,
-                            lighten = true,
-                            modifier = Modifier.padding(1f.gridUnitsAsDp()),
-                        )
+                        QuietLine("Opening…")
                     } else {
                         LightLazyScrollView(
                             listState = listState,
@@ -131,8 +127,8 @@ class CompendiumHubScreen(
      * A cancel — the drawn BACK or the hardware back button — delivers no result at all, so the callback simply
      * never runs and the hub is what the player is left looking at. A query too short to search is treated the
      * same way rather than pushing a screen of noise. The two halves of the search have different floors:
-     * `Search.likePrefix` is null under two usable characters (Search.kt:26-29), so a one-letter query skips the
-     * name query — the only ranked half — entirely, while `Search.ftsQuery` has no floor at all (:35-38) and
+     * `Search.likePrefix` is null under two usable characters, so a one-letter query skips the
+     * name query — the only ranked half — entirely, while `Search.ftsQuery` has no floor at all and
      * `CompendiumDao.textMatches` takes the first `Search.LIMIT` rows a `MATCH 'f*'` reaches in **rowid order,
      * ranked by nothing** (CompendiumDao.kt:169-174). Guarding on `likePrefix` holds the whole screen to the
      * floor the ranked half already enforces.

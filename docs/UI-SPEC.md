@@ -32,11 +32,17 @@ number by ±1; press = the primary action of the screen (roll / confirm / spend)
 318 toward the bottom, 319 press, one DOWN/UP pair per detent) — the emulator still does not
 emit 317–319, which is why S13.2 also draws tap arrows for its wheel job.
 
-On compendium screens the tool owns the wheel: turns perform the screen's stated job (scroll,
-or the level-step on the spells list) and the press is consumed as a no-op wherever the
-screen defines no primary action — an unconsumed wheel event is forwarded to LightOS, which
-foregrounds itself and relaunches the tool, a destructive context switch mid-reading. Volume
-(24/25) and camera (80/27) keys are never consumed and still reach LightOS.
+**Every screen the tool draws owns the wheel**, whether or not it has a use for it: turns perform
+the screen's stated job (scroll, or the level-step on the spells list) and the press is consumed
+as a no-op wherever the screen defines no primary action — an unconsumed wheel event is forwarded
+to LightOS, which foregrounds itself and relaunches the tool, a destructive context switch
+mid-reading. That includes S0 Home, which has nothing to scroll but is the screen the tool opens
+on and the one a player watches for the ≈ 2.5 s import, and S13.3's editor, which has no view
+model and so consumes on the screen itself. Consuming `onKeyDown` alone is not enough:
+`LightKeyHandler` defaults `onKeyUp` and `onKeyMultiple` to false, so the *release* half of every
+detent would relaunch the tool on its own — every wheel consumer forwards all three to
+`WheelHandler.consumes`. Volume (24/25) and camera (80/27) keys are never consumed and still
+reach LightOS.
 
 Global rules: no colour literals; state by weight/glyph; every list bounded; BACK is always
 the top bar's left button (the examples' convention — the SDK draws no back bar); the top

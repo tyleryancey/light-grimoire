@@ -198,17 +198,5 @@ class RefDetailTest {
         assertEquals("Barbarian 1", RefDetail.of(rage, DetailStyle.CLASS_LEVEL), "the S13.4 disambiguator, from the bundle")
     }
 
-    // ---- CATEGORY --------------------------------------------------------------------------------------------
 
-    @Test
-    fun aCategorySlugIsHumanized() {
-        assertEquals("Adventuring gear", RefDetail.of(ref(category = "adventuring-gear"), DetailStyle.CATEGORY), "hyphens are spaces")
-        assertEquals("Tools", RefDetail.of(ref(category = "tools"), DetailStyle.CATEGORY), "one word is just capitalized")
-        assertEquals(
-            "Armor",
-            RefDetail.of(ref(category = null, subcategory = "armor"), DetailStyle.CATEGORY),
-            "a row with no category falls back to its subcategory",
-        )
-        assertNull(RefDetail.of(ref(category = null, subcategory = null), DetailStyle.CATEGORY), "and to nothing when it has neither")
-    }
 }

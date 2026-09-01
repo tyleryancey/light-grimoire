@@ -83,3 +83,18 @@ fun SectionHeaderRow(label: String, modifier: Modifier = Modifier) {
         )
     }
 }
+
+/**
+ * The one quiet line every screen uses for a state that is not a list: "Opening…", "Searching…",
+ * "No matches.", "Not in the compendium." `sdk:ui` has no spinner, so a transient state is a line
+ * of lightened `Copy` and nothing else — no illustration, no placeholder rows.
+ */
+@Composable
+fun QuietLine(text: String, modifier: Modifier = Modifier) {
+    LightText(
+        text = text,
+        variant = LightTextVariant.Copy,
+        lighten = true,
+        modifier = modifier.padding(1f.gridUnitsAsDp()),
+    )
+}

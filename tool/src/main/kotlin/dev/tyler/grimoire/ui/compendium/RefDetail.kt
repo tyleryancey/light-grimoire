@@ -28,8 +28,6 @@ enum class DetailStyle {
     /** A feature's class and level ("Barbarian 1") — S13.4's disambiguator. */
     CLASS_LEVEL,
 
-    /** A humanized category slug ("Adventuring gear"). */
-    CATEGORY,
 }
 
 /**
@@ -46,7 +44,6 @@ object RefDetail {
         DetailStyle.RARITY -> ref.rarity.trimmedOrNull()
         DetailStyle.CR -> challengeRating(ref.cr)
         DetailStyle.CLASS_LEVEL -> classLevel(ref.classKey, ref.level)
-        DetailStyle.CATEGORY -> (ref.category ?: ref.subcategory).trimmedOrNull()?.let { Slug.humanize(it) }
     }
 
     /**

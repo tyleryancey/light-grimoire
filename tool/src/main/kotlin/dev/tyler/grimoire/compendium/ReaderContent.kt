@@ -379,7 +379,12 @@ object ReaderContent {
     /** "dex" -> "Dexterity"; an unmapped value stays as written. */
     private fun abilityName(ability: String): String = ABILITY_NAMES[ability] ?: ability
 
-    /** Slug humanizer: "light-armor" -> "Light armor". */
+    /**
+     * Slug humanizer: "light-armor" -> "Light armor". Hyphens only — every slug this composition reaches
+     * (class proficiencies, ability and skill keys) is hyphenated, and the one `Kind.id` with an underscore
+     * (`rule_sections`) never comes through here. `RefDetail.Slug.humanize` splits on `_` too because it
+     * humanizes kind ids; keep them separate rather than sharing one that guesses at both.
+     */
     private fun humanize(slug: String): String {
         val words = slug.replace('-', ' ')
         return if (words.isEmpty()) words else words.replaceFirstChar { it.uppercaseChar() }
