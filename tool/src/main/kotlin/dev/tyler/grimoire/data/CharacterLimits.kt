@@ -16,14 +16,34 @@ import dev.tyler.grimoire.rules.RulesException
  * and by how much, and the screen shows that sentence.
  *
  * [MAX_CHARACTERS] is not checked here: it is a property of the store, not of one character, and belongs
- * to the repository's `create`.
+ * to the repository's `create` — but its *sentence* lives here ([tooMany]), because S0 refuses a seventh
+ * character before it opens the editor and the repository refuses one that reaches it anyway, and the
+ * player must read the same words either way.
  */
 object CharacterLimits {
     /** How many characters the tool holds (docs/PRD.md, CLAUDE.md); enforced in the repository's create. */
     const val MAX_CHARACTERS = 6
 
+    /**
+     * What a full store says, wherever it is said: the repository's `create` throws it, and S0's `NEW`
+     * shows it without navigating anywhere (docs/UI-SPEC.md S0 — a wizard that ends in a refusal is a
+     * transcription the player made for nothing).
+     */
+    fun tooMany(count: Int): String = "$count characters already (at most $MAX_CHARACTERS) — delete one first"
+
     /** schema `name.maxLength`. The schema's `minLength: 1` admits "   "; a blank name is refused here. */
     const val MAX_NAME = 40
+
+    /**
+     * What an over-long name says, wherever it is said — [check] throws it, and S0 refuses with it the
+     * moment the editor comes back, before the class step (docs/UI-SPEC.md S12 steps 1–2).
+     *
+     * The same reason [tooMany] lives here: `LightTextInputEditor` takes no length parameter, so a
+     * 41-character name is typable, and the only thing worse than refusing it is refusing it *after* the
+     * player has also picked a class — the editor's result is gone by then and the name has to be
+     * transcribed again. Two call sites, one sentence.
+     */
+    fun nameTooLong(length: Int): String = "name is $length characters (at most $MAX_NAME)"
 
     /** schema `classes.minItems` / `maxItems`. */
     const val MIN_CLASSES = 1
@@ -50,9 +70,7 @@ object CharacterLimits {
      */
     fun check(character: Character) {
         if (character.name.isBlank()) throw RulesException("a character needs a name")
-        if (character.name.length > MAX_NAME) {
-            throw RulesException("name is ${character.name.length} characters (at most $MAX_NAME)")
-        }
+        if (character.name.length > MAX_NAME) throw RulesException(nameTooLong(character.name.length))
         if (character.classes.size < MIN_CLASSES) throw RulesException("a character needs at least one class")
         if (character.classes.size > MAX_CLASSES) {
             throw RulesException("${character.classes.size} classes (at most $MAX_CLASSES)")

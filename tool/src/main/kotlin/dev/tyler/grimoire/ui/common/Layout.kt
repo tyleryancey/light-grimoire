@@ -15,7 +15,8 @@ package dev.tyler.grimoire.ui.common
  * **The budget.** `LightGrid` is 27 × 31 units on the LP3 (1 unit ≈ 40 px ≈ 15.2 dp). The top bar
  * takes 3 units and the bottom bar 4 plus its own 1-unit top margin (`LightBottomBar.kt:18-20`),
  * leaving [CONTENT_HEIGHT_GRID_UNITS] of vertical room and, after each row's
- * [ROW_SIDE_MARGIN_UNITS] on both sides, 25 of the 27 columns.
+ * [ROW_SIDE_MARGIN_UNITS] on both sides, at most 25 of the 27 columns — see [ROW_SIDE_MARGIN_UNITS]
+ * for the two scroll views that take more.
  *
  * **Which converter a unit goes through.** `sdk:ui` ships two, and they are not the same function:
  * `Float.gridUnitsAsDp()` is `screenWidthDp / 27` and `Float.verticalGridUnitsAsDp()` is
@@ -35,8 +36,26 @@ package dev.tyler.grimoire.ui.common
 const val CONTENT_HEIGHT_GRID_UNITS = 23f
 
 /**
- * The margin every row keeps on both sides (`NavRow`'s `padding(horizontal = …)`), so a row's
- * usable width is 25 of the grid's 27 columns — the width every budget below is stated against.
+ * The margin every row keeps on both sides (`NavRow`'s `padding(horizontal = …)`).
+ *
+ * **25 of the grid's 27 columns is the best case, not the general one** — the scroll view a row sits in
+ * spends a gutter of its own before this margin is taken, and there are three answers, from
+ * `LightScrollView.kt`:
+ *
+ * - **Drawn outside any scroll view, or inside a lazy list that does not scroll**: nothing is spent, so
+ *   27 − 2 = **25 usable**. S1's pinned header is the case that matters (it is drawn above the list, so
+ *   the stat line really does get its 25); `LightLazyScrollView` pads by 0 while `showScrollBar` is false
+ *   (`:175-179`).
+ * - **Inside a `LightScrollView`** (S0, S3, S10): the 2-unit `Outside` gutter is padded off
+ *   **unconditionally**, drawn bar or not (`:115-121`), so 27 − 2 − 2 = **23 usable**. `MarkdownBlocks`'
+ *   table budget already states this half.
+ * - **Inside a scrolling `LightLazyScrollView`** (S1's nine rows, S13's lists): the gutter is spent
+ *   *twice* — the 2-unit `LightScrollBar` takes its place in the `Row` and the weighted `LazyColumn` is
+ *   then padded by another 2 (`:213-229`) — so 27 − 2 − 2 − 2 = **21 usable**.
+ *
+ * `LightScrollBarPosition.Inside` costs no content width at all in either view (`scrollBarGutterUnits`
+ * returns 0), which is why S3 takes it; a screen whose row is tight for width should reach for that before
+ * it reaches for this margin.
  */
 const val ROW_SIDE_MARGIN_UNITS = 1f
 
@@ -67,6 +86,34 @@ const val SHEET_HEADER_HEIGHT_GRID_UNITS = 4f
 
 /** The half-unit pad above and below S1's two header lines — the `· · ·` the wireframe draws. */
 const val SHEET_HEADER_PAD_UNITS = 0.5f
+
+/**
+ * S1's inspiration star, drawn at the end of the identity line. `LightIcon` defaults to 2 units square
+ * ([NAV_ARROW_WIDTH_UNITS]), which is taller than the [Layout.DETAIL_LINE_UNITS] line it sits on and would
+ * push the pinned header past its 4-unit budget; 1.3 leaves 0.2 of clearance inside that line box.
+ */
+const val SHEET_STAR_ICON_UNITS = 1.3f
+
+/**
+ * The star's tap box: [SHEET_STAR_ICON_UNITS] of glyph in a box exactly as wide as an interactive pip's cell
+ * ([PIP_TAP_PITCH_UNITS], 1.7), and as tall as the [Layout.DETAIL_LINE_UNITS] identity line it shares —
+ * ≈ 26 × 23 dp on the LP3.
+ *
+ * **Shorter than every other target in the tool, and on purpose.** A tappable pip is 26 × 38 dp; the star
+ * matches its width and loses its height, because the header is 4 units and nothing in it may grow. Centring
+ * the star between the two header lines instead would have made the box ≈ 26 × 61 dp — but the wireframe
+ * draws `★` on the identity line, beside the thing it qualifies, and a mark floating between two lines would
+ * read as belonging to neither. Position won. **If device QA finds 23 dp too short to hit, this is the figure
+ * to raise — and raising it takes the star off the line**, which is a spec change, not a layout tweak.
+ */
+const val SHEET_STAR_TAP_WIDTH_UNITS = 1.7f
+
+/**
+ * The width a [NavRow]'s trailing `ARROW_RIGHT` occupies — `LightIcon`'s own default square
+ * (`LightIcon.kt:20`), restated here because an arrow-less row has to reserve exactly that much to keep the
+ * detail column's right edge steady down a list that mixes live and inert rows (S1).
+ */
+const val NAV_ARROW_WIDTH_UNITS = 2f
 
 /** The blank line between two groups of rows (S0's characters and its utilities). */
 const val SECTION_GAP_UNITS = 1f
@@ -113,6 +160,11 @@ const val PIP_TAP_STROKE_UNITS = 0.14f
  * for a full caster's 4 + 3 + 3 = 10 pips, i.e. 1.8 units each. 1.7 keeps a unit of headroom.
  * S3's death row is looser (two labels and six pips afford ≈ 2.4 each) and uses the same figure, so
  * a pip that can be tapped is the same size everywhere in the tool.
+ *
+ * **That 25 is a constraint on S5, not an assumption it may quietly break**: 6 + 1 + 10 × 1.7 = 24 fits
+ * 25 and does not fit the 21 a scrolling `Outside` lazy list leaves ([ROW_SIDE_MARGIN_UNITS]). S5 must
+ * therefore draw its slot line where the full width is available — an `Inside` scrollbar, the way S3
+ * already does, or outside the scroll view — or come back here and re-derive this figure.
  */
 const val PIP_TAP_PITCH_UNITS = 1.7f
 

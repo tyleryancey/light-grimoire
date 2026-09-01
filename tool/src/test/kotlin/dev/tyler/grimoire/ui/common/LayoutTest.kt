@@ -68,6 +68,27 @@ class LayoutTest {
     }
 
     @Test
+    fun theInspirationStarFitsOnTheLineItSitsOn() {
+        // The star is drawn beside the identity line, inside that line's own box — LightIcon's 2-unit default
+        // would push the pinned header past its 4-unit budget. The tap box is as wide as an interactive pip's
+        // cell; its height is the line's, which is the price of keeping the star on the line the frame draws it on.
+        assertTrue(
+            SHEET_STAR_ICON_UNITS < Layout.DETAIL_LINE_UNITS,
+            "the glyph sits inside a Detail line box (${Layout.DETAIL_LINE_UNITS}), unlike LightIcon's $NAV_ARROW_WIDTH_UNITS default",
+        )
+        assertTrue(SHEET_STAR_TAP_WIDTH_UNITS >= PIP_TAP_PITCH_UNITS, "and its target is no narrower than a tappable pip's")
+        assertTrue(SHEET_STAR_TAP_WIDTH_UNITS > SHEET_STAR_ICON_UNITS, "with the glyph centred inside it")
+    }
+
+    @Test
+    fun anInertRowStillSpendsTheArrowsWidth() {
+        // NavRow reserves NAV_ARROW_WIDTH_UNITS when it draws no arrow, so a list mixing live and inert rows
+        // (S1's, until S2-S9 land) keeps one right-hand edge. The figure is LightIcon's own default square.
+        assertEquals(2f, NAV_ARROW_WIDTH_UNITS, "LightIcon.kt:20's DEFAULT_SIZE")
+        assertTrue(NAV_ARROW_WIDTH_UNITS < ROW_HEIGHT_GRID_UNITS, "and the glyph fits the row it trails")
+    }
+
+    @Test
     fun aCopyWeightSheetHeaderWouldNotFitWhichIsWhyItIsDetail() {
         val copyHeader = 2 * SHEET_HEADER_PAD_UNITS + 2 * Layout.COPY_LINE_UNITS
         val nineRows = 9 * ROW_HEIGHT_GRID_UNITS
@@ -162,6 +183,10 @@ class LayoutTest {
         assertTrue(PIP_TAP_DIAMETER_UNITS > PIP_DIAMETER_UNITS, "a control is aimed at, a glyph is read")
         assertTrue(PIP_TAP_DIAMETER_UNITS < PIP_TAP_PITCH_UNITS, "and still sits inside its tap box")
         // S5's worst case: three ordinal labels, two group gaps and a full caster's 4 + 3 + 3 pips.
+        // The 25 here is the *full* row width, which holds only where no scrollbar gutter is spent —
+        // S3's `Inside` bar, or a list that does not scroll (ROW_SIDE_MARGIN_UNITS derives all three
+        // cases). A scrolling `Outside` lazy list would leave 21, and this line does not fit in 21: that
+        // is a constraint on how S5 draws its strip, recorded here rather than discovered on the phone.
         val usable = 27f - 2 * ROW_SIDE_MARGIN_UNITS
         val labels = 3 * (3f / Layout.DETAIL_CHARS_PER_UNIT)
         val line = labels + 2 * 0.5f + 10 * PIP_TAP_PITCH_UNITS
@@ -173,6 +198,8 @@ class LayoutTest {
         // "success" and "failure" at Detail, plus a gap between the two groups, plus six pips. This is the
         // row in *both* DYING and STABLE: STABLE passes `tapSized = true` so its pips keep this pitch when
         // the handler goes away, which is what stops the six discs jumping as the third success lands.
+        // S3 really does get all 25: its `LightScrollView` takes `LightScrollBarPosition.Inside`, which
+        // costs no content width (`scrollBarGutterUnits` returns 0) — the reason HpScreen chose it.
         val usable = 27f - 2 * ROW_SIDE_MARGIN_UNITS
         val labels = 2 * (7f / Layout.DETAIL_CHARS_PER_UNIT)
         val row = labels + 1f + 6 * PIP_TAP_PITCH_UNITS

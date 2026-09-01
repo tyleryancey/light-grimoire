@@ -160,11 +160,7 @@ class FakeCharacterRepository(
         CharacterLimits.check(character)
         val created = if (character.id.isBlank()) character.copy(id = newId()) else character
         if (stored.containsKey(created.id)) throw RulesException("that character is already stored")
-        if (stored.size >= CharacterLimits.MAX_CHARACTERS) {
-            throw RulesException(
-                "${stored.size} characters already (at most ${CharacterLimits.MAX_CHARACTERS}) — delete one first",
-            )
-        }
+        if (stored.size >= CharacterLimits.MAX_CHARACTERS) throw RulesException(CharacterLimits.tooMany(stored.size))
         queue.remove(created.id)
         stored[created.id] = created
         updatedAt[created.id] = now()

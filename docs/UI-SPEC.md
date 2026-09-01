@@ -131,9 +131,13 @@ advances per kind (22 steps, ≈ 2.5 s on the LP3 — `sdk:ui` has no spinner); 
 shows its reason in that line and the next show retries. The list above appears only once the
 store is Ready.
 
-**M2 interim (31 Aug 2026):** until characters and the M3/M4 screens exist, the Ready branch
-shows one `COMPENDIUM ▸` row in place of the character list, and a bottom bar with the single
-text item `ABOUT`; `NEW`, `JOURNAL`, `DICE` and characters return with M3/M4.
+**M3 interim (1 Sep 2026):** the character list, `COMPENDIUM ▸`, `NEW` and `ABOUT` are all
+live. `JOURNAL` and `DICE` are still absent rather than inert, by the tool's no-dead-controls
+rule (the same rule that removes STABLE's roll button on S3); they return with M5. `NEW` runs
+the first two wizard steps only — name, then a class at level 1 with S12's own defaults for
+everything else — because S12 does not exist yet; it *is* S12 steps 1–2, so M4 absorbs it
+rather than replacing it. A name over 40 characters is refused as soon as the editor returns,
+before the class step, rather than at the write.
 
 ## S1 Sheet hub
 
@@ -220,6 +224,13 @@ lists active conditions and the concentration spell with "(C)". Wheel scrolls th
 rows per detent (`WheelScrollEffect`); wheel press has no primary action here and is consumed
 as a no-op — every row navigates on tap, none carries a wheel-selected focus the way S6's
 counters do.
+
+**M3 interim (1 Sep 2026):** only the `HP` row navigates; the other eight are drawn inert —
+present, so the fit above is the finished screen's fit and the list never reflows as screens
+land, but without an arrow and not clickable, since a row that goes nowhere is the dead
+control this spec removes elsewhere. `EDIT` (M4's S12) and the `DICE` bottom bar (M5's S15)
+are omitted for the same reason; the bar is still drawn empty so it keeps reserving its
+height. Each row goes live with its own screen.
 
 ## S2 Turn (combat mode)
 
@@ -779,7 +790,8 @@ A short wizard, each step one screen, all wheel-driven except two names:
 
 1. **Name** (editor, single line, caps).
 2. **Class & level** — class list (12 SRD + "Other…" which asks a name and hit die), level
-   via wheel; subclass list (SRD or "Other…").
+   via wheel; subclass list (SRD or "Other…"). *(M3's interim `NEW` on S0 ships the 12 SRD
+   classes at level 1 only — no "Other…", no level wheel, no subclass. M4 completes the step.)*
 3. **Race** — list (SRD 9 + subraces + "Other…").
 4. **Ability scores** — six numbers, wheel per row, default 10. Enter *final* scores.
 5. **Saves & skills** — two-column checkboxes; defaults pre-ticked from class/background.

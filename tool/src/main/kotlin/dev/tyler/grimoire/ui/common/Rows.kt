@@ -2,9 +2,11 @@ package dev.tyler.grimoire.ui.common
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,19 +22,27 @@ import com.thelightphone.sdk.ui.lightClickable
  * The UI-SPEC `▸` navigating row (kind list, record list, search results): name in `Copy`
  * weighted to fill, an optional right-aligned lightened `Detail` (e.g. a count or a spell's
  * level), and the trailing `ARROW_RIGHT` nav glyph. Fixed [ROW_HEIGHT_GRID_UNITS] tall.
+ *
+ * **A null [onClick] draws the row with no arrow and no tap target**, which is a read-out rather
+ * than a disabled control: the `▸` is the tool's only promise that a row leads somewhere, so a row
+ * that does not lead anywhere must not draw one. S9's `□ Holy Symbol` is the spec's own example, and
+ * S1 uses it for the hub rows whose screens M3 has not built yet — the row still says what it says
+ * (`CONDITIONS · Bless (C)`), it simply does not offer to open anything. Nothing is greyed: the tool
+ * has one ink, and a lightened label would read as a different kind of row, not an inert one. Same
+ * deliberate dumbness as `PipStrip.onTap`, and the same reason — the caller knows what a tap means.
  */
 @Composable
 fun NavRow(
     name: String,
     detail: String? = null,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(ROW_HEIGHT_GRID_UNITS.gridUnitsAsDp())
-            .lightClickable { onClick() }
+            .then(if (onClick != null) Modifier.lightClickable { onClick() } else Modifier)
             .padding(horizontal = ROW_SIDE_MARGIN_UNITS.gridUnitsAsDp()),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -53,7 +63,14 @@ fun NavRow(
                 maxLines = 1,
             )
         }
-        LightIcon(LightIcons.ARROW_RIGHT)
+        // An inert row still spends the arrow's width, so the right-hand detail column keeps one edge down
+        // the whole list. S1 is the case that needs it: one live row (`HP`) among eight inert ones, whose
+        // details would otherwise sit two units further right than its own.
+        if (onClick != null) {
+            LightIcon(LightIcons.ARROW_RIGHT)
+        } else {
+            Spacer(Modifier.width(NAV_ARROW_WIDTH_UNITS.gridUnitsAsDp()))
+        }
     }
 }
 

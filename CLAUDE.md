@@ -83,6 +83,9 @@ submission). Tick boxes there; mirror the current milestone here:
       screens (31 Aug 2026: 330 JVM tests in 36 classes; QA'd on the LP3 — 2 290 ms first import,
       "fire" finds Fireball, the wheel scrolls a 2 997-word rule section without LightOS taking
       the tool back).
+- [ ] **M3** — sheet & trackers. (task 1 — the character store, S0, S1 and S3 — code done
+      1 Sep 2026, 616 JVM tests in 57 classes; device QA outstanding. Left: S4/S6/S7, then
+      S2/S5/S8/S9.)
 
 ## Commands
 

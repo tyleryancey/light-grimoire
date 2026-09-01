@@ -114,9 +114,7 @@ class DbCharacterRepository(
         val stored = if (character.id.isBlank()) character.copy(id = newId()) else character
         if (dao.exists(stored.id)) throw RulesException("that character is already stored")
         val count = dao.count()
-        if (count >= CharacterLimits.MAX_CHARACTERS) {
-            throw RulesException("$count characters already (at most ${CharacterLimits.MAX_CHARACTERS}) — delete one first")
-        }
+        if (count >= CharacterLimits.MAX_CHARACTERS) throw RulesException(CharacterLimits.tooMany(count))
         // Every other write reconciles the pending map — save fills it, delete drops it, the loop clears it —
         // and this is the one path that would not. There was no row a moment ago, so anything held for this id
         // is a leftover no write will ever land (a save that preceded its create, or one that ran out of
