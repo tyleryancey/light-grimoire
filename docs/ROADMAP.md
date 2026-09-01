@@ -29,7 +29,7 @@ before any UI; commit per task; `CLAUDE.md` mirrors this list and is the handoff
 
 ## M3 — Sheet & trackers (4–5 days)
 
-- [ ] Home (S0), Sheet hub (S1), HP pad (S3) with death saves, Checks & saves (S4), Conditions (S7), Features & resources (S6).
+- [ ] Home (S0), Sheet hub (S1), HP pad (S3) with death saves, Checks & saves (S4), Conditions (S7), Features & resources (S6). → **S0, S1 and S3 done 1 Sep 2026** (`feat/m3-character-store`): the character store in `grimoire.db`, the debounced NonCancellable save, the shared components (Canvas pips, number pad, chips, `EmphasisText`), and `NEW` as S12 steps 1–2. 616 JVM tests in 57 classes. QA'd on the LP3: created a cleric through `NEW`, took 5 damage, pressed BACK and force-stopped **150 ms later — inside the 400 ms debounce** — and the relaunched sheet read **HP 3 / 8**, so the `onScreenHide` flush reaches a buffer that `viewModelScope`'s death cannot cancel (PRD:108). The wheel steps ±1 in the current verb with the tool staying foreground; bloodied renders visibly bolder than the identity line; the DYING panel draws above the pad so `HEAL +1` stays reachable at 0 HP. S4/S6/S7 are the next task.
 - [ ] Spells (S5) with slot pips, prepare mode, cast → spend (upcast chooser), concentration line.
 - [ ] Turn (S2): rows from attacks + prepared spells + `showOnTurn` counters; one-tap attack+damage; long-press chooser; roll modal (S11).
 - [ ] Rest (S8): short rest with hit-dice spend (roll/average), long rest with confirm + summary.

@@ -83,9 +83,9 @@ submission). Tick boxes there; mirror the current milestone here:
       screens (31 Aug 2026: 330 JVM tests in 36 classes; QA'd on the LP3 — 2 290 ms first import,
       "fire" finds Fireball, the wheel scrolls a 2 997-word rule section without LightOS taking
       the tool back).
-- [ ] **M3** — sheet & trackers. (task 1 — the character store, S0, S1 and S3 — code done
-      1 Sep 2026, 616 JVM tests in 57 classes; device QA outstanding. Left: S4/S6/S7, then
-      S2/S5/S8/S9.)
+- [ ] **M3** — sheet & trackers. (task 1 — the character store, S0, S1 and S3 — done 1 Sep 2026,
+      616 JVM tests in 57 classes, QA'd on the LP3: a −5 tap, BACK, force-stop 150 ms later, and
+      the relaunched sheet still reads 3/8. Left: S4/S6/S7, then S2/S5/S8/S9.)
 
 ## Commands
 
@@ -134,8 +134,12 @@ Open: creatures in v1; journal v1 vs v1.1; roll history;
   trailing comment** fails the build — only a line starting with `//` is exempt.
 - `clean` and `assemble*` must be separate Gradle invocations (generated manifest).
 - `LightTextInputEditor`'s text area does not scroll — keep entries single-line/short.
-- Popping a screen cancels `viewModelScope` synchronously — `withContext(NonCancellable)`
-  around every save; merge related writes into one coroutine.
+- Popping a screen cancels `viewModelScope` synchronously, and a coroutine that has not started yet
+  never runs — so `withContext(NonCancellable)` *inside* `viewModelScope` saves nothing. Character
+  writes go through `CharacterRepository.save()`/`flush()`, deliberately **not** suspend, buffered on
+  `GrimoireStore`'s process scope; every sheet screen extends `ui/common/CharacterViewModel`, which
+  flushes on `onScreenHide`, `onAppPause` **and** `onCleared` — none is a superset of the others, and
+  the SDK has no `onStop`/`onDestroy`.
 - `onScreenShow` fires on `onResume` too (volume/wheel modal relaunch) — guard refreshes.
 - `versionName` is strict `x.y.z`; `versionCode` must increase per release; keep this
   file's toml block byte-identical to `tool/lighttool.toml`.
