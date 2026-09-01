@@ -322,6 +322,24 @@ def apply_temp_hp(ch: dict, amount: int) -> dict:
     return ch
 
 
+def adjust_temp_hp(ch: dict, delta: int) -> dict:
+    """Correct the temporary hit points number directly: a signed delta, clamped at 0,
+    touching neither HP nor death saves. This is the HP pad editing a mis-tapped number
+    (S3), not a spell or feature granting temp HP (that is apply_temp_hp's don't-stack
+    rule) — the two must stay separate functions/events. No upper clamp: the SRD puts no
+    cap on temp HP.
+
+    Deliberately the one HP-adjacent function with NO dead guard, where heal(),
+    spend_hit_die() and long_rest() all return early: a correction is bookkeeping about
+    what the sheet says, not a rules effect on the character, and it can revive nobody
+    because it never touches HP or the death saves. Pinned by the events.json scenario
+    "temp hp correction applies even to the dead" — adding a guard here for symmetry
+    with its neighbours would break that fixture in both languages, which is the point."""
+    ch = deepcopy(ch)
+    ch["hp"]["temp"] = max(0, int(ch["hp"].get("temp", 0)) + int(delta))
+    return ch
+
+
 def death_save(ch: dict, d20: int) -> dict:
     """Roll a death saving throw with a given natural d20 (1..20)."""
     ch = deepcopy(ch)
@@ -346,6 +364,26 @@ def death_save(ch: dict, d20: int) -> dict:
     return ch
 
 
+def revive(ch: dict) -> dict:
+    """Clear the death-save block back to its default, leaving hit points exactly where
+    they are. S3's [ REVIVE ]: a dead character returns to 0 HP and DYING, ready for
+    saves again — the DM's call at the table, which the tool only records.
+
+    It is a rules event and not a view-model copy() because deathSaves is a rules field:
+    every other mutation of it (damage, heal, death_save, spend_hit_die, long_rest) goes
+    through this module, and the carve-out for trivial setters names only conditions,
+    inspiration, currency and what is equipped.
+
+    No guard on `dead`, deliberately, and no HP change either. Revive is the one function
+    whose whole job is to undo a state the rules produced, so restricting it to the state
+    it usually undoes would only add a branch nothing calls: on a living character it
+    clears the successes and failures accumulated at 0 HP, which is what a player asking
+    for it at the table means. Healing is what restores hit points; this restores nothing."""
+    ch = deepcopy(ch)
+    _reset_death_saves(ch)
+    return ch
+
+
 # ------------------------------------------------------------------------------ rests
 
 def _reset_counters(ch: dict, triggers: set[str]) -> None:
@@ -355,8 +393,12 @@ def _reset_counters(ch: dict, triggers: set[str]) -> None:
 
 
 def spend_hit_die(ch: dict, die: int, roll_value: int) -> dict:
-    """Short-rest hit die: regain roll + CON mod (minimum 0)."""
+    """Short-rest hit die: regain roll + CON mod (minimum 0). A dead character cannot
+    benefit from a short rest — matches heal() and long_rest(): unchanged, the die is
+    not spent."""
     ch = deepcopy(ch)
+    if ch.get("deathSaves", {}).get("dead"):
+        return ch
     pools = [p for p in ch.get("hitDice", []) if int(p["die"]) == die]
     if not pools or pools[0]["used"] >= pools[0]["total"]:
         raise ValueError(f"no d{die} hit dice left")
@@ -478,8 +520,12 @@ def apply_event(ch: dict, ev: dict) -> dict:
         return apply_healing(ch, ev["amount"])
     if kind == "temp":
         return apply_temp_hp(ch, ev["amount"])
+    if kind == "tempDelta":
+        return adjust_temp_hp(ch, ev["delta"])
     if kind == "deathSave":
         return death_save(ch, ev["d20"])
+    if kind == "revive":
+        return revive(ch)
     if kind == "spendHitDie":
         return spend_hit_die(ch, ev["die"], ev["roll"])
     if kind == "shortRest":

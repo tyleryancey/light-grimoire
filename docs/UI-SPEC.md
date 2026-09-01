@@ -2,13 +2,40 @@
 
 Canvas: LP3 3.92" 1080×1240, `LightGrid` 27 × 31 units (1 unit ≈ 40 px ≈ 15.2 dp). Top bar
 3 units, bottom bar 4 units plus its own 1-unit top margin (`LightBottomBar.kt:18-20`) →
-23 content units ≈ 9 rows of `Copy` text or ~15 rows of `Detail`. Type scale is multiplied by
+23 content units ≈ 9 full rows of `Copy` text or 15 rows of `Detail`. Type scale is multiplied by
 `screenHeightDp/600` (≈ 0.79 on the LP3), so `Copy` renders ≈ 24 sp, `Paragraph` ≈ 19 sp,
 `Detail` ≈ 16 sp, `Subtitle` ≈ 41 sp, `Title` ≈ 90 sp.
 
+**One line box, in grid units, is `fontSize × lineHeight × 31/600`** — the screen-height scale
+and the pixel density cancel, so the figure is exact for any LP3 (`LightTheme.kt:85-136`):
+
+| Variant | sp × lineHeight | Units |
+|---|---|---|
+| `Heading` | 38 × 1.35 | 2.65 |
+| `Copy` | 30 × 1.50 | 2.33 |
+| `Subheading` | 30 × 1.25 | 1.94 |
+| `Paragraph` | 24.5 × 1.25 | 1.58 |
+| `Detail` | 20 × 1.45 | 1.50 |
+| `Fine` | 25 × 1.15 | 1.49 |
+
+Every vertical budget below is derived from this table; the tool's own navigating row is a
+fixed 2.5 units (`ROW_HEIGHT_GRID_UNITS`, `ui/common/Rows.kt:19`), taller than any single line
+box because it carries the tap target.
+
 Wireframes below are 27 characters wide = one grid unit per character. `▔` top bar, `▁`
 bottom bar, `●`/`○` filled/hollow pip, `▸` row that navigates, `◂` its mirror (S13.2's level
-stepper), `■`/`□` toggle on/off.
+stepper), `■`/`□` toggle on/off, `· · ·` a pinned-header boundary (S1) — not drawn on device,
+unlike every other inline `·` in these frames, which is a plain mid-line separator
+("Cleric 5 · Hill Dwarf").
+
+One character ≈ one grid unit only holds at `Copy` weight, the size these frames are drawn at.
+Several screens below draw compact stat, pip and toggle lines at `Detail`, which is 20 sp
+against `Copy`'s 30, so it packs exactly **1.5×** as many characters per unit — the S1 stat line
+`AC 18  INIT +0  SPD 25  PB +3` is 29 characters, wider than the 27-column frame, but ≈ 19 of
+S1's 25 usable units (27 minus the 1-unit side margin `Rows.kt` gives every row); ≈ 37
+characters of `Detail` fit on one such line. `Fine` (25 sp) holds 1.2 characters per unit the
+same way. Read a wireframe as a *layout*, not a character-for-character render, wherever it
+runs past 27 columns.
 
 Component mapping (all `sdk:ui`, verified 29 Aug 2026 — see `.claude/skills/lp3-ui-patterns`):
 
@@ -33,12 +60,17 @@ number by ±1; press = the primary action of the screen (roll / confirm / spend)
 emit 317–319, which is why S13.2 also draws tap arrows for its wheel job.
 
 **Every screen the tool draws owns the wheel**, whether or not it has a use for it: turns perform
-the screen's stated job (scroll, or the level-step on the spells list) and the press is consumed
+the screen's stated job — scroll, a level step, a verb's ±1, a focused counter's ±1, an
+exhaustion step, a coin denomination's ±1, depending on the screen (each S0–S9 section below
+states its own) — and the press is consumed
 as a no-op wherever the screen defines no primary action — an unconsumed wheel event is forwarded
 to LightOS, which foregrounds itself and relaunches the tool, a destructive context switch
-mid-reading. That includes S0 Home, which has nothing to scroll but is the screen the tool opens
-on and the one a player watches for the ≈ 2.5 s import, and S13.3's editor, which has no view
-model and so consumes on the screen itself. Consuming `onKeyDown` alone is not enough:
+mid-reading. That includes S0 Home — whose wheel scrolls the character list once the
+compendium is Ready, but which before Ready has neither a list to scroll nor a primary action,
+and so must consume **both** halves as no-ops for the ≈ 2.5 s the import runs: a turn that
+reached LightOS there would restart Home on the one screen a first-time player watches all the
+way through — and S13.3's editor, which has no view model and so
+consumes on the screen itself. Consuming `onKeyDown` alone is not enough:
 `LightKeyHandler` defaults `onKeyUp` and `onKeyMultiple` to false, so the *release* half of every
 detent would relaunch the tool on its own — every wheel consumer forwards all three to
 `WheelHandler.consumes`. Volume (24/25) and camera (80/27) keys are never consumed and still
@@ -50,6 +82,18 @@ bar centre is the screen name in `Fine`, except S13.2's two-line level stepper (
 the SDK's own `LightTopBarCenter.TwoLineDetail` weight); the bottom bar holds screen actions
 only.
 
+**Choosers, confirms and search never sit under what they lead to.** A long-press chooser, a
+confirm screen and the search editor are each a typed-result screen (`SimpleLightScreen<R>`)
+that pops back to its caller before anything happens with the result — the caller reads the
+result and pushes whatever comes next. This is the shape S13.3's editor already uses to reach
+S13.4 (the editor pops to the hub, which then pushes results), applied wherever else a screen
+would otherwise sit permanently under two more: S2's long-press chooser pops before S2 pushes
+S10 for "Read"; S8's long-rest confirm pops before S8 pushes the rest summary; S9's `+` search
+editor pops before S9 pushes the equipment/magic-item picker. Static navigation depth (the
+closing Navigation map's rule; D5's reader-cross-link chain is the sole exception) stays ≤ 4 at
+every one of these joins — none of them needed a new exception, only the pattern M2 already
+established.
+
 ---
 
 ## S0 Home
@@ -59,7 +103,7 @@ only.
 Brother Aldric            ▸
   Cleric 5 · Hill Dwarf
 Vessa Quickfinger         ▸
-  Rogue 3 · Halfling
+  Rogue 3 · Lightfoot Halfling
                             
 COMPENDIUM                ▸
 JOURNAL                   ▸
@@ -67,8 +111,19 @@ DICE                      ▸
                             
 ▁▁▁▁▁▁ NEW ▁▁▁ ABOUT ▁▁▁▁▁▁
 ```
-Characters first (≤ 6), then the three utilities. Tap a character → S1. `NEW` → S12.
-If exactly one character exists the tool still opens here (predictable, one extra tap).
+Characters first (≤ 6, two lines each — name, then `summary` verbatim from the character's own
+`race.name`/class/level, e.g. "Lightfoot Halfling" rather than a shortened "Halfling" — the
+player transcribed it, so it is shown as transcribed), then the three utilities, one line each.
+Six two-line character rows (4 units each) plus a gap plus three one-line utility rows is 32.5
+units against the 23 available, and mixes row heights `LightLazyScrollView`'s uniform-row
+contract cannot draw — so S0 is a `LightScrollView`, not a lazy list; mixed heights are exactly
+what it is for. Tap a character → S1. `NEW` → S12. If exactly one character exists the tool
+still opens here (predictable, one extra tap).
+
+Wheel scrolls the list, one character row per detent, once the store is Ready; wheel press has
+no primary action anywhere on this screen and is consumed as a no-op. **Before** Ready, while
+`Preparing the rules…` is up, there is no list and no action, so the turn is consumed as a
+no-op too — both halves, for the whole import.
 
 First launch (and after a bundle or schema change): until the compendium is imported the list
 is replaced by one line, `Preparing the rules…`, over a determinate `LightProgressBar` that
@@ -76,31 +131,106 @@ advances per kind (22 steps, ≈ 2.5 s on the LP3 — `sdk:ui` has no spinner); 
 shows its reason in that line and the next show retries. The list above appears only once the
 store is Ready.
 
-**M2 interim (31 Aug 2026):** until characters and the M3/M4 screens exist, the Ready branch
-shows one `COMPENDIUM ▸` row in place of the character list, and a bottom bar with the single
-text item `ABOUT`; `NEW`, `JOURNAL`, `DICE` and characters return with M3/M4.
+**M3 interim (1 Sep 2026):** the character list, `COMPENDIUM ▸`, `NEW` and `ABOUT` are all
+live. `JOURNAL` and `DICE` are still absent rather than inert, by the tool's no-dead-controls
+rule (the same rule that removes STABLE's roll button on S3); they return with M5. `NEW` runs
+the first two wizard steps only — name, then a class at level 1 with S12's own defaults for
+everything else — because S12 does not exist yet; it *is* S12 steps 1–2, so M4 absorbs it
+rather than replacing it. A name over 40 characters is refused as soon as the editor returns,
+before the class step, rather than at the write.
 
 ## S1 Sheet hub
 
 ```
-▔▔ BACK ▔▔ ALDRIC ▔▔ EDIT ▔▔
-Cleric 5 · Hill Dwarf   ★ 
+▔▔ BACK ▔ BROTHER… ▔ EDIT ▔
+Cleric 5 · Hill Dwarf     ★
 AC 18  INIT +0  SPD 25  PB +3
+· · · · · · · · · · · · ·
 HP  31 / 43   TEMP 0      ▸
 ●●●● ●●● ●○   slots     ▸
 TURN                      ▸
 CHECKS & SAVES            ▸
 SPELLS                    ▸
-FEATURES & RESOURCES      ▸
 CONDITIONS  · Bless (C)   ▸
-GEAR & COIN               ▸
 REST                      ▸
+FEATURES & RESOURCES      ▸
+GEAR & COIN               ▸
 ▁▁▁▁▁▁▁▁▁▁ DICE ▁▁▁▁▁▁▁▁▁▁▁
 ```
-`★` = inspiration toggle (filled when held; 2014 term). HP row shows *bloodied* by rendering
-the numbers in `Subheading` weight when current ≤ half. The slot row is a compact pip
-strip (levels 1–3 shown; deeper levels on S5). Conditions row lists active conditions and
-the concentration spell with "(C)". Everything is one tap away.
+`★` = inspiration toggle (filled when held; 2014 term), pinned beside the identity line. The
+top **4 units** are a pinned header, drawn once and never scrolled: a 0.5-unit pad, the
+identity line (`Detail`: class/level · race, star trailing), the stat line (`Detail`:
+AC/INIT/SPD/PB), and a 0.5-unit pad separating the header from the list beneath it. Two
+`Detail` line boxes are 1.50 units each by the preamble's table, so 0.5 + 1.5 + 1.5 + 0.5 = 4.0
+exactly; the `· · ·` row in the frame *is* that lower pad — it marks where the header ends and
+is not itself drawn on device. Below it is a `LightLazyScrollView` of the nine navigating rows,
+each the uniform 2.5-unit `NavRow` height. The header has to be pinned and `Detail`-compact
+because 9 × 2.5 = 22.5 of the 23 content units leaves 0.5 for everything else: a header of two
+`Copy` lines is 4.65 units, and nine rows plus that header is 27.15 units against 23. Nothing
+shrinks the rows — 2.5 units is the tool's one row height, and a `Copy` line box alone is 2.33.
+
+The top bar centre shows the whole character name, **uppercased and untruncated by this
+tool** — names run to 40 characters (`character.schema.json`) and `LightTopBarCenter`'s centre
+is capped at 18 grid units in `Fine` (`CENTER_MAX_WIDTH_UNITS`, `LightTopBar.kt:19`), which the
+SDK then ellipsizes itself (`widthIn(max = …)` at `LightTopBar.kt:105`, `maxLines = 1` +
+`TextOverflow.Ellipsis` at `:114-115`). Every shortening heuristic is wrong on some real name
+("Brother Aldric" wants its last word kept, "Vessa Quickfinger" its first), so the tool passes
+the full uppercased name and lets the SDK's ellipsis have the last word.
+
+The `BROTHER…` above is the **wireframe's** limit, not the device's: once `BACK` and `EDIT` are
+drawn, this 27-column frame leaves the centre about eight columns. The real bar is wider — at
+`Fine`'s 1.2 characters per unit (25 sp against `Copy`'s 30, the preamble's conversion), 18
+units hold 18 × 30/25 ≈ **21 characters**. So the fixture this frame draws, "Brother Aldric"
+(14), renders whole on device and never ellipsizes; the longest name in `fixtures/characters/`,
+"Ser Maelis of the Pact" (22), is the one that actually meets the SDK's ellipsis, and a
+schema-maximum 40-character name loses roughly half itself. Twenty-one characters is far more
+than this frame can draw and far less than the schema allows — which is exactly why the tool
+does not try to choose the truncation point.
+
+Nine rows, one turn of the wheel: 19 of the 23 content units go to the list (23 − 4 for the
+pinned header), and 19 / 2.5 = 7.6 rows are visible without scrolling — rows 1–7 (`HP` through
+`REST`) are visible on open, row 8 shows as a part-row that tells the player the list scrolls;
+`FEATURES & RESOURCES` and `GEAR & COIN` arrive after one wheel turn or a touch drag. The seven
+visible rows are exactly the ones a one-tap contract names: `HP` (HP change, death save),
+`slots` (the fastest look at what is castable), `TURN` (attack+damage, in-combat cast),
+`SPELLS` (cast), `CONDITIONS` (condition toggle) and `REST` (rest start) — plus
+`CHECKS & SAVES`, which no contract names but which `docs/PRD.md:43-46` ranks above
+`FEATURES & RESOURCES` in per-session frequency (5–15 skill checks and 3–10 saves a session,
+ranked separately there, against 3–10 feature-counter spends; the same line puts inventory
+out-of-session), so it takes the seventh visible slot instead of them. "Everything is one tap
+away" now means: seven of nine rows, and every one-tap-contract action, in one tap; the
+remaining two rows are one wheel turn (or touch drag) plus one tap.
+
+**Owed to Tyler — the row order is a substantive change, not just a layout one.** Fitting nine
+rows into 7.6 visible slots forced `REST` up out of row 9 (below the fold, which would have
+broken "rest start" in the one-tap contract) and `FEATURES & RESOURCES` / `GEAR & COIN` down to
+rows 8–9. The frequency argument above is the reason, but re-ranking the hub is an information-
+architecture decision this repair pass is proposing, not one it was handed; it wants explicit
+ratification before S1 is built.
+
+HP row shows *bloodied* by rendering the numbers **bold**, via a new small helper,
+`EmphasisText` (`ui/common`) — not `Subheading`: `Subheading` and `Copy` are both 30 sp
+`FontWeight.Normal` (`LightTheme.kt:91-102`), differing only by 0.9 sp of tracking and a
+tighter line box (1.25 against 1.50, i.e. 1.94 units against 2.33) — neither of which reads as
+"heavier type" (PRD principle 4) — and `LightText` exposes no weight parameter at all
+(`LightText.kt:75-87`). `EmphasisText` lifts the `BasicText` + `buildAnnotatedString` +
+`SpanStyle(fontWeight = FontWeight.Bold)` path `ui/common/MarkdownBlocks.kt`'s `InlineSpans`
+already uses and M2 device-verified, for a single bold run outside prose. (S3's `DEAD` label
+has no such problem: `Heading` is 38 sp, genuinely larger than `Copy`/`Subheading`'s shared
+30 sp — see S3.)
+
+The slot row is a compact pip strip (levels 1–3 shown; deeper levels on S5). Conditions row
+lists active conditions and the concentration spell with "(C)". Wheel scrolls the list, three
+rows per detent (`WheelScrollEffect`); wheel press has no primary action here and is consumed
+as a no-op — every row navigates on tap, none carries a wheel-selected focus the way S6's
+counters do.
+
+**M3 interim (1 Sep 2026):** only the `HP` row navigates; the other eight are drawn inert —
+present, so the fit above is the finished screen's fit and the list never reflows as screens
+land, but without an arrow and not clickable, since a row that goes nowhere is the dead
+control this spec removes elsewhere. `EDIT` (M4's S12) and the `DICE` bottom bar (M5's S15)
+are omitted for the same reason; the bar is still drawn empty so it keeps reserving its
+height. Each row goes live with its own screen.
 
 ## S2 Turn (combat mode)
 
@@ -128,10 +258,27 @@ level, then counters flagged `showOnTurn`. Result appears as a 2-second modal
 (`S11 Roll result`); the row then shows the last result inline in `Detail` until the next
 roll, so a missed modal costs nothing.
 
+Wheel scrolls the row list (attacks, spells and flagged counters together can exceed the
+visible area); wheel press has no primary action and is consumed as a no-op — rolling needs a
+specific row's tap, not a generic press.
+
 ## S3 HP pad
 
+Four states — **UP**, **DYING**, **STABLE**, **DEAD** — the same top and bottom bar throughout;
+only the middle changes. The top bar's right action is `UNDO`, not `DEATH`: the swap into the
+death states at 0 HP is automatic, so a button to reach them would do nothing a hit point does
+not already do — see `UNDO` at the end of this section. `UNDO` is drawn in all four states and
+whether or not there is anything to undo: the chrome is what stays fixed, and a tap on an empty
+snapshot is a consumed no-op — a cheaper surprise than a button appearing under a thumb.
+
+**M3 interim (1 Sep 2026):** the bottom bar is drawn **empty** until S8 exists — an empty
+`LightBottomBar` still reserves its 4-unit height and 1-unit top margin, so every budget below is
+the one the finished screen has, and the tool's no-dead-controls rule (S0's M2 interim, STABLE's
+missing roll button) says not to draw `REST` before it goes anywhere. `REST` returns with S8.
+
+**UP** — `current > 0`:
 ```
-▔▔ BACK ▔▔▔▔ HP ▔▔ DEATH ▔▔
+▔▔ BACK ▔▔▔▔ HP ▔▔ UNDO ▔▔▔
                             
         31 / 43            
         temp 0             
@@ -144,40 +291,227 @@ roll, so a missed modal costs nothing.
                             
 ▁▁▁▁▁▁▁▁▁▁ REST ▁▁▁▁▁▁▁▁▁▁▁
 ```
-Verb chips select what the buttons and wheel apply to. Wheel = ±1 in the current verb.
-Damage hits temp first; heal caps at max; temp keeps the higher value (rules.py). At 0 HP
-the screen swaps its middle for death saves:
+Wheel press: no primary action, consumed as a no-op.
 
+At 0 HP the screen inserts a death-save panel **above** the pad — it does not replace it, so
+`HEAL +1`, the only way a downed character gets back up, stays reachable at 0 HP. A death panel
+that swapped the pad out would take that control away at exactly the moment it matters most.
+
+**Two lines the frames above do not draw, added while building S3.** *(a)* A lightened `Detail`
+line sits between the pad and the verb chips saying what the last action did — "took 5 · 3
+absorbed", "death save 6 · failure", "healed 5 · no effect", "temp 3 · kept 5". Every clause after
+the first is a place the rules differed from what was asked, which is otherwise reconstructed by
+comparing two numbers nobody was watching; its box is reserved whether or not there is anything to
+say, so the chips never move. *(b)* `temp 0` has a line of its own in **UP** as drawn, but DYING
+and STABLE have no unit to spare for a second line, so they trail temporary hit points on the
+status line instead and only when non-zero — `0 / 43 · temp 6   DOWN`. Temp HP absorb damage at 0
+exactly as they do above it (`events.json`, "temp hp absorbs damage while at zero"), so hiding
+them there would hide them on the turn they decide whether a failure is recorded.
+
+**DYING** — `current == 0`, not stable, not dead:
 ```
+▔▔ BACK ▔▔▔▔ HP ▔▔ UNDO ▔▔▔
         0 / 43   DOWN       
- success  ○ ○ ○             
- failure  ● ○ ○             
+ success ○ ○ ○  failure ●○○ 
       [ ROLL DEATH SAVE ]   
+   −10    −5    −1         
+   +10    +5    +1         
+                            
+ DAMAGE   HEAL    TEMP     
+ [■]      [□]     [□]      
+▁▁▁▁▁▁▁▁▁▁ REST ▁▁▁▁▁▁▁▁▁▁▁
 ```
-Natural 20 → "+1 HP" and saves clear; natural 1 → two failures; three failures renders
-"DEAD" in `Heading` weight with a single "Undo last" (no drama, no animation).
+Two ways to record a save, both reaching `Ledger.deathSave`: `[ ROLL DEATH SAVE ]` rolls the
+app's own d20 and handles natural 1 and natural 20 automatically — a 1 is two failures; a 20
+regains 1 HP and clears the saves outright (`Ledger.kt:147-150` sets `hp.damage = max − 1` and
+`NO_SAVES`), which returns the character to **UP** at 1 HP, not to STABLE. Or tap a hollow
+success or failure pip directly — the manual path for a player who already rolled a physical
+d20 and just wants to log the outcome.
+
+A pip tap dispatches `Event.DeathSave` with a plain, non-critical value: **success = 10,
+failure = 9**. Those two are the whole decision, and they need no engine work — `Ledger.deathSave`
+already branches `d20 >= 10` → success, `else` → failure (`Ledger.kt:152-153`), and 10 and 9 are
+the two values nearest the threshold that are neither a natural 1 nor a natural 20. Natural 1
+and natural 20 therefore stay reachable only through `ROLL`, never through a pip tap, by
+construction. Wheel press triggers `ROLL DEATH SAVE` — the Dice screen's "wheel press rolls"
+convention, reused here.
+
+**STABLE** — `deathSaves.stable`:
+```
+▔▔ BACK ▔▔▔▔ HP ▔▔ UNDO ▔▔▔
+        0 / 43   STABLE     
+ success ○ ○ ○  failure ○○○ 
+   Stable. No further saves.
+   −10    −5    −1         
+   +10    +5    +1         
+                            
+ DAMAGE   HEAL    TEMP     
+ [■]      [□]     [□]      
+▁▁▁▁▁▁▁▁▁▁ REST ▁▁▁▁▁▁▁▁▁▁▁
+```
+`Ledger.deathSave` zeroes both counts on stabilizing, so both rows draw hollow — there is
+nothing left to show filled. No `[ ROLL ]` button: `Ledger.deathSave` returns the character
+unchanged once `stable` (`Ledger.kt:144`), so a live-looking roll button here would be a dead
+control. **The pips are display-only in this state**, for exactly the same reason — they are
+tappable in DYING, but here the same early return would swallow the tap, and six hollow
+tappable-looking pips are the dead control the missing roll button was removed to avoid. Wheel
+press: no primary action, consumed as a no-op.
+
+**DEAD** — `deathSaves.dead`:
+```
+▔▔ BACK ▔▔▔▔ HP ▔▔ UNDO ▔▔▔
+                            
+                            
+           DEAD             
+        0 / 43              
+                            
+       [ REVIVE ]           
+                            
+                            
+▁▁▁▁▁▁▁▁▁▁ REST ▁▁▁▁▁▁▁▁▁▁▁
+```
+No pad, no verb chips, no `±n` buttons: `Ledger.heal` (`Ledger.kt:116`), `Ledger.longRest`
+(`:194`), `Ledger.deathSave` (`:144`) and `Ledger.spendHitDie` (`:170`) all return the character
+unchanged once `dead`, so drawing controls that do nothing would be the same dead-button problem
+`STABLE` avoids by dropping its roll button. `DEAD` draws in `Heading` weight — 38 sp and a
+2.65-unit line box, genuinely larger than `Copy`/`Subheading`'s shared 30 sp, so unlike S1's
+bloodied case this one already reads as heavier without help.
+
+**The one control that used to reach a dead character is now closed in the engine.** The bottom
+bar keeps `REST`, and `Ledger.spendHitDie` had no dead guard: it returned
+`out.copy(deathSaves = NO_SAVES)` whenever the die brought HP above 0, which cleared `dead` along
+with everything else, so S8 → `[ROLL]`/`[AVG]` resurrected a dead character with none of the
+deliberation `[ REVIVE ]` is justified by. **That guard has landed** — pipeline-first as the
+working rules require (`rules.py::spend_hit_die`, two `events.json` scenarios, then
+`Ledger.kt:170`) — and it sits *before* the hit-dice pool is looked up, so a dead character
+spending a die they do not have is a no-op too, not the `no dN hit dice left` error a living one
+would get. **S8's hit-dice controls stay disabled whenever `deathSaves.dead`** (stated again
+in S8): the guard is what makes the engine safe, the disable is what keeps the UI from drawing a
+live-looking button that does nothing — the same dead-button rule `STABLE` follows, not a
+stand-in for the guard any more. `REST` stays in this frame's bottom bar so all four states keep
+the same bars — the state that changes is the middle of the screen, never the chrome.
+
+The functions that are still unguarded are harmless here and are named so nobody has to
+re-derive it: damage dealt to a dead character always takes the at-0-HP branch
+(`Ledger.kt:98-103`), which carries `dead` forward rather than clearing it; `Ledger.temp`
+(`:123`) only ever raises temporary HP; `Ledger.tempDelta` (`:136`) is left unguarded **on
+purpose** — a correction is bookkeeping about what the sheet says, not a rules effect on the
+character, and it touches neither HP nor the death saves, so it revives nobody. That exception is
+pinned by its own scenario (`events.json`, "temp hp correction applies even to the dead") in both
+languages, so adding a guard there for symmetry with its four neighbours fails the suite by
+design. `shortRest`, `dawn`, `spendSlot`, `spendPactSlot` and `counter` touch neither HP nor the
+saves either. With `spendHitDie` guarded there is no hole left.
+
+`[ REVIVE ]` clears `deathSaves` back to its default and leaves HP at 0, so the character
+returns to `DYING`, ready for saves again — resurrection is the DM's call at the table, and the
+tool only records it. It is **not** a view-model `copy()`: every `deathSaves` mutation in the
+engine goes through `Ledger` (damage, heal, deathSave, spendHitDie, longRest), and
+`Ledger.kt:12-13`'s view-model carve-out names four rules-free fields — toggling a condition,
+inspiration, currency, what is equipped — and no death-save field. `REVIVE` **has landed** as
+`Ledger.revive` / `Event.Revive` — pipeline-first as the working rules require
+(`rules.py::revive`, three `events.json` scenarios, then Kotlin), the same debt TEMP `−n` and the
+`spendHitDie` guard were. All three are now paid, and DEAD ships with a working control.
+
+`revive` carries no `dead` guard and restores no hit points. Its whole job is to undo a state the
+rules produced, so restricting it to that state would only add a branch nothing calls: on a living
+character it clears the successes and failures accumulated at 0 HP, which is what a player asking
+for it at the table means. Healing is what restores hit points; this restores nothing.
+
+Wheel: no verb to nudge in this state and nothing to scroll, so **both** halves are consumed as
+no-ops — turn and press alike. `REVIVE` is deliberately tap-only.
+
+**Verb chips.** Select what the `±n` buttons and the wheel apply to; each is *signed*, so the
+same three buttons cover both directions of a correction:
+
+| Chip | `+n` | `−n` |
+|---|---|---|
+| DAMAGE | give it back (`Event.Heal(n)`) | take `n` (`Event.Damage(n)`) |
+| HEAL | heal (`Event.Heal(n)`) | damage (`Event.Damage(n)`) |
+| TEMP | grant `n` temp HP, the 2014 "does not stack" rule (`Event.Temp(n)`, keeps the higher value) | lower temp by `n`, floored at 0 (`Event.TempDelta(-n)`) |
+
+TEMP's two signs reach the **two different temp-HP functions**, and keeping that pair distinct is
+the point. `Ledger.temp` (`Ledger.kt:123`) is a *grant* — a spell or feature conferring temp HP,
+keeping the higher of the old and new numbers, so it can only ever raise. `Ledger.tempDelta`
+(`:136`) is a *correction* — the signed, clamped-at-0 edit of a number the player already typed,
+and the only way temp HP comes back down. The correction **has landed** (pipeline-first:
+`rules.py::adjust_temp_hp`, five `events.json` scenarios, then Kotlin), so this row ships in both
+directions. Unlike a grant, corrections stack: `+3` then `+3` onto a temp of 5 leaves 11, where
+two grants of 3 would have left it at 5.
+
+`tempDelta` is also the one HP-adjacent function that deliberately keeps working while
+`deathSaves.dead` — see the DEAD state above for why, and for the fixture that pins it.
+
+DAMAGE `+n` and HEAL `−n` are not exact inverses of their own verb, because each reaches the
+real `rules/Ledger.kt` function its sign maps to, not a UI-layer approximation: DAMAGE `+n`
+calls `heal()`, which clears death saves outright once HP is back above 0 (`NO_SAVES`); HEAL
+`−n` calls `damage()`, which at 0 HP *adds a failure* rather than simply subtracting HP. A
+mis-tap's own correction can therefore have a death-save side effect at 0 HP.
+
+Wheel = ±1 in the current verb in **UP, DYING and STABLE** — the three states that draw a pad.
+DEAD draws no pad and no chips, so there is no verb to nudge: its turn is consumed as a no-op
+alongside its press, per that state's paragraph. Touch drag scrolls the screen wherever the
+wheel's turns are claimed by the verb nudge, the same shape S13.2's level stepper uses for its
+own row list.
+
+`UNDO` reverts the single most recent pad action taken **during this visit to S3** — a snapshot
+the view model holds in memory, not a stored character state. It does not survive a screen pop,
+a relaunch, or a LightOS modal re-entry (`onScreenShow` reloads from the repository, per the
+global rule): tapping `UNDO` with nothing to undo is a consumed no-op. It is deliberately not
+scoped to the death states — a mis-tapped `−10` in UP is the same mistake as a mis-tapped third
+failure, and one uniform action covers both. With `Ledger.revive` landed it is no longer the
+only in-app recovery from a mis-tapped third failure — `[ REVIVE ]` is the one that survives a
+relaunch — but it stays the only one that costs no deliberation, which is what a mis-tap wants.
 
 ## S4 Checks & saves
 
 ```
 ▔▔ BACK ▔▔ CHECKS ▔▔ ADV ▔▔
-STR 14  +2   save +2       
-  Athletics        +2     ▸
-DEX 10  +0   save +0       
-  Acrobatics  +0 · Stealth +0
-  Sleight of Hand +0       
-CON 16  +3   save +3       
-INT  8  −1   save −1       
-  Arcana −1 · History −1   
+STR 14  +2   save +2
+  Athletics +2
+DEX 10  +0   save +0
+  Acrobatics +0 · Stealth +0
+  Sleight of Hand +0
+CON 16  +3   save +3
+INT  8  −1   save −1
+  Arcana −1 · History −1
   Investigation −1 · Nature −1
-WIS 18  +4   save ●+7      
-  Insight ●+7 · Medicine ●+7
+  Religion ●+2
+WIS 18  +4   save ●+7
+  Animal Handling +4 · Insight ●+7
+  Medicine ●+7 · Survival +4
   Perception ◐+5 (passive 15)
+CHA 12  +1   save ●+4
+  Deception +1 · Intimidation +1
+  Performance +1 · Persuasion +1
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 ```
 Ability row: tap the score = ability check, tap "save" = saving throw. Skills grouped under
 their ability (the 2024 paper-sheet grouping new players find readable). `●` proficient,
 `◐` half, `◆` expertise, nothing = none. Long-press any = adv/dis chooser.
+
+**All six abilities and all eighteen skills are drawn**, in the bundle's own grouping by
+`ability` (`compendium/skills.json`): STR 1, DEX 3, CON 0, INT 5, WIS 5, CHA 4. Nothing is
+dropped for space — INT's fifth is Religion and WIS's are Animal Handling and Survival, and CHA
+gets the four the screen used to omit entirely. Within an ability the skills read
+alphabetically, with one deliberate break: Perception takes the last line of the WIS group
+rather than its alphabetical place, because it is the one skill that carries a second value
+(the passive score) and pairing it with another skill would run the line past what `Detail`
+holds.
+
+Every number above is `fixtures/derived.json`'s own output for `cleric-5-life.json` — including
+`Religion ●+2` (the fixture is proficient in Religion, so it is *not* the bare INT −1) and
+`CHA … save ●+4` (its `saveProficiencies` are `["wis","cha"]`, the 2014 cleric's two).
+
+Six ability rows and eleven skill lines are 17 `Detail` line boxes ≈ 25.5 units against the 23
+available, before any row padding — so this screen scrolls from the moment it opens, which it
+already does. Nothing is dropped, but not everything is on screen at once: the CHA group is the
+part below the fold on open, reached by the same wheel turn (or touch drag) this screen already
+documents. F5 asks that every ability, save and skill be *reachable* and rollable, which it is;
+it does not ask that all eighteen fit one screenful, which at `Detail` they cannot.
+
+Wheel scrolls (`LightScrollView`, mixed row heights per ability's skill count); wheel press:
+no primary action, consumed as a no-op — rolling needs a specific ability, save or skill row,
+and this plain scroll list has no wheel-selected focus.
 
 ## S5 Spells
 
@@ -202,6 +536,10 @@ prepared count vs allowed is shown). Tap a spell → S10 reader with a `CAST` bo
 Concentration: casting a (C) spell sets the concentration line on S1 and offers to drop the
 previous one.
 
+Wheel scrolls the spell list (grouped by level; a prepared list can run past the visible area);
+wheel press: no primary action, consumed as a no-op — casting is the bottom bar's `CAST`, from
+a tapped spell, not a generic press.
+
 ## S6 Features & resources
 
 ```
@@ -213,10 +551,19 @@ Rage           ●●●     long ▸
 Second Wind    ●       short▸
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 ```
-One row per counter: name · pips (≤ 8) or `value/max` (> 8) · reset rule. Tap = spend one;
-wheel while a row is focused = ±1; tap the name = SRD feature text if `featureKey` is set.
-`+` adds a custom counter (name via editor, max and reset via wheel) — this is how non-SRD
-features (manoeuvres, ki from a homebrew subclass) are tracked without their text.
+One row per counter: name · pips (≤ 8) or `value/max` (> 8) · reset rule. The name column is
+fixed-width and ellipsizes (`maxLines = 1`, `TextOverflow.Ellipsis` — the same pattern `NavRow`
+already uses), rather than reserving room for a full 30-character counter name: a 30-character
+name, pips or `value/max`, the reset word and the trailing arrow do not all fit on 27 units.
+
+Tap a row = spend one; tap the name = SRD feature text if `featureKey` is set. The first row
+has wheel focus as soon as the screen opens — the wheel is claimed unconditionally, the same
+shape S13.2's level stepper uses, never a plain scroll by default — and tapping a different
+row's pips moves focus to it; the wheel then nudges *that* counter by ±1. Wheel press also
+spends one from the focused counter, the same effect as tapping it. Touch drag scrolls the
+list, since the wheel's turns are claimed by the focused row on this screen. `+` adds a custom
+counter (name via editor, max and reset via wheel) — this is how non-SRD features (manoeuvres,
+ki from a homebrew subclass) are tracked without their text.
 
 ## S7 Conditions
 
@@ -224,18 +571,55 @@ features (manoeuvres, ki from a homebrew subclass) are tracked without their tex
 ▔▔ BACK ▔▔ CONDITIONS ▔▔▔▔▔▔
 Concentrating: Bless  [DROP]
 Exhaustion  ○●○○○○  1       
-  disadv. on ability checks  
-□ Blinded     ■ Poisoned    
-□ Charmed     □ Prone       
-□ Deafened    □ Restrained  
-□ Frightened  □ Stunned     
-□ Grappled    □ Unconscious 
-□ Incapacitated □ Paralyzed 
-□ Invisible   □ Petrified   
+  Disadvantage on ability checks
+□ Blinded       □ Paralyzed 
+□ Charmed       □ Petrified 
+□ Deafened      ■ Poisoned  
+□ Frightened    □ Prone     
+□ Grappled      □ Restrained
+□ Incapacitated □ Stunned   
+□ Invisible     □ Unconscious
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 ```
-Tap toggles; tap the name text opens the SRD condition text (S10). Exhaustion steps with
-the wheel and prints the level's effect line under it. Active conditions surface on S1.
+Tap toggles; tap the name text opens the SRD condition text (S10). The 14 toggles — drawn in
+seven two-column rows, which is why ten lines cover this whole screen — are the
+bundle's 15 conditions minus Exhaustion, which `character.schema.json`'s own description calls
+out as tracked separately and which this screen draws as a stepper instead of a checkbox — PRD
+F8's "checklist of 15" is these 14 toggles plus that one stepper, not 15 toggles. Left column
+reads the first seven names alphabetically (Blinded … Invisible), right column the remaining
+seven (Paralyzed … Unconscious).
+
+**PRD F8's per-condition "one-line rule" is dropped, and that is an amendment owed to
+`docs/PRD.md:68`, not something this screen satisfies by another route.** Two facts kill it.
+There is no room: a rule line needs the full width, so giving each condition one collapses the
+two-column grid into 14 toggle rows plus 14 rule lines — 28 `Detail` lines, 42 units, on a
+screen with 23, before the concentration and exhaustion rows are drawn at all. And there is no
+source: every `conditions.json` record carries exactly
+`key, name, edition, source, license, xref, text`, with no summary field — the shortest text is
+Incapacitated's 60 characters and the longest a 620-character Petrified, and Blinded is two
+bullet sentences. A one-liner would have to be written by hand, which PRD principle 2 forbids.
+What replaces it is the full SRD text one tap away on S10 — more than a line, but the real
+rule rather than a paraphrase of it. Restoring a per-row line later means new derived data in
+the pipeline (a generated `summary` field), not a UI change.
+
+Ten lines drawn here looks tight against the preamble's "~9 full rows of `Copy`", but every
+line on this screen is `Detail`, not `Copy`: at 1.50 units a line box those ten lines are
+≈ 15.0 of 23 units. The remaining ≈ 8 units are row padding — the toggles are tap targets, not
+bare text lines — not room for more content.
+
+Exhaustion's level 1–6 effect line is the one per-row rule that survives, because it is
+derivable verbatim rather than typed: it is the substring of the bundle's own `exhaustion`
+record after the " - " in whichever paragraph starts with the current level
+("1 - Disadvantage on ability checks", "2 - Speed halved", … "6 - Death"). Nothing is
+abbreviated — an abbreviation like "disadv. on ability checks" would be re-typed rules text,
+which PRD principle 2 forbids. Level 0 draws no effect line (there is none to show).
+
+Exhaustion steps with the wheel, which this screen claims unconditionally from the moment it
+opens (S13.2's shape, not a default scroll that later gets claimed); touch drag scrolls the
+toggle grid instead — though at seven toggle rows fixed by the bundle this screen does not
+actually overflow today, and the fallback exists for the same reason every wheel-claimed screen
+states one. Wheel press: no primary action, consumed as a no-op — toggling a specific condition needs
+a specific tap. Active conditions surface on S1.
 
 ## S8 Rest
 
@@ -253,9 +637,29 @@ LONG REST                 ▸
 ▁▁▁▁▁▁▁▁▁▁ DONE ▁▁▁▁▁▁▁▁▁▁▁
 ```
 Short rest: spend hit dice one at a time (roll or take the average), then `DONE` applies the
-short-rest resets and shows what changed. Long rest → confirm screen → summary. The tool
-never clears conditions on a rest (the GM decides) and warns if HP is 0 ("must have at
-least 1 HP to benefit").
+short-rest resets and shows what changed. Long rest → confirm screen → summary; the confirm
+screen pops back to this screen before this screen pushes the summary — the pop-then-push
+shape the preamble's depth rule describes — so the chain stays S0 → S1 → S8 → summary, depth 4,
+never a confirm screen left sitting under it. The tool never clears conditions on a rest (the
+GM decides) and warns if HP is 0 ("must have at least 1 HP to benefit").
+
+**`[ROLL]` and `[AVG]` are disabled whenever `deathSaves.dead`.** `Ledger.spendHitDie` used to be
+the one HP-affecting function with no dead guard — it returned `out.copy(deathSaves = NO_SAVES)`
+whenever the die brought HP above 0, clearing `dead` with it — so a hit die spent here silently
+resurrected a dead character, which is S3's `[ REVIVE ]` without any of its deliberation. **The
+guard has since landed** (`Ledger.kt:170`, pipeline-first through `rules.py` and two
+`events.json` scenarios; see S3 DEAD), and it runs before the pool lookup, so a dead character
+spending a die they do not have is a no-op rather than the `no dN hit dice left` error. The
+disable stays all the same, as the UI half of the same rule: a control that would do nothing is
+not drawn live. (One function is still unguarded on purpose — `Ledger.tempDelta`, which touches
+neither HP nor the death saves and so needs no disable anywhere; see S3 DEAD.) `LONG REST` needs
+no such disable either — `Ledger.longRest` returns the character unchanged once `dead`
+(`Ledger.kt:194`) — but it too is drawn inert in that state, for the same dead-control reason S3
+STABLE drops its roll button.
+
+Wheel scrolls (hit-dice pools are bounded per die size — see `docs/DATA-MODEL.md`'s open bound
+question); wheel press: no primary action, consumed as a no-op — spending a die is `[ROLL]` or
+`[AVG]`, not a generic press.
 
 ## S9 Gear & coin
 
@@ -272,6 +676,15 @@ gp 47   sp 12   cp 0       ▸
 `■` equipped, `◇`/`◆` attuned toggle (max 3, the fourth tap is refused with a line of
 text). Tap a compendium-backed row → text. Coin row → a pad where the wheel edits the
 focused denomination. `+` → search equipment/magic items (editor screen) or "custom name".
+
+Turn scrolls the item list (bounded at 60) until the coin row is tapped, which turns the top of
+the screen into a coin pad in place and claims the wheel for the focused denomination until
+BACK or another tap closes it — touch drag scrolls the item list underneath meanwhile, the same
+fallback S13.2 uses for its level stepper. Wheel press: no primary action, consumed as a no-op
+in both states — spending is the pad's own ±1, not a press. `+` opens the search editor, which
+pops back to this screen before this screen pushes the equipment/magic-item picker — the same
+pop-then-push shape the preamble's depth rule describes, keeping S0 → S1 → S9 → picker at
+depth 4.
 
 ## S10 Reader (compendium entry)
 
@@ -377,7 +790,8 @@ A short wizard, each step one screen, all wheel-driven except two names:
 
 1. **Name** (editor, single line, caps).
 2. **Class & level** — class list (12 SRD + "Other…" which asks a name and hit die), level
-   via wheel; subclass list (SRD or "Other…").
+   via wheel; subclass list (SRD or "Other…"). *(M3's interim `NEW` on S0 ships the 12 SRD
+   classes at level 1 only — no "Other…", no level wheel, no subclass. M4 completes the step.)*
 3. **Race** — list (SRD 9 + subraces + "Other…").
 4. **Ability scores** — six numbers, wheel per row, default 10. Enter *final* scores.
 5. **Saves & skills** — two-column checkboxes; defaults pre-ticked from class/background.

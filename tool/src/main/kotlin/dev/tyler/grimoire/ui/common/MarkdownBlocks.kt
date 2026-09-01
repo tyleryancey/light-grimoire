@@ -10,17 +10,13 @@ import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.TextUnit
 import com.thelightphone.sdk.ui.LightText
 import com.thelightphone.sdk.ui.LightTextVariant
-import com.thelightphone.sdk.ui.LightThemeTokens
-import com.thelightphone.sdk.ui.designVerticalPxToSp
 import com.thelightphone.sdk.ui.gridUnitsAsDp
 import dev.tyler.grimoire.compendium.Block
 import dev.tyler.grimoire.compendium.Span
@@ -203,7 +199,9 @@ private fun InlineSpans(
         LightText(text = plain(spans), variant = LightTextVariant.Paragraph, maxLines = maxLines, modifier = modifier)
         return
     }
-    val style = readerParagraphStyle()
+    // The reader's prose is `Paragraph`; the scaling arithmetic behind it lives in Emphasis.kt, so
+    // this renderer and `EmphasisText` cannot drift apart on a size, a line box or a colour.
+    val style = emphasisTextStyle(LightTextVariant.Paragraph)
     BasicText(
         text = buildAnnotatedString {
             for (span in spans) {
@@ -226,30 +224,6 @@ private fun InlineSpans(
         maxLines = maxLines,
     )
 }
-
-/**
- * The `Paragraph` variant's real style, ready for `BasicText`.
- *
- * `LightText` reaches this by calling `TextStyle.scaledForScreenHeight()`, which is `internal` to
- * `:sdk:ui` (LightText.kt) and unreachable from here, so the same arithmetic is redone with the
- * public `designVerticalPxToSp` — including its guard: `paragraph` sets no letter spacing, and an
- * `Unspecified` unit must stay unspecified rather than become a NaN size. The colour is set on the
- * style because `BasicText`, unlike `LightText`, inherits none.
- */
-@Composable
-private fun readerParagraphStyle(): TextStyle {
-    val base = LightThemeTokens.typography.paragraph
-    return base.copy(
-        color = LightThemeTokens.colors.content,
-        fontSize = base.fontSize.scaledForScreen(),
-        lineHeight = base.lineHeight.scaledForScreen(),
-        letterSpacing = base.letterSpacing.scaledForScreen(),
-    )
-}
-
-@Composable
-private fun TextUnit.scaledForScreen(): TextUnit =
-    if (this == TextUnit.Unspecified) this else value.designVerticalPxToSp()
 
 /**
  * The concatenated text of [spans]; a line break inside a heading or a plain run is a space.

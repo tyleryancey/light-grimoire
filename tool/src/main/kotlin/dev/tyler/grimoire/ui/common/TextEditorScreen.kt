@@ -50,14 +50,16 @@ import dev.tyler.grimoire.ui.keys.WheelHandler
  *    overrides `onKeyDown`, not `dispatchKeyEvent`, so the view hierarchy gets first refusal and this override
  *    only ever sees what nothing on screen claimed.
  *
- * `initialCaps` is false: S13.3 types a search query, not a name, and the search lowercases everything it is
- * given anyway. The UI-SPEC component table's `initialCaps = true` is the *name* recipe — the M3/M4 caller that
- * needs it adds the flag as a defaulted parameter rather than flipping it under FIND.
+ * [initialCaps] defaults to false, which is what S13.3 wants: it types a search query, not a name, and the
+ * search lowercases everything it is given anyway. The UI-SPEC component table's `initialCaps = true` is the
+ * *name* recipe, and S0's `NEW` is its first caller — passed here rather than flipped under FIND, so the two
+ * callers keep their own keyboards.
  */
 class TextEditorScreen(
     sealedActivity: SealedLightActivity,
     private val title: String,
     private val initial: String = "",
+    private val initialCaps: Boolean = false,
 ) : SimpleLightScreen<String?>(sealedActivity) {
     @Composable
     override fun Content() {
@@ -71,7 +73,7 @@ class TextEditorScreen(
                 keyboardOptionsFlow = rememberKeyboardOptions(),
                 modifier = Modifier.background(LightThemeTokens.colors.background),
                 singleLine = true,
-                initialCaps = false,
+                initialCaps = initialCaps,
             )
         }
     }

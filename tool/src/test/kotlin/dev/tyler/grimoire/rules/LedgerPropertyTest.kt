@@ -19,7 +19,7 @@ class LedgerPropertyTest {
 
     private fun Mulberry32.pick(n: Int): Int = die(n) - 1
 
-    private fun Mulberry32.event(c: Character): Event = when (die(11)) {
+    private fun Mulberry32.event(c: Character): Event = when (die(13)) {
         1 -> Event.Damage(amount = pick(80), critical = die(4) == 1)
         2 -> Event.Heal(amount = pick(60))
         3 -> Event.Temp(amount = pick(20))
@@ -30,6 +30,11 @@ class LedgerPropertyTest {
         8 -> Event.Dawn
         9 -> Event.SpendSlot(level = die(9))
         10 -> Event.SpendPactSlot
+        11 -> Event.TempDelta(delta = pick(21) - 10)
+        // Revive belongs in the corpus, not only in its own fixtures: it is the one event that clears
+        // `dead`, so an arbitrary sequence can now reach states like revive-then-spend-a-hit-die that no
+        // two-event fixture generates.
+        12 -> Event.Revive
         else -> {
             val id = c.counters.getOrNull(pick(c.counters.size + 1))?.id ?: "no-such-counter"
             Event.CounterDelta(id = id, delta = pick(11) - 5)
@@ -105,6 +110,29 @@ class LedgerPropertyTest {
                 val before = start.copy(hp = start.hp.copy(temp = rng.pick(30)))
                 val amount = rng.pick(30)
                 assertEquals(max(before.hp.temp, amount), Ledger.temp(before, amount).hp.temp, "${start.id}: temp $amount onto ${before.hp.temp}")
+            }
+        }
+    }
+
+    /**
+     * The correction is the only way temp HP comes down, so the clamp at 0 is the whole of its lower bound.
+     * Half the starts are dead, because tempDelta is deliberately the one HP-adjacent function that does not
+     * guard on `dead` — the whole-character equality below is what would go red if a guard were added.
+     */
+    @Test
+    fun aTemporaryHitPointCorrectionClampsAtZeroAndTouchesNothingElse() {
+        for (start in characters) {
+            val rng = Mulberry32(19)
+            repeat(500) {
+                val corpse = rng.die(2) == 1
+                val saves = if (corpse) DeathSaves(failures = 3, dead = true) else start.deathSaves
+                val before = start.copy(hp = start.hp.copy(temp = rng.pick(30)), deathSaves = saves)
+                val delta = rng.pick(61) - 30
+                val corrected = Ledger.tempDelta(before, delta)
+                assertTrue(corrected.hp.temp >= 0, "${start.id}: temp ${before.hp.temp} + $delta went negative")
+                // Whole-character equality: the correction moves temp and nothing else — not HP, not the saves.
+                val expected = before.copy(hp = before.hp.copy(temp = max(0, before.hp.temp + delta)))
+                assertEquals(expected, corrected, "${start.id}: temp ${before.hp.temp} corrected by $delta, dead=$corpse")
             }
         }
     }

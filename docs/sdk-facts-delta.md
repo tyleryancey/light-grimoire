@@ -187,3 +187,25 @@ event is forwarded to LightOS with `componentToRelaunch` set, so a screen that c
 `onKeyDown` and leaves `onKeyUp`/`onKeyMultiple` at their `false` default is bounced out by
 the *release* half of every detent. That is exactly the bug this milestone found in the
 reader, and this is the cheapest way to catch it on device.
+
+## Verified 1 Sep 2026 — writable Room and the save window (M3 task 1)
+
+- **`viewModelScope` is dead before a debounced save can fire.** `LightActivity.goBack()` runs
+  `notifyWillHide()` → `destroy()` → `viewModelStore.clear()` synchronously in one call, so a
+  `viewModelScope.launch { delay(400); save() }` is cancelled before the delay elapses — and a
+  coroutine that has not started yet never runs at all, which makes `withContext(NonCancellable)`
+  *inside* one necessary but not sufficient. The working shape is a buffer on a process-lifetime
+  scope with non-suspending `save()`/`flush()`, flushed from `onScreenHide` **and** `onAppPause`:
+  hide does not fire on pause, pause does not fire on a back press, and the SDK exposes no
+  `onStop`/`onDestroy` at all, so neither hook is a superset of the other.
+  Measured on the LP3: a −5 tap, BACK, and a force-stop 150 ms later — well inside the debounce —
+  still lands the write.
+- **A second Room database is fine.** `grimoire.db` opens beside `compendium-v1.db` under
+  `databases/` with no interference; both run WAL. `StaleDbFiles` leaves the user file alone (pinned
+  by `StaleDbFilesTest`). But `buildDatabase` still exposes no migration API, so this file's schema
+  is frozen at creation: an added column or entity throws "Room cannot verify the data integrity"
+  at open on every installed phone. Character evolution goes through `Model.migrate(json)` instead.
+- **The phone dozes fast over USB, and a dozing first launch is slow but correct.** An import that
+  measures ≈ 2.3 s awake took **8 602 ms** with the screen off (throttled CPU) and still completed.
+  Wake with `adb shell input keyevent 224` before screenshotting or the capture is solid black —
+  which reads exactly like a crash and is not one.
