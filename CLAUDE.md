@@ -79,10 +79,10 @@ submission). Tick boxes there; mirror the current milestone here:
       wheel key codes recorded on hardware, first-launch import timed, pipeline reproducible.
 - [x] **M1** — `rules/` replays every fixture; JVM gate green (29 Aug 2026: 58 JVM tests in
       11 classes, property tests mutation-checked, `assembleDebug` clean).
-- [ ] **M2** — compendium on device: Room entities + `AssetImporter`, kind/list/reader/search
-      screens. (task 1 — data layer — done 29 Aug 2026; task 2 — hub, lists, S10 reader, S13
-      search — done 31 Aug 2026; task 3 — S16 About + Home wiring — done 31 Aug 2026, 330 JVM
-      tests in 36 classes. Left: emulator QA.)
+- [x] **M2** — compendium on device: Room entities + `AssetImporter`, kind/list/reader/search
+      screens (31 Aug 2026: 330 JVM tests in 36 classes; QA'd on the LP3 — 2 290 ms first import,
+      "fire" finds Fireball, the wheel scrolls a 2 997-word rule section without LightOS taking
+      the tool back).
 
 ## Commands
 

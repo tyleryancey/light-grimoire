@@ -171,3 +171,19 @@ around decode and insert inside `AssetImporter.ensure()`), `compendium ready row
 `Skipped` — read with `adb logcat -s Grimoire`; the file size from
 `adb shell run-as dev.tyler.grimoire ls -l databases/`. Reproduce with `run-light-tool`; the phone
 must be awake with the tool in the foreground, or the dozing figure is what you get.
+
+## Verified 31 Aug 2026 — driving the wheel over adb (M2 hardware QA)
+
+`adb shell input keyevent 317` / `318` / `319` **does** reach a foreground tool's
+`LightKeyHandler` on the physical LP3 (TLP301, build 00WW_1_440000, USB). Confirmed by
+stepping the S13.2 spells screen from CANTRIPS to LEVEL 3 with three `317`s and by scrolling
+the S10 reader with `318`s. The `run-light-tool` driver has no key command and this was
+untested until now; it makes the whole wheel contract QA-able from a script, which the AVD
+cannot do at all (the emulator emits no 317–319 — that fact is unchanged).
+
+The companion check is `adb shell dumpsys activity activities | grep topResumedActivity`
+after a burst of wheel events: it must still name `dev.tyler.grimoire`. An unconsumed wheel
+event is forwarded to LightOS with `componentToRelaunch` set, so a screen that consumes only
+`onKeyDown` and leaves `onKeyUp`/`onKeyMultiple` at their `false` default is bounced out by
+the *release* half of every detent. That is exactly the bug this milestone found in the
+reader, and this is the cheapest way to catch it on device.
