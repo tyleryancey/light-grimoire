@@ -364,6 +364,26 @@ def death_save(ch: dict, d20: int) -> dict:
     return ch
 
 
+def revive(ch: dict) -> dict:
+    """Clear the death-save block back to its default, leaving hit points exactly where
+    they are. S3's [ REVIVE ]: a dead character returns to 0 HP and DYING, ready for
+    saves again — the DM's call at the table, which the tool only records.
+
+    It is a rules event and not a view-model copy() because deathSaves is a rules field:
+    every other mutation of it (damage, heal, death_save, spend_hit_die, long_rest) goes
+    through this module, and the carve-out for trivial setters names only conditions,
+    inspiration, currency and what is equipped.
+
+    No guard on `dead`, deliberately, and no HP change either. Revive is the one function
+    whose whole job is to undo a state the rules produced, so restricting it to the state
+    it usually undoes would only add a branch nothing calls: on a living character it
+    clears the successes and failures accumulated at 0 HP, which is what a player asking
+    for it at the table means. Healing is what restores hit points; this restores nothing."""
+    ch = deepcopy(ch)
+    _reset_death_saves(ch)
+    return ch
+
+
 # ------------------------------------------------------------------------------ rests
 
 def _reset_counters(ch: dict, triggers: set[str]) -> None:
@@ -504,6 +524,8 @@ def apply_event(ch: dict, ev: dict) -> dict:
         return adjust_temp_hp(ch, ev["delta"])
     if kind == "deathSave":
         return death_save(ch, ev["d20"])
+    if kind == "revive":
+        return revive(ch)
     if kind == "spendHitDie":
         return spend_hit_die(ch, ev["die"], ev["roll"])
     if kind == "shortRest":

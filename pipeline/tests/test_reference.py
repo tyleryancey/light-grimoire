@@ -207,6 +207,22 @@ def test_adjust_temp_hp_is_the_deliberate_exception_to_the_dead_guards():
     assert corrected["hp"]["damage"] == ch["hp"]["damage"]
 
 
+def test_revive_clears_the_death_saves_and_restores_no_hit_points():
+    """S3's [ REVIVE ]: the one control that reaches a dead character, and the only thing it
+    touches is the death-save block. Hit points stay where they were, so the character comes
+    back at 0 HP and DYING — resurrection is the DM's call, the tool only records it."""
+    ch = rules.apply_damage(_pc(), 20)                  # down, 0 hp
+    for _ in range(3):
+        ch = rules.death_save(ch, 3)                    # three failures -> dead
+    assert ch["deathSaves"]["dead"] is True
+    revived = rules.revive(ch)
+    assert revived["deathSaves"] == {"successes": 0, "failures": 0, "stable": False, "dead": False}
+    assert revived["hp"] == ch["hp"]                    # no hit points back, not even one
+    assert ch["deathSaves"]["dead"] is True             # and the input is untouched
+    # Back to DYING, so the next save counts again — which is the whole point of the state.
+    assert rules.death_save(revived, 15)["deathSaves"]["successes"] == 1
+
+
 def test_spend_hit_die_does_not_revive_the_dead():
     ch = rules.apply_damage(_pc(), 20)                  # down, 0 hp
     ch = rules.death_save(ch, 3)

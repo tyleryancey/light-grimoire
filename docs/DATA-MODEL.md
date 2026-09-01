@@ -74,12 +74,17 @@ and attack bonus, max slots, attack to-hit and damage formulas. Python reference
 `fixtures/derived.json`).
 
 Events (the only way state changes in play): `damage`, `heal`, `temp`, `tempDelta`,
-`deathSave`, `spendHitDie`, `shortRest`, `longRest`, `dawn`, `spendSlot`, `spendPactSlot`,
-`counter`, plus edits from the wizard. Reference: `rules.py::apply_event`; fixtures:
-`events.json`. `temp` and `tempDelta` are two different things and must stay separate:
+`deathSave`, `revive`, `spendHitDie`, `shortRest`, `longRest`, `dawn`, `spendSlot`,
+`spendPactSlot`, `counter`, plus edits from the wizard. Reference: `rules.py::apply_event`;
+fixtures: `events.json`. `temp` and `tempDelta` are two different things and must stay separate:
 `temp{amount}` is a **grant** (a spell or feature; keeps the higher number, never stacks),
 `tempDelta{delta}` is a **correction** to the number already on the sheet (signed, clamped at
 0, and it does stack). Only the correction can lower temp HP.
+
+`revive` is S3's `[ REVIVE ]`: the death-save block back to its default, hit points untouched, so
+a dead character returns to 0 HP and DYING. It is an event and not a view-model `copy()` because
+`deathSaves` is a rules field — the carve-out for trivial setters covers conditions, inspiration,
+currency and what is equipped, and nothing else.
 
 ### Room mapping
 

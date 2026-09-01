@@ -44,6 +44,11 @@ sealed class Event {
     @SerialName("deathSave")
     data class DeathSave(val d20: Int) : Event()
 
+    /** S3's `[ REVIVE ]` — the death-save block back to its default, hit points untouched. */
+    @Serializable
+    @SerialName("revive")
+    data object Revive : Event()
+
     /** A hit die spent during a short rest, with the value rolled (or the average). */
     @Serializable
     @SerialName("spendHitDie")
@@ -161,6 +166,23 @@ object Ledger {
     }
 
     /**
+     * Clear the death-save block back to its default, leaving hit points exactly where they are — S3's
+     * `[ REVIVE ]`. A dead character returns to 0 HP and DYING, ready for saves again; resurrection is the
+     * DM's call at the table and the tool only records it.
+     *
+     * An event and not a view-model `copy()`, unlike the trivial setters this file's header names: every
+     * other mutation of `deathSaves` in the engine (damage, heal, deathSave, spendHitDie, longRest) goes
+     * through [Ledger], and the carve-out covers conditions, inspiration, currency and what is equipped —
+     * no death-save field.
+     *
+     * No `dead` guard, deliberately, and no HP change either. Revive's whole job is to undo a state the
+     * rules produced, so restricting it to the state it usually undoes would only add a branch nothing
+     * calls: on a living character it clears the successes and failures accumulated at 0 HP, which is what
+     * a player asking for it at the table means. Healing is what restores hit points; this restores nothing.
+     */
+    fun revive(c: Character): Character = c.copy(deathSaves = NO_SAVES)
+
+    /**
      * Short rest: one hit die at a time — regain the roll plus the CON modifier, never less than 0. A dead
      * character cannot benefit from a short rest, so the state stands and the die goes unspent, matching
      * [heal] and [longRest] rather than raising. The guard comes before the pool is looked up: spending a die
@@ -248,6 +270,7 @@ object Ledger {
         is Event.Temp -> temp(c, event.amount)
         is Event.TempDelta -> tempDelta(c, event.delta)
         is Event.DeathSave -> deathSave(c, event.d20)
+        is Event.Revive -> revive(c)
         is Event.SpendHitDie -> spendHitDie(c, event.die, event.roll)
         is Event.ShortRest -> shortRest(c)
         is Event.LongRest -> longRest(c)

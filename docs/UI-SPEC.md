@@ -256,7 +256,14 @@ specific row's tap, not a generic press.
 Four states — **UP**, **DYING**, **STABLE**, **DEAD** — the same top and bottom bar throughout;
 only the middle changes. The top bar's right action is `UNDO`, not `DEATH`: the swap into the
 death states at 0 HP is automatic, so a button to reach them would do nothing a hit point does
-not already do — see `UNDO` at the end of this section.
+not already do — see `UNDO` at the end of this section. `UNDO` is drawn in all four states and
+whether or not there is anything to undo: the chrome is what stays fixed, and a tap on an empty
+snapshot is a consumed no-op — a cheaper surprise than a button appearing under a thumb.
+
+**M3 interim (1 Sep 2026):** the bottom bar is drawn **empty** until S8 exists — an empty
+`LightBottomBar` still reserves its 4-unit height and 1-unit top margin, so every budget below is
+the one the finished screen has, and the tool's no-dead-controls rule (S0's M2 interim, STABLE's
+missing roll button) says not to draw `REST` before it goes anywhere. `REST` returns with S8.
 
 **UP** — `current > 0`:
 ```
@@ -278,6 +285,17 @@ Wheel press: no primary action, consumed as a no-op.
 At 0 HP the screen inserts a death-save panel **above** the pad — it does not replace it, so
 `HEAL +1`, the only way a downed character gets back up, stays reachable at 0 HP. A death panel
 that swapped the pad out would take that control away at exactly the moment it matters most.
+
+**Two lines the frames above do not draw, added while building S3.** *(a)* A lightened `Detail`
+line sits between the pad and the verb chips saying what the last action did — "took 5 · 3
+absorbed", "death save 6 · failure", "healed 5 · no effect", "temp 3 · kept 5". Every clause after
+the first is a place the rules differed from what was asked, which is otherwise reconstructed by
+comparing two numbers nobody was watching; its box is reserved whether or not there is anything to
+say, so the chips never move. *(b)* `temp 0` has a line of its own in **UP** as drawn, but DYING
+and STABLE have no unit to spare for a second line, so they trail temporary hit points on the
+status line instead and only when non-zero — `0 / 43 · temp 6   DOWN`. Temp HP absorb damage at 0
+exactly as they do above it (`events.json`, "temp hp absorbs damage while at zero"), so hiding
+them there would hide them on the turn they decide whether a failure is recorded.
 
 **DYING** — `current == 0`, not stable, not dead:
 ```
@@ -378,17 +396,15 @@ returns to `DYING`, ready for saves again — resurrection is the DM's call at t
 tool only records it. It is **not** a view-model `copy()`: every `deathSaves` mutation in the
 engine goes through `Ledger` (damage, heal, deathSave, spendHitDie, longRest), and
 `Ledger.kt:12-13`'s view-model carve-out names four rules-free fields — toggling a condition,
-inspiration, currency, what is equipped — and no death-save field. `REVIVE` is owed to
-`pipeline/reference/` as `Ledger.revive` (`Event.Revive`), a fixture, then Kotlin — the same debt
-TEMP `−n` and the `spendHitDie` guard were, both of which have since been paid. `REVIVE` is the
-last of the three still outstanding.
+inspiration, currency, what is equipped — and no death-save field. `REVIVE` **has landed** as
+`Ledger.revive` / `Event.Revive` — pipeline-first as the working rules require
+(`rules.py::revive`, three `events.json` scenarios, then Kotlin), the same debt TEMP `−n` and the
+`spendHitDie` guard were. All three are now paid, and DEAD ships with a working control.
 
-**M3 gap, stated rather than hidden:** until `Ledger.revive` lands, DEAD has no working control.
-The only in-app recovery from a mis-tapped third failure is `UNDO`, and `UNDO` survives only the
-current visit to S3 (an in-memory snapshot — see the end of this section). Off that path, a
-character wrongly marked dead is recovered by editing HP through M4's `EDIT`, which does not
-exist yet. That is the strongest argument for landing `Ledger.revive` the way the other two
-engine debts were landed — pipeline-first, before the screen is built — not after the screens.
+`revive` carries no `dead` guard and restores no hit points. Its whole job is to undo a state the
+rules produced, so restricting it to that state would only add a branch nothing calls: on a living
+character it clears the successes and failures accumulated at 0 HP, which is what a player asking
+for it at the table means. Healing is what restores hit points; this restores nothing.
 
 Wheel: no verb to nudge in this state and nothing to scroll, so **both** halves are consumed as
 no-ops — turn and press alike. `REVIVE` is deliberately tap-only.
@@ -431,9 +447,9 @@ the view model holds in memory, not a stored character state. It does not surviv
 a relaunch, or a LightOS modal re-entry (`onScreenShow` reloads from the repository, per the
 global rule): tapping `UNDO` with nothing to undo is a consumed no-op. It is deliberately not
 scoped to the death states — a mis-tapped `−10` in UP is the same mistake as a mis-tapped third
-failure, and one uniform action covers both. Until `Ledger.revive` lands it is also the only
-in-app recovery from a mis-tapped third failure, which is why the visit-scoped lifetime above
-is a real limit and not a detail.
+failure, and one uniform action covers both. With `Ledger.revive` landed it is no longer the
+only in-app recovery from a mis-tapped third failure — `[ REVIVE ]` is the one that survives a
+relaunch — but it stays the only one that costs no deliberation, which is what a mis-tap wants.
 
 ## S4 Checks & saves
 

@@ -60,7 +60,7 @@ class EventsFixtureTest {
 
     @Test
     fun everyScenarioEndsInTheOracleState() {
-        assertEquals(28, fixture.scenarios.size, "scenario count")
+        assertEquals(31, fixture.scenarios.size, "scenario count")
         for (scenario in fixture.scenarios) {
             val end = Ledger.run(start(scenario.start), scenario.events)
             assertEquals(scenario.end, endState(end), "scenario ${scenario.name}")
