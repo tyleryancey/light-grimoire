@@ -19,7 +19,7 @@ class LedgerPropertyTest {
 
     private fun Mulberry32.pick(n: Int): Int = die(n) - 1
 
-    private fun Mulberry32.event(c: Character): Event = when (die(12)) {
+    private fun Mulberry32.event(c: Character): Event = when (die(13)) {
         1 -> Event.Damage(amount = pick(80), critical = die(4) == 1)
         2 -> Event.Heal(amount = pick(60))
         3 -> Event.Temp(amount = pick(20))
@@ -31,6 +31,10 @@ class LedgerPropertyTest {
         9 -> Event.SpendSlot(level = die(9))
         10 -> Event.SpendPactSlot
         11 -> Event.TempDelta(delta = pick(21) - 10)
+        // Revive belongs in the corpus, not only in its own fixtures: it is the one event that clears
+        // `dead`, so an arbitrary sequence can now reach states like revive-then-spend-a-hit-die that no
+        // two-event fixture generates.
+        12 -> Event.Revive
         else -> {
             val id = c.counters.getOrNull(pick(c.counters.size + 1))?.id ?: "no-such-counter"
             Event.CounterDelta(id = id, delta = pick(11) - 5)

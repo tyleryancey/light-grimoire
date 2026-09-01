@@ -67,9 +67,8 @@ private const val NAME = "NAME"
  * **M3 task 1 interim, and it deviates from the S0 wireframe.** The wireframe draws `JOURNAL` and `DICE`
  * under the characters; S14 and S15 do not exist, and the tool's no-dead-controls rule (S1's inert rows,
  * S3's missing `REST`) says not to draw a row before it goes anywhere — so they are absent, and return
- * with M5. The spec's own S0 note is the M2 one, which says characters and `NEW` return with M3/M4: they
- * are here. **The spec carries no S0 M3 interim note yet — this wants ratification**, the way S1's and
- * S3's interims did.
+ * with M5. `docs/UI-SPEC.md`'s S0 M3 interim note records exactly this shape — the character list,
+ * `COMPENDIUM`, `NEW` and `ABOUT` live, `JOURNAL` and `DICE` absent — so the screen and the spec agree.
  *
  * S0 is a [LightScrollView] rather than a `LightLazyScrollView` because it mixes row heights — six 4-unit
  * character rows, a 1-unit gap and a 2.5-unit `COMPENDIUM` row come to 27.5 units against the 23 available

@@ -89,8 +89,8 @@ private const val SHEET_INLINE_GAP_UNITS = 1f
  * reads whether or not it opens anything. `EDIT` (S12) and the bottom bar's `DICE` (S15) are the same
  * interim: no dead controls, so the top bar's right button and the bottom bar's item are simply absent —
  * an empty `LightBottomBar` still reserves its 4 units and its 1-unit top margin, so the budget above is
- * the finished screen's. **This deviates from the S1 wireframe and wants ratification**; the spec carries
- * no S1 interim note today, unlike S0's and S3's.
+ * the finished screen's. `docs/UI-SPEC.md`'s S1 M3 interim note records the same thing — only the `HP`
+ * row navigates, the other eight are drawn inert, and `EDIT`/`DICE` wait for M4 and M5.
  *
  * [name] is the character's name as the row that pushed this screen already holds it: it is the top bar's
  * title from the first frame, so the bar is never blank through the load — which here means the character,
@@ -168,6 +168,10 @@ class SheetScreen(
      * cannot forget to route it.
      */
     private fun open(destination: SheetDestination) {
+        // [navigates] is the single source of truth for what is live: a row that draws no arrow can still
+        // be reached by a stale tap, and a destination added to one list but not the other would draw an
+        // arrow that goes nowhere — the no-dead-controls rule inverted, and silently.
+        if (!navigates(destination)) return
         when (destination) {
             SheetDestination.HP -> navigateTo({ HpScreen(it, characterId) })
             SheetDestination.SLOTS,
