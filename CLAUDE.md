@@ -79,7 +79,10 @@ submission). Tick boxes there; mirror the current milestone here:
       wheel key codes recorded on hardware, first-launch import timed, pipeline reproducible.
 - [x] **M1** — `rules/` replays every fixture; JVM gate green (29 Aug 2026: 58 JVM tests in
       11 classes, property tests mutation-checked, `assembleDebug` clean).
-- [ ] **M2** — compendium on device: Room entities + `AssetImporter`, kind/list/reader/search screens. (task 1 — data layer — done 29 Aug 2026)
+- [ ] **M2** — compendium on device: Room entities + `AssetImporter`, kind/list/reader/search
+      screens. (task 1 — data layer — done 29 Aug 2026; task 2 — hub, lists, S10 reader, S13
+      search — done 31 Aug 2026; task 3 — S16 About + Home wiring — done 31 Aug 2026, 330 JVM
+      tests in 36 classes. Left: emulator QA.)
 
 ## Commands
 
@@ -145,5 +148,8 @@ Open: creatures in v1; journal v1 vs v1.1; roll history;
   and a forgotten bump throws "Room cannot verify the data integrity… forgot to update the version
   number" at open on every installed phone; `StaleDbFilesTest` pins the column set beside the version.
 - `CompendiumStore.reader()` throws unless the state is Ready — navigate off Home only after Ready.
+- `ui/common/MarkdownBlocks` draws S10's compendium prose **and** S16's CC-BY attribution: never give a
+  prose branch a `maxLines` — the licence sentence would be clipped on device with the JVM gate green.
+  The whole truncation policy is `maxLinesOf` (only `Block.Mono` clips); `AboutViewModelTest` pins it.
 - A first launch while the phone is dozing (screen off) is slow (11.5 s measured, throttled CPU)
   but still completes — do not add a timeout.

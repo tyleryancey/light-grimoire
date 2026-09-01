@@ -28,6 +28,14 @@ android {
         manifestPlaceholders["sdkVersion"] = property("sdkVersion") as String
     }
 
+    // S16 About prints the version, the tool id and "5E compatible" (docs/UI-SPEC.md S16). The Light plugin
+    // injects applicationId / versionCode / versionName into defaultConfig from lighttool.toml — and the
+    // build script may not set them itself — so BuildConfig is the one reading of those three fields that
+    // cannot drift from the toml the builder ships.
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         debug {
             signingConfig = signingConfigs.getByName("lightsdkDev")
@@ -77,11 +85,17 @@ dependencies {
 // The compendium's armor table (assets/compendium/equipment.json) is an input of derived.json and
 // events.json, so the bundled compendium is handed to the tests the same way (it ships in the module,
 // hence never optional).
+// The generated legal text (assets/legal/ATTRIBUTION.md, written by pipeline/legal.py) reaches the tests the
+// same way: AboutViewModelTest asserts the CC-BY sentence and the modification notice survive the About
+// screen, so a regenerated attribution must re-run that test.
 val fixturesDir = rootProject.layout.projectDirectory.dir("fixtures")
 val compendiumDir = layout.projectDirectory.dir("src/main/assets/compendium")
+val legalDir = layout.projectDirectory.dir("src/main/assets/legal")
 tasks.withType<Test>().configureEach {
     inputs.dir(fixturesDir).optional(true)   // absent on Light's builder, which never runs tests
     inputs.dir(compendiumDir)
+    inputs.dir(legalDir)
     systemProperty("grimoire.fixtures", fixturesDir.asFile.absolutePath)
     systemProperty("grimoire.compendium", compendiumDir.asFile.absolutePath)
+    systemProperty("grimoire.legal", legalDir.asFile.absolutePath)
 }

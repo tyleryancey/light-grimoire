@@ -23,8 +23,8 @@ before any UI; commit per task; `CLAUDE.md` mirrors this list and is the handoff
 ## M2 — Compendium on device (2 days)
 
 - [x] Room entities/DAOs ~~per kind~~ + `search_index` FTS4; `AssetImporter` keyed by `index.json` bundle hash. → Done 29 Aug 2026 (`feat/m2-compendium-db`): one `records` table + FTS4 (ADR-0009), 2.3–2.5 s first launch on the LP3, 169 JVM tests
-- [ ] Compendium screens: kind list → filtered lists (spells by level via wheel) → reader (S10) with cross-links; search via editor screen (S13).
-- [ ] About screen renders `assets/legal/ATTRIBUTION.md`.
+- [x] Compendium screens: kind list → filtered lists (spells by level via wheel) → reader (S10) with cross-links; search via editor screen (S13). → Done 31 Aug 2026 (`feat/m2-compendium-screens`): S13 hub, the per-kind lists and spells-by-level (the wheel steps the level), the S10 reader with chained cross-links, and search that returns name matches before mentions (`20b3995`, `5777b46`, `cf5b0a8`, `5d83ddc`).
+- [x] About screen renders `assets/legal/ATTRIBUTION.md`. → Done 31 Aug 2026 (`feat/m2-compendium-screens`): S16 draws the generated attribution verbatim through the shared Markdown renderer (`ui/common/MarkdownBlocks`, also S10's), with `BuildConfig`'s version and tool id beside it; S0 Home gets the `COMPENDIUM` row in its Ready branch and an `ABOUT` bottom-bar button reachable in every import state, so the CC-BY text can be read even when the import fails. 330 JVM tests in 36 classes.
 - [ ] Emulator QA: every kind opens; "fire" finds Fireball; a 1,500-word rule section scrolls with the wheel (or touch if wheel is unavailable).
 
 ## M3 — Sheet & trackers (4–5 days)
