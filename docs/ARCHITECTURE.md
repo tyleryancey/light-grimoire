@@ -37,9 +37,23 @@ docs/                                       this folder; docs/research/ = the 5 
    and fails loudly.
 2. `ui/` never computes rules. A screen renders `Derived` and dispatches `Event`s; the view
    model calls `Ledger`/`Derive` and persists.
-3. Persistence is the view model's job, debounced (400 ms) and shielded:
-   `withContext(NonCancellable) { repo.save(character) }` — screen pops cancel
-   `viewModelScope` synchronously.
+3. Persistence is the **repository's** job, not the view model's — `CharacterRepository` holds
+   its own process-lifetime `CoroutineScope(SupervisorJob() + Dispatchers.IO)` and debounces
+   writes (400 ms) on it, wrapped in `withContext(NonCancellable)`. `save(character)` and
+   `flush()` are plain, non-`suspend` functions precisely because the caller is about to be
+   cancelled: `LightActivity.goBack()` runs `notifyWillHide()` → `destroy()` →
+   `viewModelStore.clear()` synchronously in one call, so a `viewModelScope`-hosted
+   `delay(400)` would never fire. A view model calls `flush()` from both `onScreenHide` and
+   `onAppPause` — neither is a superset of the other (hide does not fire on pause, pause does
+   not fire on a back press) — so the pending write lands on every exit path. The write is
+   debounced, uncancellable, and always initiated by the view model; only the debounce timer's
+   scope belongs to the repository. **Reads are served from the repository's own in-memory
+   latest value while a debounce is in flight**, so within the process no reload can observe a
+   pre-flush row: `onPause` → `notifyAppPause` and `onResume` → `notifyWillShow` run back to
+   back (`LightActivity.kt:218-225`), and without that rule rule 4's reload would race the
+   flush and revert the player's last edit on a resume. Across process death there is no
+   in-memory value and the row is whatever landed — which is why the flush is on both exits and
+   not only one.
 4. Every screen's `onScreenShow` reloads its state from the repository; nothing is trusted
    from a previous composition (LightOS relaunches the tool after it takes the screen for a
    volume/wheel modal; process death is routine).

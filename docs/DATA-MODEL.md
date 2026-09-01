@@ -7,8 +7,20 @@ because the SDK's nav stack and view models are process-memory only.
 |---|---|---|---|
 | **Compendium** (SRD 5.1) | committed JSON under `tool/src/main/assets/compendium/` | imported into Room on first launch — one `records` table + `search_index` FTS4 in `compendium-v1.db`; read-only (ADR-0009) | 2.6 MB assets → 6.3 MB `compendium-v1.db` on the LP3 (+ a WAL of the same size until checkpoint) |
 | **Characters** | the player | Room table `characters` (one JSON document per row, `schemaVersion`) + hot columns for the list — in `grimoire.db`, a separate file from the compendium | KBs |
-| **Journal** | the player | Room tables `sessions`, `entries`, `people`, `places`, `quests`, `loot` (`grimoire.db`) | KBs |
+| **Journal** | the player | Room tables `sessions`, `entries`, `people`, `places`, `quests`, `loot` — its own file, `journal.db` (M5) | KBs |
 | Small prefs (last character, `compendium.stamp`) | — | `lightContext.dataStore` | bytes |
+
+**Decision (Tyler, M3 repair pass): `grimoire.db` holds only `characters`.** The journal gets
+its own `journal.db`, built in M5 (ADR-0010, forthcoming). `buildDatabase` exposes no migration
+API (the same shape ADR-0009 already lives with for the compendium), so entities can never be
+added to a Room database after it first ships on a phone — the alternative was freezing six
+journal entities, none of them exercised before M5, onto the one file that holds a player's
+characters and can never be rebuilt from source.
+
+**This supersedes ADR-0009 §7**, which reads "Characters and the journal (M3+) go in a separate
+`grimoire.db`". Only the characters half of that sentence still stands. ADR-0010 owes §7 a
+superseded-by note, and until it carries one a reader following the ADR-0009 citation above
+lands on the contradicted text — `docs/adr/` was outside the editable set of this repair pass.
 
 Schemas (JSON Schema 2020-12, validated in CI): `pipeline/schema/compendium.schema.json`,
 `character.schema.json`, `journal.schema.json`.
@@ -25,6 +37,27 @@ Stored fields (see the schema for types and limits) and their **invariants**:
 - `counters[]` is the one primitive for every limited-use thing: class features, hit dice
   pools are *not* counters (they have their own die-typed structure), item charges, custom
   homebrew uses. `reset ∈ short | long | dawn | none`.
+- **Open gap:** `pipeline/schema/character.schema.json` bounds `classes` (≤ 3), `attacks`
+  (≤ 12), `items` (≤ 60) and `notes` (≤ 20), but `counters[]`, `spellcasting.spells[]`,
+  `conditions[]` and `hitDice[]` carry no `maxItems` at all — a gap against the global "every
+  list bounded" rule and M6's finite-by-rule audit. Two of the four are derivable, not a
+  judgement call: `conditions[]` ≤ 14 (the bundle's 15 conditions minus Exhaustion, which this
+  same schema's description already calls out as tracked separately) and `hitDice[]` ≤ 4 (one
+  pool per value in the schema's own `die` enum, `{6, 8, 10, 12}` — a character cannot have two
+  pools of the same die size). The other two are Tyler's call, owed before S5 and S6 are built
+  (`docs/UI-SPEC.md`): proposed `counters[]` ≤ 20, the same bound as `notes[]` — a comparable
+  curated per-character list, and the point past which S6's own row budget stops being a
+  quick-glance resource screen; proposed `spellcasting.spells[]` ≤ **60**, anchored to the two
+  2014 ceilings that actually bind. A maximal prepared caster lands at exactly 40 — a
+  20th-level cleric prepares level + WIS ≤ 20 + 5 = 25, plus 5 cantrips, plus 10 always-prepared
+  domain spells (two at each of cleric 1/3/5/7/9) — so 40 is the ceiling with **zero** slack,
+  not a bound with room above it. A wizard is larger still: a RAW spellbook is 6 spells at 1st
+  level plus 2 per level thereafter = 44, plus 5 cantrips = **49**, before a single scroll is
+  copied in. 60 clears the wizard by eleven and the cleric by twenty. If a bound is ever hit,
+  S5 refuses the addition with a line of text rather than dropping anything — the same shape as
+  S9's attunement cap — because silently discarding a transcribed spell is worse than a wall.
+  The schema file itself is out of scope for this repair pass, so neither number is binding
+  yet — both are recorded here as owed, not decided.
 - `abilities` are **final** scores (racial bonuses already applied) — that is what a paper
   sheet shows and what a player will transcribe.
 - `ac` is either `manual` (transcribed) or `computed` (unarmored / armor key / monk /
@@ -50,10 +83,27 @@ plus edits from the wizard. Reference: `rules.py::apply_event`; fixtures: `event
 characters(id TEXT PK, name TEXT, summary TEXT, updatedAt INTEGER, json TEXT)
 ```
 One row per character; `json` is the schema document (kotlinx-serialization). `summary`
-("Cleric 5 · Hill Dwarf") is denormalised for the Home list. Writes are debounced 400 ms
-and wrapped in `withContext(NonCancellable)` (the Sudoku lesson: popping a screen cancels
-`viewModelScope`). Migrations: `schemaVersion` in the JSON + a Kotlin `migrate(json)` chain;
-Room's own schema stays at v1 until a hot column changes.
+("Cleric 5 · Hill Dwarf") is denormalised for the Home list. Writes are debounced 400 ms inside
+`CharacterRepository`, on its own process-lifetime scope rather than the view model's, and
+wrapped in `withContext(NonCancellable)` — see `docs/ARCHITECTURE.md`'s persistence rule for
+why (a screen pop cancels `viewModelScope` synchronously, before a `viewModelScope`-hosted
+`delay(400)` could ever fire). The `characters(...)` columns above are **frozen at creation**:
+character evolution goes entirely through `schemaVersion` + `Model.migrate(json)` inside the
+`json` column, never a Room migration (`buildDatabase` offers none — the same shape ADR-0009
+gives the compendium). A hot column added later — something the Home list needs to sort or
+filter on without decoding every row's JSON — needs a **second file**, e.g.
+`characters-v2.db`, not a migration.
+
+**The second file is copied into, not started empty.** This is where the character file and the
+compendium file part company: the compendium is disposable because a new `compendium-v<N>.db`
+re-imports from the bundled assets, and a character file has no source to re-import from. So a
+file bump reads every row out of the old database and re-inserts it into the new one — the
+`json` column is the durable record and carries forward byte-for-byte, with `schemaVersion` +
+`Model.migrate(json)` doing any content evolution and the new hot column derived from the
+decoded document. The old file is deleted only **after** the copy commits, the character
+analogue of `StaleDbFiles`; a bump that failed halfway leaves the old file intact and retries on
+the next launch. Skipping the copy would delete the player's characters, which is the one thing
+this schema exists to prevent.
 
 ## 2. Compendium
 
@@ -106,13 +156,14 @@ re-encoded, never selected by list queries) — plus a standalone
 `search_index(kind, key, name, body)` `@Fts4` table (`unicode61`; `kind`/`key` `notIndexed`;
 body per kind from `Body.of`). The file is `compendium-v<SCHEMA_VERSION>.db`: a `RecordRow` /
 `SearchRow` change bumps `SCHEMA_VERSION` (a new file that imports from scratch; `StaleDbFiles`
-deletes the old one), never a Room migration — `buildDatabase` offers none. Characters and the
-journal live in a separate `grimoire.db`. Never ship a `.db` (builder rejects the extension);
-never mutate compendium tables.
+deletes the old one), never a Room migration — `buildDatabase` offers none. Characters live in
+a separate `grimoire.db`; the journal gets its own `journal.db` (M5 — see the decision above).
+Never ship a `.db` (builder rejects the extension); never mutate compendium tables.
 
 ## 3. Journal
 
-Six entities, one link primitive (see `journal.schema.json`):
+Own database, `journal.db` (M5, ADR-0010 forthcoming) — kept out of `grimoire.db` per the
+decision above. Six entities, one link primitive (see `journal.schema.json`):
 
 ```
 sessions(id, number, date, inWorldDate?, title?)
