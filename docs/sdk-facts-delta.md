@@ -94,6 +94,37 @@ validated declared + resolved; `ALLOWED_PERMISSIONS` (11) unchanged; KSP only
   without a `Migration` — which this design never takes. The JVM gate pins the column set beside
   the version (`StaleDbFilesTest.aColumnChangeInEitherRowRequiresASchemaVersionBump`).
 
+## Verified 31 Aug 2026 — compendium screens (M2 step 6, `feat/m2-compendium-screens`)
+
+Read out of `light-sdk` @ `3df3c24`; all three are load-bearing for the S13 hub → FIND editor →
+S13.4 results round trip, and none is inferable from the July snapshot.
+
+- **A cancel delivers no result at all — the `navigateTo` callback simply never fires.**
+  `BackStackEntry.deliverResult` opens `val result = screen.result ?: return`
+  (`sdk/client/.../LightActivity.kt:52-55`), and the Activity's back dispatcher calls
+  `goBack()` directly (`:139-146`) rather than the screen's own `goBack(result)`, so `result` is
+  still null. The hardware back button, a drawn BACK button and an explicit `goBack(null)` are
+  therefore indistinguishable to the caller: **"the callback never ran" is the only cancel signal**,
+  and a screen that must express cancel needs a nullable result type (`SimpleLightScreen<String?>`)
+  so the null branch is expressible at both ends.
+- **`goBack()` shows the previous screen *before* it delivers the popped screen's result.**
+  The order inside `LightActivity.goBack` is `previous.screen.notifyWillShow()` (`:85`, →
+  `onScreenShow`), then `currentScreen.value = previous` (`:86`), then `current.deliverResult()`
+  (`:87`). So a screen that pushes an editor and re-queries itself from the result always gets a
+  second `onScreenShow` *first*: its load must be guarded (`loaded`), or the re-show would re-run
+  the query the result is about to replace. S13.4 depends on this
+  (`SearchResultsViewModel.load()`; pinned by `theReShowThatPrecedesAReFindCannotUndoIt`).
+- **A `SimpleLightScreen` gets no key handling for free, and silently forwards the wheel.**
+  `SimpleLightScreen` *implements* `LightKeyHandler` (`LightScreen.kt:11-12`) whose three methods
+  default to `false` (`sdk/ui/.../LightKeyHandler.kt:6-14`); only `LightScreen` overrides them, to
+  delegate to its view model (`LightScreen.kt:95-103`). A screen with no view model that overrides
+  nothing therefore returns false for every key, and `LightActivity` hands anything in
+  `LightDeviceKeys.mapping` to `forwardKeyEventToServer(…, componentToRelaunch = …)`
+  (`:157-166`, `:176-183`, `:189-197`, `:199-216`) — LightOS foregrounds itself and relaunches the
+  tool. Any full-screen editor must consume 317/318/319 itself (`TextEditorScreen`). Consuming at
+  this level cannot starve the composed keyboard: `LightActivity` overrides `onKeyDown`, not
+  `dispatchKeyEvent`, so the view hierarchy has already had first refusal.
+
 ## Still unknown (ask Light or test)
 
 1. Wheel turn events on retail LightOS (M0).
@@ -140,3 +171,19 @@ around decode and insert inside `AssetImporter.ensure()`), `compendium ready row
 `Skipped` — read with `adb logcat -s Grimoire`; the file size from
 `adb shell run-as dev.tyler.grimoire ls -l databases/`. Reproduce with `run-light-tool`; the phone
 must be awake with the tool in the foreground, or the dozing figure is what you get.
+
+## Verified 31 Aug 2026 — driving the wheel over adb (M2 hardware QA)
+
+`adb shell input keyevent 317` / `318` / `319` **does** reach a foreground tool's
+`LightKeyHandler` on the physical LP3 (TLP301, build 00WW_1_440000, USB). Confirmed by
+stepping the S13.2 spells screen from CANTRIPS to LEVEL 3 with three `317`s and by scrolling
+the S10 reader with `318`s. The `run-light-tool` driver has no key command and this was
+untested until now; it makes the whole wheel contract QA-able from a script, which the AVD
+cannot do at all (the emulator emits no 317–319 — that fact is unchanged).
+
+The companion check is `adb shell dumpsys activity activities | grep topResumedActivity`
+after a burst of wheel events: it must still name `dev.tyler.grimoire`. An unconsumed wheel
+event is forwarded to LightOS with `componentToRelaunch` set, so a screen that consumes only
+`onKeyDown` and leaves `onKeyUp`/`onKeyMultiple` at their `false` default is bounced out by
+the *release* half of every detent. That is exactly the bug this milestone found in the
+reader, and this is the cheapest way to catch it on device.

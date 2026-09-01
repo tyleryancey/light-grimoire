@@ -45,41 +45,53 @@ interface CompendiumDao {
     // ---- filtered lists --------------------------------------------------------------------------------------
 
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = :kind ORDER BY sortName LIMIT :limit",
     )
     suspend fun listByName(kind: String, limit: Int): List<CompendiumRef>
 
     /** Asset order — classes, races, rules, backgrounds, feats, conditions. */
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = :kind ORDER BY position LIMIT :limit",
     )
     suspend fun listInOrder(kind: String, limit: Int): List<CompendiumRef>
 
     /** Rule sections of a chapter, subraces of a race, trait variants, feature options. */
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = :kind AND parentKey = :parentKey ORDER BY position, level, sortName",
     )
     suspend fun children(kind: String, parentKey: String): List<CompendiumRef>
 
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = 'subclasses' AND classKey = :classKey ORDER BY sortName",
     )
     suspend fun subclassesOf(classKey: String): List<CompendiumRef>
 
+    /**
+     * The rules chapter that owns a rule section — the S10 reader's CHAPTER link. The owner is the derived
+     * `parentKey` column [Rows.of] fills from rules.json, which no other query exposes, so the subquery reads
+     * it back. Null when the section is unknown or its `parentKey` is null: `key = (NULL)` matches no row.
+     */
+    @Query(
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
+            "WHERE kind = 'rules' AND `key` = (SELECT parentKey FROM records " +
+            "WHERE kind = 'rule_sections' AND `key` = :sectionKey)",
+    )
+    suspend fun chapterOfSection(sectionKey: String): CompendiumRef?
+
     /** The S13 spell wheel: one level at a time. */
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = 'spells' AND level = :level ORDER BY sortName",
     )
     suspend fun spellsByLevel(level: Int): List<CompendiumRef>
 
     /** A class's list up to a slot level — the M3 prepare list and M4 step 8. */
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = 'spells' AND level <= :maxLevel AND classList LIKE '% ' || :classKey || ' %' " +
             "ORDER BY level, sortName",
     )
@@ -87,27 +99,27 @@ interface CompendiumDao {
 
     /** The class's own features up to a level — no subclass features, no options of a parent feature. */
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = 'features' AND classKey = :classKey AND level <= :maxLevel " +
             "AND subclassKey IS NULL AND parentKey IS NULL ORDER BY level, sortName",
     )
     suspend fun classFeatures(classKey: String, maxLevel: Int): List<CompendiumRef>
 
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = 'features' AND subclassKey = :subclassKey ORDER BY level, sortName",
     )
     suspend fun subclassFeatures(subclassKey: String): List<CompendiumRef>
 
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = :kind AND category = :category ORDER BY sortName",
     )
     suspend fun byCategory(kind: String, category: String): List<CompendiumRef>
 
     /** equipment `armor` (13) / `weapon` (37); magic_items `base` hides the 123 variants. */
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = :kind AND subcategory = :subcategory ORDER BY sortName",
     )
     suspend fun bySubcategory(kind: String, subcategory: String): List<CompendiumRef>
@@ -116,7 +128,7 @@ interface CompendiumDao {
     suspend fun categoriesOf(kind: String): List<CategoryCount>
 
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = 'creatures' AND cr BETWEEN :minCr AND :maxCr ORDER BY cr, sortName",
     )
     suspend fun creaturesByCr(minCr: Double, maxCr: Double): List<CompendiumRef>
@@ -131,7 +143,7 @@ interface CompendiumDao {
     suspend fun getAll(kind: String, keys: List<String>): List<RecordRow>
 
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind = :kind AND `key` IN (:keys) ORDER BY sortName",
     )
     suspend fun refs(kind: String, keys: List<String>): List<CompendiumRef>
@@ -140,14 +152,14 @@ interface CompendiumDao {
 
     /** String-prefix hits before word-prefix hits so the `LIMIT` keeps the better candidates. */
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE name LIKE :prefix || '%' OR name LIKE '% ' || :prefix || '%' " +
             "ORDER BY CASE WHEN name LIKE :prefix || '%' THEN 0 ELSE 1 END, sortName LIMIT :limit",
     )
     suspend fun nameMatches(prefix: String, limit: Int): List<CompendiumRef>
 
     @Query(
-        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr FROM records " +
+        "SELECT kind, `key`, name, level, school, category, subcategory, rarity, cr, classKey FROM records " +
             "WHERE kind IN (:kinds) AND (name LIKE :prefix || '%' OR name LIKE '% ' || :prefix || '%') " +
             "ORDER BY CASE WHEN name LIKE :prefix || '%' THEN 0 ELSE 1 END, sortName LIMIT :limit",
     )
@@ -155,14 +167,14 @@ interface CompendiumDao {
 
     /** FTS4 `MATCH` over name + body, joined back to `records` for the projection; hits in rowid order. */
     @Query(
-        "SELECT r.kind, r.`key`, r.name, r.level, r.school, r.category, r.subcategory, r.rarity, r.cr " +
+        "SELECT r.kind, r.`key`, r.name, r.level, r.school, r.category, r.subcategory, r.rarity, r.cr, r.classKey " +
             "FROM search_index JOIN records r ON r.kind = search_index.kind AND r.`key` = search_index.`key` " +
             "WHERE search_index MATCH :match LIMIT :limit",
     )
     suspend fun textMatches(match: String, limit: Int): List<CompendiumRef>
 
     @Query(
-        "SELECT r.kind, r.`key`, r.name, r.level, r.school, r.category, r.subcategory, r.rarity, r.cr " +
+        "SELECT r.kind, r.`key`, r.name, r.level, r.school, r.category, r.subcategory, r.rarity, r.cr, r.classKey " +
             "FROM search_index JOIN records r ON r.kind = search_index.kind AND r.`key` = search_index.`key` " +
             "WHERE search_index.kind IN (:kinds) AND search_index MATCH :match LIMIT :limit",
     )

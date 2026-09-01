@@ -27,6 +27,7 @@ class FakeCompendiumDao(built: List<Rows.Built> = emptyList()) : CompendiumDao {
         subcategory = r.subcategory,
         rarity = r.rarity,
         cr = r.cr,
+        classKey = r.classKey,
     )
 
     private fun note(name: String) {
@@ -91,6 +92,12 @@ class FakeCompendiumDao(built: List<Rows.Built> = emptyList()) : CompendiumDao {
     override suspend fun subclassesOf(classKey: String): List<CompendiumRef> {
         note("subclassesOf")
         return kind("subclasses").filter { it.classKey == classKey }.sortedBy { it.sortName }.map(::ref)
+    }
+
+    override suspend fun chapterOfSection(sectionKey: String): CompendiumRef? {
+        note("chapterOfSection")
+        val owner = kind("rule_sections").firstOrNull { it.key == sectionKey }?.parentKey ?: return null
+        return kind("rules").firstOrNull { it.key == owner }?.let(::ref)
     }
 
     override suspend fun spellsByLevel(level: Int): List<CompendiumRef> {

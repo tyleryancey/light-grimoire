@@ -21,6 +21,7 @@ import java.io.File
 object Fixtures {
     private val dir: File by lazy { directory("grimoire.fixtures", "fixtures") }
     private val compendiumDir: File by lazy { directory("grimoire.compendium", "compendium") }
+    private val legalDir: File by lazy { directory("grimoire.legal", "legal") }
 
     private fun directory(property: String, what: String): File {
         val path = System.getProperty(property)
@@ -35,6 +36,12 @@ object Fixtures {
 
     /** The same file as the exact bytes Light's builder bundles — what `readAsset` hands the importer. */
     fun compendiumBytes(name: String): ByteArray = compendiumDir.resolve(name).readBytes()
+
+    /**
+     * A bundled legal file (tool/src/main/assets/legal) as text — the generated ATTRIBUTION.md the About
+     * screen must render verbatim (docs/LICENSING.md).
+     */
+    fun legal(name: String): String = legalDir.resolve(name).readText()
 
     /** index.json decoded strictly, the way AssetImporter reads it on device. */
     fun compendiumIndex(): CompendiumIndex =

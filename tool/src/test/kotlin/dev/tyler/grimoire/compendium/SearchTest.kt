@@ -4,6 +4,7 @@ import dev.tyler.grimoire.Fixtures
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -22,14 +23,14 @@ class SearchTest {
         val bundle: List<CompendiumRef> by lazy {
             Kind.entries.flatMap { kind ->
                 kind.decodeAll(Fixtures.compendium(kind.file)).map { record ->
-                    CompendiumRef(kind = kind.id, key = record.key, name = record.name, level = null, school = null, category = null, subcategory = null, rarity = null, cr = null)
+                    CompendiumRef(kind = kind.id, key = record.key, name = record.name, level = null, school = null, category = null, subcategory = null, rarity = null, cr = null, classKey = null)
                 }
             }
         }
     }
 
     private fun ref(kind: Kind, key: String, name: String, level: Int? = null): CompendiumRef =
-        CompendiumRef(kind = kind.id, key = key, name = name, level = level, school = null, category = null, subcategory = null, rarity = null, cr = null)
+        CompendiumRef(kind = kind.id, key = key, name = name, level = level, school = null, category = null, subcategory = null, rarity = null, cr = null, classKey = null)
 
     /**
      * The DAO's `nameMatches` (plan §DAO) modelled on the JVM over the real bundle: `name LIKE :p || '%' OR
@@ -86,33 +87,69 @@ class SearchTest {
     }
 
     @Test
-    fun mergePutsNameHitsBeforeTextHitsAndDedupesOnKindAndKey() {
+    fun splitKeepsNameHitsInTheirOwnTierAndDedupesOnKindAndKey() {
         val fireball = ref(Kind.SPELLS, "fireball", "Fireball", 3)
         val fireBolt = ref(Kind.SPELLS, "fire-bolt", "Fire Bolt", 0)
         val burningHands = ref(Kind.SPELLS, "burning-hands", "Burning Hands", 1)
         val sameKeyOtherKind = ref(Kind.MAGIC_ITEMS, "fireball", "Fireball (item)")
-        val merged = Search.merge(
+        val results = Search.split(
             nameHits = listOf(fireball, fireBolt),
             textHits = listOf(burningHands, fireball, sameKeyOtherKind, fireBolt),
         )
-        assertEquals(listOf(fireball, fireBolt, burningHands, sameKeyOtherKind), merged, "name hits, then unseen text hits")
+        assertEquals(listOf(fireball, fireBolt), results.named, "the name hits")
+        assertEquals(
+            listOf(burningHands, sameKeyOtherKind),
+            results.mentioned,
+            "the unseen text hits; a record already named is never demoted to a mention",
+        )
+        assertEquals(4, results.size, "hits across both tiers")
+        assertFalse(results.isEmpty, "something was found")
+        assertTrue(Search.split(emptyList(), emptyList()).isEmpty, "neither tier found anything")
     }
 
     @Test
-    fun mergeCapsAtTheLimitAndNameHitsSurviveTheCut() {
+    fun splitCapsTheTwoTiersTogetherAndNameHitsSurviveTheCut() {
         val names = (1..40).map { ref(Kind.CREATURES, "n$it", "Name $it") }
         val texts = (1..40).map { ref(Kind.SPELLS, "t$it", "Text $it") }
-        val merged = Search.merge(names, texts)
-        assertEquals(50, merged.size, "capped at LIMIT")
+        // Every text hit here is one kind, so the per-kind quota would decide this instead of the cap;
+        // lifted, to keep the assertion about the bound it names. The quota has its own test below.
+        val loose = Int.MAX_VALUE
+        val results = Search.split(names, texts, mentionsPerKind = loose)
+        assertEquals(50, results.size, "capped at LIMIT across both tiers")
         assertEquals(50, Search.LIMIT, "LIMIT")
-        assertTrue(names.all { it in merged }, "every name hit survives")
-        assertEquals(texts.take(10), merged.filter { it.kind == Kind.SPELLS.id }, "the first ten text hits fill the rest")
-        assertEquals(5, Search.merge(names, texts, limit = 5).size, "an explicit limit")
-        assertEquals(names.take(5), Search.merge(names, texts, limit = 5), "an explicit limit keeps name hits")
+        assertEquals(names, results.named, "every name hit survives")
+        assertEquals(texts.take(10), results.mentioned, "the first ten text hits fill the rest")
+        val tight = Search.split(names, texts, limit = 5, mentionsPerKind = loose)
+        assertEquals(names.take(5), tight.named, "an explicit limit keeps name hits")
+        assertEquals(emptyList(), tight.mentioned, "and leaves no room for a mention")
+        val flooded = Search.split((1..60).map { ref(Kind.CREATURES, "n$it", "Name $it") }, texts, mentionsPerKind = loose)
+        assertEquals(50, flooded.named.size, "fifty name hits fill the whole budget")
+        assertEquals(emptyList(), flooded.mentioned, "so nothing is merely mentioned")
     }
 
     @Test
-    fun mergeGroupsByKindOrderKeepingNameHitsFirstWithinAKind() {
+    fun splitLetsNoOneKindFillTheMentionsTier() {
+        // The FTS query returns hits in import order, so without a quota the first kind takes every slot —
+        // "hit points" drew fifty spells and the rule section that answers it never reached the screen.
+        val spells = (1..40).map { ref(Kind.SPELLS, "s$it", "Spell $it") }
+        val sections = (1..40).map { ref(Kind.RULE_SECTIONS, "r$it", "Section $it") }
+        val results = Search.split(emptyList(), spells + sections)
+        assertEquals(
+            Search.MENTIONS_PER_KIND,
+            results.mentioned.count { it.kind == Kind.SPELLS.id },
+            "the loud kind takes its quota and no more",
+        )
+        assertEquals(
+            Search.MENTIONS_PER_KIND,
+            results.mentioned.count { it.kind == Kind.RULE_SECTIONS.id },
+            "so the kind behind it is reachable",
+        )
+        // The tier comes back short of the budget rather than topping itself up with more of one kind.
+        assertEquals(2 * Search.MENTIONS_PER_KIND, results.mentioned.size, "ten mentions, not fifty")
+    }
+
+    @Test
+    fun splitGroupsEachTierByKindOrderKeepingTheRankingWithinAKind() {
         val fireElemental = ref(Kind.CREATURES, "fire-elemental", "Fire Elemental")
         val fireGiant = ref(Kind.CREATURES, "fire-giant", "Fire Giant")
         val fireball = ref(Kind.SPELLS, "fireball", "Fireball", 3)
@@ -120,32 +157,36 @@ class SearchTest {
         val burningHands = ref(Kind.SPELLS, "burning-hands", "Burning Hands", 1)
         val fireDamage = ref(Kind.DAMAGE_TYPES, "fire", "Fire")
         val salamander = ref(Kind.CREATURES, "salamander", "Salamander")
-        val merged = Search.merge(
-            nameHits = listOf(fireElemental, fireGiant, fireball, fireDamage),
-            textHits = listOf(flameTongue, burningHands, salamander, fireElemental),
+        val nameHits = listOf(fireElemental, fireGiant, fireball, fireDamage)
+        val textHits = listOf(flameTongue, burningHands, salamander, fireElemental)
+        val results = Search.split(nameHits, textHits)
+        assertEquals(
+            listOf(fireball, fireElemental, fireGiant, fireDamage),
+            results.named,
+            "S13 kind order (spells, creatures, lookup), the rankNames order kept within a kind",
         )
         assertEquals(
-            listOf(fireball, burningHands, flameTongue, fireElemental, fireGiant, salamander, fireDamage),
-            merged,
-            "S13 kind order (spells, magic items, creatures, lookup), name hits before text hits within a kind",
+            listOf(burningHands, flameTongue, salamander),
+            results.mentioned,
+            "the mentions are grouped by the same kind order, even though S13.4 draws them flat",
         )
-        assertEquals(
-            listOf(fireElemental, fireGiant, salamander, fireball, burningHands, flameTongue, fireDamage),
-            Search.merge(
-                nameHits = listOf(fireElemental, fireGiant, fireball, fireDamage),
-                textHits = listOf(flameTongue, burningHands, salamander, fireElemental),
-                kindOrder = listOf("creatures", "spells", "magic_items", "damage_types"),
-            ),
-            "a custom kind order is honoured",
-        )
+        val custom = Search.split(nameHits, textHits, kindOrder = listOf("creatures", "spells", "magic_items", "damage_types"))
+        assertEquals(listOf(fireElemental, fireGiant, fireball, fireDamage), custom.named, "a custom kind order is honoured")
+        assertEquals(listOf(salamander, burningHands, flameTongue), custom.mentioned, "in both tiers")
         assertEquals(Kind.entries.map { it.id }, Search.KIND_ORDER, "the default kind order is the S13 order")
     }
 
     @Test
-    fun mergeKeepsUnknownKindsLastWithoutDropping() {
+    fun splitKeepsUnknownKindsLastWithoutDropping() {
         val known = ref(Kind.SPELLS, "fireball", "Fireball", 3)
-        val unknown = CompendiumRef(kind = "monsters", key = "x", name = "X", level = null, school = null, category = null, subcategory = null, rarity = null, cr = null)
-        assertEquals(listOf(known, unknown), Search.merge(listOf(unknown, known), emptyList()), "unknown kind sorts last")
+        val unknown = CompendiumRef(kind = "monsters", key = "x", name = "X", level = null, school = null, category = null, subcategory = null, rarity = null, cr = null, classKey = null)
+        assertEquals(listOf(known, unknown), Search.split(listOf(unknown, known), emptyList()).named, "unknown kind sorts last")
+        val otherUnknown = CompendiumRef(kind = "vehicles", key = "y", name = "Y", level = null, school = null, category = null, subcategory = null, rarity = null, cr = null, classKey = null)
+        assertEquals(
+            listOf(known, otherUnknown),
+            Search.split(emptyList(), listOf(otherUnknown, known)).mentioned,
+            "and in the mention tier too",
+        )
     }
 
     @Test
@@ -183,30 +224,34 @@ class SearchTest {
             ref(Kind.MAGIC_ITEMS, "flame-tongue", "Flame Tongue"),
             ref(Kind.CREATURES, "adult-red-dragon", "Adult Red Dragon"),
         )
-        val merged = Search.merge(Search.rankNames(prefix, daoOrder), textHits)
-        assertEquals("Fireball", merged.first().name, "Fireball first")
+        val results = Search.split(Search.rankNames(prefix, daoOrder), textHits)
+        assertEquals("Fireball", results.named.first().name, "Fireball first")
         assertEquals(
-            listOf("Fireball", "Fire Bolt", "Fire Storm", "Fire Shield", "Faerie Fire", "Wall of Fire", "Delayed Blast Fireball", "Burning Hands"),
-            merged.filter { it.kind == Kind.SPELLS.id }.map { it.name },
-            "spells: string-prefix name hits shortest first, word-prefix name hits shortest first, then the text hit",
+            listOf("Fireball", "Fire Bolt", "Fire Storm", "Fire Shield", "Faerie Fire", "Wall of Fire", "Delayed Blast Fireball"),
+            results.named.filter { it.kind == Kind.SPELLS.id }.map { it.name },
+            "named spells: string-prefix hits shortest first, then word-prefix hits shortest first",
         )
-        assertEquals(merged, Search.merge(Search.rankNames(prefix, daoOrder.reversed()), textHits), "the DAO's order does not leak into the ranking")
-        assertEquals(merged, Search.merge(Search.rankNames(prefix, daoOrder.shuffled(Random(11))), textHits), "the DAO's order does not leak into the ranking, shuffled")
-        assertEquals(merged.size, merged.map { it.kind to it.key }.toSet().size, "no duplicates")
-        assertEquals(daoOrder.size + 3, merged.size, "every name hit plus the three unseen text hits")
-        assertEquals("Fire", merged.last().name, "the exact match of a lookup kind is grouped last by kind, not first")
+        assertEquals(listOf("Burning Hands"), results.mentioned.filter { it.kind == Kind.SPELLS.id }.map { it.name }, "the text hit is a mention")
+        assertEquals(results, Search.split(Search.rankNames(prefix, daoOrder.reversed()), textHits), "the DAO's order does not leak into the ranking")
+        assertEquals(results, Search.split(Search.rankNames(prefix, daoOrder.shuffled(Random(11))), textHits), "the DAO's order does not leak into the ranking, shuffled")
+        val all = results.named + results.mentioned
+        assertEquals(all.size, all.map { it.kind to it.key }.toSet().size, "no duplicates")
+        assertEquals(daoOrder.size, results.named.size, "every name hit is named")
+        assertEquals(3, results.mentioned.size, "the three unseen text hits are mentions")
+        assertEquals("Fire", results.named.last().name, "the exact match of a lookup kind is grouped last by kind, not first")
     }
 
     @Test
     fun shieldRanksTheExactMatchFirstWithinEachKindOverTheRealBundle() {
         val prefix = assertNotNull(Search.likePrefix("shield"), "the name query argument")
-        val merged = Search.merge(Search.rankNames(prefix, daoNameMatches(prefix)), emptyList())
-        assertEquals(12, merged.size, "name hits for 'shield' in the bundle")
+        val results = Search.split(Search.rankNames(prefix, daoNameMatches(prefix)), emptyList())
+        assertEquals(12, results.named.size, "name hits for 'shield' in the bundle")
+        assertEquals(emptyList(), results.mentioned, "no text hits were given")
         assertEquals(
             listOf(Kind.SPELLS.id to "Shield", Kind.SPELLS.id to "Shield of Faith", Kind.SPELLS.id to "Fire Shield", Kind.EQUIPMENT.id to "Shield"),
-            merged.take(4).map { it.kind to it.name },
+            results.named.take(4).map { it.kind to it.name },
             "the exact match leads its kind, the word-prefix hit follows the string-prefix hits, kinds stay grouped",
         )
-        assertEquals(Kind.PROFICIENCIES.id to "Shields", merged.last().let { it.kind to it.name }, "the lookup kind comes last")
+        assertEquals(Kind.PROFICIENCIES.id to "Shields", results.named.last().let { it.kind to it.name }, "the lookup kind comes last")
     }
 }

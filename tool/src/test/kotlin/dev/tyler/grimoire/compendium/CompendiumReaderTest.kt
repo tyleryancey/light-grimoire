@@ -121,15 +121,19 @@ class CompendiumReaderTest {
 
     @Test
     fun searchPutsFireballFirstForFireAndNeverRepeatsARecord() = runBlocking {
-        val hits = CompendiumReader(dao()).search("fire")
-        assertEquals("Fireball", hits.first().name, "Fireball leads the 'fire' search")
-        assertEquals("spells", hits.first().kind, "the leading hit is the spell")
-        assertTrue(hits.any { it.kind == "spells" && it.key == "fire-bolt" }, "Fire Bolt is among the hits")
-        assertTrue(hits.any { it.kind == "damage_types" && it.key == "fire" }, "the fire damage type is among the hits")
-        assertEquals(hits.size, hits.map { it.kind to it.key }.toSet().size, "no (kind, key) twice")
-        assertTrue(hits.size <= Search.LIMIT, "bounded by Search.LIMIT")
-        val kindRank = hits.map { Search.KIND_ORDER.indexOf(it.kind) }
-        assertEquals(kindRank.sorted(), kindRank, "grouped by S13 kind order")
+        val results = CompendiumReader(dao()).search("fire")
+        assertEquals("Fireball", results.named.first().name, "Fireball leads the 'fire' search")
+        assertEquals("spells", results.named.first().kind, "the leading hit is the spell")
+        assertTrue(results.named.any { it.kind == "spells" && it.key == "fire-bolt" }, "Fire Bolt is among the name hits")
+        assertTrue(results.named.any { it.kind == "damage_types" && it.key == "fire" }, "the fire damage type is among the name hits")
+        val all = results.named + results.mentioned
+        assertEquals(all.size, all.map { it.kind to it.key }.toSet().size, "no (kind, key) twice across the two tiers")
+        assertEquals(results.size, all.size, "size counts both tiers")
+        assertTrue(results.size <= Search.LIMIT, "bounded by Search.LIMIT")
+        for ((tier, hits) in listOf("named" to results.named, "mentioned" to results.mentioned)) {
+            val kindRank = hits.map { Search.KIND_ORDER.indexOf(it.kind) }
+            assertEquals(kindRank.sorted(), kindRank, "the $tier tier is grouped by S13 kind order")
+        }
     }
 
     @Test
@@ -138,28 +142,95 @@ class CompendiumReaderTest {
         val reader = CompendiumReader(dao)
         val single = reader.search("f")
         assertEquals(listOf("textMatches"), dao.calls, "one character: the FTS query only")
-        assertTrue(single.isNotEmpty(), "'f*' still matches text")
+        assertEquals(emptyList(), single.named, "under the two-character floor nothing can be a name hit")
+        assertTrue(single.mentioned.isNotEmpty(), "'f*' still matches text")
         dao.calls.clear()
-        assertEquals(emptyList(), reader.search("   "), "blank input finds nothing")
+        assertTrue(reader.search("   ").isEmpty, "blank input finds nothing")
         assertEquals(emptyList(), dao.calls, "blank input runs no query")
         dao.calls.clear()
-        assertEquals(emptyList(), reader.search("%_"), "wildcards alone find nothing")
+        assertTrue(reader.search("%_").isEmpty, "wildcards alone find nothing")
         assertEquals(emptyList(), dao.calls, "wildcards alone run no query")
     }
 
     @Test
     fun searchScopedToKindsUsesTheScopedQueriesAndReturnsOnlyThoseKinds() = runBlocking {
         val dao = dao()
-        val hits = CompendiumReader(dao).search("fire", listOf(Kind.SPELLS, Kind.MAGIC_ITEMS))
+        val results = CompendiumReader(dao).search("fire", listOf(Kind.SPELLS, Kind.MAGIC_ITEMS))
         assertEquals(listOf("nameMatchesIn", "textMatchesIn"), dao.calls, "the kind-scoped pair of queries")
-        assertTrue(hits.isNotEmpty(), "scoped hits exist")
-        assertEquals(setOf("spells", "magic_items"), hits.map { it.kind }.toSet(), "only the requested kinds")
-        assertEquals("Fireball", hits.first().name, "Fireball still leads")
+        assertTrue(results.size > 0, "scoped hits exist")
+        assertEquals(
+            setOf("spells", "magic_items"),
+            (results.named + results.mentioned).map { it.kind }.toSet(),
+            "only the requested kinds",
+        )
+        assertEquals("Fireball", results.named.first().name, "Fireball still leads")
         val unscopedDao = dao()
         val unscoped = CompendiumReader(unscopedDao).search("fire")
         assertEquals(listOf("nameMatches", "textMatches"), unscopedDao.calls, "the unscoped pair of queries")
-        assertTrue(unscoped.size >= hits.size, "the unscoped search is a superset in size")
-        assertEquals(emptyList(), CompendiumReader(dao()).search("fire", listOf(Kind.CONDITIONS)), "no condition mentions fire")
+        assertTrue(unscoped.size >= results.size, "the unscoped search is a superset in size")
+        assertTrue(CompendiumReader(dao()).search("fire", listOf(Kind.CONDITIONS)).isEmpty, "no condition mentions fire")
+    }
+
+    /**
+     * The two-tier regression (M2 step 6b). Blended into one kind-grouped list, a name match sat behind every
+     * body mention of an earlier kind: for "fire" the creature **Fire Giant** was hit 52 of 50 hits — row 53 of
+     * the 57 rows S13.4 drew — and the damage type **Fire** was dead last; for "shield" the equipment **Shield**
+     * was row 23, a third screenful down. Two tiers put every name match ahead of every mention.
+     *
+     * The counts below are measured over the bundle these assets pin (`Fixtures.compendium`), so a regenerated
+     * bundle is *supposed* to fail this test: re-measure and update the numbers, never loosen the assertion.
+     */
+    @Test
+    fun everyNameMatchOutranksEveryBodyMentionOverTheRealBundle() = runBlocking {
+        val fire = CompendiumReader(dao()).search("fire")
+        assertEquals(25, fire.named.size, "'fire' name hits in the bundle")
+        assertEquals(25, fire.mentioned.size, "and the mentions that fill the rest of the budget")
+        assertEquals(Search.LIMIT, fire.size, "'fire' fills the whole budget")
+        // The two records the blended list buried, both name matches, both now in the named tier.
+        assertEquals(21, fire.named.indexOfFirst { it.kind == "creatures" && it.key == "fire-giant" }, "Fire Giant, named hit 22 of 25")
+        assertEquals(24, fire.named.indexOfFirst { it.kind == "damage_types" && it.key == "fire" }, "the Fire damage type, named hit 25 of 25")
+        assertTrue(
+            fire.mentioned.none { val n = it.name.lowercase(); n.startsWith("fire") || n.contains(" fire") },
+            "no record the name query matched was demoted to a mention",
+        )
+        val shield = CompendiumReader(dao()).search("shield")
+        assertEquals(12, shield.named.size, "'shield' name hits in the bundle")
+        assertEquals(21, shield.mentioned.size, "and its mentions, five to a kind (Search.MENTIONS_PER_KIND)")
+        assertEquals(3, shield.named.indexOfFirst { it.kind == "equipment" && it.key == "shield" }, "the equipment Shield, named hit 4 of 12")
+        assertEquals(
+            listOf("spells" to "shield", "spells" to "shield-of-faith", "spells" to "fire-shield", "equipment" to "shield"),
+            shield.named.take(4).map { it.kind to it.key },
+            "the two records called Shield are both above every body mention",
+        )
+    }
+
+    /**
+     * The two ways the DAO's `LIMIT` used to decide the results before anything ranked them, both fixed by
+     * fetching [Search.FETCH] candidates and cutting on merit. Measured over the pinned bundle: a regenerated
+     * bundle is *supposed* to fail this — re-measure, never loosen.
+     */
+    @Test
+    fun theFetchWidthAndTheMentionQuotaDecideTheCutOverTheRealBundle() = runBlocking {
+        // The name query orders by sortName, so a fetch of 50 cut "giant"'s 53 hits alphabetically and these
+        // two fell off the end entirely — not demoted to mentions, absent from the screen.
+        val giant = CompendiumReader(dao()).search("giant")
+        for (key in listOf("stone-giant", "storm-giant")) {
+            assertTrue(giant.named.any { it.kind == "creatures" && it.key == key }, "$key survives the cut")
+        }
+        // The FTS query has no ORDER BY, so its hits arrive in import order — spells first. Without the
+        // per-kind quota every one of these fifty rows was a spell and the rules section was never fetched.
+        val hitPoints = CompendiumReader(dao()).search("hit points")
+        assertEquals(emptyList(), hitPoints.named, "'hit points' matches no record's name")
+        val kinds = hitPoints.mentioned.map { it.kind }
+        assertTrue(kinds.toSet().size > 1, "the mentions are not all one kind")
+        assertTrue(
+            kinds.count { it == "spells" } <= Search.MENTIONS_PER_KIND,
+            "no kind takes more than its quota while other kinds are waiting",
+        )
+        assertTrue(
+            hitPoints.mentioned.any { it.kind == "rule_sections" },
+            "the rules a player asking about hit points wants are reachable",
+        )
     }
 
     @Test
@@ -184,5 +255,15 @@ class CompendiumReaderTest {
         assertTrue(reader.subclassesOf("cleric").any { it.key == "life" }, "the Life domain is a cleric subclass")
         assertTrue(reader.children(Kind.SUBRACES, "elf").any { it.key == "high-elf" }, "high elf is a child of elf")
         assertEquals(listOf("listInOrder", "countsByKind", "bySubcategory", "bySubcategory", "bySubcategory", "spellsByLevel", "subclassesOf", "children"), dao.calls, "each pass-through is one DAO call")
+    }
+
+    @Test
+    fun refsCarryClassKeyForFeatureDisambiguation() = runBlocking {
+        val reader = CompendiumReader(dao())
+        val rage = reader.classFeatures("barbarian", 1).single { it.key == "rage" }
+        assertEquals("barbarian", rage.classKey, "a feature ref carries its class for the list subtitle")
+        assertEquals(1, rage.level, "rage level")
+        val fireball = reader.spellsByLevel(3).single { it.key == "fireball" }
+        assertNull(fireball.classKey, "a spell ref has no classKey")
     }
 }

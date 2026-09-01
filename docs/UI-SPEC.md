@@ -1,12 +1,14 @@
 # Grimoire — UI specification (screen by screen)
 
 Canvas: LP3 3.92" 1080×1240, `LightGrid` 27 × 31 units (1 unit ≈ 40 px ≈ 15.2 dp). Top bar
-3 units, bottom bar 4 units → 24 content units ≈ 9–10 rows of `Copy` text or ~16 rows of
-`Detail`. Type scale is multiplied by `screenHeightDp/600` (≈ 0.79 on the LP3), so `Copy`
-renders ≈ 24 sp, `Paragraph` ≈ 19 sp, `Detail` ≈ 16 sp, `Subtitle` ≈ 41 sp, `Title` ≈ 90 sp.
+3 units, bottom bar 4 units plus its own 1-unit top margin (`LightBottomBar.kt:18-20`) →
+23 content units ≈ 9 rows of `Copy` text or ~15 rows of `Detail`. Type scale is multiplied by
+`screenHeightDp/600` (≈ 0.79 on the LP3), so `Copy` renders ≈ 24 sp, `Paragraph` ≈ 19 sp,
+`Detail` ≈ 16 sp, `Subtitle` ≈ 41 sp, `Title` ≈ 90 sp.
 
 Wireframes below are 27 characters wide = one grid unit per character. `▔` top bar, `▁`
-bottom bar, `●`/`○` filled/hollow pip, `▸` row that navigates, `■`/`□` toggle on/off.
+bottom bar, `●`/`○` filled/hollow pip, `▸` row that navigates, `◂` its mirror (S13.2's level
+stepper), `■`/`□` toggle on/off.
 
 Component mapping (all `sdk:ui`, verified 29 Aug 2026 — see `.claude/skills/lp3-ui-patterns`):
 
@@ -15,7 +17,7 @@ Component mapping (all `sdk:ui`, verified 29 Aug 2026 — see `.claude/skills/lp
 | Row list | `LightScrollView` (mixed heights) or `LightLazyScrollView` (uniform rows) + `LightText` + `lightClickable` |
 | Toggle / pip | `LightIcon(TOGGLE_STATE_ON/OFF)` or `CIRCLE`/`STAR_OUTLINE` glyph in a clickable row; never a Material switch |
 | Number pad | `LightText(Subtitle)` value + two glyph buttons (`UP`/`DOWN` or `ADD`/`DOWN`) + wheel via `LightKeyHandler` |
-| Text entry | `LightTextField` (display) → `navigateTo(EditorScreen)` → `LightTextInputEditor(singleLine=true, initialCaps=true)` |
+| Text entry | `LightTextField` (display) → `navigateTo(EditorScreen)` → `LightTextInputEditor(singleLine=true, initialCaps=true)` — `initialCaps=false` for a search query, which is not a name |
 | Confirm | a `SimpleLightScreen<Boolean>` with CONFIRM/CANCEL in the bottom bar |
 | Transient result | `LightModalManager.show(RollModal, 2 s)` for dice results; the originating row keeps the last result inline |
 | Long text | `LightText(Paragraph)` inside `LightScrollView`; wheel scrolls |
@@ -24,12 +26,29 @@ Component mapping (all `sdk:ui`, verified 29 Aug 2026 — see `.claude/skills/lp
 Wheel contract (`LightViewModel.onKeyDown`, key codes 317 up / 318 down / 319 press, from
 `LightDeviceKeys`): on a list screen turns scroll; on a number pad turns nudge the focused
 number by ±1; press = the primary action of the screen (roll / confirm / spend). Return
-`true` only when the screen actually used the event, so unhandled keys still reach LightOS.
-**Verify on hardware in M0** — the emulator does not emit 317–319.
+`true` only when the screen claims the event, so unhandled keys still reach LightOS
+(compendium screens amend this — the next paragraph).
+**Verified on hardware** 28 Aug 2026 on retail LightOS 572 (317 toward the top of the phone,
+318 toward the bottom, 319 press, one DOWN/UP pair per detent) — the emulator still does not
+emit 317–319, which is why S13.2 also draws tap arrows for its wheel job.
+
+**Every screen the tool draws owns the wheel**, whether or not it has a use for it: turns perform
+the screen's stated job (scroll, or the level-step on the spells list) and the press is consumed
+as a no-op wherever the screen defines no primary action — an unconsumed wheel event is forwarded
+to LightOS, which foregrounds itself and relaunches the tool, a destructive context switch
+mid-reading. That includes S0 Home, which has nothing to scroll but is the screen the tool opens
+on and the one a player watches for the ≈ 2.5 s import, and S13.3's editor, which has no view
+model and so consumes on the screen itself. Consuming `onKeyDown` alone is not enough:
+`LightKeyHandler` defaults `onKeyUp` and `onKeyMultiple` to false, so the *release* half of every
+detent would relaunch the tool on its own — every wheel consumer forwards all three to
+`WheelHandler.consumes`. Volume (24/25) and camera (80/27) keys are never consumed and still
+reach LightOS.
 
 Global rules: no colour literals; state by weight/glyph; every list bounded; BACK is always
 the top bar's left button (the examples' convention — the SDK draws no back bar); the top
-bar centre is the screen name in `Fine`; the bottom bar holds screen actions only.
+bar centre is the screen name in `Fine`, except S13.2's two-line level stepper (`Detail`,
+the SDK's own `LightTopBarCenter.TwoLineDetail` weight); the bottom bar holds screen actions
+only.
 
 ---
 
@@ -56,6 +75,10 @@ is replaced by one line, `Preparing the rules…`, over a determinate `LightProg
 advances per kind (22 steps, ≈ 2.5 s on the LP3 — `sdk:ui` has no spinner); a failed import
 shows its reason in that line and the next show retries. The list above appears only once the
 store is Ready.
+
+**M2 interim (31 Aug 2026):** until characters and the M3/M4 screens exist, the Ready branch
+shows one `COMPENDIUM ▸` row in place of the character list, and a bottom bar with the single
+text item `ABOUT`; `NEW`, `JOURNAL`, `DICE` and characters return with M3/M4.
 
 ## S1 Sheet hub
 
@@ -266,10 +289,71 @@ At higher levels: +1d6 per
 slot level above 3rd.       
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 ```
-`Paragraph` text in a `LightScrollView`; the wheel scrolls. Header line = the typed fields
-(level/school, time/range/components, duration). Cross-references (a condition named in
-the text) are rendered as underlined `LightText` rows at the end: "See: Prone".
-`CAST` appears only when opened from a character's spell list.
+`Paragraph` text in a `LightScrollView`; the wheel scrolls. `CAST` appears only when opened
+from a character's spell list. The header lines and the link footer are specified below (the
+per-kind header table and the cross-link footer, D10).
+
+**Body render — Markdown-lite → `sdk:ui` (D7/D8).** `h1`/`h2` → `Heading`, `h3` →
+`Subheading`, `h4`/`h5` → bold `Paragraph`; a leading heading at any level whose text equals
+the record's own name is dropped — the top bar already says it (the nine rules chapters open
+`# <Name>`, 33 of the 40 rule sections open `## <Name>`). `- `/`* ` bullets become hanging
+rows; `N.  ` numbered items keep their number. Inline `**bold**` → weight, `*italic*` → slant. Pipe tables
+— both bundle dialects, rows contiguous or blank-line-separated — render as monospace
+column-aligned rows: `Detail` when the packed width fits ≈ 38 chars, `Superfine` up to ≈ 48;
+wider tables stack instead — a 2-column table becomes a bold run-in paragraph, a 3+-column
+table becomes a bold title line plus `Header: cell` lines. Nothing scrolls horizontally.
+
+**Per-kind header line**, below the top bar and above the body:
+
+| Kind | Header |
+|---|---|
+| spells | "3rd-level evocation" / "Evocation cantrip" (+ " (ritual)"); "1 action · 150 feet · V S M"; a concentration duration reads "Concentration, up to 1 minute"; the M-component line and the classes line are lighten. Body = text, then an "At higher levels." run-in from `higherLevel`. |
+| conditions, rule sections, weapon properties, damage types, magic schools | none — body = text |
+| rules (chapter) | none — body = text minus its own leading `h1`; footer = its sections in reading order |
+| classes | "Hit die d12"; "Saves Str, Con"; lighten humanized proficiencies; casters add "Spellcasting: Int (from level 1)". Body = spellcasting sections (a class with none, e.g. Barbarian, is a legal header-only page). The 20-level class table is deferred to M4. |
+| subclasses | lighten flavor line ("Primal Path"); body = text |
+| features | "Barbarian 1" / "Berserker 3" (+ a prerequisites line) |
+| traits | none — the parent trait (when there is one) is a PART OF footer link |
+| subraces | "+1 Cha" ability-bonus line; the race is a RACE footer link |
+| races | "Medium · Speed 30 ft."; "+2 Con"; lighten languages |
+| backgrounds | lighten skills line; body = feature text + suggested-characteristics tables |
+| feats | "Prerequisite: Str 13" |
+| equipment | lighten "75 gp · 55 lb."; armor adds its real line, each field as applicable — chain mail "Heavy armor · AC 16 · Str 13 · Stealth disadvantage", scale mail "Medium armor · AC 14 + Dex (max 2) · Stealth disadvantage"; weapons add "Martial melee weapon" / "1d8 slashing" / range, versatile, thrown as applicable. Footer (weapons only): PROPERTIES links. |
+| magic items | the headline verbatim, lighten ("Armor (medium or heavy, but not hide), uncommon"); a base item's footer lists its VARIANTS |
+| creatures | classic SRD stat-block order: "Small humanoid (goblinoid), neutral evil"; "AC 15 (armor)"; "HP 7 (2d6)"; "Speed 30 ft."; an ability grid as a monospace table (STR..CHA header, one row "8 (-1)" — ASCII hyphen); lighten saves/skills/vulnerabilities/resistances/immunities/senses/languages lines; "CR 1/4 · 50 XP · Prof +2". Body = text + trait/action/reaction/legendary-action run-ins under headings. |
+| skills | "Ability: Dexterity" |
+| languages | "Exotic · Script: Infernal" + speakers |
+| alignments | lighten "CE" |
+| proficiencies | a type line, plus lighten classes/races lines when the record names any; no body |
+
+**Cross-link footer (D10).** Underlined `LightText` rows at the end, grouped under a
+`SectionHeaderRow` label each — the structural sections first, then a `SEE` section whose rows
+are the condition names:
+
+| Source kind | Footer links |
+|---|---|
+| class | SUBCLASSES + FEATURES |
+| subclass | FEATURES |
+| race | TRAITS + SUBRACES |
+| subrace | TRAITS + RACE |
+| trait | its parent trait |
+| feature | its parent feature + its class |
+| magic item (base) | its VARIANTS |
+| weapon | PROPERTIES |
+| rules chapter | SECTIONS |
+| rule section | its CHAPTER |
+
+Condition links come from a whole-word case-insensitive scan of the rendered prose for the
+15 condition names, on exactly these kinds: spells (text + higher-level), conditions
+(self-excluded), rule sections, subclasses, features, traits, feats, equipment, magic items,
+and creatures (which also union their `conditionImmunities`). The other kinds are not
+scanned — the bundle's only condition-word hit among them is lightfoot-halfling's idiomatic
+"prone to wanderlust", which must not become a link. First-occurrence order, deduped, capped
+at 12. Spell names in prose are not links in M2. Every link row pushes a new S10 reader.
+
+Reader-to-reader cross-links are the one static-depth exception (D5): each link push adds one
+screen and BACK pops one, so the chain is bounded by how many links the user actually taps,
+not by a fixed number.
 
 ## S11 Roll result (transient modal)
 
@@ -309,7 +393,7 @@ A short wizard, each step one screen, all wheel-driven except two names:
 Every step can be revisited from `EDIT` on S1. Nothing here is required to be complete —
 a half-transcribed character is still useful at the table.
 
-## S13 Compendium
+## S13 Compendium hub
 
 ```
 ▔▔ BACK ▔ COMPENDIUM ▔ FIND ▔
@@ -324,9 +408,188 @@ MAGIC ITEMS (362)         ▸
 CREATURES (334)           ▸
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 ```
-`FIND` opens the editor (single line) and returns to a bounded result list (≤ 50) across
-kinds, name matches first (Room FTS4). Spells list filters by level with the wheel; rules
-are the SRD's nine chapters with their sections.
+`FIND` (top-bar right action) opens the editor S13.3 and returns S13.4, a bounded result list
+(≤ 50) across kinds, name matches first, then FTS4 body matches — see S13.3/S13.4. SPELLS pushes S13.2
+(spells by level, its own wheel job); every other row pushes S13.1, the one generic group-list
+screen, seeded with that row's kind(s) — see S13.1 for the per-group content table. Counts
+come from `countsByKind()` at runtime, never hardcoded (D13); RULES, CLASSES & FEATURES,
+RACES and BACKGROUNDS & FEATS stay uncounted because each mixes more than one kind. The six
+LOOKUP kinds (skills, languages, damage types, magic schools, alignments, proficiencies) have
+no hub row — reached only via FIND and reader cross-links.
+
+## S13.1 Compendium group list (generic)
+
+```
+▔ BACK ▔ CLASSES & FEATURES
+CLASSES                    
+Barbarian                 ▸
+Bard                      ▸
+Cleric                    ▸
+SUBCLASSES                 
+Path of the Berserker     ▸
+College of Lore           ▸
+Circle of the Land        ▸
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+```
+One screen definition, reused for every S13 row but SPELLS; the top bar centre is that row's
+own label. `LightLazyScrollView`, every row — a section header included — exactly 2.5 grid
+units tall (D1); a header row is `LightText(Detail)`, lighten, upper-cased by the row itself, and
+is not `lightClickable` (the same shape as S5's level groups). Not letter-spaced: `LightText`
+takes no `letterSpacing` and only the `fine`/`button` styles define one (`LightTheme.kt:124-136`),
+both larger than `Detail` — upper case and `lighten` carry the header on their own. The wheel scrolls; a press is
+consumed as a no-op (no primary action here — see the wheel-contract amendment above). No
+`FIND` on this screen — search stays on the hub and on S13.4. Tap a row → S10. Static depth
+S0 → S13 → S13.1 → S10 = 4 (deeper only via a reader cross-link, D5).
+
+Per-group content — the load-bearing shape of this screen:
+
+| Group | Rows | Right detail |
+|---|---|---|
+| CONDITIONS | flat, `listInOrder(CONDITIONS, 15)` — bounded at 15 | none |
+| RULES | 9 chapter header rows, `listInOrder(RULES, 9)` — bounded at 9, non-tappable (six chapters' text is only their `# Title`; equipment, spellcasting and using-ability-scores carry real intro prose, reached via FIND or a section's CHAPTER link) — each followed by its sections, `children(RULE_SECTIONS, chapterKey)` — finite by the bundle; 49 rows total. A chapter's own reader page is reached from FIND or from one of its sections' CHAPTER links (D10), not from this list. | none |
+| CLASSES & FEATURES | section CLASSES, `listInOrder(CLASSES, 12)` — bounded at 12 — then section SUBCLASSES, `listByName(SUBCLASSES, 12)` — bounded at 12; features have no list row here — reached from a class or subclass reader's footer and from FIND (63 duplicate "Ability Score Improvement" rows would be noise) | none |
+| RACES | section RACES, `listInOrder(RACES, 9)` — bounded at 9 — then section SUBRACES, `listByName(SUBRACES, 4)` — bounded at 4; traits via race reader footers + FIND | none |
+| BACKGROUNDS & FEATS | two one-row sections, `listInOrder(BACKGROUNDS, 1)` + `listInOrder(FEATS, 1)`; SRD 5.1 ships exactly one of each | none |
+| EQUIPMENT | one section per `categoriesOf(EQUIPMENT)` category (humanized label), rows from `byCategory` — finite by the bundle — then a WEAPON PROPERTIES section, `listByName(WEAPON_PROPERTIES, 12)` — bounded at 12 (the bundle ships 11); ≈ 250 rows total (the hub's 237 counts equipment records only — the category headers and the 11 weapon-property rows are the difference, not a discrepancy). Sections run **weapon, armor, adventuring gear, tools, mounts and vehicles**, not `categoriesOf`'s alphabetical order: alphabetical opens the screen on 116 rows of adventuring gear and puts weapons at row 204, and weapons and armor are what get looked up mid-turn. A category the bundle grows later keeps its alphabetical place after these five. | none |
+| MAGIC ITEMS | flat, `bySubcategory(MAGIC_ITEMS, "base")` — finite by the bundle, 239 rows; the 123 variants are reached from each base item's reader footer and FIND — 239 + 123 = 362, the hub's count (which counts items, not rows opened by this list, D13) | rarity |
+| CREATURES | flat, `listByName(CREATURES, 334)` — bounded at 334, the whole bundle | CR as a fraction ("1/8", "1/2", "5") |
+
+Right-detail text is `LightText(Detail)`, lighten, right-aligned in the same row as the name.
+
+## S13.2 Spells by level
+
+```
+▔▔ BACK ▔▔▔▔ SPELLS ▔▔▔▔▔▔▔
+          LEVEL 3          
+◂       LEVEL 3 · 42      ▸
+Counterspell           Abj▸
+Fear                  Illu▸
+Fireball               Evo▸
+Fly                   Tran▸
+Gaseous Form          Tran▸
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+```
+Top-bar centre is `LightTopBarCenter.TwoLineDetail("SPELLS", "CANTRIPS")` at level 0 or
+`TwoLineDetail("SPELLS", "LEVEL n")` at level 1–9 — drawn above as the bar plus a centred
+second line, both lines `Detail` weight (the SDK's own rendering, not the usual `Fine` title —
+verified in `LightTopBar.kt`). The first content row is a tappable stepper, `◂ LEVEL n · count ▸` — the
+emulator emits no wheel codes, so the arrows are the tap fallback for the wheel job below.
+Rows under it are `spellsByLevel(level)` (finite by the bundle; the largest level, 2nd, is 54
+rows), right detail = the school abbreviated to at most four characters as the wireframe draws
+it — `Abj` `Conj` `Div` `Ench` `Evo` `Illu` `Nec` `Tran` (the full names ellipsize 37 of the 319
+spell names, the abbreviations 6); tap one → S10, with no `CAST` action (opened outside a
+character's spell list — S10's existing rule). Touch drag scrolls the row list itself, since
+the wheel's turns are claimed by the level stepper on this screen.
+
+| Wheel event | Job |
+|---|---|
+| 317 (toward the top of the phone) | level + 1, clamped at 9 — no wrap |
+| 318 (toward the bottom) | level − 1, clamped at 0 — no wrap |
+| 319 (press) | consumed, no-op — no primary action on this screen |
+
+Spell counts by level, 0–9: 24, 49, 54, 42, 31, 37, 31, 20, 16, 15 — sums to 319, the SPELLS
+count on the S13 hub. Static depth S0 → S13 → S13.2 → S10 = 4.
+
+## S13.3 Find (editor)
+
+```
+┌─────────────────────────┐
+│  FIND                   │
+│  ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁  │
+│  [ keyboard ]           │
+└─────────────────────────┘
+```
+The SDK's own full-screen `LightTextInputEditor(singleLine = true, initialCaps = false)` — the
+box stands in for the SDK's own chrome; the tool draws no top or bottom bar here. `FIND` is the
+editor's `title`, the only string it takes: there is no placeholder or hint parameter
+(`LightTextInputEditor.kt:47-61`), so the empty line carries no prompt text. Return submits the
+query (that is what `singleLine` buys — otherwise Return inserts a newline); BACK, hardware back
+and an empty submit all cancel with no result delivered, so a caller treats "the result callback
+never fired" as cancel. A query under two characters is refused at the caller, because the name
+query has a two-character floor while the FTS query has none — one letter would return fifty rows
+of whatever sorts first. The editor consumes the wheel like every other compendium screen; it is
+the one screen with no view model, so the overrides sit on the screen itself.
+Reached from the hub's `FIND` or from S13.4's `FIND` (re-seeded with the current query).
+
+## S13.4 Search results
+
+```
+▔ BACK ▔ RESULTS (6) ▔ FIND
+SPELLS                     
+Fireball                  ▸
+Fire Bolt                 ▸
+CLASSES & FEATURES         
+Rage           Barbarian 1▸
+CREATURES                  
+Fire Giant                ▸
+ALSO MENTIONED             
+Burning Hands        Spell▸
+Traps         Rule section▸
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+```
+`search(query)` (`CompendiumReader`) returns **two tiers** (`Search.Results`), drawn one after
+the other: the records whose *name* matched, then the records only a body mentions. Blending
+them into one kind-grouped list buried the name matches — a name hit sat behind every body
+mention of an earlier kind, which put the equipment **Shield** at row 23 of the "shield"
+results and the creature **Fire Giant** at row 53 of the "fire" results. Two tiers put every
+name match above every mention, whatever kind it belongs to; a record whose name matched is
+never repeated as a mention.
+
+**Named tier.** Non-tappable kind header rows (the same shape as S13.1) group the name matches
+in S13 order (SPELLS, CONDITIONS, RULES, CLASSES & FEATURES, RACES, BACKGROUNDS & FEATS,
+EQUIPMENT, MAGIC ITEMS, CREATURES); a LOOKUP kind sorts after those nine, in `Kind` declaration
+order (it has no hub row of its own). A row may carry a right-aligned lighten Detail
+disambiguator (D6) — a feature row reads "Barbarian 1" (its class and level; `classKey` is on
+the `CompendiumRef` projection — a projection column, not a `RecordRow` column, so it needs
+no `SCHEMA_VERSION` bump); every other named row's own name is its answer, and repeating a kind
+the header above already names would be noise.
+
+**Mention tier.** One header, `ALSO MENTIONED`, and under it a flat list — no per-kind headers,
+because two levels of header over a tail of loose body matches read badly on 27 units. Each
+mention row instead carries its kind as the right detail ("Spell", "Rule section", "Creature"),
+so a spell is still told from a rule with no header to say so — except a feature, which keeps
+the class-and-level disambiguator a named feature row gets ("Barbarian 6"). Features are the
+one kind whose names collide (31 colliding names in the bundle, "Ability Score Improvement" 63
+times): the mentions of "rage" hold three different features all named "Path feature", and
+"Class feature" on each of the three is one unopenable choice where "Barbarian 6 / 10 / 14" is
+three. The mentions are ordered by the same S13 kind order; the header is drawn only when there
+is at least one mention.
+
+**No kind takes more than five mentions** (`Search.MENTIONS_PER_KIND`). The FTS query has no
+`ORDER BY`, so its hits arrive in import order — spells first — and one loud kind used to take
+every slot: "hit points" drew fifty spell rows and the rule section that answers it was never
+even fetched. The tier is allowed to come back short of the cap rather than top itself up with
+more of the same kind; five rows a kind is what "where else does this appear" is worth.
+
+**The cap is on hits, not rows**: at most 50 hits across the two tiers (`Search.LIMIT`), name
+matches taken first so they always survive the cut, and the headers standing over them are
+extra rows on top — "fire" draws 50 hits under 7 headers, 57 rows. The top bar counts hits, not
+rows: `RESULTS (n)` once the query is in, bare `RESULTS` while it runs. Both queries fetch
+`Search.FETCH` (250) candidates rather than 50, because neither one's SQL order is a ranking:
+the name query sorts by `sortName`, so cutting at 50 cut "giant" alphabetically and lost **Stone
+Giant** and **Storm Giant** from the screen entirely. The bound belongs to the ranking, not to
+the SQL.
+
+Two transient lines, each the same lightened `Copy` line the empty state uses (`sdk:ui` has no
+spinner): the hub draws `Opening…` while its counts load, and this screen draws `Searching…`
+while a query runs. Empty result — neither tier found anything — is one lighten `Copy` line,
+"No matches."
+
+**Known limits, left for a later milestone** (both predate the two-tier split; measured over
+this bundle): a multi-word query never reaches the name tier, because `Search.likePrefix` hands
+the whole typed string to a `LIKE` substring test while the FTS side AND-joins its tokens — so
+"long rest" and "opportunity attack" are all mentions, and the rule section that answers them is
+found only by the FTS query. And inside the named tier kind grouping outranks match quality, so
+an exact name match in a LOOKUP kind sorts below every hub kind: the damage type **Fire**, the
+one record whose name *is* the query, is the last named row of "fire". Neither is worth new
+query shapes in M2; both want a name index that tokenises, which is an M6-or-later change.
+
+`FIND` re-opens the editor seeded with the current query; the editor pops back to
+this same screen instance, which re-queries in place — it never pushes a second results
+screen. From the hub the sequence is editor-pops-then-results-pushes (S0 → S13 → S13.3 pops to
+S0 → S13, which then pushes S0 → S13 → S13.4); from this screen the sequence briefly reaches
+S0 → S13 → S13.4 → S13.3 before popping back to S0 → S13 → S13.4 to re-query — depth 4 is the
+deepest the compendium branch reaches outside a reader chain (D5). Tap a row → S10.
 
 ## S14 Journal
 
@@ -371,8 +634,25 @@ last ten rolls of this session, cleared on relaunch — no statistics, no streak
 
 ## S16 About
 
-Attribution text from `assets/legal/ATTRIBUTION.md` (rendered verbatim), version, tool id,
-"5E compatible", repository URL as plain text. Nothing else.
+```
+▔▔ BACK ▔▔▔▔ ABOUT ▔▔▔▔▔▔▔▔
+ATTRIBUTION                
+Grimoire is 5E compatible. 
+It bundles rules text from 
+the System Reference       
+Document 5.1 …             
+                           
+Grimoire 0.1.0 (1)         
+dev.tyler.grimoire         
+5E compatible              
+github.com/tyleryancey/    
+light-grimoire             
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+```
+`LightScrollView`; the wheel scrolls. `ATTRIBUTION.md` (one `h1`, five paragraphs) renders
+verbatim under S10's Markdown-lite rules, its `h1` kept this time (there is no record name to
+match it against). Below it, four plain lines: version, tool id, "5E compatible", the
+repository URL as plain text. Nothing else; empty bottom bar.
 
 ---
 
@@ -388,10 +668,14 @@ S0 Home ─┬─ S1 Sheet ─┬─ S2 Turn ── S11 result / S10 reader
          │            ├─ S8 Rest ── confirm
          │            ├─ S9 Gear ── S10 / coin pad
          │            └─ EDIT → S12 steps
-         ├─ S13 Compendium ── lists ── S10
+         ├─ S13 Compendium ─┬─ S13.1 group lists ── S10 reader
+         │                  ├─ S13.2 spells by level ── S10 reader
+         │                  └─ FIND ── S13.3 editor ── S13.4 results ── S10 reader
          ├─ S14 Journal ── session ── capture flow / rosters
          ├─ S15 Dice ── S11
          └─ S16 About
 ```
-Depth never exceeds four screens. Every screen rebuilds from Room/DataStore on relaunch
-(`onScreenShow` reloads; nothing lives only in a view model).
+Static navigation depth never exceeds four screens; reader-to-reader cross-links are the
+sole exception — the chain is bounded by the user's taps and BACK unwinds it. Every screen
+rebuilds from Room/DataStore on relaunch (`onScreenShow` reloads; nothing lives only in a
+view model).

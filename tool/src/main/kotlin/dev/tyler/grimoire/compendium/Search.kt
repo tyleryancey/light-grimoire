@@ -4,14 +4,33 @@ package dev.tyler.grimoire.compendium
  * The pure half of compendium search (plan D9). The DAO runs two bounded, dumb queries — a `LIKE` name
  * prefix (string-prefix hits before word-prefix hits, then sortName, so the `LIMIT` keeps the better
  * candidates) and an FTS4 `MATCH` — and everything else happens here: normalising the typed text into each
- * query's argument, ranking the name hits ([rankNames]) and merging the two hit lists into one bounded,
- * kind-grouped result ([merge]). The DAO's order is not the ranking: under sortName "fire bolt" precedes
- * "fireball" because a space sorts before 'b'. Nothing here touches Room, so "fire → Fireball first" is a
- * JVM test. The reader composes `merge(rankNames(prefix, nameHits), textHits)`.
+ * query's argument, ranking the name hits ([rankNames]) and splitting the two hit lists into the bounded,
+ * kind-grouped two-tier [Results] ([split]). The DAO's order is not the ranking: under sortName "fire bolt"
+ * precedes "fireball" because a space sorts before 'b'. Nothing here touches Room, so "fire → Fireball first"
+ * is a JVM test. The reader composes `split(rankNames(prefix, nameHits), textHits)`.
  */
 object Search {
-    /** The bound on every search query and on the merged result — the S13 list never grows past it. */
+    /** The bound on every search query and on the two tiers together — the S13 list never grows past it. */
     const val LIMIT = 50
+
+    /**
+     * How many candidates each DAO query fetches before any ranking happens — deliberately wider than
+     * [LIMIT], because neither query's SQL order is a ranking. The name query orders by `sortName`, so a
+     * `LIMIT` of 50 cuts alphabetically: "giant" has 53 name hits and lost **Stone Giant** and **Storm
+     * Giant** entirely while keeping fourteen "… Giant Strength" potions. The FTS query has no `ORDER BY`
+     * at all and comes back in docid order, which is import order, so "hit points" returned fifty spells and
+     * the rules section that answers it was never fetched. Fetching wider lets [rankNames] and [split] make
+     * the cut on merit; 250 rows of the [CompendiumRef] projection is a fraction of one 27 KB rule section.
+     */
+    const val FETCH = 250
+
+    /**
+     * The most mentions of any one kind in [split]'s mentions tier. Without it the loudest kind fills the
+     * tier — "hit points" drew fifty spell rows and nothing else, and the rule section that answers it never
+     * reached the screen. The tier is allowed to come back short of [LIMIT] rather than top itself up with
+     * more of the same kind: "where else this appears" is worth five rows a kind, not fifty of one.
+     */
+    const val MENTIONS_PER_KIND = 5
 
     /** Result grouping: the 22 kinds in S13 order. */
     val KIND_ORDER: List<String> = Kind.entries.map { it.id }
@@ -52,25 +71,58 @@ object Search {
         )
 
     /**
-     * One result list from the two queries. Name hits are taken first, in the order [rankNames] gave them,
-     * then text hits; a (kind, key) already present is dropped; the list is cut at [limit] (so name hits
-     * survive the cut); finally the survivors are grouped by [kindOrder] with a stable sort, so within a kind
-     * the name hits still precede the text hits and a kind absent from [kindOrder] sorts last.
+     * The two tiers of one search: [named] is what the name query matched, [mentioned] what only a body
+     * mentioned. Both are already deduped, kind-grouped and jointly bounded by [split].
      */
-    fun merge(
+    data class Results(
+        val named: List<CompendiumRef>,
+        val mentioned: List<CompendiumRef>,
+    ) {
+        /** Nothing found — the screen's one "No matches." line, not an empty tier. */
+        val isEmpty: Boolean get() = named.isEmpty() && mentioned.isEmpty()
+
+        /** Hits across both tiers; never above the `limit` [split] was given. */
+        val size: Int get() = named.size + mentioned.size
+    }
+
+    /**
+     * The two queries' hits as two tiers rather than one blended list. Blending them buried name matches: one
+     * list grouped by kind puts a name hit behind every body mention of an earlier kind, and the equipment
+     * **Shield** landed at row 23 of the "shield" results, three screenfuls below the spell of the same name.
+     * A tier of its own keeps every name match above every mention, whatever kind it belongs to.
+     *
+     * A (kind, key) seen already is dropped, the name tier winning a duplicate — a record whose name matched is
+     * never demoted to a mention. The two tiers together are cut at [limit], name hits taken first so they
+     * always survive the cut (50 name hits leave [Results.mentioned] empty). Each tier is then grouped by
+     * [kindOrder] with a stable sort of its own, so [rankNames]' order still holds within a kind and a kind
+     * absent from [kindOrder] sorts last.
+     */
+    fun split(
         nameHits: List<CompendiumRef>,
         textHits: List<CompendiumRef>,
         limit: Int = LIMIT,
         kindOrder: List<String> = KIND_ORDER,
-    ): List<CompendiumRef> {
+        mentionsPerKind: Int = MENTIONS_PER_KIND,
+    ): Results {
         val seen = HashSet<Pair<String, String>>()
-        val picked = ArrayList<CompendiumRef>()
-        for (hit in nameHits.asSequence() + textHits.asSequence()) {
-            if (picked.size >= limit) break
-            if (seen.add(hit.kind to hit.key)) picked += hit
+        val named = ArrayList<CompendiumRef>()
+        for (hit in nameHits) {
+            if (named.size >= limit) break
+            if (seen.add(hit.kind to hit.key)) named += hit
+        }
+        val mentioned = ArrayList<CompendiumRef>()
+        val perKind = HashMap<String, Int>()
+        for (hit in textHits) {
+            if (named.size + mentioned.size >= limit) break
+            if (perKind.getOrElse(hit.kind) { 0 } >= mentionsPerKind) continue
+            if (seen.add(hit.kind to hit.key)) {
+                mentioned += hit
+                perKind[hit.kind] = perKind.getOrElse(hit.kind) { 0 } + 1
+            }
         }
         val rank = HashMap<String, Int>()
         for ((i, kind) in kindOrder.withIndex()) rank.putIfAbsent(kind, i)
-        return picked.sortedBy { rank[it.kind] ?: kindOrder.size }
+        fun byKind(hits: List<CompendiumRef>) = hits.sortedBy { rank[it.kind] ?: kindOrder.size }
+        return Results(named = byKind(named), mentioned = byKind(mentioned))
     }
 }
